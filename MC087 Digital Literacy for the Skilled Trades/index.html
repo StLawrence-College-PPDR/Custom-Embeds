@@ -1,0 +1,261 @@
+<html class="no-js">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" >
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+		<link rel="stylesheet" href="common.css">
+		<link rel="stylesheet" href="typography.css">
+		<link rel="stylesheet" href="style.css">
+	</head>
+
+	<body>        
+        <div class="fade-in">
+            <div class="dashboard internal-dashboard">
+                <div class="ipad-layout">
+                    <div class="ipad-profile"><i class="far fa-user-circle"></i></div>
+                    <h2 class="ipad-credentials">Welcome, Employee #122</h2>
+                    <div class="ipad-navigation"><h2 class="ipad-credentials"></h2>
+                       <ul>
+                           <li class="active"><a class="borderless" href="#task"><i class="fas fa-tasks"></i></a></li>
+                           <li class="active"><a class="borderless" href="#invent"><i class="fas fa-box"></i></a></li>
+                           <li class="active"><a class="borderless" href="#sched"><i class="fas fa-business-time"></i></a></li>
+                           <li><i class="fas fa-cog"></i></li>
+                           <li><i class="fas fa-sign-out-alt"></i></li>
+                       </ul>
+                    </div>
+
+                    <div class="ipad-inbox">
+                        <h5 class="ipad-title"> Messages</h5>
+                        <p>You have no current messages...</p>
+                    </div>
+
+                    <div class="ipad-widgets">
+                        <h5 class="ipad-title">Today's Tasks <br> <strong>Monday, October 4, 2021</strong></h5>
+                       
+                       <div id="task">
+                            <div class="flex-collection ipad-new-items">
+                                <div class="dashboard-driver flex-2">
+                                   <div class="driver-content">
+                                        <div class="identity-details">
+                                            <p class="mb0"><strong>Assist Lift Operation</strong></p>
+                                            <p>Kingston, Ontario</p>
+                                            <p>1350 Gardiners Road</p>
+                                            <div class="progress"><div class="progress-bar" role="progressbar" style="width: 5%" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div></div>
+                                            <p class="mb30"><span class="approved">Assigned <i class="fas fa-check-circle"></i></span></p>
+
+                                            <div class="alert alert-danger"><i class="fas fa-exclamation-triangle"></i>&nbsp; <strong>Required</strong>: 2 Wire Slings</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-2">
+                                    <div class="ipad-graphic"><canvas id="chartA" width="100%" height="60"></canvas></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <hr>
+                        
+                        <div id="invent">
+                            <div class="ipad-graphic"><h5 class="ipad-title">Site Inventory</h5><canvas id="productChart" width="100%" height="30"></canvas></div>
+                        </div>
+
+                        <hr>
+                        
+                        <div id="sched">
+                            <h5 class="ipad-title">Your Schedule</h5>
+                        
+                            <div class="table-wrapper">
+                                <table class="mb30">
+                                    <tr>
+                                        <th>Monday 4</th>
+                                        <th>Tuesday 5</th>
+                                        <th>Wednesday 6</th>
+                                        <th>Thursday 7</th>
+                                        <th>Friday 8</th>
+                                    </tr>
+                                    <tr>
+                                        <td style="color: #FFF;"><strong>Assist Lift Operation</strong> <br> 1350 Gardiners Road</td>
+                                        <td style="color: #FFF;"><strong>Shadow</strong> <br> 13 General Cedar Crescent</td>
+                                        <td style="color: #FFF;"><strong>Shadow</strong> <br> 13 General Cedar Crescent</td>
+                                        <td style="color: #FFF;"><strong>Site Clean-up</strong> <br> 1350 Gardiners Road</td>
+                                        <td style="color: #FFF;"><strong>Doctors <br>Appointment</strong><br> (Approved<br> Absense)</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+		<script src="jquery.min.js"></script>
+		<script src="js/slick-master/slick/slick.js"></script>
+		
+		<script>
+            $(".dashboard-close").hide();
+            
+            $(".dashboard-open").on("click", function(){
+                $(".dashboard").animate({top: "0"});
+                $(".dashboard-close").show();
+                $(this).hide();
+            });
+            
+            $(".dashboard-close").on("click", function(){
+                $(".dashboard").animate({top: "65vh"});
+                $(".dashboard-open").show();
+                $(this).hide();
+            });
+            
+            $('.inbox-items').hide();
+            $('.inbox-items').append('<p>You currently have no messages</p>');
+
+            $(".slider2").slick({
+                dots: true,
+                slidesToShow: 5,
+                slidesToScroll: 1,
+                adaptiveHeight: true,
+                cssEase: 'ease', 
+                responsive: [{
+                    breakpoint: 1450,
+                    settings: {
+                    slidesToShow: 3
+                }
+
+                }, {
+                    breakpoint: 1320,
+                    settings: {
+                    slidesToShow: 3,
+                    dots: true
+                }
+
+                }, {
+                    breakpoint: 700,
+                    settings: "unslick" // destroys slick
+                }]
+            });
+            
+            $('#inboxInstructions').click(function() {
+                $('.activity-nav').fadeIn('slow');
+                $(this).css('color', '#2196f3');
+            });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        <script>
+            var ctxA = document.getElementById('productChart').getContext('2d');
+            var ctxD = document.getElementById('chartA').getContext('2d');
+            Chart.defaults.global.defaultFontColor = 'rgba(255,255,255,0.5)';
+            var produceChart = new Chart(ctxA, {
+                type: 'horizontalBar',
+                responsive: true,
+                data: {
+                    labels: ['1350 Gardiners Road', '13 General Cedar Crescent', '4-677 Innovation Drive'],
+                    datasets: [{
+                        label: '# of 1 1/4 Wire Slings',
+                        data: [1, 10, 14],
+                        borderColor: 'rgba(198, 179, 42, 1)',
+                        borderWidth: 1,
+                        backgroundColor: [
+                            'rgba(198, 179, 42, 0.6)',
+                            'rgba(198, 179, 42, 0.6)',
+                            'rgba(198, 179, 42, 0.6)'
+                        ]
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            barPercentage: 0.2,
+                            stacked: true,
+                            ticks: {
+                                beginAtZero: true,
+                            }
+                        }],
+                        yAxes: [{
+                            barPercentage: 0.2,
+                            stacked: true
+                        }]
+                    },
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            fontColor: 'white'
+                        }
+                    },
+                    tooltips: {
+                        backgroundColor: 'rgba(255,255,255,0.2)'
+                    }
+                }
+            });
+            var chartD = new Chart(ctxD, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'Completed Tasks',
+                        data: [15, 32, 21, 30, 25, 26, 33, 40, 22, 0, 0, 0],
+                        backgroundColor: [
+                            'rgba(71, 91, 178, 0.6)',
+                            'rgba(71, 91, 178, 0.6)',
+                            'rgba(71, 91, 178, 0.6)',
+                            'rgba(71, 91, 178, 0.6)',
+                            'rgba(71, 91, 178, 0.6)',
+                            'rgba(71, 91, 178, 0.6)',
+                            'rgba(71, 91, 178, 0.6)',
+                            'rgba(71, 91, 178, 0.6)',
+                            'rgba(71, 91, 178, 0.6)',
+                            'rgba(71, 91, 178, 0.6)',
+                            'rgba(71, 91, 178, 0.6)',
+                            'rgba(71, 91, 178, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(71, 91, 178, 1)',
+                            'rgba(71, 91, 178, 1)',
+                            'rgba(71, 91, 178, 1)',
+                            'rgba(71, 91, 178, 1)',
+                            'rgba(71, 91, 178, 1)',
+                            'rgba(71, 91, 178, 1)',
+                            'rgba(71, 91, 178, 1)',
+                            'rgba(71, 91, 178, 1)',
+                            'rgba(71, 91, 178, 1)',
+                            'rgba(71, 91, 178, 1)',
+                            'rgba(71, 91, 178, 1)',
+                            'rgba(71, 91, 178, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+            
+            $(".dashboard-close").hide();
+            
+            $(".dashboard-open").on("click", function(){
+                $(".dashboard").animate({top: "0"});
+                $(".dashboard-close").show();
+                $(this).hide();
+            });
+            
+            $(".dashboard-close").on("click", function(){
+                $(".dashboard").animate({top: "65vh"});
+                $(".dashboard-open").show();
+                $(this).hide();
+            });
+            
+            $('.inbox-items').hide();
+            $('.inbox-items').append('<p>You currently have no messages</p>');
+
+            $('#inboxInstructions').click(function() {
+                $('.activity-nav').fadeIn('slow');
+                $(this).css('color', '#2196f3');
+            });
+        </script>
+	</body>
+</html>
