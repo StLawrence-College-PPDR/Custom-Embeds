@@ -694,6 +694,9 @@
             
            
         </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
         
       <script src="jquery.min.js"></script>
         <!-- script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script -->
@@ -1038,6 +1041,78 @@
                 },
                 
             });
-        </script>
+            $(".load-window").show();
+    $('body').css('height', '100vh');
+    $('body').css('overflow-y', 'hidden');
+    setTimeout(function () {
+        $(".load-window").fadeOut("slow");
+        $('body').css('height', 'auto');
+        $('body').css('overflow-y', 'visible');
+    }, 2000);
+    
+    setTimeout(function () {
+        $('html,body').animate({
+            scrollTop: 0
+        }, 0);
+    }, 1000);
+    
+    window.addEventListener("load", function(){
+      window.dispatchEvent(new Event('resize'));
+    });
+    
+    $('.nav').hide();
+    $('.nav').css('height', '0%');
+    $('#menuClose').hide();
+    
+    $('#menuToggle').click(function() {
+        $('.nav').fadeIn('slow');
+        $(this).hide();
+        $('#menuClose').fadeIn('slow');
+        $('.nav').css('height', '100%');
+    });
+    
+    $('#menuClose').click(function() {
+        $('.nav').fadeOut('fast');
+        $('.nav').css('height', '0%');
+        $(this).hide();
+        $('#menuToggle').fadeIn('slow');
+    });
+    
+    $('.activity-nav').hide();
+    $('.activity-nav.show').show();
+    
+    $('.instructions-link').click(function() {
+        $('.activity-nav').fadeIn('slow');
+        $(this).css('color', '#2196f3');
+    });
+    
+    $('.activity-close').click(function() {
+        $('.activity-nav').fadeOut('fast');
+        $('.instructions-link').css('color', '#FFFFFF');
+    });
+    
+    $(window).scroll(function() {
+       if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+           $('.branching-next').css('background', '#2294f0');
+       }
+    });
+    
+    $(".completed-activity").hide();
+    
+    H5P.externalDispatcher.on('xAPI', function(event){
+        if (event.getScore() === event.getMaxScore() && event.getMaxScore() > 0){
+            console.log(event);
+            console.log(event.getScore());
+            console.log(event.setActor());
+
+            $(".completed-activity").fadeIn("slow");
+            $('.branching-next').css('background', '#2294f0');
+            setTimeout(function () {
+                $(".completed-activity").fadeOut("slow");
+                $('.branching-next').css('background', '#444');
+            }, 8000);
+        }
+    });
+</script>
     </body>
 </html>
