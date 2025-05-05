@@ -1,0 +1,2772 @@
+<html class="no-js">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" >
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+		<link rel="stylesheet" href="common.css">
+		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="typography.css">
+		<link rel="stylesheet" href="animations.css">
+		<link rel="stylesheet" href="housekeeping.css">
+	</head>
+
+	<body> 
+        
+        <div class="activity-nav">
+            <a class="activity-close mb30"><i class="fas fa-times"></i></a>
+
+            <h4 class="mb30"><strong>Louisiana Shrimp Gumbo</strong> (Serves 6)</h4>
+            
+            <p class="mb0"><strong>Roux <i>(5 Minutes - Low)</i></strong></p>
+            
+            <ul>
+                <li>1 cup any vegetable oil</li>
+                <li>1 cup all-purpose flour <i>(Gluten-Free Substitute)</i></li>
+            </ul>
+            
+            <p class="mb0"><strong>Lousiana Holy Trinity <i>(5 Minutes - Low)</i></strong></p>   
+            <ul>
+                <li>1 onion, peeled and chopped</li>
+                <li>1 green pepper, seeds removed and chopped</li>
+                <li>1 stalk celery, chopped</li>
+            </ul>
+               
+            <p class="mb0"><strong>Aromatics <i>(1 Minutes - Med)</i></strong></p>   
+            <ul>
+                <li>4 cloves garlic, peeled</li>
+            </ul>
+            
+            <p class="mb0"><strong>Broth <i>(5 Minutes - Med)</i></strong></p>    
+            <ul>
+                <li>2 cups chicken broth <i>(Vegetarian Substitute)</i></li>
+            </ul>
+            
+            <p class="mb0"><strong>Vegetables, Meat/Seafood, Herbs &amp; Spices <i>(30 Minutes - Med)</i></strong></p> 
+            <ul>
+                <li>3/4 cups ounces andouille, chorizo or Italian sausage, sliced <i>(Vegetarian Substitute)</i></li>
+                <li>1 cup shrimp, peeled and devined</li>
+                <li>3 1/2 cups can whole tomatoes</li>
+                <li>1/2 cup okra, fresh or frozen</li>
+                <li>1 teaspoon paprika</li>
+                <li>1 teaspoon onion powder</li>
+                <li>1 teaspoon garlic powder</li>
+                <li>1 teaspoon dried oregano</li>
+                <li>1 teaspoon dried thyme</li>
+                <li>1 teaspoon sassafras (gumbo file powder)</li>
+                <li>1/4 teaspoon cayenne pepper</li>
+            </ul>
+            
+            <p class="mb0"><strong>Season &amp; Taste <i>(1 Minutes - Simmer)</i></strong></p> 
+            <ul>
+                <li>1 teaspoon sea salt</li>
+            </ul>
+            
+            <p class="mb0"><strong>Garnish <i>(1 Minutes - Off)</i></strong></p> 
+            <ul>
+                <li>2 green onions, thinly sliced</li>
+            </ul>
+        </div>
+        
+        <div id="drag1">            
+            <div class="container">
+                <div class="pull-out">
+                    <div class="pull-lever"><i class="fas fa-chevron-left"></i></div>
+                    
+                    <div class="panel-nav flex-collection">
+                        <a class="panel-tab tab1 flex-5"><i class="fas fa-carrot"></i></a>
+                        <a class="panel-tab tab2 flex-5"><i class="fas fa-drumstick-bite"></i></a>
+                        <a class="panel-tab tab3 flex-5"><i class="fas fa-fish"></i></a>
+                        <a class="panel-tab tab4 flex-5"><i class="fas fa-cheese"></i></a>
+                        <a class="panel-tab tab5 flex-5"><i class="fas fa-wine-bottle"></i></a>
+                        <a class="panel-tab tab6 flex-5"><i class="fas fa-bread-slice"></i></a>
+                        <a class="panel-tab tab7 flex-5"><i class="fas fa-mortar-pestle"></i></a>
+                    </div>
+                    
+                    <div class="groceries drag-drop">
+                        <div class="t1">
+                           <h4 class="mb30">Produce</h4>
+                           <div id="produce" class="pull-content flex-collection"></div>
+                        </div>  
+
+                        <div class="t2">
+                           <h4 class="mb30">Meats</h4>
+                           <div id="meats" class="pull-content flex-collection"></div>
+                        </div>  
+
+                        <div class="t3">
+                           <h4 class="mb30">Seafood</h4>
+                           <div id="seafood" class="pull-content flex-collection"></div>
+                        </div>
+
+                        <div class="t4">
+                           <h4 class="mb30">Dairy</h4>
+                           <div id="dairy" class="pull-content flex-collection"></div>
+                        </div>
+
+                        <div class="t5">
+                           <h4 class="mb30">Pantry</h4>
+                           <div id="pantry" class="pull-content flex-collection"></div>
+                        </div>
+
+                        <div class="t6">
+                           <h4 class="mb30">Bakery</h4>
+                           <div id="bakery" class="pull-content flex-collection"></div>
+                        </div>
+
+                        <div class="t7">
+                           <h4 class="mb30">Herbs &amp; Spices</h4>
+                           <div id="spices" class="pull-content flex-collection"></div>
+                        </div>
+                    
+                        <div id="cloneObject" style="display: none;">
+                            <div class="pull-item material-item"><img draggable="true" class="drag-item"><span class="label"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="environment-setup drag-drop">
+                <div class="flex-collection no-response svg-areas">
+                   <div id="area1" class="area-hotspot"></div>
+                   <div id="area2" class="area-hotspot"></div>
+                   <div id="area3" class="area-hotspot"></div>
+                   <div id="area4" class="area-hotspot"></div>
+                   <div id="area5" class="area-hotspot"></div>
+                   <div id="area6" class="area-hotspot"></div>
+                   <div id="area7" class="area-hotspot"></div>
+                   <div id="area8" class="area-hotspot"></div>
+                   <div id="area9" class="area-hotspot"></div>
+
+                   <div id="area10" class="area-hotspot"></div>
+                   <div id="area11" class="area-hotspot"></div>
+                   <div id="area12" class="area-hotspot"></div>
+                   <a id="area13" class="area-hotspot filled tab2">
+                        <i class="fas fa-book"></i>
+                        <div class="hotspot-content 13-content">
+                            <p>Ingredients &amp; Recipe</p>
+                       </div>
+                    </a>
+                   <div id="area14" class="area-hotspot"></div>
+                   <div id="area15" class="area-hotspot"></div>
+                   <div id="area16" class="area-hotspot"></div>
+                   <div id="area17" class="area-hotspot"></div>
+                   <div id="area18" class="area-hotspot"></div>
+
+                   <div id="area19" class="area-hotspot"></div>
+                   <div id="area20" class="area-hotspot"></div>
+                   <div id="area21" class="area-hotspot"></div>
+                   <div id="area21" class="area-hotspot"></div>
+                   <div id="area22" class="area-hotspot"></div>
+                   <div id="area32" class="area-hotspot"></div>
+                   <div id="area24" class="area-hotspot"></div>
+                   <div id="area25" class="area-hotspot"></div>
+                   <div id="area26" class="area-hotspot"></div>
+                   <div id="area27" class="area-hotspot"></div>
+
+                   <div id="area28" class="area-hotspot"></div>
+                   <div id="area29" class="area-hotspot"></div>
+                   <div id="area30" class="area-hotspot"></div>
+                   <div id="area31" class="dropped area-hotspot">
+                        <div class="drop" data-value="7">
+                            <div class="measurement-selector">
+                                <div class="measurement-content">
+                                    <p>Select the appropriate <strong>'<span class="measurement-label"></span>'</strong> amount:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="amount-placeholder">Amount</div> 
+                                            <form id="amount">
+                                                <select name="amount" class="amount-data"></select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="measurement-placeholder">Measurement</div>
+                                            <form id="measure">
+                                                <select name="measure" class="measure-data"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a class="measurement-button">Add to Pot</a>
+                            </div>
+
+                            <div class="cooking-selector">
+                                <div class="cooking-content">
+                                    <p>Before adding that, set the cooking time and temperature for the <strong>'<span class="cooking-label"></span>'</strong>:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="time-placeholder">Time</div>
+
+                                            <form id="time">
+                                                <select name="time" class="time-data">
+                                                    <option class="category-selected dropdown-item time-item" value="1 Min">1 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="5 Min">5 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="10 Min">10 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="15 Min">15 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="30 Min">30 Min</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="temp-placeholder">Temperature</div>
+
+                                            <form id="temp">
+                                                <select name="temp" class="temperature-data">
+                                                   <option class="category-selected dropdown-item temperature-item" value="Low">Low</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Medium">Medium</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="High">High</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Simmer">Simmer</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Off">Off</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="cooking-button">Cook Items</a>
+                            </div>
+                        </div>
+                        <div class="drop" data-value="6">
+                            <div class="measurement-selector">
+                                <div class="measurement-content">
+                                    <p>Select the appropriate <strong>'<span class="measurement-label"></span>'</strong> amount:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="amount-placeholder">Amount</div> 
+                                            <form id="amount">
+                                                <select name="amount" class="amount-data"></select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="measurement-placeholder">Measurement</div>
+                                            <form id="measure">
+                                                <select name="measure" class="measure-data"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a class="measurement-button">Add to Pot</a>
+                            </div>
+
+                            <div class="cooking-selector">
+                                <div class="cooking-content">
+                                    <p>Before adding that, set the cooking time and temperature for the <strong>'<span class="cooking-label"></span>'</strong>:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="time-placeholder">Time</div>
+
+                                            <form id="time">
+                                                <select name="time" class="time-data">
+                                                    <option class="category-selected dropdown-item time-item" value="1 Min">1 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="5 Min">5 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="10 Min">10 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="15 Min">15 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="30 Min">30 Min</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="temp-placeholder">Temperature</div>
+
+                                            <form id="temp">
+                                                <select name="temp" class="temperature-data">
+                                                   <option class="category-selected dropdown-item temperature-item" value="Low">Low</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Medium">Medium</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="High">High</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Simmer">Simmer</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Off">Off</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="cooking-button">Cook Items</a>
+                            </div>
+                        </div>
+                        <div class="drop" data-value="5">
+                            <div class="measurement-selector">
+                                <div class="measurement-content">
+                                    <p>Select the appropriate <strong>'<span class="measurement-label"></span>'</strong> amount:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="amount-placeholder">Amount</div> 
+                                            <form id="amount">
+                                                <select name="amount" class="amount-data"></select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="measurement-placeholder">Measurement</div>
+                                            <form id="measure">
+                                                <select name="measure" class="measure-data"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a class="measurement-button">Add to Pot</a>
+                            </div>
+
+                            <div class="cooking-selector">
+                                <div class="cooking-content">
+                                    <p>Before adding that, set the cooking time and temperature for the <strong>'<span class="cooking-label"></span>'</strong>:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="time-placeholder">Time</div>
+
+                                            <form id="time">
+                                                <select name="time" class="time-data">
+                                                    <option class="category-selected dropdown-item time-item" value="1 Min">1 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="5 Min">5 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="10 Min">10 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="15 Min">15 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="30 Min">30 Min</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="temp-placeholder">Temperature</div>
+
+                                            <form id="temp">
+                                                <select name="temp" class="temperature-data">
+                                                   <option class="category-selected dropdown-item temperature-item" value="Low">Low</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Medium">Medium</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="High">High</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Simmer">Simmer</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Off">Off</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="cooking-button">Cook Items</a>
+                            </div>
+                        </div>
+
+                        <div class="drop" data-value="5">
+                            <div class="measurement-selector">
+                                <div class="measurement-content">
+                                    <p>Select the appropriate <strong>'<span class="measurement-label"></span>'</strong> amount:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="amount-placeholder">Amount</div> 
+                                            <form id="amount">
+                                                <select name="amount" class="amount-data"></select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="measurement-placeholder">Measurement</div>
+                                            <form id="measure">
+                                                <select name="measure" class="measure-data"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a class="measurement-button">Add to Pot</a>
+                            </div>
+
+                            <div class="cooking-selector">
+                                <div class="cooking-content">
+                                    <p>Before adding that, set the cooking time and temperature for the <strong>'<span class="cooking-label"></span>'</strong>:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="time-placeholder">Time</div>
+
+                                            <form id="time">
+                                                <select name="time" class="time-data">
+                                                    <option class="category-selected dropdown-item time-item" value="1 Min">1 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="5 Min">5 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="10 Min">10 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="15 Min">15 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="30 Min">30 Min</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="temp-placeholder">Temperature</div>
+
+                                            <form id="temp">
+                                                <select name="temp" class="temperature-data">
+                                                   <option class="category-selected dropdown-item temperature-item" value="Low">Low</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Medium">Medium</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="High">High</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Simmer">Simmer</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Off">Off</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="cooking-button">Cook Items</a>
+                            </div>
+                        </div>
+                        <div class="drop" data-value="5">
+                            <div class="measurement-selector">
+                                <div class="measurement-content">
+                                    <p>Select the appropriate <strong>'<span class="measurement-label"></span>'</strong> amount:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="amount-placeholder">Amount</div> 
+                                            <form id="amount">
+                                                <select name="amount" class="amount-data"></select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="measurement-placeholder">Measurement</div>
+                                            <form id="measure">
+                                                <select name="measure" class="measure-data"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a class="measurement-button">Add to Pot</a>
+                            </div>
+
+                            <div class="cooking-selector">
+                                <div class="cooking-content">
+                                    <p>Before adding that, set the cooking time and temperature for the <strong>'<span class="cooking-label"></span>'</strong>:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="time-placeholder">Time</div>
+
+                                            <form id="time">
+                                                <select name="time" class="time-data">
+                                                    <option class="category-selected dropdown-item time-item" value="1 Min">1 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="5 Min">5 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="10 Min">10 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="15 Min">15 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="30 Min">30 Min</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="temp-placeholder">Temperature</div>
+
+                                            <form id="temp">
+                                                <select name="temp" class="temperature-data">
+                                                   <option class="category-selected dropdown-item temperature-item" value="Low">Low</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Medium">Medium</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="High">High</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Simmer">Simmer</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Off">Off</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="cooking-button">Cook Items</a>
+                            </div>
+                        </div>
+                        <div class="drop" data-value="5">
+                            <div class="measurement-selector">
+                                <div class="measurement-content">
+                                    <p>Select the appropriate <strong>'<span class="measurement-label"></span>'</strong> amount:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="amount-placeholder">Amount</div> 
+                                            <form id="amount">
+                                                <select name="amount" class="amount-data"></select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="measurement-placeholder">Measurement</div>
+                                            <form id="measure">
+                                                <select name="measure" class="measure-data"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a class="measurement-button">Add to Pot</a>
+                            </div>
+
+                            <div class="cooking-selector">
+                                <div class="cooking-content">
+                                    <p>Before adding that, set the cooking time and temperature for the <strong>'<span class="cooking-label"></span>'</strong>:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="time-placeholder">Time</div>
+
+                                            <form id="time">
+                                                <select name="time" class="time-data">
+                                                    <option class="category-selected dropdown-item time-item" value="1 Min">1 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="5 Min">5 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="10 Min">10 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="15 Min">15 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="30 Min">30 Min</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="temp-placeholder">Temperature</div>
+
+                                            <form id="temp">
+                                                <select name="temp" class="temperature-data">
+                                                   <option class="category-selected dropdown-item temperature-item" value="Low">Low</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Medium">Medium</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="High">High</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Simmer">Simmer</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Off">Off</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="cooking-button">Cook Items</a>
+                            </div>
+                        </div>
+                        <div class="drop" data-value="5">
+                            <div class="measurement-selector">
+                                <div class="measurement-content">
+                                    <p>Select the appropriate <strong>'<span class="measurement-label"></span>'</strong> amount:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="amount-placeholder">Amount</div> 
+                                            <form id="amount">
+                                                <select name="amount" class="amount-data"></select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="measurement-placeholder">Measurement</div>
+                                            <form id="measure">
+                                                <select name="measure" class="measure-data"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a class="measurement-button">Add to Pot</a>
+                            </div>
+
+                            <div class="cooking-selector">
+                                <div class="cooking-content">
+                                    <p>Before adding that, set the cooking time and temperature for the <strong>'<span class="cooking-label"></span>'</strong>:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="time-placeholder">Time</div>
+
+                                            <form id="time">
+                                                <select name="time" class="time-data">
+                                                    <option class="category-selected dropdown-item time-item" value="1 Min">1 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="5 Min">5 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="10 Min">10 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="15 Min">15 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="30 Min">30 Min</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="temp-placeholder">Temperature</div>
+
+                                            <form id="temp">
+                                                <select name="temp" class="temperature-data">
+                                                   <option class="category-selected dropdown-item temperature-item" value="Low">Low</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Medium">Medium</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="High">High</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Simmer">Simmer</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Off">Off</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="cooking-button">Cook Items</a>
+                            </div>
+                        </div>
+                        <div class="drop" data-value="5">
+                            <div class="measurement-selector">
+                                <div class="measurement-content">
+                                    <p>Select the appropriate <strong>'<span class="measurement-label"></span>'</strong> amount:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="amount-placeholder">Amount</div> 
+                                            <form id="amount">
+                                                <select name="amount" class="amount-data"></select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="measurement-placeholder">Measurement</div>
+                                            <form id="measure">
+                                                <select name="measure" class="measure-data"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a class="measurement-button">Add to Pot</a>
+                            </div>
+
+                            <div class="cooking-selector">
+                                <div class="cooking-content">
+                                    <p>Before adding that, set the cooking time and temperature for the <strong>'<span class="cooking-label"></span>'</strong>:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="time-placeholder">Time</div>
+
+                                            <form id="time">
+                                                <select name="time" class="time-data">
+                                                    <option class="category-selected dropdown-item time-item" value="1 Min">1 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="5 Min">5 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="10 Min">10 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="15 Min">15 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="30 Min">30 Min</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="temp-placeholder">Temperature</div>
+
+                                            <form id="temp">
+                                                <select name="temp" class="temperature-data">
+                                                   <option class="category-selected dropdown-item temperature-item" value="Low">Low</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Medium">Medium</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="High">High</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Simmer">Simmer</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Off">Off</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="cooking-button">Cook Items</a>
+                            </div>
+                        </div>
+                        <div class="drop" data-value="5">
+                            <div class="measurement-selector">
+                                <div class="measurement-content">
+                                    <p>Select the appropriate <strong>'<span class="measurement-label"></span>'</strong> amount:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="amount-placeholder">Amount</div> 
+                                            <form id="amount">
+                                                <select name="amount" class="amount-data"></select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="measurement-placeholder">Measurement</div>
+                                            <form id="measure">
+                                                <select name="measure" class="measure-data"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a class="measurement-button">Add to Pot</a>
+                            </div>
+
+                            <div class="cooking-selector">
+                                <div class="cooking-content">
+                                    <p>Before adding that, set the cooking time and temperature for the <strong>'<span class="cooking-label"></span>'</strong>:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="time-placeholder">Time</div>
+
+                                            <form id="time">
+                                                <select name="time" class="time-data">
+                                                    <option class="category-selected dropdown-item time-item" value="1 Min">1 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="5 Min">5 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="10 Min">10 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="15 Min">15 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="30 Min">30 Min</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="temp-placeholder">Temperature</div>
+
+                                            <form id="temp">
+                                                <select name="temp" class="temperature-data">
+                                                   <option class="category-selected dropdown-item temperature-item" value="Low">Low</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Medium">Medium</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="High">High</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Simmer">Simmer</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Off">Off</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="cooking-button">Cook Items</a>
+                            </div>
+                        </div>
+                        <div class="drop" data-value="5">
+                            <div class="measurement-selector">
+                                <div class="measurement-content">
+                                    <p>Select the appropriate <strong>'<span class="measurement-label"></span>'</strong> amount:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="amount-placeholder">Amount</div> 
+                                            <form id="amount">
+                                                <select name="amount" class="amount-data"></select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="measurement-placeholder">Measurement</div>
+                                            <form id="measure">
+                                                <select name="measure" class="measure-data"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a class="measurement-button">Add to Pot</a>
+                            </div>
+
+                            <div class="cooking-selector">
+                                <div class="cooking-content">
+                                    <p>Before adding that, set the cooking time and temperature for the <strong>'<span class="cooking-label"></span>'</strong>:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="time-placeholder">Time</div>
+
+                                            <form id="time">
+                                                <select name="time" class="time-data">
+                                                    <option class="category-selected dropdown-item time-item" value="1 Min">1 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="5 Min">5 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="10 Min">10 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="15 Min">15 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="30 Min">30 Min</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="temp-placeholder">Temperature</div>
+
+                                            <form id="temp">
+                                                <select name="temp" class="temperature-data">
+                                                   <option class="category-selected dropdown-item temperature-item" value="Low">Low</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Medium">Medium</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="High">High</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Simmer">Simmer</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Off">Off</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="cooking-button">Cook Items</a>
+                            </div>
+                        </div>
+                        <div class="drop" data-value="5">
+                            <div class="measurement-selector">
+                                <div class="measurement-content">
+                                    <p>Select the appropriate <strong>'<span class="measurement-label"></span>'</strong> amount:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="amount-placeholder">Amount</div> 
+                                            <form id="amount">
+                                                <select name="amount" class="amount-data"></select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="measurement-placeholder">Measurement</div>
+                                            <form id="measure">
+                                                <select name="measure" class="measure-data"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a class="measurement-button">Add to Pot</a>
+                            </div>
+
+                            <div class="cooking-selector">
+                                <div class="cooking-content">
+                                    <p>Before adding that, set the cooking time and temperature for the <strong>'<span class="cooking-label"></span>'</strong>:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="time-placeholder">Time</div>
+
+                                            <form id="time">
+                                                <select name="time" class="time-data">
+                                                    <option class="category-selected dropdown-item time-item" value="1 Min">1 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="5 Min">5 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="10 Min">10 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="15 Min">15 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="30 Min">30 Min</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="temp-placeholder">Temperature</div>
+
+                                            <form id="temp">
+                                                <select name="temp" class="temperature-data">
+                                                   <option class="category-selected dropdown-item temperature-item" value="Low">Low</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Medium">Medium</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="High">High</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Simmer">Simmer</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Off">Off</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="cooking-button">Cook Items</a>
+                            </div>
+                        </div>
+                        <div class="drop" data-value="5">
+                            <div class="measurement-selector">
+                                <div class="measurement-content">
+                                    <p>Select the appropriate <strong>'<span class="measurement-label"></span>'</strong> amount:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="amount-placeholder">Amount</div> 
+                                            <form id="amount">
+                                                <select name="amount" class="amount-data"></select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="measurement-placeholder">Measurement</div>
+                                            <form id="measure">
+                                                <select name="measure" class="measure-data"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a class="measurement-button">Add to Pot</a>
+                            </div>
+
+                            <div class="cooking-selector">
+                                <div class="cooking-content">
+                                    <p>Before adding that, set the cooking time and temperature for the <strong>'<span class="cooking-label"></span>'</strong>:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="time-placeholder">Time</div>
+
+                                            <form id="time">
+                                                <select name="time" class="time-data">
+                                                    <option class="category-selected dropdown-item time-item" value="1 Min">1 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="5 Min">5 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="10 Min">10 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="15 Min">15 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="30 Min">30 Min</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="temp-placeholder">Temperature</div>
+
+                                            <form id="temp">
+                                                <select name="temp" class="temperature-data">
+                                                   <option class="category-selected dropdown-item temperature-item" value="Low">Low</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Medium">Medium</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="High">High</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Simmer">Simmer</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Off">Off</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="cooking-button">Cook Items</a>
+                            </div>
+                        </div>
+                        <div class="drop" data-value="5">
+                            <div class="measurement-selector">
+                                <div class="measurement-content">
+                                    <p>Select the appropriate <strong>'<span class="measurement-label"></span>'</strong> amount:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="amount-placeholder">Amount</div> 
+                                            <form id="amount">
+                                                <select name="amount" class="amount-data"></select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="measurement-placeholder">Measurement</div>
+                                            <form id="measure">
+                                                <select name="measure" class="measure-data"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a class="measurement-button">Add to Pot</a>
+                            </div>
+
+                            <div class="cooking-selector">
+                                <div class="cooking-content">
+                                    <p>Before adding that, set the cooking time and temperature for the <strong>'<span class="cooking-label"></span>'</strong>:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="time-placeholder">Time</div>
+
+                                            <form id="time">
+                                                <select name="time" class="time-data">
+                                                    <option class="category-selected dropdown-item time-item" value="1 Min">1 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="5 Min">5 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="10 Min">10 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="15 Min">15 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="30 Min">30 Min</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="temp-placeholder">Temperature</div>
+
+                                            <form id="temp">
+                                                <select name="temp" class="temperature-data">
+                                                   <option class="category-selected dropdown-item temperature-item" value="Low">Low</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Medium">Medium</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="High">High</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Simmer">Simmer</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Off">Off</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="cooking-button">Cook Items</a>
+                            </div>
+                        </div>
+                        <div class="drop" data-value="4">
+                            <div class="measurement-selector">
+                                <div class="measurement-content">
+                                    <p>Select the appropriate <strong>'<span class="measurement-label"></span>'</strong> amount:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="amount-placeholder">Amount</div> 
+                                            <form id="amount">
+                                                <select name="amount" class="amount-data"></select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="measurement-placeholder">Measurement</div>
+                                            <form id="measure">
+                                                <select name="measure" class="measure-data"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a class="measurement-button">Add to Pot</a>
+                            </div>
+
+                            <div class="cooking-selector">
+                                <div class="cooking-content">
+                                    <p>Before adding that, set the cooking time and temperature for the <strong>'<span class="cooking-label"></span>'</strong>:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="time-placeholder">Time</div>
+
+                                            <form id="time">
+                                                <select name="time" class="time-data">
+                                                    <option class="category-selected dropdown-item time-item" value="1 Min">1 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="5 Min">5 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="10 Min">10 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="15 Min">15 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="30 Min">30 Min</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="temp-placeholder">Temperature</div>
+
+                                            <form id="temp">
+                                                <select name="temp" class="temperature-data">
+                                                   <option class="category-selected dropdown-item temperature-item" value="Low">Low</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Medium">Medium</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="High">High</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Simmer">Simmer</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Off">Off</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="cooking-button">Cook Items</a>
+                            </div>
+                        </div>
+                        <div class="drop" data-value="3">
+                            <div class="measurement-selector">
+                                <div class="measurement-content">
+                                    <p>Select the appropriate <strong>'<span class="measurement-label"></span>'</strong> amount:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="amount-placeholder">Amount</div> 
+                                            <form id="amount">
+                                                <select name="amount" class="amount-data"></select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="measurement-placeholder">Measurement</div>
+                                            <form id="measure">
+                                                <select name="measure" class="measure-data"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a class="measurement-button">Add to Pot</a>
+                            </div>
+
+                            <div class="cooking-selector">
+                                <div class="cooking-content">
+                                    <p>Before adding that, set the cooking time and temperature for the <strong>'<span class="cooking-label"></span>'</strong>:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="time-placeholder">Time</div>
+
+                                            <form id="time">
+                                                <select name="time" class="time-data">
+                                                    <option class="category-selected dropdown-item time-item" value="1 Min">1 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="5 Min">5 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="10 Min">10 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="15 Min">15 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="30 Min">30 Min</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="temp-placeholder">Temperature</div>
+
+                                            <form id="temp">
+                                                <select name="temp" class="temperature-data">
+                                                   <option class="category-selected dropdown-item temperature-item" value="Low">Low</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Medium">Medium</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="High">High</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Simmer">Simmer</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Off">Off</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="cooking-button">Cook Items</a>
+                            </div>
+                        </div>
+                        <div class="drop" data-value="2">
+                            <div class="measurement-selector">
+                                <div class="measurement-content">
+                                    <p>Select the appropriate <strong>'<span class="measurement-label"></span>'</strong> amount:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="amount-placeholder">Amount</div> 
+                                            <form id="amount">
+                                                <select name="amount" class="amount-data"></select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="measurement-placeholder">Measurement</div>
+                                            <form id="measure">
+                                                <select name="measure" class="measure-data"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a class="measurement-button">Add to Pot</a>
+                            </div>
+
+                            <div class="cooking-selector">
+                                <div class="cooking-content">
+                                    <p>Before adding that, set the cooking time and temperature for the <strong>'<span class="cooking-label"></span>'</strong>:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="time-placeholder">Time</div>
+
+                                            <form id="time">
+                                                <select name="time" class="time-data">
+                                                    <option class="category-selected dropdown-item time-item" value="1 Min">1 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="5 Min">5 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="10 Min">10 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="15 Min">15 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="30 Min">30 Min</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="temp-placeholder">Temperature</div>
+
+                                            <form id="temp">
+                                                <select name="temp" class="temperature-data">
+                                                   <option class="category-selected dropdown-item temperature-item" value="Low">Low</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Medium">Medium</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="High">High</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Simmer">Simmer</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Off">Off</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="cooking-button">Cook Items</a>
+                            </div>
+                        </div>
+                        <div class="drop" data-value="2">
+                            <div class="measurement-selector">
+                                <div class="measurement-content">
+                                    <p>Select the appropriate <strong>'<span class="measurement-label"></span>'</strong> amount:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="amount-placeholder">Amount</div> 
+                                            <form id="amount">
+                                                <select name="amount" class="amount-data"></select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="measurement-placeholder">Measurement</div>
+                                            <form id="measure">
+                                                <select name="measure" class="measure-data"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a class="measurement-button">Add to Pot</a>
+                            </div>
+
+                            <div class="cooking-selector">
+                                <div class="cooking-content">
+                                    <p>Before adding that, set the cooking time and temperature for the <strong>'<span class="cooking-label"></span>'</strong>:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="time-placeholder">Time</div>
+
+                                            <form id="time">
+                                                <select name="time" class="time-data">
+                                                    <option class="category-selected dropdown-item time-item" value="1 Min">1 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="5 Min">5 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="10 Min">10 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="15 Min">15 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="30 Min">30 Min</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="temp-placeholder">Temperature</div>
+
+                                            <form id="temp">
+                                                <select name="temp" class="temperature-data">
+                                                   <option class="category-selected dropdown-item temperature-item" value="Low">Low</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Medium">Medium</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="High">High</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Simmer">Simmer</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Off">Off</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="cooking-button">Cook Items</a>
+                            </div>
+                        </div>
+                        <div class="drop" data-value="2">
+                            <div class="measurement-selector">
+                                <div class="measurement-content">
+                                    <p>Select the appropriate <strong>'<span class="measurement-label"></span>'</strong> amount:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="amount-placeholder">Amount</div> 
+                                            <form id="amount">
+                                                <select name="amount" class="amount-data"></select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="measurement-placeholder">Measurement</div>
+                                            <form id="measure">
+                                                <select name="measure" class="measure-data"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a class="measurement-button">Add to Pot</a>
+                            </div>
+
+                            <div class="cooking-selector">
+                                <div class="cooking-content">
+                                    <p>Before adding that, set the cooking time and temperature for the <strong>'<span class="cooking-label"></span>'</strong>:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="time-placeholder">Time</div>
+
+                                            <form id="time">
+                                                <select name="time" class="time-data">
+                                                    <option class="category-selected dropdown-item time-item" value="1 Min">1 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="5 Min">5 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="10 Min">10 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="15 Min">15 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="30 Min">30 Min</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="temp-placeholder">Temperature</div>
+
+                                            <form id="temp">
+                                                <select name="temp" class="temperature-data">
+                                                   <option class="category-selected dropdown-item temperature-item" value="Low">Low</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Medium">Medium</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="High">High</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Simmer">Simmer</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Off">Off</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="cooking-button">Cook Items</a>
+                            </div>
+                        </div>
+                        <div class="drop" data-value="1">
+                            <div class="measurement-selector">
+                                <div class="measurement-content">
+                                    <p>Select the appropriate <strong>'<span class="measurement-label"></span>'</strong> amount:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="amount-placeholder">Amount</div> 
+                                            <form id="amount">
+                                                <select name="amount" class="amount-data"></select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="measurement-placeholder">Measurement</div>
+                                            <form id="measure">
+                                                <select name="measure" class="measure-data"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a class="measurement-button">Add to Pot</a>
+                            </div>
+
+                            <div class="cooking-selector">
+                                <div class="cooking-content">
+                                    <p>Before adding that, set the cooking time and temperature for the <strong>'<span class="cooking-label"></span>'</strong>:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="time-placeholder">Time</div>
+
+                                            <form id="time">
+                                                <select name="time" class="time-data">
+                                                    <option class="category-selected dropdown-item time-item" value="1 Min">1 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="5 Min">5 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="10 Min">10 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="15 Min">15 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="30 Min">30 Min</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="temp-placeholder">Temperature</div>
+
+                                            <form id="temp">
+                                                <select name="temp" class="temperature-data">
+                                                   <option class="category-selected dropdown-item temperature-item" value="Low">Low</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Medium">Medium</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="High">High</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Simmer">Simmer</option>
+                                                           <option class="category-selected dropdown-item temperature-item" value="Off">Off</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="cooking-button">Cook Items</a>
+                            </div>
+                        </div>
+                        <div class="drop" data-value="1">
+                            <div class="measurement-selector">
+                                <div class="measurement-content">
+                                    <p>Select the appropriate <strong>'<span class="measurement-label"></span>'</strong> amount:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="amount-placeholder">Amount</div> 
+                                            <form id="amount">
+                                                <select name="amount" class="amount-data"></select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="measurement-placeholder">Measurement</div>
+                                            <form id="measure">
+                                                <select name="measure" class="measure-data"></select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <a class="measurement-button">Add to Pot</a>
+                            </div>
+
+                            <div class="cooking-selector">
+                                <div class="cooking-content">
+                                    <p>Before adding that, set the cooking time and temperature for the <strong>'<span class="cooking-label"></span>'</strong>:</p>
+
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <div class="time-placeholder">Time</div>
+
+                                            <form id="time">
+                                                <select name="time" class="time-data">
+                                                    <option class="category-selected dropdown-item time-item" value="1 Min">1 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="5 Min">5 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="10 Min">10 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="15 Min">15 Min</option>
+                                                    <option class="category-selected dropdown-item time-item" value="30 Min">30 Min</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="flex-2">
+                                            <div class="temp-placeholder">Temperature</div>
+
+                                            <form id="temp">
+                                                <select name="temp" class="temperature-data">
+                                                   <option class="category-selected dropdown-item temperature-item" value="Low">Low</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Medium">Medium</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="High">High</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Simmer">Simmer</option>
+                                                   <option class="category-selected dropdown-item temperature-item" value="Off">Off</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="cooking-button">Cook Items</a>
+                            </div>
+                        </div>
+                   </div>
+                   <div id="area33" class="area-hotspot"></div>
+                   <div id="area33" class="area-hotspot"></div>
+                   <div id="area34" class="area-hotspot"></div>
+                   <div id="area35" class="area-hotspot"></div>
+                   <div id="area36" class="area-hotspot"></div>
+
+                   <div id="area37" class="area-hotspot"></div>
+                   <div id="area38" class="area-hotspot"></div>
+                   <div id="area39" class="area-hotspot"></div>
+                   <div id="area40" class="area-hotspot"></div>
+                   <div id="area41" class="area-hotspot"></div>
+                   <div id="area42" class="area-hotspot"></div>
+                   <div id="area43" class="area-hotspot"></div>
+                   <div id="area44" class="area-hotspot"></div>
+                   <div id="area45" class="area-hotspot"></div>
+
+                   <div id="area46" class="area-hotspot"></div>
+                   <div id="area47" class="area-hotspot"></div>
+                   <div id="area48" class="area-hotspot"></div>
+                   <div id="area49" class="area-hotspot"></div>
+                   <div id="area50" class="area-hotspot"></div>
+                   <div id="area51" class="area-hotspot"></div>
+                   <div id="area52" class="area-hotspot"></div>
+                   <div id="area53" class="area-hotspot"></div>
+                </div>
+
+                <div class="drop-field" style="background: url('culinary/culinary-cooking.svg');"></div>
+            </div>
+        </div>
+        
+        <div class="reset-message">
+            <div class="reset-content">
+                <div class="reset"></div>
+            </div>
+        </div>
+        
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <script src="jquery.min.js"></script> 
+        
+        <script src="culinary-drop.js"></script> 
+        <script> 
+            $('.activity-nav').hide();
+            $('.activity-nav.show').show();
+
+            $('.instructions-link').click(function() {
+                $('.activity-nav').fadeIn('slow');
+                $(this).css('color', '#2196f3');
+            });
+
+            $('.activity-close').click(function() {
+                $('.activity-nav').fadeOut('fast');
+                $('.instructions-link').css('color', '#FFFFFF');
+            });
+
+            $(".completed-activity").hide();
+
+        setInterval(removeParent,1000);
+
+        function removeParent(){
+            $('.material-item').each(function() {
+                if ($(this).has('.drag-item').length == 0) {
+                    $(this).hide();
+                }
+            });
+        }
+
+        $('.modal').css('left', '-100vw');
+        $('.modal').css('overflow', 'hidden');
+        $('.modal').css('display', 'block');
+        $('.measurement-selector').hide();
+        $('.cooking-selector').hide();
+
+        $(function () {
+            json = {
+                "categories": [
+                    {
+                        "option": "Produce",
+                        "code": "A",
+                    },
+                    {
+                        "option": "Meats",
+                        "code": "B",
+                    },
+                    {
+                        "option": "Seafood",
+                        "code": "C",
+                    },
+                    {
+                        "option": "Dairy",
+                        "code": "D",
+                    },
+                    {
+                        "option": "Pantry",
+                        "code": "E",
+                    },
+                    {
+                        "option": "Bakery",
+                        "code": "F",
+                    },
+                    {
+                        "option": "Herbs & Spices",
+                        "code": "G",
+                    }
+                ],
+                "number": [
+                    {
+                        "digits": "0",
+                        "instance": "0",
+                    },
+                    {
+                        "digits": "1/4",
+                        "instance": "1/4",
+                    },
+                    {
+                        "digits": "1/2",
+                        "instance": "1/2",
+                    },
+                    {
+                        "digits": "3/4",
+                        "instance": "3/4",
+                    },
+                    {
+                        "digits": "1",
+                        "instance": "1",
+                    },
+                    {
+                        "digits": "1 1/2",
+                        "instance": "1 1/2",
+                    },
+                    {
+                        "digits": "2",
+                        "instance": "2",
+                    },
+                    {
+                        "digits": "2 1/2",
+                        "instance": "2 1/2",
+                    },
+                    {
+                        "digits": "3",
+                        "instance": "3",
+                    },
+                    {
+                        "digits": "3 1/2",
+                        "instance": "3 1/2",
+                    },
+                    {
+                        "digits": "4",
+                        "instance": "4",
+                    }
+                ],
+                "type": [
+                    {
+                        "measurement": "Item(s)",
+                        "measure": "Item(s)",
+                    },
+                    {
+                        "measurement": "Cup(s)",
+                        "measure": "Cup(s)",
+                    },
+                    {
+                        "measurement": "Teaspoon(s)",
+                        "measure": "Teaspoon(s)",
+                    },
+                    {
+                        "measurement": "Tablespoon(s)",
+                        "measure": "Tablespoon(s)",
+                    },
+                    {
+                        "measurement": "Unknown",
+                        "measure": "Unknown",
+                    }
+                ],
+                "objects": [
+                    {
+                            "image": "culinary/Food/item1.png",
+                            "name": "Pear",
+                            "objectNumber": "1",
+                            "category": "A",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown"
+
+                    },
+                    {
+                            "image": "culinary/Food/item2.png",
+                            "name": "Apple",
+                            "objectNumber": "2",
+                            "category": "A",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown"
+
+                    },
+                    {
+                            "image": "culinary/Food/item3.png",
+                            "name": "Orange",
+                            "objectNumber": "3",
+                            "category": "A",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item4.png",
+                            "name": "Grapes",
+                            "objectNumber": "4",
+                            "category": "A",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item5.png",
+                            "name": "Carrot",
+                            "objectNumber": "5",
+                            "category": "A",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item7.png",
+                            "name": "Green Pepper",
+                            "objectNumber": "6",
+                            "category": "A",
+                            "value": "2",
+                            "order": "2",
+                            "amount": "1",
+                            "measurement": "Item(s)",
+                    },
+                    {
+                            "image": "culinary/Food/item6.png",
+                            "name": "Red Pepper",
+                            "objectNumber": "7",
+                            "category": "A",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item8.png",
+                            "name": "Beet",
+                            "objectNumber": "8",
+                            "category": "A",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item9.png",
+                            "name": "Eggplant",
+                            "objectNumber": "9",
+                            "category": "A",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+                    },
+                    {
+                            "image": "culinary/Food/item10.png",
+                            "name": "Okra",
+                            "objectNumber": "10",
+                            "category": "A",
+                            "value": "5",
+                            "order": "5",
+                            "amount": "1/2",
+                            "measurement": "Cup(s)",
+
+                    },
+                    {
+                            "image": "culinary/Food/item11.png",
+                            "name": "Corn",
+                            "objectNumber": "11",
+                            "category": "A",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item12.png",
+                            "name": "Cabbage",
+                            "objectNumber": "12",
+                            "category": "A",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item13.png",
+                            "name": "Garlic",
+                            "objectNumber": "13",
+                            "category": "A",
+                            "value": "3",
+                            "order": "3",
+                            "amount": "4",
+                            "measurement": "Item(s)",
+
+                    },
+                    {
+                            "image": "culinary/Food/item14.png",
+                            "name": "Onion",
+                            "objectNumber": "14",
+                            "category": "A",
+                            "value": "2",
+                            "order": "2",
+                            "amount": "1",
+                            "measurement": "Item(s)",
+
+                    },
+                    {
+                            "image": "culinary/Food/item15.png",
+                            "name": "Radicchio",
+                            "objectNumber": "15",
+                            "category": "A",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item16.png",
+                            "name": "Romaine",
+                            "objectNumber": "16",
+                            "category": "A",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item17.png",
+                            "name": "Broccoli",
+                            "objectNumber": "17",
+                            "category": "A",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item18.png",
+                            "name": "Green Onion",
+                            "objectNumber": "18",
+                            "category": "A",
+                            "value": "7",
+                            "order": "7",
+                            "amount": "2",
+                            "measurement": "Item(s)",
+                    },
+                    {
+                            "image": "culinary/Food/item19.png",
+                            "name": "Micro Greens",
+                            "objectNumber": "19",
+                            "category": "A",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item20.png",
+                            "name": "Parsley",
+                            "objectNumber": "20",
+                            "category": "G",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item20.png",
+                            "name": "Cilantro",
+                            "objectNumber": "82",
+                            "category": "G",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item21.png",
+                            "name": "Zucchini",
+                            "objectNumber": "21",
+                            "category": "A",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item22.png",
+                            "name": "Tomato",
+                            "objectNumber": "22",
+                            "category": "A",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item23.png",
+                            "name": "Cauliflower",
+                            "objectNumber": "23",
+                            "category": "A",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item24.png",
+                            "name": "Butter",
+                            "objectNumber": "24",
+                            "category": "D",
+                            "value": "Y",
+                            "order": "0",
+                            "amount": "1",
+                            "measurement": "Cup(s)",
+
+                    },
+                    {
+                            "image": "culinary/Food/item25.png",
+                            "name": "Mussels",
+                            "objectNumber": "25",
+                            "category": "C",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item26.png",
+                            "name": "Shrimp",
+                            "objectNumber": "26",
+                            "category": "C",
+                            "value": "5",
+                            "order": "5",
+                            "amount": "1",
+                            "measurement": "Cup(s)",
+                    },
+                    {
+                            "image": "culinary/Food/item27.png",
+                            "name": "Crab",
+                            "objectNumber": "27",
+                            "category": "C",
+                            "value": "Y",
+                            "order": "0",
+                            "amount": "1",
+                            "measurement": "Cup(s)",
+
+                    },
+                    {
+                            "image": "culinary/Food/item28.png",
+                            "name": "Tuna",
+                            "objectNumber": "28",
+                            "category": "C",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item29.png",
+                            "name": "Salmon",
+                            "objectNumber": "29",
+                            "category": "C",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item30.png",
+                            "name": "Trout",
+                            "objectNumber": "30",
+                            "category": "C",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item31.png",
+                            "name": "Eggs",
+                            "objectNumber": "31",
+                            "category": "B",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item32.png",
+                            "name": "Yogurt",
+                            "objectNumber": "32",
+                            "category": "D",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item33.png",
+                            "name": "Milk",
+                            "objectNumber": "33",
+                            "category": "D",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+                    },
+                    {
+                            "image": "culinary/Food/item34.png",
+                            "name": "Cream",
+                            "objectNumber": "34",
+                            "category": "D",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item35.png",
+                            "name": "Cheese",
+                            "objectNumber": "35",
+                            "category": "D",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item36.png",
+                            "name": "Vegetable Oil",
+                            "objectNumber": "36",
+                            "category": "E",
+                            "value": "1",
+                            "order": "1",
+                            "amount": "1",
+                            "measurement": "Cup(s)",
+
+                    },
+                    {
+                            "image": "culinary/Food/item37.png",
+                            "name": "Truffle Oil",
+                            "objectNumber": "37",
+                            "category": "E",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item38.png",
+                            "name": "Salami",
+                            "objectNumber": "38",
+                            "category": "B",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item39.png",
+                            "name": "Chorizo",
+                            "objectNumber": "39",
+                            "category": "B",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item40.png",
+                            "name": "Panchetta",
+                            "objectNumber": "40",
+                            "category": "B",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item41.png",
+                            "name": "Veggie Sausages",
+                            "objectNumber": "41",
+                            "category": "B",
+                            "value": "5",
+                            "order": "5",
+                            "amount": "3/4",
+                            "measurement": "Cup(s)",
+                    },
+                    {
+                            "image": "culinary/Food/item42.png",
+                            "name": "Capocollo",
+                            "objectNumber": "42",
+                            "category": "B",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item44.png",
+                            "name": "Ham Steak",
+                            "objectNumber": "44",
+                            "category": "B",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item45.png",
+                            "name": "Guanciale",
+                            "objectNumber": "45",
+                            "category": "B",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item46.png",
+                            "name": "Chicken Stock",
+                            "objectNumber": "46",
+                            "category": "E",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "2",
+                            "measurement": "Cup(s)",
+                    },
+                    {
+                            "image": "culinary/Food/item115.png",
+                            "name": "Vegetable Stock",
+                            "objectNumber": "111",
+                            "category": "E",
+                            "value": "4",
+                            "order": "4",
+                            "amount": "2",
+                            "measurement": "Cup(s)",
+                    },
+                    {
+                            "image": "culinary/Food/item47.png",
+                            "name": "Canned Tomatoes",
+                            "objectNumber": "47",
+                            "category": "E",
+                            "value": "5",
+                            "order": "5",
+                            "amount": "3 1/2",
+                            "measurement": "Cup(s)",
+
+                    },
+                    {
+                            "image": "culinary/Food/item48.png",
+                            "name": "Oregano",
+                            "objectNumber": "48",
+                            "category": "G",
+                            "value": "5",
+                            "order": "5",
+                            "amount": "1",
+                            "measurement": "Teaspoon(s)",
+
+                    },
+                    {
+                            "image": "culinary/Food/item49.png",
+                            "name": "Rosemary",
+                            "objectNumber": "49",
+                            "category": "G",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item50.png",
+                            "name": "Thyme",
+                            "objectNumber": "50",
+                            "category": "G",
+                            "value": "5",
+                            "order": "5",
+                            "amount": "1",
+                            "measurement": "Teaspoon(s)",
+
+                    },
+                    {
+                            "image": "culinary/Food/item51.png",
+                            "name": "Onion Powder",
+                            "objectNumber": "51",
+                            "category": "G",
+                            "value": "5",
+                            "order": "5",
+                            "amount": "1",
+                            "measurement": "Teaspoon(s)",
+
+                    },
+                    {
+                            "image": "culinary/Food/item51.png",
+                            "name": "Sea Salt",
+                            "objectNumber": "81",
+                            "category": "G",
+                            "value": "6",
+                            "order": "6",
+                            "amount": "1",
+                            "measurement": "Teaspoon(s)",
+                    },
+                    {
+                            "image": "culinary/Food/item52.png",
+                            "name": "Garlic Powder",
+                            "objectNumber": "52",
+                            "category": "G",
+                            "value": "5",
+                            "order": "5",
+                            "amount": "1",
+                            "measurement": "Teaspoon(s)",
+
+                    },
+                    {
+                            "image": "culinary/Food/item52.png",
+                            "name": "Ginger",
+                            "objectNumber": "90",
+                            "category": "G",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item52.png",
+                            "name": "Fennel",
+                            "objectNumber": "98",
+                            "category": "G",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item53.png",
+                            "name": "Sassafras",
+                            "objectNumber": "53",
+                            "category": "G",
+                            "value": "5",
+                            "order": "5",
+                            "amount": "1",
+                            "measurement": "Teaspoon(s)",
+
+                    },
+                    {
+                            "image": "culinary/Food/item54.png",
+                            "name": "Paprika",
+                            "objectNumber": "54",
+                            "category": "G",
+                            "value": "5",
+                            "order": "5",
+                            "amount": "1",
+                            "measurement": "Teaspoon(s)",
+
+                    },
+                    {
+                            "image": "culinary/Food/item55.png",
+                            "name": "Cayenne Pepper",
+                            "objectNumber": "55",
+                            "category": "G",
+                            "value": "5",
+                            "order": "5",
+                            "amount": "1/4",
+                            "measurement": "Teaspoon(s)",
+
+                    },
+                    {
+                            "image": "culinary/Food/item84.png",
+                            "name": "Turmeric",
+                            "objectNumber": "84",
+                            "category": "G",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item84.png",
+                            "name": "Cumin",
+                            "objectNumber": "91",
+                            "category": "G",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item85.png",
+                            "name": "Cinnamon",
+                            "objectNumber": "85",
+                            "category": "G",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item85.png",
+                            "name": "Coriander",
+                            "objectNumber": "96",
+                            "category": "G",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item85.png",
+                            "name": "Cardamom",
+                            "objectNumber": "97",
+                            "category": "G",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item86.png",
+                            "name": "Basil",
+                            "objectNumber": "86",
+                            "category": "G",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item87.png",
+                            "name": "Tarragon",
+                            "objectNumber": "87",
+                            "category": "G",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item87.png",
+                            "name": "Dill",
+                            "objectNumber": "93",
+                            "category": "G",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item87.png",
+                            "name": "Mint",
+                            "objectNumber": "94",
+                            "category": "G",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item87.png",
+                            "name": "Marjoram",
+                            "objectNumber": "95",
+                            "category": "G",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item88.png",
+                            "name": "Sage",
+                            "objectNumber": "88",
+                            "category": "G",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item89.png",
+                            "name": "Peppercorns",
+                            "objectNumber": "89",
+                            "category": "G",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item55.png",
+                            "name": "Chili Powder",
+                            "objectNumber": "80",
+                            "category": "G",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item56.png",
+                            "name": "Fusilli",
+                            "objectNumber": "56",
+                            "category": "E",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item57.png",
+                            "name": "Potatos",
+                            "objectNumber": "57",
+                            "category": "E",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item58.png",
+                            "name": "Spaghetti",
+                            "objectNumber": "58",
+                            "category": "E",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item59.png",
+                            "name": "Sourdough Bread",
+                            "objectNumber": "59",
+                            "category": "F",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item60.png",
+                            "name": "White Bread",
+                            "objectNumber": "60",
+                            "category": "F",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item61.png",
+                            "name": "Flour",
+                            "objectNumber": "61",
+                            "category": "E",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item62.png",
+                            "name": "Olives",
+                            "objectNumber": "62",
+                            "category": "E",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item63.png",
+                            "name": "Pickles",
+                            "objectNumber": "63",
+                            "category": "E",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item64.png",
+                            "name": "Pinapple",
+                            "objectNumber": "64",
+                            "category": "A",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item65.png",
+                            "name": "Cherries",
+                            "objectNumber": "65",
+                            "category": "A",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item66.png",
+                            "name": "Strawberries",
+                            "objectNumber": "66",
+                            "category": "A",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item67.png",
+                            "name": "Pomegranate",
+                            "objectNumber": "67",
+                            "category": "A",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item68.png",
+                            "name": "Clams",
+                            "objectNumber": "68",
+                            "category": "C",
+                            "value": "Y",
+                            "order": "0",
+                            "amount": "1/2",
+                            "measurement": "Cup(s)",
+
+                    },
+                    {
+                            "image": "culinary/Food/item69.png",
+                            "name": "Lemon",
+                            "objectNumber": "69",
+                            "category": "A",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item70.png",
+                            "name": "Peas",
+                            "objectNumber": "70",
+                            "category": "A",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item71.png",
+                            "name": "Avacado",
+                            "objectNumber": "71",
+                            "category": "A",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item72.png",
+                            "name": "Plums",
+                            "objectNumber": "72",
+                            "category": "A",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+                    },
+                    {
+                            "image": "culinary/Food/item73.png",
+                            "name": "Italian Sausage",
+                            "objectNumber": "73",
+                            "category": "B",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item74.png",
+                            "name": "Ham",
+                            "objectNumber": "74",
+                            "category": "B",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item76.png",
+                            "name": "Rye Bread",
+                            "objectNumber": "76",
+                            "category": "F",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item77.png",
+                            "name": "French Baguette",
+                            "objectNumber": "77",
+                            "category": "F",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item78.png",
+                            "name": "Extra Virgin Olive Oil",
+                            "objectNumber": "78",
+                            "category": "E",
+                            "value": "X",
+                            "order": "0",
+                            "amount": "0",
+                            "measurement": "Unknown",
+
+                    },
+                    {
+                            "image": "culinary/Food/item79.png",
+                            "name": "Celery",
+                            "objectNumber": "79",
+                            "category": "A",
+                            "value": "2",
+                            "order": "2",
+                            "amount": "1",
+                            "measurement": "Item(s)",
+
+                    },
+                    {
+                            "image": "item100.png",
+                            "name": "Gluten Free Rice Flour",
+                            "objectNumber": "100",
+                            "category": "E",
+                            "value": "1",
+                            "order": "1",
+                            "amount": "1",
+                            "measurement": "Cup(s)",
+
+                    }
+
+                ]
+            };
+
+            // --------------------------- REPLENISHING ITEMS
+
+            $.each(json.objects, function () {
+                var newObject = $("body").find("#cloneObject > .material-item").clone();
+
+                newObject.find(".drag-item").attr('src', this.image);
+                newObject.find(".drag-item").attr('id', 'Obj' + this.objectNumber);
+                newObject.find(".drag-item").attr('alt', this.name);
+                newObject.find(".drag-item").attr('data-order', this.order);
+                newObject.find(".drag-item").attr('data-value', this.value);
+                newObject.find(".drag-item").attr('data-amount', this.amount);
+                newObject.find(".drag-item").attr('data-measurement', this.measurement);
+                newObject.attr('data-type', this.category);
+                newObject.find(".label").append(this.name);
+
+                // Populate Item
+                switch (this.category) {
+                    case ('A'):
+                        $(newObject).appendTo("#produce");
+                    break; 
+
+                    case ('B'):
+                        $(newObject).appendTo("#meats");
+                    break; 
+
+                    case ('C'):
+                        $(newObject).appendTo("#seafood");
+                    break; 
+
+                    case ('D'):
+                        $(newObject).appendTo("#dairy");
+                    break; 
+
+                    case ('E'):
+                        $(newObject).appendTo("#pantry");
+                    break;  
+
+                    case ('F'):
+                        $(newObject).appendTo("#bakery");
+                    break; 
+
+                    case ('G'):
+                        $(newObject).appendTo("#spices");
+                    break; 
+
+                    default:
+                        $(newObject).appendTo(".pull-content");
+                }
+            });
+
+            $.each(json.categories, function(index, value) {
+                var categoryOption = "<option class='category-selected dropdown-item' value='" + value.code + "'>" + value.option + "</option>"
+                $(categoryOption).appendTo(".category-data");
+            });
+
+            $.each(json.number, function(index, value) {
+                var amountOption = "<option class='category-selected dropdown-item amount-item' value='" + value.instance + "'>" + value.digits + "</option>"
+                $(amountOption).appendTo(".amount-data");
+            });
+
+            $.each(json.type, function(index, value) {
+                var measurementOption = "<option class='category-selected dropdown-item measurement-item' value='" + value.measure + "'>" + value.measurement + "</option>"
+                $(measurementOption).appendTo(".measure-data");
+            });
+        });
+
+
+        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            $('.notification').show();
+            $('.modal').css('padding-top', '5rem');
+            $('.notification').append('<p class="mb0">Use desktop or laptop for optimal performance.</p>');
+
+            $(".modal-button").click(function(){
+                $('.notification').hide();
+            })
+        } else {
+            $('.notification').hide();
+        }
+
+        $( '.t2, .t3, .t4, .t5, .t6, .t7' ).hide();
+
+        $('.tab1').click(function() {
+            $('.t1').fadeIn('slow');
+            $('.t2').hide();
+            $('.t3').hide();
+            $('.t4').hide();
+            $('.t5').hide();
+            $('.t6').hide();
+            $('.t7').hide();
+
+        });
+
+        $('.tab2').click(function() {
+            $('.t2').fadeIn('slow');
+            $('.t1').hide();
+            $('.t3').hide();
+            $('.t4').hide();
+            $('.t5').hide();
+            $('.t6').hide();
+            $('.t7').hide();
+
+        });
+
+        $('.tab3').click(function() {
+            $('.t3').fadeIn('slow');
+            $('.t2').hide();
+            $('.t1').hide();
+            $('.t4').hide();
+            $('.t5').hide();
+            $('.t6').hide();
+            $('.t7').hide();
+
+        });
+
+        $('.tab4').click(function() {
+            $('.t4').fadeIn('slow');
+            $('.t2').hide();
+            $('.t3').hide();
+            $('.t1').hide();
+            $('.t5').hide();
+            $('.t6').hide();
+            $('.t7').hide();
+
+        });
+
+        $('.tab5').click(function() {
+            $('.t5').fadeIn('slow');
+            $('.t2').hide();
+            $('.t3').hide();
+            $('.t4').hide();
+            $('.t1').hide();
+            $('.t6').hide();
+            $('.t7').hide();
+
+        });
+
+        $('.tab6').click(function() {
+            $('.t6').fadeIn('slow');
+            $('.t2').hide();
+            $('.t3').hide();
+            $('.t4').hide();
+            $('.t1').hide();
+            $('.t5').hide();
+            $('.t7').hide();
+
+        });
+
+        $('.tab7').click(function() {
+            $('.t7').fadeIn('slow');
+            $('.t2').hide();
+            $('.t3').hide();
+            $('.t4').hide();
+            $('.t1').hide();
+            $('.t6').hide();
+            $('.t5').hide();
+
+        });
+
+        $( '.13-content' ).hide();
+
+        $( "#area13" ).hover(
+            function() {
+                $( '.13-content' ).fadeIn('slow');
+            }, function() {
+                $( '.13-content' ).fadeOut('fast');
+            }
+        );
+
+        $('#area13').click(function() {
+            $('.activity-nav').fadeIn('slow');
+            $('.instructions-link').css('color', '#2196f3');
+        });
+
+        </script> 
+    </body>
+</html>
