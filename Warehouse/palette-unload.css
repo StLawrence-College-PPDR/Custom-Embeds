@@ -1,0 +1,212 @@
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                      supported by Chrome, Edge, Opera and Firefox */
+}
+
+#warehouse {
+    width: 100%;
+    height: calc(100vh - 150px);
+    background-size: cover;
+    position: relative;
+    background-repeat: no-repeat !important;
+}
+
+.dropzone {
+    position: absolute;
+    transform: rotatez(-60deg) skewY(30deg);
+}
+#dropzone-A {
+    height: 234px;
+    width: 105px;
+    bottom: 100px;
+    right: 750px;
+}
+
+#dropzone-B {
+    height: 234px;
+    width: 105px;
+    bottom: 195px;
+    right: 585px;
+}
+
+#dropzone-C {
+    height: 234px;
+    width: 105px;
+    bottom: 285px;
+    right: 430px;
+}
+
+.dropzone {
+    /* background-color: #bfe4ff; */
+    border: dashed 4px transparent;
+    border-radius: 4px;
+    /* margin: 10px auto 30px; */
+    padding: 10px;
+    /* width: 80%; */
+    transition: background-color 0.3s;
+    position: absolute;
+    text-align: center;
+}
+
+.hack {
+    position: absolute;
+    width: 156px;
+    height: 252px;
+}
+.hack-0 {
+    background: url("../img/order-sorting/Racks/Rack-0.png") no-repeat;
+    background-size: cover;
+}
+.hack-1 {
+    background: url("../img/order-sorting/Racks/Rack-1.png") no-repeat;
+    background-size: cover;
+}
+.hack-2 {
+    background: url("../img/order-sorting/Racks/Rack-2.png") no-repeat;
+    background-size: cover;
+}
+.hack-3 {
+    background: url("../img/order-sorting/Racks/Rack-3.png") no-repeat;
+    background-size: cover;
+}
+.hack-4 {
+    background: url("../img/order-sorting/Racks/Rack-4.png") no-repeat;
+    background-size: cover;
+}
+.hack-5 {
+    background: url("../img/order-sorting/Racks/Rack-5.png") no-repeat;
+    background-size: cover;
+}
+.hack-6 {
+    background: url("../img/order-sorting/Racks/Rack-6.png") no-repeat;
+    background-size: cover;
+}
+.hack-7 {
+    background: url("../img/order-sorting/Racks/Rack-7.png") no-repeat;
+    background-size: cover;
+}
+.hack-8 {
+    background: url("../img/order-sorting/Racks/Rack-8.png") no-repeat;
+    background-size: cover;
+}
+.hack-9 {
+    background: url("../img/order-sorting/Racks/Rack-9.png") no-repeat;
+    background-size: cover;
+}
+.hack-10 {
+    background: url("../img/order-sorting/Racks/Rack-10.png") no-repeat;
+    background-size: cover;
+}
+.hack-11 {
+    background: url("../img/order-sorting/Racks/Rack-11.png") no-repeat;
+    background-size: cover;
+}
+.hack-12 {
+    background: url("../img/order-sorting/Racks/Rack-12.png") no-repeat;
+    background-size: cover;
+}
+#hack-dropzone-A {
+    bottom: 150px;
+    right: 690px;
+}
+#hack-dropzone-B {
+    bottom: 245px;
+    right: 526px;
+}
+#hack-dropzone-C {
+    bottom: 333px;
+    right: 369px;
+}
+
+.drop-active {
+    border-color: #aaa;
+}
+
+.drop-target {
+    background-color: #29e;
+    border-color: #fff;
+    border-style: solid;
+}
+
+.drag-drop {
+    /* display: inline-block; */
+    /* min-width: 40px; */
+    /* padding: 2em 0.5em; */
+    /* margin: 1rem 0 0 1rem; */
+
+    /* color: yellow; */
+    text-align: center;
+    /* background-color: #29e; */
+    /* border: solid 2px #fff; */
+
+    touch-action: none;
+    -webkit-transform: translate(0px, 0px);
+    transform: translate(0px, 0px);
+
+    /* transition: transform 0.3s; */
+}
+
+.pallet-item {
+    width: 60px;
+    height: 67px;
+    background: url("../img/order-sorting/wrapped-pallet.png") no-repeat;
+    background-size: cover;
+}
+.pallet-drop {
+    position: absolute;
+}
+#pallet-1 {
+    top: 288px;
+    right: 663px;
+}
+#pallet-2 {
+    top: 300px;
+    right: 634px;
+}
+#pallet-3 {
+    top: 305px;
+    right: 701px;
+}
+#pallet-4 {
+    top: 322px;
+    right: 672px;
+}
+#pallet-5 {
+    top: 328px;
+    right: 741px;
+}
+#pallet-6 {
+    top: 345px;
+    right: 712px;
+}
+#pallet-7 {
+    top: 351px;
+    right: 780px;
+}
+#pallet-8 {
+    top: 367px;
+    right: 751px;
+}
+#pallet-9 {
+    top: 373px;
+    right: 819px;
+}
+#pallet-10 {
+    top: 389px;
+    right: 790px;
+}
+
+.pallet-info {
+    background: url(info.png) no-repeat;
+    background-size: cover;
+    position: relative;
+    background: rgb(255 255 255 / 74%);
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 3px;
+}
