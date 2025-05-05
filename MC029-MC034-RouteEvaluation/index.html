@@ -1,0 +1,304 @@
+
+<!DOCTYPE html>
+
+<html class="no-js">
+	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="common.css">
+        <link rel="stylesheet" href="typography.css">
+        <link rel="stylesheet" href="scanner.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+	<body>
+        <!-- Loader and instructions would be here -->
+        
+        <div class="interactive-content fade-in">
+            <div class="container">
+                <!-- Progress would be here -->
+                <!-- Content would be here -->
+            </div>
+                
+            <div class="dashboard internal-dashboard">
+                <div class="ipad-layout">
+                    <div class="ipad-profile"><i class="far fa-user-circle"></i></div>
+                    <h2 class="ipad-credentials">Welcome, Employee</h2>
+                    <div class="ipad-navigation ipad-dash"><h2 class="ipad-credentials"></h2>
+                       <ul>
+                           <li class="tab1"><i class="fas fa-list-ul"></i></li>
+                           <li class="tab2"><i class="fas fa-box-open"></i></li>
+                           <li class="tab3"><i class="fas fa-address-card"></i></li>
+                           <li class="tab4"><i class="fas fa-pallet"></i></li>
+                           <li class="tab5"><i class="fas fa-project-diagram"></i></li>
+                           <li class="tab6"><i class="fas fa-business-time"></i></li>
+                       </ul>
+                    </div>
+
+                    <div class="ipad-inbox">
+                        <h5 class="ipad-title"> Messages</h5>
+                        <p>You have no current messages...</p>
+                    </div>
+
+                    <div class="ipad-widgets">
+                        <div id="tasks">
+                            <h5 class="ipad-title">Schedule Maintenance Inspections</h5>
+                            
+                            <div class="flex-collection">
+                               <div class="flex-2 ipad-graphic">
+                                    <p>Total Cost (2021)</p>
+                                    <canvas id="productChart" width="100%" height="130"></canvas>
+                                </div>
+                                <div class="flex-2">
+                                    <div class="flex-collection">
+                                        <div class="flex-full">
+                                           <p class="mb0">Service Reminders</p>
+                                            <div class="flex-collection">
+                                                <div class="flex-2 ipad-new-items">
+                                                    <h2 class="mb0" style="color: #28a745;">12</h2>
+                                                    <p class="mb0">Overdue</p>
+                                                </div>
+                                                <div class="flex-2 ipad-new-items">
+                                                    <h2 class="mb0" style="color: #28a745;">6</h2>
+                                                    <p class="mb0">Due Soon</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex-full">
+                                           <p class="mb0">Vehicle Renewal Reminders</p>
+                                            <div class="flex-collection">
+                                                <div class="flex-2 ipad-new-items">
+                                                    <h2 class="mb0" style="color: #ffc107;">34</h2>
+                                                    <p class="mb0">Overdue</p>
+                                                </div>
+                                                <div class="flex-2 ipad-new-items">
+                                                    <h2 class="mb0" style="color: #ffc107;">3</h2>
+                                                    <p class="mb0">Due Soon</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex-full">
+                                           <p class="mb0">Inspections</p>
+                                            <div class="flex-collection">
+                                                <div class="flex-2 ipad-new-items">
+                                                    <h2 class="mb0" style="color: #2196f3;">9</h2>
+                                                    <p class="mb0">Overdue</p>
+                                                </div>
+                                                <div class="flex-2 ipad-new-items">
+                                                    <h2 class="mb0" style="color: #2196f3;">5.86%</h2>
+                                                    <p class="mb0">Due Soon</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+            
+           
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        
+      <script src="jquery.min.js"></script>
+        <!-- script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js" integrity="sha512-BqNYFBAzGfZDnIWSAEGZSD/QFKeVxms2dIBPfw11gZubWwKUjEgmFUtUls8vZ6xTRZN/jaXGHD/ZaxD9+fDo0A==" crossorigin="anonymous"></script>
+        <script>
+            
+            $( '.t2, .t3, .t4, .t5, .t6' ).hide();
+    
+            $('.tab1').click(function() {
+                $('.t1').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t2').hide();
+                $('.t3').hide();
+                $('.t4').hide();
+                $('.t5').hide();
+                $('.t6').hide();
+                $( '.tab2, .tab3, .tab4, .tab5, .tab6' ).removeClass('active');
+
+            });
+
+            $('.tab2').click(function() {
+                $('.t2').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t1').hide();
+                $('.t3').hide();
+                $('.t4').hide();
+                $('.t5').hide();
+                $('.t6').hide();
+                $( '.tab1, .tab3, .tab4, .tab5, .tab6' ).removeClass('active');
+
+            });
+
+            $('.tab3').click(function() {
+                $('.t3').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t2').hide();
+                $('.t1').hide();
+                $('.t4').hide();
+                $('.t5').hide();
+                $('.t6').hide();
+                $( '.tab2, .tab1, .tab4, .tab5, .tab6' ).removeClass('active');
+
+            });
+
+            $('.tab4').click(function() {
+                $('.t4').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t2').hide();
+                $('.t3').hide();
+                $('.t1').hide();
+                $('.t5').hide();
+                $('.t6').hide();
+                $( '.tab2, .tab3, .tab1, .tab5, .tab6' ).removeClass('active');
+            });
+
+            $('.tab5').click(function() {
+                $('.t5').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t2').hide();
+                $('.t3').hide();
+                $('.t4').hide();
+                $('.t1').hide();
+                $('.t6').hide();
+                $( '.tab2, .tab3, .tab4, .tab1, .tab6' ).removeClass('active');
+            });
+            
+            $('.tab6').click(function() {
+                $('.t6').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t2').hide();
+                $('.t5').hide();
+                $('.t3').hide();
+                $('.t4').hide();
+                $('.t1').hide();
+                $( '.tab2, .tab3, .tab4, .tab1, .tab6' ).removeClass('active');
+            });
+
+           var ctxA = document.getElementById('productChart').getContext('2d');
+            Chart.defaults.global.defaultFontColor = 'rgba(255,255,255,0.8)';
+            var produceChart = new Chart(ctxA, {
+                type: 'bar',
+                responsive: true,
+                data: {
+                    labels: ['Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'],
+                    datasets: [{
+                        label: '# of Documents',
+                        data: [5000, 12000, 6300, 2123, 3332],
+                        borderColor: 'rgba(255, 255, 255, 0.01)',
+                        borderWidth: 10,
+                        backgroundColor: [
+                            'rgba(0, 188, 212, 0.8)',
+                            'rgba(0, 188, 212, 0.8)',
+                            'rgba(0, 188, 212, 0.8)',
+                            'rgba(0, 188, 212, 0.8)',
+                            'rgba(0, 188, 212, 0.8)'
+                        ]
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            barPercentage: 0.2,
+                            stacked: true,
+                            ticks: {
+                                beginAtZero: true,
+                            }
+                        }],
+                        yAxes: [{
+                            barPercentage: 0.2,
+                            stacked: true
+                        }]
+                    },
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            fontColor: 'white'
+                        }
+                    },
+                    tooltips: {
+                        backgroundColor: 'rgba(255,255,255,0.2)'
+                    }
+                }
+            });
+            $(".load-window").show();
+    $('body').css('height', '100vh');
+    $('body').css('overflow-y', 'hidden');
+    setTimeout(function () {
+        $(".load-window").fadeOut("slow");
+        $('body').css('height', 'auto');
+        $('body').css('overflow-y', 'visible');
+    }, 2000);
+    
+    setTimeout(function () {
+        $('html,body').animate({
+            scrollTop: 0
+        }, 0);
+    }, 1000);
+    
+    window.addEventListener("load", function(){
+      window.dispatchEvent(new Event('resize'));
+    });
+    
+    $('.nav').hide();
+    $('.nav').css('height', '0%');
+    $('#menuClose').hide();
+    
+    $('#menuToggle').click(function() {
+        $('.nav').fadeIn('slow');
+        $(this).hide();
+        $('#menuClose').fadeIn('slow');
+        $('.nav').css('height', '100%');
+    });
+    
+    $('#menuClose').click(function() {
+        $('.nav').fadeOut('fast');
+        $('.nav').css('height', '0%');
+        $(this).hide();
+        $('#menuToggle').fadeIn('slow');
+    });
+    
+    $('.activity-nav').hide();
+    $('.activity-nav.show').show();
+    
+    $('.instructions-link').click(function() {
+        $('.activity-nav').fadeIn('slow');
+        $(this).css('color', '#2196f3');
+    });
+    
+    $('.activity-close').click(function() {
+        $('.activity-nav').fadeOut('fast');
+        $('.instructions-link').css('color', '#FFFFFF');
+    });
+    
+    $(window).scroll(function() {
+       if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+           $('.branching-next').css('background', '#2294f0');
+       }
+    });
+    
+    $(".completed-activity").hide();
+    
+    H5P.externalDispatcher.on('xAPI', function(event){
+        if (event.getScore() === event.getMaxScore() && event.getMaxScore() > 0){
+            console.log(event);
+            console.log(event.getScore());
+            console.log(event.setActor());
+
+            $(".completed-activity").fadeIn("slow");
+            $('.branching-next').css('background', '#2294f0');
+            setTimeout(function () {
+                $(".completed-activity").fadeOut("slow");
+                $('.branching-next').css('background', '#444');
+            }, 8000);
+        }
+    });
+</script>
+    </body>
+</html>
