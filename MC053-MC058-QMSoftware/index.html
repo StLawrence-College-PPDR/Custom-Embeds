@@ -1,0 +1,868 @@
+
+<!DOCTYPE html>
+
+<html class="no-js">
+	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="common.css">
+        <link rel="stylesheet" href="typography.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+	<body>
+        <!-- Loader and instructions would be here -->
+        
+        <div class="interactive-content fade-in">
+            <div class="container">
+                <!-- Progress would be here -->
+                <!-- Content would be here -->
+            </div>
+                
+            <div class="dashboard internal-dashboard">
+                <div class="ipad-layout">
+                    <div class="ipad-profile"><i class="far fa-user-circle"></i></div>
+                    <h2 class="ipad-credentials">Welcome, Employee</h2>
+                    <div class="ipad-navigation ipad-dash"><h2 class="ipad-credentials"></h2>
+                       <ul>
+                           <li class="tab1"><i class="fas fa-list-ul"></i></li>
+                           <li class="tab2"><i class="fas fa-medal"></i></li>
+                           <li class="tab3"><i class="far fa-clipboard"></i></li>
+                           <li class="tab4"><i class="fas fa-search-plus"></i></li>
+                           <li class="tab5"><i class="fas fa-chart-bar"></i></li>
+                           <div class="hotspot hotspot-dash" data-toggle="modal" data-target="#modal1"></div>
+                       </ul>
+                    </div>
+
+                    <div class="ipad-inbox">
+                        <h5 class="ipad-title"> Messages</h5>
+                        <p>You have no current messages...</p>
+                    </div>
+
+                    <div class="ipad-widgets">
+                        <div class="t1">
+                            <div id="tasks">
+                                <h5 class="ipad-title">Dashboard</h5>
+                                <p>The Dashboard is the main page for Quality Management Software.  From there, employees can navigate to the other areas within the software.  </p>
+                                
+                                <div class="flex-collection">
+                                    <div class="flex-2 ipad-graphic">
+                                        <h5 class="ipad-title">Tasks <div class="hotspot hotspot-dash" data-toggle="modal" data-target="#modal2"></div></h5>
+                                        <div class="ipad-checklist">
+                                            <ul class="task-items">
+                                               <li class="task-item active"><a><i class="far fa-square"></i><strong>SOP</strong> (Training)<span class="task-menu"><i class="fas fa-ellipsis-v"></i></span></a></li>
+                                              
+                                                <li class="task-item active"><a><i class="far fa-square"></i><strong>GMP</strong> (Training)<span class="task-menu"><i class="fas fa-ellipsis-v"></i></span></a></li>
+                                               
+                                               <li class="task-item active"><a><i class="far fa-square"></i><strong>Continuous Improvement</strong> (Training)<span class="task-menu"><i class="fas fa-ellipsis-v"></i></span></a></li>
+                                               
+                                               <li class="task-item active"><a><i class="far fa-square"></i><strong>Item</strong> (Task)<span class="task-menu"><i class="fas fa-ellipsis-v"></i></span></a></li>
+                                               
+                                               <li class="task-item active"><a><i class="far fa-square"></i><strong>Item</strong> (Task)<span class="task-menu"><i class="fas fa-ellipsis-v"></i></span></a></li>
+                                               
+                                               <li class="task-item active"><a><i class="far fa-square"></i><strong>Item</strong> (Audits and Inspections)<span class="task-menu"><i class="fas fa-ellipsis-v"></i></span></a></li>
+                                               
+                                               <li class="task-item active"><a><i class="far fa-square"></i><strong>Item</strong> (Audits and Inspections)<span class="task-menu"><i class="fas fa-ellipsis-v"></i></span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="flex-2 training-card">
+                                        <canvas id="kpiChart" width="100%" height="100"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+
+                        <div class="t2">
+                           <div id="training">
+                               <h5 class="ipad-title">Training</h5>
+                               <p>The Training area of the Quality Management Software shows what courses the employee has completed and what courses the employee needs to do.  The QMS will also tell the employee if any training is overdue. The employee will be able to access the courses through the QMS. </p>
+                               
+                               <div class="flex-collection">
+                                   <div class="flex-2">
+                                       <div class="flex-collection">
+                                           <div class="flex-2 training-card" style="background: rgb(255 191 0 / 14%);">
+                                                <div class="hotspot hotspot-dash" data-toggle="modal" data-target="#modal3"></div>
+                                                <i class="fas fa-medal" style="color: #ffc107;"></i>
+                                                SOP
+                                                <span class="approved">In-Progress</span>
+                                           </div>
+                                           <div class="flex-2 training-card" style="background: rgb(40 167 69 / 17%);">
+                                               <div class="hotspot hotspot-dash" data-toggle="modal" data-target="#modal5"></div>
+                                                <i class="fas fa-medal" style="color: #28a745;"></i>
+                                                WHIMIS
+                                                <span class="approved">Complete</span>
+                                           </div>
+                                           <div class="flex-2 training-card" style="background: rgb(205 38 83 / 23%);">
+                                                <i class="fas fa-medal" style="color: #cd2653;"></i>
+                                                GMP
+                                                <span class="approved">In-Progress</span>
+                                           </div>
+                                           <div class="flex-2 training-card" style="background: rgb(33 150 243 / 20%);">
+                                                <i class="fas fa-medal" style="color: #2196f3;"></i>
+                                                Safety Training
+                                                <span class="approved" >Complete</span>
+                                           </div>
+                                           <div class="flex-2 training-card" style="background: rgb(23 162 184 / 24%);">
+                                                <div class="hotspot hotspot-dash" data-toggle="modal" data-target="#modal4"></div>
+                                                <i class="fas fa-medal" style="color: #17a2b8;"></i>
+                                                Continuous Improvement
+                                                <span class="approved">Past Due</span>
+                                           </div>
+                                       </div>
+                                   </div>
+                                   <div class="flex-3 training-card">
+                                       <canvas id="storageChart" width="100%" height="120"></canvas>
+                                        <div class="ipad-new-items">
+                                            <div class='content'>90% Completed</div>
+                                        </div>
+                                   </div>
+                               </div>
+                           </div>
+                        </div>  
+
+                        <div class="t3">
+                           <div id="documents">
+                               <h5 class="ipad-title">Document Library <div class="hotspot hotspot-dash" data-toggle="modal" data-target="#modal8"></div></h5>
+                                <p>The Document area of the QMS is where employees can read documents. The employee can create documents (if the employee has authorization), edit documents (if the employee has authorization), and read documents.</p>
+                               <div class="flex-collection">
+                                    <div class="flex-full">
+                                        <div class="ipad-checklist">
+                                            <ul class="task-items">
+                                               <li class="task-item active"><a><i class="far fa-folder"></i>Standard Operating Procedures<span class="task-menu"><i class="fas fa-ellipsis-v"></i></span></a></li>
+                                               <li class="task-item active"><a><i class="far fa-folder"></i>Good Manufacturing Practices<span class="task-menu"><i class="fas fa-ellipsis-v"></i></span></a></li>
+                                               <li class="task-item active"><a><i class="far fa-folder"></i>Audit &amp; Inspection Checklists<span class="task-menu"><i class="fas fa-ellipsis-v"></i></span></a></li>
+                                               <li class="task-item active"><a><i class="far fa-folder"></i>Company Templates<span class="task-menu"><i class="fas fa-ellipsis-v"></i></span></a></li>
+                                            </ul>
+                                        </div>
+                                   </div>
+                                   <div class="flex-2 ipad-graphic">
+                                       <h5 class="ipad-title">State of Documents <div class="hotspot hotspot-dash" data-toggle="modal" data-target="#modal7"></div></h5>
+                                       <canvas id="productChart" width="100%" height="60"></canvas>
+                                   </div>
+                                   <div class="flex-2 ipad-graphic">
+                                       <h5 class="ipad-title">Document Pipeline <div class="hotspot hotspot-dash" data-toggle="modal" data-target="#modal9"></div></h5>
+                                       <canvas id="pipelineChart" width="100%" height="60"></canvas>
+                                   </div>
+                               </div>
+                           </div>
+                        </div>
+
+                        <div class="t4">
+                           <div id="audits">
+                               <h5 class="ipad-title">Audits &amp; Inspections</h5>
+                               <p>Employees can initiate audits and inspections from the audits and inspections icon on the main menu. In this menu, employees can access the checklist for an inspection or audit.  The employee can also file the paperwork for an inspection or an audit. </p>
+                               
+                               <div class="ipad-graphic">
+                                   <h5 class="ipad-title"><i class="far fa-folder"></i> Audits <div class="hotspot hotspot-dash" data-toggle="modal" data-target="#modal10"></div></h5>
+                                   <div class="table-wrapper">
+                                        <table class="mb30">
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Type</th>
+                                                <th>Category</th>
+                                                <th>Employee</th>
+                                                <th>Status</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Audit #4565553</td>
+                                                <td>Audit</td>
+                                                <td>Process</td>
+                                                <td>David Hughes</td>
+                                                <td>In-Progress</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Audit #4564332</td>
+                                                <td>Audit</td>
+                                                <td>Ethical</td>
+                                                <td>Sam Turner</td>
+                                                <td>Complete</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Audit #4564991</td>
+                                                <td>Audit</td>
+                                                <td>Ethical</td>
+                                                <td>Sam Turner</td>
+                                                <td>Complete</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Audit #4564572</td>
+                                                <td>Audit</td>
+                                                <td>Supplier</td>
+                                                <td>Sam Turner</td>
+                                                <td>Incomplete</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="ipad-graphic">
+                                    <h5 class="ipad-title"><i class="far fa-folder"></i> Inspections <div class="hotspot hotspot-dash" data-toggle="modal" data-target="#modal11"></div></h5>
+                                    
+                                    <div class="table-wrapper">
+                                        <table class="mb30">
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Type</th>
+                                                <th>Category</th>
+                                                <th>Employee</th>
+                                                <th>Status</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Inspection #772812</td>
+                                                <td>Inspection</td>
+                                                <td>Warehouse</td>
+                                                <td>George O'Neil</td>
+                                                <td>In-Progress</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Inspection #772812</td>
+                                                <td>Inspection</td>
+                                                <td>Recieving</td>
+                                                <td>George O'Neil</td>
+                                                <td>Incomplete</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                           </div>
+                        </div>
+
+                        <div class="t5">
+                           <div id="reports">
+                               <h5 class="ipad-title">Non-Conformity Reports and Corrective Action Reports</h5>
+                               
+                               <p>The Non-Compliance Reports and Corrective Action Reports area of the QMS is for employees to initiate the reporting process for non-conformities in the workflow.  Employees can also access this area to report on corrective actions that have been implemented in the workflow.</p>
+                               
+                               <h5 class="ipad-title">Non-Conformity Reports<div class="hotspot hotspot-dash" data-toggle="modal" data-target="#modal12"></div></h5>
+                               
+                               <div class="ipad-graphic flex-collection">
+                                   <div class="flex-2">
+                                       <canvas id="ReportAChart" width="100%" height="60"></canvas>
+                                   </div>
+                                   <div class="flex-2">
+                                       <canvas id="ReportBChart" width="100%" height="60"></canvas>
+                                   </div>
+                               </div>
+                               
+                               <h5 class="ipad-title">Corrective Action Reports<div class="hotspot hotspot-dash" data-toggle="modal" data-target="#modal13"></div></h5>
+                               
+                               <div class="flex-collection ipad-graphic">
+                                   <div class="flex-2">
+                                       <canvas id="ReportCChart" width="100%" height="60"></canvas>
+                                   </div>
+                                   <div class="flex-2">
+                                       <canvas id="ReportDChart" width="100%" height="60"></canvas>
+                                   </div>
+                               </div>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="container">  
+                <!-- H5P content would be here -->
+            </div>
+        </div>
+        
+        <div class="modal modal-bubble" id="modal1" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body"> 
+                        <button type="button" class="modal-button primary-text mb30" data-dismiss="modal"><i class="fas fa-times"></i></button>
+
+                        <h6 class="mb30">Menu</h6>
+
+                        <p>The side menu is where the employee can access each of the different areas within the Quality Management Software.  Employees can select to access training, documents, audits and inspections, non-compliance reports and corrective action reports, and any other areas an organization chooses to include.  </p>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+        <div class="modal modal-bubble" id="modal2" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body"> 
+                        <button type="button" class="modal-button primary-text mb30" data-dismiss="modal"><i class="fas fa-times"></i></button>
+
+                        <h6 class="mb30">Tasks</h6>
+
+                        <p>The Dashboard lets an employee know what the employee needs to do at work.  In this example, the employee has some training to do, some documents to read, and audits and inspections to complete.  </p>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+        <div class="modal modal-bubble" id="modal3" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body"> 
+                        <button type="button" class="modal-button primary-text mb30" data-dismiss="modal"><i class="fas fa-times"></i></button>
+
+                        <h6 class="mb30">In-Progress</h6>
+
+                        <p>The Training area lets the employee know just how much of the training the employee has completed. </p>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+        <div class="modal modal-bubble" id="modal4" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body"> 
+                        <button type="button" class="modal-button primary-text mb30" data-dismiss="modal"><i class="fas fa-times"></i></button>
+
+                        <h6 class="mb30">Past Due</h6>
+
+                        <p>The Past Due section of the Training area lets the employee know if there isn't any training that hasn't been completed within the given window.  If an employee has any courses that are past due, those courses need to become a priority for the employee. There could be consequences for both the employee and the organization if training courses aren't completed on time. </p>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+        <div class="modal modal-bubble" id="modal5" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body"> 
+                        <button type="button" class="modal-button primary-text mb30" data-dismiss="modal"><i class="fas fa-times"></i></button>
+
+                        <h6 class="mb30">Completed</h6>
+
+                        <p>The courses listed in the Completed section, of the training area, are a great resource for an employee.  The employee can keep track of the completed courses to give proof of completion.  </p>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+        <div class="modal modal-bubble" id="modal6" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body"> 
+                        <button type="button" class="modal-button primary-text mb30" data-dismiss="modal"><i class="fas fa-times"></i></button>
+
+                        <h6 class="mb30">Documents</h6>
+
+                        <p>The documents section often contains multiple menus.  Employees can create reports, depending on their authorization, view documents, and see how many documents they have read and created throughout a span of time.</p>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+        <div class="modal modal-bubble" id="modal7" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body"> 
+                        <button type="button" class="modal-button primary-text mb30" data-dismiss="modal"><i class="fas fa-times"></i></button>
+
+                        <h6 class="mb30">State of Documents</h6>
+
+                        <p>The State of Documents section, of the Documents area, shows what documents are in an employee's process flow.  If an employee is authorized, the employee may need to write and edit documents for the organization.  The employee can see whether documents are in draft form, or have been reviewed, approved, or rejected.  Employees can also see the total number of documents they are working on. Employees can select a document and continue to work on the document. </p>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+        <div class="modal modal-bubble" id="modal8" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body"> 
+                        <button type="button" class="modal-button primary-text mb30" data-dismiss="modal"><i class="fas fa-times"></i></button>
+
+                        <h6 class="mb30">Document Library</h6>
+
+                        <p>Employees can find all of the important documents in the Document Library.  SOPs, GMPs, and other important documents are housed with the document library.  Employees can select the link and access the required file. </p>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+        <div class="modal modal-bubble" id="modal9" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body"> 
+                        <button type="button" class="modal-button primary-text mb30" data-dismiss="modal"><i class="fas fa-times"></i></button>
+
+                        <h6 class="mb30">Document Pipeline</h6>
+
+                        <p>The Document Pipeline shows an employee how many documents the employee has filed within the past five months. The employee can also use the Document Pipeline to access documents they have created. </p>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+        <div class="modal modal-bubble" id="modal10" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body"> 
+                        <button type="button" class="modal-button primary-text mb30" data-dismiss="modal"><i class="fas fa-times"></i></button>
+
+                        <h6 class="mb30">Audits</h6>
+
+                        <p>The audit area provides employees with a list of audits that are in process and complete.  The author of the document and the date of the inspection are listed.  </p>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+        <div class="modal modal-bubble" id="modal11" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body"> 
+                        <button type="button" class="modal-button primary-text mb30" data-dismiss="modal"><i class="fas fa-times"></i></button>
+
+                        <h6 class="mb30">Inspections</h6>
+
+                        <p>The inspection area provides employees with a list of inspections that are in process and complete.  The author of the document and the date of the inspection are listed.  </p>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+        <div class="modal modal-bubble" id="modal12" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body"> 
+                        <button type="button" class="modal-button primary-text mb30" data-dismiss="modal"><i class="fas fa-times"></i></button>
+
+                        <h6 class="mb30">Non-Conformity Reports</h6>
+
+                        <p>Employees can file failures, or non-conformities, in the QMS in this section.  The employee can see how many NCRs the employee has initiated, and the status of any NCR initiated.  </p>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+        <div class="modal modal-bubble" id="modal13" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body"> 
+                        <button type="button" class="modal-button primary-text mb30" data-dismiss="modal"><i class="fas fa-times"></i></button>
+
+                        <h6 class="mb30">Corrective Action Reports</h6>
+
+                        <p>The audit area provides employees with a list of audits that are in process and complete.  The author of the document and the date of the inspection are listed.  </p>
+                    </div>
+                </div>
+            </div>
+        </div> 
+		<script src="jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        <script>
+            
+            var ctxA = document.getElementById('productChart').getContext('2d');
+            var ctxB = document.getElementById('storageChart').getContext('2d');
+            var ctxC = document.getElementById('kpiChart').getContext('2d');
+            var ctxD = document.getElementById('pipelineChart').getContext('2d');
+            var ctxE = document.getElementById('ReportAChart').getContext('2d');
+            var ctxF = document.getElementById('ReportBChart').getContext('2d');
+            var ctxG = document.getElementById('ReportCChart').getContext('2d');
+            var ctxH = document.getElementById('ReportDChart').getContext('2d');
+            Chart.defaults.global.defaultFontColor = 'rgba(255,255,255,0.8)';
+            var produceChart = new Chart(ctxA, {
+                type: 'bar',
+                responsive: true,
+                data: {
+                    labels: ['Draft', 'Recieved', 'Appr/Effect', 'Rejected', 'Active Workflow'],
+                    datasets: [{
+                        label: '# of Documents',
+                        data: [7, 0, 24, 0, 1],
+                        borderColor: 'rgba(255, 255, 255, 0.01)',
+                        borderWidth: 10,
+                        backgroundColor: [
+                            'rgba(0, 188, 212, 0.8)',
+                            'rgba(0, 188, 212, 0.8)',
+                            'rgba(0, 188, 212, 0.8)',
+                            'rgba(0, 188, 212, 0.8)',
+                            'rgba(0, 188, 212, 0.8)'
+                        ]
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            barPercentage: 0.2,
+                            stacked: true,
+                            ticks: {
+                                beginAtZero: true,
+                            }
+                        }],
+                        yAxes: [{
+                            barPercentage: 0.2,
+                            stacked: true
+                        }]
+                    },
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            fontColor: 'white'
+                        }
+                    },
+                    tooltips: {
+                        backgroundColor: 'rgba(255,255,255,0.2)'
+                    }
+                }
+            });
+            var pipelineChart = new Chart(ctxD, {
+                type: 'bar',
+                responsive: true,
+                data: {
+                    labels: ['Past Due', 'August', 'September', 'October', 'November'],
+                    datasets: [{
+                        label: '# of Documents',
+                        data: [0, 1, 1, 1, 2],
+                        borderColor: 'rgba(255, 255, 255, 0.01)',
+                        borderWidth: 10,
+                        backgroundColor: [
+                            'rgba(255, 193, 7, 0.8)',
+                            'rgba(255, 193, 7, 0.8)',
+                            'rgba(255, 193, 7, 0.8)',
+                            'rgba(255, 193, 7, 0.8)',
+                            'rgba(255, 193, 7, 0.8)'
+                        ]
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            barPercentage: 0.2,
+                            stacked: true,
+                            ticks: {
+                                beginAtZero: true,
+                            }
+                        }],
+                        yAxes: [{
+                            barPercentage: 0.2,
+                            stacked: true
+                        }]
+                    },
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            fontColor: 'white'
+                        }
+                    },
+                    tooltips: {
+                        backgroundColor: 'rgba(255,255,255,0.2)'
+                    }
+                }
+            });
+            var ReportAChart = new Chart(ctxE, {
+                type: 'horizontalBar',
+                responsive: true,
+                data: {
+                    labels: ['Draft', 'Awaiting Appr', 'Implementation', 'Review', 'Closed', 'Awaiting E.C', 'Effective', 'Failed'],
+                    datasets: [{
+                        label: 'State of Issues',
+                        data: [3, 2, 0, 0, 1, 0, 0, 1],
+                        borderColor: 'rgba(255, 255, 255, 0.01)',
+                        borderWidth: 10,
+                        backgroundColor: [
+                            'rgba(40, 167, 69, 0.8)',
+                            'rgba(40, 167, 69, 0.8)',
+                            'rgba(40, 167, 69, 0.8)',
+                            'rgba(40, 167, 69, 0.8)',
+                            'rgba(40, 167, 69, 0.8)',
+                            'rgba(40, 167, 69, 0.8)',
+                            'rgba(40, 167, 69, 0.8)',
+                            'rgba(40, 167, 69, 0.8)'
+                        ]
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            barPercentage: 0.2,
+                            stacked: true,
+                            ticks: {
+                                beginAtZero: true,
+                            }
+                        }],
+                        yAxes: [{
+                            barPercentage: 0.2,
+                            stacked: true
+                        }]
+                    },
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            fontColor: 'white'
+                        }
+                    },
+                    tooltips: {
+                        backgroundColor: 'rgba(255,255,255,0.2)'
+                    }
+                }
+            });
+            var ReportBChart = new Chart(ctxF, {
+                type: 'horizontalBar',
+                responsive: true,
+                data: {
+                    labels: ['Past Due', 'October', 'November', 'Decemeber', 'Jan'],
+                    datasets: [{
+                        label: 'Issues Pipeline',
+                        data: [1, 0, 2, 0, 0],
+                        borderColor: 'rgba(255, 255, 255, 0.01)',
+                        borderWidth: 10,
+                        backgroundColor: [
+                            'rgba(40, 167, 69, 0.8)',
+                            'rgba(40, 167, 69, 0.8)',
+                            'rgba(40, 167, 69, 0.8)',
+                            'rgba(40, 167, 69, 0.8)',
+                            'rgba(40, 167, 69, 0.8)'
+                        ]
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            barPercentage: 0.2,
+                            stacked: true,
+                            ticks: {
+                                beginAtZero: true,
+                            }
+                        }],
+                        yAxes: [{
+                            barPercentage: 0.2,
+                            stacked: true
+                        }]
+                    },
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            fontColor: 'white'
+                        }
+                    },
+                    tooltips: {
+                        backgroundColor: 'rgba(255,255,255,0.2)'
+                    }
+                }
+            });
+            var ReportCChart = new Chart(ctxG, {
+                type: 'horizontalBar',
+                responsive: true,
+                data: {
+                    labels: ['Draft', 'Awaiting Appr', 'Implementation', 'Review', 'Closed', 'Awaiting E.C', 'Effective', 'Failed'],
+                    datasets: [{
+                        label: 'State of Issues',
+                        data: [1, 3, 0, 2, 0, 0, 0, 1],
+                        borderColor: 'rgba(255, 255, 255, 0.01)',
+                        borderWidth: 10,
+                        backgroundColor: [
+                            'rgba(0, 188, 212, 0.8)',
+                            'rgba(0, 188, 212, 0.8)',
+                            'rgba(0, 188, 212, 0.8)',
+                            'rgba(0, 188, 212, 0.8)',
+                            'rgba(0, 188, 212, 0.8)',
+                            'rgba(0, 188, 212, 0.8)',
+                            'rgba(0, 188, 212, 0.8)',
+                            'rgba(0, 188, 212, 0.8)'
+                        ]
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            barPercentage: 0.2,
+                            stacked: true,
+                            ticks: {
+                                beginAtZero: true,
+                            }
+                        }],
+                        yAxes: [{
+                            barPercentage: 0.2,
+                            stacked: true
+                        }]
+                    },
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            fontColor: 'white'
+                        }
+                    },
+                    tooltips: {
+                        backgroundColor: 'rgba(255,255,255,0.2)'
+                    }
+                }
+            });
+            var ReportDChart = new Chart(ctxH, {
+                type: 'horizontalBar',
+                responsive: true,
+                data: {
+                    labels: ['Past Due', 'October', 'November', 'Decemeber', 'Jan'],
+                    datasets: [{
+                        label: 'Issues Pipeline',
+                        data: [1, 0, 0, 0, 0],
+                        borderColor: 'rgba(255, 255, 255, 0.01)',
+                        borderWidth: 10,
+                        backgroundColor: [
+                            'rgba(0, 188, 212, 0.8)',
+                            'rgba(0, 188, 212, 0.8)',
+                            'rgba(0, 188, 212, 0.8)',
+                            'rgba(0, 188, 212, 0.8)',
+                            'rgba(0, 188, 212, 0.8)'
+                        ]
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            barPercentage: 0.2,
+                            stacked: true,
+                            ticks: {
+                                beginAtZero: true,
+                            }
+                        }],
+                        yAxes: [{
+                            barPercentage: 0.2,
+                            stacked: true
+                        }]
+                    },
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            fontColor: 'white'
+                        }
+                    },
+                    tooltips: {
+                        backgroundColor: 'rgba(255,255,255,0.2)'
+                    }
+                }
+            });
+            var storageChart = new Chart(ctxB, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Complete', 'Incomplete'],
+                    datasets: [{
+                        label: '# Completed',
+                        data: [90, 10],
+                        backgroundColor: [
+                            'rgba(33, 150, 243, 1)',
+                            'rgba(255, 255, 255, 0.21)'
+                        ],
+                        borderColor: 'rgba(255, 255, 255, 0.01)',
+                        borderWidth: 10
+                    }]
+                },
+                options: {
+                    cutoutPercentage: 80,
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            fontColor: 'white'
+                        }
+                    },
+                    tooltips: {
+                        backgroundColor: 'rgba(255,255,255,0.2)'
+                    }
+                }
+            });
+            var kpiChart = new Chart(ctxC, {
+                type: 'polarArea',
+                responsive: true,
+                data: {
+                    labels: ['Tasks', 'Training', 'Documents', 'Audits and Inspections', 'Reports'],
+                    datasets: [{
+                        data: [49, 3, 32, 6, 8],
+                        borderColor: 'rgba(255, 255, 255, 0.01)',
+                        borderWidth: 10,
+                        backgroundColor: [
+                            'rgba(244, 67, 54, 0.8)',
+                            'rgba(233, 30, 99, 0.8)',
+                            'rgba(156, 39, 176, 0.8)',
+                            'rgba(103, 58, 183, 0.8)',
+                            'rgba(63, 81, 181, 0.8)',
+                            'rgba(33, 150, 243, 0.8)'
+                        ]
+                    }]
+                },
+                options: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            fontColor: 'white'
+                        }
+                    },
+                    tooltips: {
+                        backgroundColor: 'rgba(255,255,255,0.2)'
+                    },
+                    scale: {
+                        ticks: {
+                          backdropColor: 'rgba(255, 255, 255, 0)'
+                        }
+                    }
+                },
+                animation:{
+                    animateScale:true
+                },
+            });
+        </script>
+        <script>
+            $( '.t2, .t3, .t4, .t5' ).hide();
+    
+            $('.tab1').click(function() {
+                $('.t1').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t2').hide();
+                $('.t3').hide();
+                $('.t4').hide();
+                $('.t5').hide();
+                $('.t6').hide();
+                $('.t7').hide();
+                $( '.tab2, .tab3, .tab4, .tab5' ).removeClass('active');
+
+            });
+
+            $('.tab2').click(function() {
+                $('.t2').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t1').hide();
+                $('.t3').hide();
+                $('.t4').hide();
+                $('.t5').hide();
+                $('.t6').hide();
+                $('.t7').hide();
+                $( '.tab1, .tab3, .tab4, .tab5' ).removeClass('active');
+
+            });
+
+            $('.tab3').click(function() {
+                $('.t3').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t2').hide();
+                $('.t1').hide();
+                $('.t4').hide();
+                $('.t5').hide();
+                $('.t6').hide();
+                $('.t7').hide();
+                $( '.tab2, .tab1, .tab4, .tab5' ).removeClass('active');
+
+            });
+
+            $('.tab4').click(function() {
+                $('.t4').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t2').hide();
+                $('.t3').hide();
+                $('.t1').hide();
+                $('.t5').hide();
+                $('.t6').hide();
+                $('.t7').hide();
+                $( '.tab2, .tab3, .tab1, .tab5' ).removeClass('active');
+            });
+
+            $('.tab5').click(function() {
+                $('.t5').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t2').hide();
+                $('.t3').hide();
+                $('.t4').hide();
+                $('.t1').hide();
+                $('.t6').hide();
+                $('.t7').hide();
+                $( '.tab2, .tab3, .tab4, .tab1' ).removeClass('active');
+            });
+        </script>
+    </body>
+</html>
