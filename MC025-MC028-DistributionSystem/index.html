@@ -1,0 +1,1047 @@
+
+<!DOCTYPE html>
+
+<html class="no-js">
+	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="common.css">
+        <link rel="stylesheet" href="typography.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+	<body>
+        <!-- Loader and instructions would be here -->
+        
+        <div class="interactive-content fade-in">
+            <div class="container">
+                <!-- Progress would be here -->
+                <!-- Content would be here -->
+            </div>
+                
+            <div class="dashboard internal-dashboard">
+                <div class="ipad-layout">
+                    <div class="ipad-profile"><i class="far fa-user-circle"></i></div>
+                    <h2 class="ipad-credentials">Welcome, Employee</h2>
+                    <div class="ipad-navigation ipad-dash"><h2 class="ipad-credentials"></h2>
+                       <ul>
+                           <li class="tab1"><i class="fas fa-list-ul"></i></li>
+                           <li class="tab2"><i class="fas fa-box-open"></i></li>
+                           <li class="tab3"><i class="fas fa-address-card"></i></li>
+                           <li class="tab4"><i class="fas fa-pallet"></i></li>
+                           <li class="tab5"><i class="fas fa-project-diagram"></i></li>
+                           <li class="tab6"><i class="fas fa-business-time"></i></li>
+                       </ul>
+                    </div>
+
+                    <div class="ipad-inbox">
+                        <h5 class="ipad-title"> Messages</h5>
+                        <p>You have no current messages...</p>
+                    </div>
+
+                    <div class="ipad-widgets">
+                        <div class="t1">
+                            <div id="tasks">
+                                <div class="flex-collection">
+
+                                    <div class="flex-full">
+                                        <h5 class="ipad-title">Volume Today</h5>
+                                        
+                                        <div class="flex-collection">
+                                            <div class="flex-4 ipad-new-items">
+                                                <h2 class="mb0" style="color: #28a745;">106</h2>
+                                                <p class="mb0">Orders Shipped</p>
+                                            </div>
+                                            <div class="flex-4 ipad-new-items">
+                                                <h2 class="mb0" style="color: #ffc107;">20</h2>
+                                                <p class="mb0">Overdue Shipments</p>
+                                            </div>
+                                            <div class="flex-4 ipad-new-items">
+                                                <h2 class="mb0" style="color: #2196f3;">198</h2>
+                                                <p class="mb0">Open POs</p>
+                                            </div>
+                                            <div class="flex-4 ipad-new-items">
+                                                <h2 class="mb0" style="color: #17a2b8;">12</h2>
+                                                <p class="mb0">Late Vendor Shipments</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-full mb30">
+                                        <h5 class="ipad-title">Order Status</h5>
+                                        <div class="table-wrapper">
+                                            <table style="min-width: 650px;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Customer</th>
+                                                        <th>Order Status</th>
+                                                        <th>Order Date</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Testa Inc.</td>
+                                                        <td>Backorder</td>
+                                                        <td>February 22, 2021</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Weldon Inc.</td>
+                                                        <td>Backorder</td>
+                                                        <td>March 10, 2021</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Weldon Inc.</td>
+                                                        <td>Backorder</td>
+                                                        <td>March 20, 2021</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Welltown Inc.</td>
+                                                        <td>Picking</td>
+                                                        <td>May 3, 2021</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Johnny’s</td>
+                                                        <td>Processed</td>
+                                                        <td>May 11, 2021</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-2 ipad-graphic" style="padding: 20px 30px; min-height: inherit;">
+                                        <h5 class="ipad-title">Inventory</h5>
+                                        <canvas id="inventoryChart" width="200" height="300"></canvas>
+                                    </div>
+                                    
+                                    <div class="flex-2 ipad-graphic" style="padding: 20px 30px; min-height: inherit;">
+                                        <h5 class="ipad-title">Commerce</h5>
+                                        <canvas id="commerceChart" width="320" height="300"></canvas>
+                                    </div>
+
+                                    <div class="flex-full">
+                                        <h5 class="ipad-title">KPIs (Monthly)</h5>
+                                        <div class="table-wrapper">
+                                            <table style="min-width: 650px;" class="mb-5">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Metric</th>
+                                                        <th>This Month</th>
+                                                        <th>Past Month</th>
+                                                        <th>Change</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Inventory</td>
+                                                        <td>$826,905</td>
+                                                        <td>$754,638</td>
+                                                        <td>10%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Shipping Costs</td>
+                                                        <td>$23,092</td>
+                                                        <td>$25,748</td>
+                                                        <td>-10%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Perfect Order</td>
+                                                        <td>94.5%</td>
+                                                        <td>94.1%</td>
+                                                        <td>0%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Backorders</td>
+                                                        <td>12.1%</td>
+                                                        <td>12.5%</td>
+                                                        <td>-3%</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Warehouse Capacity</td>
+                                                        <td>98.0%</td>
+                                                        <td>95.4%</td>
+                                                        <td>3%</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>  
+
+                        <div class="t2">
+                           <div id="training">
+                               <div class="flex-collection">
+                                   <div class="flex-full">
+                                     <h5 class="ipad-title">Orders</h5>
+                                      <div class="table-wrapper mb30">
+                                            <table style="min-width: 650px;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Customer</th>
+                                                        <th>Order Status</th>
+                                                        <th>Order Date</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Testa Inc.</td>
+                                                        <td>Backorder</td>
+                                                        <td>February 22, 2021</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Weldon Inc.</td>
+                                                        <td>Backorder</td>
+                                                        <td>March 10, 2021</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Weldon Inc.</td>
+                                                        <td>Backorder</td>
+                                                        <td>March 20, 2021</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Welltown Inc.</td>
+                                                        <td>Picking</td>
+                                                        <td>May 3, 2021</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Johnny’s</td>
+                                                        <td>Processed</td>
+                                                        <td>May 11, 2021</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                       </div>
+                                   </div>
+                                   <div class="ipad-graphic flex-full mb30" style="padding: 20px 30px; min-height: inherit;">
+                                        <h5 class="ipad-title">Schedule Order</h5>
+                                        <form class="flex-collection">
+
+                                          <p class="mb-0">Company:</p>
+                                          <input type="text">
+
+                                          <p class="mb-0 mt-3">Item:</p>
+                                          <input type="text">
+
+                                          <p class="mb-0 mt-3">Amount:</p>
+                                          <input type="text">
+
+                                          <p class="mb-0 mt-3">Departure (PM):</p>
+                                          <input type="text">
+
+                                          <p class="mb-0 mt-3">Dock:</p>
+                                          <input type="text">
+
+                                          <p class="mb-0 mt-3">Arrival (PM):</p>
+                                          <input type="text">
+
+                                          <div class="mt-3" style="margin-left: auto;" >
+                                            <input type="button" value="Schedule">
+                                          </div>
+
+                                        </form>
+                                   </div>
+                               </div>
+                           </div>
+                        </div>  
+
+                        <div class="t3">
+                           <div id="documents">
+                               <h5 class="ipad-title">Suppliers </h5>
+                               
+                               <div class="ipad-graphic flex-full mb30" style="padding: 20px 30px; min-height: inherit;">
+                                    <h5 class="ipad-title">Gallop Company:<br>Steve Gallop - (613) 555-4238 - sgallop@gallopinc.com</h5>
+                                    <canvas id="gallopCompanyChart" width="320" height="120"></canvas>
+                               </div>
+
+                               <div class="ipad-graphic flex-full mb30" style="padding: 20px 30px; min-height: inherit;">
+                                    <h5 class="ipad-title">Stove Farms:<br>Lenora Stove - (613) 555-9822 - lenora@stovefarms.com</h5>
+                                    <canvas id="stoveFarmsChart" width="320" height="120"></canvas>
+                               </div>
+
+                               <div class="ipad-graphic flex-full mb30" style="padding: 20px 30px; min-height: inherit;">
+                                    <h5 class="ipad-title">Harris Farm:<br>Julian Harris - (613) 555-2912 - jharris@harrisfarm.com</h5>
+                                    <canvas id="harrisFarmChart" width="320" height="120"></canvas>
+                               </div>
+
+                               <div class="ipad-graphic flex-full mb30" style="padding: 20px 30px; min-height: inherit;">
+                                    <h5 class="ipad-title">Opal Farms:<br>Cathy Reynolds - (613) 555-2300 - creynolds@opalfarms.com</h5>
+                                    <canvas id="opalFarmsChart" width="320" height="120"></canvas>
+                               </div>
+
+                               <div class="ipad-graphic flex-full mb30" style="padding: 20px 30px; min-height: inherit;">
+                                    <h5 class="ipad-title">Phenosaztra Pharmaceuticals:<br>Sam Arazaztra - (613) 555-6688 - sarazaztra@phenosaztra.com</h5>
+                                    <canvas id="phenosaztraChart" width="320" height="120"></canvas>
+                               </div>
+
+                           </div>
+                        </div>
+
+                        <div class="t4">
+                           <div id="audits">
+                               <h5 class="ipad-title">Inventory</h5>
+                               <div class="table-wrapper">
+                                   <table id="inventoryTable" class="mb30" style="min-width: 650px;" >
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 25%;">Company</th>
+                                                <th style="width: 20%;">Product</th>
+                                                <th style="width: 15%;">SKU</th>
+                                                <th style="width: 10%;">In-Stock</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Gallop Company</td>
+                                                <td>Fruity Cereal</td>
+                                                <td>4565447</td>
+                                                <td>106</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Gallop Company</td>
+                                                <td>Rice cereal</td>
+                                                <td>1444765</td>
+                                                <td>42</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Gallop Company</td>
+                                                <td>Bran cereal</td>
+                                                <td>4568896</td>
+                                                <td>35</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Gallop Company</td>
+                                                <td>Marinara sauce</td>
+                                                <td>7887978</td>
+                                                <td>110</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Gallop Company</td>
+                                                <td>Garlic tomato sauce</td>
+                                                <td>1742132</td>
+                                                <td>115</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Gallop Company</td>
+                                                <td>Tomato Basil sauce</td>
+                                                <td>0654546</td>
+                                                <td>90</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Gallop Company</td>
+                                                <td>Canned tomatoes</td>
+                                                <td>5266556</td>
+                                                <td>75</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Gallop Company</td>
+                                                <td>Diced tomatoes</td>
+                                                <td>5646840</td>
+                                                <td>46</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Stove Farms</td>
+                                                <td>Blueberries</td>
+                                                <td>0056174</td>
+                                                <td>108</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Stove Farms</td>
+                                                <td>Raspberries</td>
+                                                <td>0215664</td>
+                                                <td>110</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Stove Farms</td>
+                                                <td>Celery</td>
+                                                <td>1406975</td>
+                                                <td>88</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Stove Farms</td>
+                                                <td>Strawberries</td>
+                                                <td>3325475</td>
+                                                <td>20</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Stove Farms</td>
+                                                <td>Lettuce</td>
+                                                <td>7124739</td>
+                                                <td>130</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Stove Farms</td>
+                                                <td>Carrots</td>
+                                                <td>5524783</td>
+                                                <td>150</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Stove Farms</td>
+                                                <td>Basil</td>
+                                                <td>4566671</td>
+                                                <td>42</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Stove Farms</td>
+                                                <td>Thyme</td>
+                                                <td>5534817</td>
+                                                <td>36</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Stove Farms</td>
+                                                <td>Watermelon</td>
+                                                <td>4564563</td>
+                                                <td>10</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Opal Farms</td>
+                                                <td>Kidney beans</td>
+                                                <td>8786446</td>
+                                                <td>55</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Opal Farms</td>
+                                                <td>Chickpeas</td>
+                                                <td>7894446</td>
+                                                <td>75</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Opal Farms</td>
+                                                <td>Black beans</td>
+                                                <td>8788413</td>
+                                                <td>35</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Opal Farms</td>
+                                                <td>Lentils</td>
+                                                <td>3354876</td>
+                                                <td>80</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Harris Farms</td>
+                                                <td>Garlic</td>
+                                                <td>1142765</td>
+                                                <td>20</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Harris Farms</td>
+                                                <td>Ginger</td>
+                                                <td>4554778</td>
+                                                <td>96</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Harris Farms</td>
+                                                <td>Saffron</td>
+                                                <td>5336779</td>
+                                                <td>12</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Harris Farms</td>
+                                                <td>Cumin</td>
+                                                <td>2575577</td>
+                                                <td>30</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Harris Farms</td>
+                                                <td>Rosemary</td>
+                                                <td>4778263</td>
+                                                <td>30</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Phenosaztra Pharmaceuticals</td>
+                                                <td>Sleep Aid</td>
+                                                <td>0146345</td>
+                                                <td>115</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Phenosaztra Pharmaceuticals</td>
+                                                <td>Breathe well</td>
+                                                <td>0684454</td>
+                                                <td>60</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Phenosaztra Pharmaceuticals</td>
+                                                <td>Calm Down</td>
+                                                <td>1445368</td>
+                                                <td>60</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Phenosaztra Pharmaceuticals</td>
+                                                <td>Energy</td>
+                                                <td>4568876</td>
+                                                <td>80</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                               </div>
+                           </div>
+                        </div>
+
+                        <div class="t5">
+                           <div id="fufillment">
+                               <h5 class="ipad-title">Fufillment</h5>
+                               
+                               <div class="flex-collection">
+                                   <div class="flex-full">
+                                        <p class="mb0"><strong>Inbound</strong></p>
+                                        <div class="table-wrapper">
+                                           <table id="fufillment-inbound-table" class="mb30" style="min-width: 650px;" >
+                                                <thead>
+                                                    <tr>
+                                                        <th>Supplier</th>
+                                                        <th>Type of Inventory</th>
+                                                        <th>Arrival Time</th>
+                                                        <th>Dock</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Phenosaztra</td>
+                                                        <td>Ambient</td>
+                                                        <td>09:00 AM</td>
+                                                        <td>4</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Gallop Farms shipment</td>
+                                                        <td>Refrigerated</td>
+                                                        <td>11:00 AM</td>
+                                                        <td>5</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Stove Farms</td>
+                                                        <td>Ambient</td>
+                                                        <td>14:00 PM</td>
+                                                        <td>3</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Harris Farm</td>
+                                                        <td>Refrigerated</td>
+                                                        <td>15:00 PM</td>
+                                                        <td>4</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Phenosaztra Pharmaceuticals</td>
+                                                        <td>Refrigerated</td>
+                                                        <td>15:00PM</td>
+                                                        <td>1</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                       </div>
+                                   </div>
+                                   <div class="flex-full">
+                                        <p class="mb0"><strong>Outbound</strong></p>
+                                        <div class="table-wrapper">
+                                           <table id="fufillment-outbound-table" class="mb30" style="min-width: 650px;" >
+                                                <thead>
+                                                    <tr>      
+                                                        <th>Customer</th>
+                                                        <th>Type</th>
+                                                        <th>Departure Time</th>
+                                                        <th>Dock</th>
+                                                        <th>Arrival Time</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Weldon (Retailer)</td>
+                                                        <td>Retailer</td>
+                                                        <td>10:00 AM</td>
+                                                        <td>1</td>
+                                                        <td>11:45 AM</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Johnny’s (Agent)</td>
+                                                        <td>Agent</td>
+                                                        <td>11:00 AM</td>
+                                                        <td>3</td>
+                                                        <td>13:10 PM</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Testa Inc. (Retailer)</td>
+                                                        <td>Retailer</td>
+                                                        <td>14:30 PM</td>
+                                                        <td>2</td>
+                                                        <td>15:30 PM</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Welltown Inc. (Retailer)</td>
+                                                        <td>Retailer</td>
+                                                        <td>15:00 PM</td>
+                                                        <td>5</td>
+                                                        <td>16:45 PM</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                        </div>
+                        
+                        <div class="t6">
+                           <div id="kpis">            
+                               <div class="flex-collection">
+
+                                    <div class="flex-full">
+                                        <h5 class="ipad-title">Costs KPIs</h5>
+                                        <div class="flex-collection">
+                                            <div class="flex-full ipad-new-items">
+                                                <h2 class="mb0" style="color: #ffc107;font-size: 2.5em;">$30,000 - $35,000</h2>
+                                                <p class="mb0">Cost of Receiving Per Receiving Line</p>
+                                            </div>
+                                            <div class="flex-2 ipad-new-items">
+                                                <h2 class="mb0" style="color: #2196f3;font-size: 2.5em;">$22</h2>
+                                                <p class="mb0">Receiving Productivity</p>
+                                            </div>
+                                            <div class="flex-2 ipad-new-items">
+                                                <h2 class="mb0" style="color: #17a2b8;font-size: 2.5em;">$7,000 - $6,000</h2>
+                                                <p class="mb0">Carrying Cost of Inventory</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-full">
+                                        <h5 class="ipad-title">Accuracy KPIs</h5>
+                                        <div class="flex-collection">
+                                            <div class="flex-3 ipad-new-items">
+                                                <h2 class="mb0" style="color: #ffc107;font-size: 2em;">90% - 92%</h2>
+                                                <p class="mb0">Receiving Accuracy</p>
+                                            </div>
+                                            <div class="flex-3 ipad-new-items">
+                                                <h2 class="mb0" style="color: #2196f3;font-size: 2em;">95%</h2>
+                                                <p class="mb0">Put away Accuracy</p>
+                                            </div>
+                                            <div class="flex-3 ipad-new-items">
+                                                <h2 class="mb0" style="color: #17a2b8;font-size: 2em;">80% - 83%</h2>
+                                                <p class="mb0">Picking Accuracy</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-full">
+                                        <h5 class="ipad-title">Utilization KPIs</h5>
+                                        <div class="flex-collection">
+                                            <div class="flex-2 ipad-new-items">
+                                                <h2 class="mb0" style="color: #ffc107;font-size: 2.5em;">85% - 87%</h2>
+                                                <p class="mb0">Dock Door Utilization</p>
+                                            </div>
+                                            <div class="flex-2 ipad-new-items">
+                                                <h2 class="mb0" style="color: #2196f3;font-size: 2.5em;">90% - 92%</h2>
+                                                <p class="mb0">Labor and Equipment Utilization</p>
+                                            </div>
+                                            <div class="flex-2 ipad-new-items">
+                                                <h2 class="mb0" style="color: #17a2b8;font-size: 2.5em;">85% - 87%</h2>
+                                                <p class="mb0">Space Utilization</p>
+                                            </div>
+                                            <div class="flex-2 ipad-new-items">
+                                                <h2 class="mb0" style="color: #28a745;font-size: 2.5em;">87% - 85%</h2>
+                                                <p class="mb0">Put away Productivity</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-full">
+                                        <h5 class="ipad-title">Time KPIs</h5>
+                                        <div class="flex-collection">
+                                            <div class="flex-3 ipad-new-items">
+                                                <h2 class="mb0" style="color: #ffc107;font-size: 2.2em;">20 - 30<br>minutes</h2>
+                                                <p class="mb0">Receiving Cycle Time</p>
+                                            </div>
+                                            <div class="flex-3 ipad-new-items">
+                                                <h2 class="mb0" style="color: #2196f3;font-size: 2.2em;">120<br>minutes</h2>
+                                                <p class="mb0">Put away Cost Per Line </p>
+                                            </div>
+                                            <div class="flex-3 ipad-new-items">
+                                                <h2 class="mb0" style="color: #17a2b8;font-size: 2.2em;">140 - 150<br>minutes</h2>
+                                                <p class="mb0">Put away Cycle Time</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-full mb-5">
+                                        <h5 class="ipad-title">Others KPIs</h5>
+                                        <div class="flex-collection">
+                                            <div class="flex-3 ipad-new-items">
+                                                <h2 class="mb0" style="color: #ffc107;font-size: 2.5em;">4 - 3</h2>
+                                                <p class="mb0">Inventory Turnover</p>
+                                            </div>
+                                            <div class="flex-3 ipad-new-items">
+                                                <h2 class="mb0" style="color: #2196f3;font-size: 2.5em;">3:2 - 3:3</h2>
+                                                <p class="mb0">Inventory to Sales Ratio</p>
+                                            </div>
+                                            <div class="flex-3 ipad-new-items">
+                                                <h2 class="mb0" style="color: #17a2b8;font-size: 2.5em;">6% - 8%</h2>
+                                                <p class="mb0">Rate of Return<br><span style="font-size: .9rem;">(damaged or expired goods)</span></p>
+                                            </div>
+                                            <div class="flex-full ipad-new-items">
+                                                <h2 class="mb0" style="color: #28a745;">15,000 - 14,500 sq. ft</h2>
+                                                <p class="mb0">Storage Productivity</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                               </div>
+                           </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+            <div class="container">  
+                <?php echo do_shortcode('[h5p id="5"]'); ?>
+            </div>
+        </div>
+        
+        <?php wp_footer(); ?>
+        
+        <?php require_once( get_stylesheet_directory().'/includes/scripts.php'); ?>
+        <!-- script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js" integrity="sha512-BqNYFBAzGfZDnIWSAEGZSD/QFKeVxms2dIBPfw11gZubWwKUjEgmFUtUls8vZ6xTRZN/jaXGHD/ZaxD9+fDo0A==" crossorigin="anonymous"></script>
+        <script>
+            
+            $( '.t2, .t3, .t4, .t5, .t6' ).hide();
+    
+            $('.tab1').click(function() {
+                $('.t1').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t2').hide();
+                $('.t3').hide();
+                $('.t4').hide();
+                $('.t5').hide();
+                $('.t6').hide();
+                $( '.tab2, .tab3, .tab4, .tab5, .tab6' ).removeClass('active');
+
+            });
+
+            $('.tab2').click(function() {
+                $('.t2').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t1').hide();
+                $('.t3').hide();
+                $('.t4').hide();
+                $('.t5').hide();
+                $('.t6').hide();
+                $( '.tab1, .tab3, .tab4, .tab5, .tab6' ).removeClass('active');
+
+            });
+
+            $('.tab3').click(function() {
+                $('.t3').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t2').hide();
+                $('.t1').hide();
+                $('.t4').hide();
+                $('.t5').hide();
+                $('.t6').hide();
+                $( '.tab2, .tab1, .tab4, .tab5, .tab6' ).removeClass('active');
+
+            });
+
+            $('.tab4').click(function() {
+                $('.t4').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t2').hide();
+                $('.t3').hide();
+                $('.t1').hide();
+                $('.t5').hide();
+                $('.t6').hide();
+                $( '.tab2, .tab3, .tab1, .tab5, .tab6' ).removeClass('active');
+            });
+
+            $('.tab5').click(function() {
+                $('.t5').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t2').hide();
+                $('.t3').hide();
+                $('.t4').hide();
+                $('.t1').hide();
+                $('.t6').hide();
+                $( '.tab2, .tab3, .tab4, .tab1, .tab6' ).removeClass('active');
+            });
+            
+            $('.tab6').click(function() {
+                $('.t6').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t2').hide();
+                $('.t5').hide();
+                $('.t3').hide();
+                $('.t4').hide();
+                $('.t1').hide();
+                $( '.tab2, .tab3, .tab4, .tab1, .tab6' ).removeClass('active');
+            });
+
+            var ctxB = document.getElementById('commerceChart').getContext('2d');
+            var ctxA = document.getElementById('inventoryChart').getContext('2d');
+            var ctxC = document.getElementById('gallopCompanyChart').getContext('2d');
+            var ctxD = document.getElementById('stoveFarmsChart').getContext('2d');
+            var ctxE = document.getElementById('harrisFarmChart').getContext('2d');
+            var ctxF = document.getElementById('opalFarmsChart').getContext('2d');
+            var ctxG = document.getElementById('phenosaztraChart').getContext('2d');
+            
+            Chart.defaults.color = 'rgba(255,255,255,0.8)';
+
+            var commerceChart = new Chart(ctxA, {
+                type: 'pie',
+                responsive: true,
+                data: {
+                    labels: ['% pharmaceuticals', '% non-perishable goods', '% perishable goods'],
+                    datasets: [
+                        {
+                            data: [20, 50, 30],
+                            borderColor: 'rgba(255, 255, 255, 0.01)',
+                            borderWidth: 10,
+                            backgroundColor: [
+                                'rgba(23, 162, 184, 0.8)',
+                                'rgba(0, 123, 255, 0.8)',
+                                'rgba(220, 53, 69, 0.8)'
+                            ],
+                        }
+                    ],
+                },
+            });
+
+            var inventoryChart = new Chart(ctxB, {
+                type: 'bar',
+                responsive: true,
+                data: {
+                    labels: ["December", "January", 'February', 'March'],
+                    datasets: [{
+                        label: "Supplier Costs",
+                        borderColor: 'rgba(255, 255, 255, 0.01)',
+                        borderWidth: 2,
+                        backgroundColor: [
+                            'rgba(40, 167, 69, 0.8)',
+                            'rgba(40, 167, 69, 0.8)',
+                            'rgba(40, 167, 69, 0.8)',
+                            'rgba(40, 167, 69, 0.8)'
+                        ],
+                        data: [45, 60, 33, 43]
+                    }, {
+                        label: "Sales",
+                        borderColor: 'rgba(255, 255, 255, 0.01)',
+                        borderWidth: 2,
+                        backgroundColor: [
+                            'rgba(71, 91, 178, 0.8)',
+                            'rgba(71, 91, 178, 0.8)',
+                            'rgba(71, 91, 178, 0.8)',
+                            'rgba(71, 91, 178, 0.8)'
+                        ],
+                        data: [56, 88, 54, 23]
+                    }, {
+                        label: "Inventory Holding",
+                        borderColor: 'rgba(255, 255, 255, 0.01)',
+                        borderWidth: 2,
+                        backgroundColor: [
+                            'rgba(205, 38, 83, 0.8)',
+                            'rgba(205, 38, 83, 0.8)',
+                            'rgba(205, 38, 83, 0.8)',
+                            'rgba(205, 38, 83, 0.8)'
+                        ],
+                        data: [34, 77, 66, 43]
+                    }, {
+                        label: "Returns",
+                        borderColor: 'rgba(255, 255, 255, 0.01)',
+                        borderWidth: 2,
+                        backgroundColor: [
+                            'rgba(255, 193, 7, 0.8)',
+                            'rgba(255, 193, 7, 0.8)',
+                            'rgba(255, 193, 7, 0.8)',
+                            'rgba(255, 193, 7, 0.8)'
+                        ],
+                        data: [5, 3, 7, 2]
+                    }]
+                },
+                options: {
+                    barValueSpacing: 20,
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                            min: 0,
+                            }
+                        }]
+                    }
+                }
+            });
+
+            var suppliers = {
+                'period' : ['October 2020', 'November ', 'December 2021', 'January 2021', 'February 2021', 'March 2021'],
+                'Gallop' : { 
+                    'value'   : [6893, 5734, 7439, 8873, 7636, 6972], 
+                    'percent' : [90, 97, 100, 93, 87, 82]
+                },
+                'Stove' : { 
+                    'value'   : [4694, 6825, 4922, 5866, 4614, 5522], 
+                    'percent' : [88, 100, 87, 95, 84, 92]
+                },
+                'Harris' : { 
+                    'value'   : [3226, 3425, 4873, 4612, 3200, 3821], 
+                    'percent' : [90, 92, 98, 95, 86, 90]
+                },
+                'Opal' : { 
+                    'value'   : [6012, 4031, 5764, 4726, 3040, 3469], 
+                    'percent' : [97, 73, 89, 72, 71, 83]
+                },
+                'Phenosaztra' : { 
+                    'value'   : [12270, 15980, 17630, 17210, 15920, 14655], 
+                    'percent' : [98, 99, 100, 99, 91, 88]
+                },
+            }
+
+            var gallopCompanyChart = new Chart(ctxC, {
+                type: 'line',
+                data: {
+                    labels: suppliers.period,
+                    datasets: [
+                        {
+                            label: '$',
+                            data: suppliers.Gallop.value,
+                            stack: 'combined',
+                            type: 'bar',
+                            // backgroundColor: '#ffc107',
+                        },
+                        {
+                            label: '%',
+                            data: suppliers.Gallop.percent,
+                            stack: 'combined', 
+                            backgroundColor: '#2196f3',
+                            borderColor: '#2196f3',
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            stacked: true
+                        }
+                    }
+                },
+                
+            });
+            var stoveFarmsChart = new Chart(ctxD, {
+                type: 'line',
+                data: {
+                    labels: suppliers.period,
+                    datasets: [
+                        {
+                            label: '$',
+                            data: suppliers.Stove.value,
+                            stack: 'combined',
+                            type: 'bar',
+                            // backgroundColor: '#28a745',
+                        },
+                        {
+                            label: '%',
+                            data: suppliers.Stove.percent,
+                            stack: 'combined', 
+                            backgroundColor: '#2196f3',
+                            borderColor: '#2196f3',
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            stacked: true
+                        }
+                    }
+                },
+                
+            });
+            var harrisFarmChart = new Chart(ctxE, {
+                type: 'line',
+                data: {
+                    labels: suppliers.period,
+                    datasets: [
+                        {
+                            label: '$',
+                            data: suppliers.Harris.value,
+                            stack: 'combined',
+                            type: 'bar',
+                            // backgroundColor: '#28a745',
+                        },
+                        {
+                            label: '%',
+                            data: suppliers.Harris.percent,
+                            stack: 'combined', 
+                            backgroundColor: '#2196f3',
+                            borderColor: '#2196f3',
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            stacked: true
+                        }
+                    }
+                },
+                
+            });
+            var opalFarmsChart = new Chart(ctxF, {
+                type: 'line',
+                data: {
+                    labels: suppliers.period,
+                    datasets: [
+                        {
+                            label: '$',
+                            data: suppliers.Opal.value,
+                            stack: 'combined',
+                            type: 'bar',
+                            // backgroundColor: '#28a745',
+                        },
+                        {
+                            label: '%',
+                            data: suppliers.Opal.percent,
+                            stack: 'combined', 
+                            backgroundColor: '#2196f3',
+                            borderColor: '#2196f3',
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            stacked: true
+                        }
+                    }
+                },
+                
+            });
+            var phenosaztraChart = new Chart(ctxG, {
+                type: 'line',
+                data: {
+                    labels: suppliers.period,
+                    datasets: [
+                        {
+                            label: '$',
+                            data: suppliers.Phenosaztra.value,
+                            stack: 'combined',
+                            type: 'bar',
+                            // backgroundColor: '#28a745',
+                        },
+                        {
+                            label: '%',
+                            data: suppliers.Phenosaztra.percent,
+                            stack: 'combined', 
+                            backgroundColor: '#2196f3',
+                            borderColor: '#2196f3',
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            stacked: true
+                        }
+                    }
+                },
+                
+            });
+        </script>
+    </body>
+</html>
