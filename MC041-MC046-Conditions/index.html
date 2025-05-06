@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="profile" href="https://gmpg.org/xfn/11">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="typography.css">
+    <link rel="stylesheet" href="custom.css">
+    <link rel="stylesheet" href="palette-load.css">
+    <link rel="stylesheet" href="palette-unload.css">
+    <link rel="stylesheet" href="scanner.css">
+  </head>
+
+  <body>
+    <div class="interactive-content fade-in mb0">
+      <div class="container">
+        <div class="hover-instructions">Hover to Open</div>
+        <!-- Progress content would be loaded here -->
+        <!-- Static fallback message for posts/pages -->
+      </div>
+    </div>
+
+    <div class="activity-nav">
+        <h4 class="mb30"></h4>
+        <p></p>
+    </div>
+
+    <div class="environment-setup mb0">
+      <div class="drop-field" style="background: url('warehouse-rooms.svg');">
+        <div class="button-dash">
+          <button onClick="window.location.href=window.location.href" class="clean-button">
+            <i class="fas fa-redo"></i> Clean Room
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pull-out">
+      <div class="pull-lever"><i class="fas fa-chevron-left"></i></div>
+      <div id="objects" class="pull-content">
+        <!-- Populates with Clones from JSON script -->
+      </div>
+      <div id="cloneObject" style="display: none;">
+        <div class="pull-item">
+          <img draggable="true" class="drag-item" src="" alt="">
+          <span class="label"></span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      setInterval(removeParent, 1000);
+
+      function removeParent() {
+        document.querySelectorAll('.pull-item').forEach(function (item) {
+          if (!item.querySelector('.drag-item')) {
+            item.style.display = 'none';
+          }
+        });
+      }
+
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        document.querySelectorAll('.notification').forEach(n => n.style.display = 'block');
+        document.querySelectorAll('.modal').forEach(m => m.style.paddingTop = '5rem');
+        document.querySelectorAll('.notification').forEach(n => {
+          const p = document.createElement('p');
+          p.className = 'mb0';
+          p.textContent = 'Use desktop or laptop for optimal performance.';
+          n.appendChild(p);
+        });
+
+        document.querySelectorAll('.modal-button').forEach(b => {
+          b.addEventListener('click', () => {
+            document.querySelectorAll('.notification').forEach(n => n.style.display = 'none');
+          });
+        });
+      } else {
+        document.querySelectorAll('.notification').forEach(n => n.style.display = 'none');
+      }
+
+      // JSON data with image URLs should be inserted here manually or by script
+      const json = {
+        "objects": [
+          {
+                                "image": "staff1.png",
+                                "name": "Staff Member",
+                                "objectNumber": "1",
+
+                        },
+                        {
+                                "image": "staff2.png",
+                                "name": "Staff Member",
+                                "objectNumber": "2",
+
+                        },
+                        {
+                                "image": "staff3.png",
+                                "name": "Staff Member",
+                                "objectNumber": "3",
+
+                        },
+                        {
+                                "image": "stair.png",
+                                "name": "Stairs",
+                                "objectNumber": "4",
+
+                        },
+                        {
+                                "image": "stair2.png",
+                                "name": "Stairs",
+                                "objectNumber": "5",
+
+                        },
+                        {
+                                "image": "tall-rack-empty.png",
+                                "name": "Empty Tall Rack",
+                                "objectNumber": "6",
+
+                        },
+                        {
+                                "image": "tall-rack-empty2.png",
+                                "name": "Empty Tall Rack",
+                                "objectNumber": "7",
+
+                        },
+                        {
+                                "image": "tall-rack-empty3.png",
+                                "name": "Empty Tall Rack",
+                                "objectNumber": "8",
+
+                        },
+                        {
+                                "image": "tall-rack-empty4.png",
+                                "name": "Empty Tall Rack",
+                                "objectNumber": "9",
+
+                        },
+                        {
+                                "image": "tall-rack-full4.png",
+                                "name": "Full Tall Rack",
+                                "objectNumber": "10",
+
+                        },
+                        {
+                                "image": "tall-rack-full3.png",
+                                "name": "Full Tall Rack",
+                                "objectNumber": "11",
+
+                        },
+                        {
+                                "image": "tall-rack-full2.png",
+                                "name": "Full Tall Rack",
+                                "objectNumber": "12",
+
+                        },
+                        {
+                                "image": "tall-rack-full.png",
+                                "name": "Full Tall Rack",
+                                "objectNumber": "13",
+
+                        },
+                        {
+                                "image": "wrapped-pallet-l.png",
+                                "name": "Wrapped Palette",
+                                "objectNumber": "14",
+
+                        },
+                        {
+                                "image": "wrapped-pallet-l2.png",
+                                "name": "Wrapped Palette",
+                                "objectNumber": "15",
+
+                        },
+                        {
+                                "image": "wrapped-pallet-r.png",
+                                "name": "Wrapped Palette",
+                                "objectNumber": "16",
+
+                        },
+                        {
+                                "image": "wrapped-pallet-r2.png",
+                                "name": "Wrapped Palette",
+                                "objectNumber": "17",
+
+                        },
+                        {
+                                "image": "wrapper.png",
+                                "name": "Wrapping Machine",
+                                "objectNumber": "18",
+
+                        },
+                        {
+                                "image": "wrapper2.png",
+                                "name": "Wrapping Machine",
+                                "objectNumber": "19",
+
+                        },
+                        {
+                                "image": "forklift-empty-l.png",
+                                "name": "Forklift",
+                                "objectNumber": "20",
+
+                        },
+                        {
+                                "image": "forklift-empty-r.png",
+                                "name": "Forklift",
+                                "objectNumber": "21",
+
+                        },                        
+                        {
+                                "image": "forklift-loaded-l.png",
+                                "name": "Forklift",
+                                "objectNumber": "22",
+
+                        },
+                        {
+                                "image": "packed-pallet-l.png",
+                                "name": "Full Palette",
+                                "objectNumber": "23",
+
+                        },
+                        {
+                                "image": "packed-pallet-l2.png",
+                                "name": "Full Palette",
+                                "objectNumber": "24",
+
+                        },
+                        {
+                                "image": "packed-pallet-r.png",
+                                "name": "Full Palette",
+                                "objectNumber": "25",
+
+                        },
+                        {
+                                "image": "packed-pallet-r2.png",
+                                "name": "Full Palette",
+                                "objectNumber": "26",
+
+                        },
+                        {
+                                "image": "pallet-empty4.png",
+                                "name": "Empty Palette",
+                                "objectNumber": "27",
+
+                        },
+                        {
+                                "image": "pallet-empty3.png",
+                                "name": "Empty Palette",
+                                "objectNumber": "28",
+
+                        },
+                        {
+                                "image": "pallet-empty2.png",
+                                "name": "Empty Palette",
+                                "objectNumber": "29",
+
+                        },
+                        {
+                                "image": "pallet-empty.png",
+                                "name": "Empty Palette",
+                                "objectNumber": "30",
+
+                        },
+                        {
+                                "image": "palletjack.png",
+                                "name": "Palette Jack",
+                                "objectNumber": "31",
+
+                        },
+                        {
+                                "image": "palletjack2.png",
+                                "name": "Palette Jack",
+                                "objectNumber": "32",
+
+                        },
+                        {
+                                "image": "scale-l.png",
+                                "name": "Scale",
+                                "objectNumber": "33",
+
+                        },
+                        {
+                                "image": "scale-r.png",
+                                "name": "Scale",
+                                "objectNumber": "34",
+
+                        },
+                        {
+                                "image": "short-rack-empty4.png",
+                                "name": "Empty Short Rack",
+                                "objectNumber": "35",
+
+                        },
+                        {
+                                "image": "short-rack-empty3.png",
+                                "name": "Empty Short Rack",
+                                "objectNumber": "36",
+
+                        },
+                        {
+                                "image": "short-rack-empty2.png",
+                                "name": "Empty Short Rack",
+                                "objectNumber": "37",
+
+                        },
+                        {
+                                "image": "short-rack-empty.png",
+                                "name": "Empty Short Rack",
+                                "objectNumber": "38",
+
+                        },
+                        {
+                                "image": "short-rack-full4.png",
+                                "name": "Full Short Rack",
+                                "objectNumber": "39",
+
+                        },
+                        {
+                                "image": "short-rack-full3.png",
+                                "name": "Full Short Rack",
+                                "objectNumber": "40",
+
+                        },
+                        {
+                                "image": "short-rack-full2.png",
+                                "name": "Full Short Rack",
+                                "objectNumber": "41",
+
+                        },
+                        {
+                                "image": "short-rack-full.png",
+                                "name": "Full Short Rack",
+                                "objectNumber": "42",
+
+                        }
+        ]
+      };
+
+      document.addEventListener("DOMContentLoaded", function () {
+        json.objects.forEach(function (obj) {
+          const newObject = document.querySelector("#cloneObject > .pull-item").cloneNode(true);
+
+          newObject.querySelector(".drag-item").src = obj.image;
+          newObject.querySelector(".drag-item").id = 'Obj' + obj.objectNumber;
+          newObject.querySelector(".drag-item").alt = obj.name;
+          newObject.querySelector(".label").textContent = obj.name;
+
+          document.querySelector(".pull-content").appendChild(newObject);
+        });
+
+        const dragObjects = Array.from(document.querySelectorAll('.drag-item'));
+
+        dragObjects.forEach(function (item) {
+          item.onmousedown = function (event) {
+            const shiftX = event.clientX - item.getBoundingClientRect().left;
+            const shiftY = event.clientY - item.getBoundingClientRect().top;
+
+            item.style.position = 'absolute';
+            item.style.zIndex = 1000;
+            document.body.append(item);
+
+            function moveAt(pageX, pageY) {
+              item.style.left = pageX - shiftX + 'px';
+              item.style.top = pageY - shiftY + 'px';
+            }
+
+            function onMouseMove(event) {
+              moveAt(event.pageX, event.pageY);
+
+              item.hidden = true;
+              let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+              item.hidden = false;
+
+              let droppableBelow = elemBelow?.closest('.droppable');
+
+              if (droppableBelow) {
+                // handle enter/leave droppable if needed
+              }
+            }
+
+            document.addEventListener('mousemove', onMouseMove);
+
+            item.onmouseup = function () {
+              document.removeEventListener('mousemove', onMouseMove);
+              item.onmouseup = null;
+            };
+          };
+
+          item.ondragstart = function () {
+            return false;
+          };
+        });
+      });
+    </script>
+  </body>
+</html>

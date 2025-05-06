@@ -1,0 +1,205 @@
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+      -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+#warehouse{
+    width: 100%;
+    height: calc(100vh - 150px);
+    background-size: cover;
+    position: relative;
+    background-repeat: no-repeat !important;
+}
+
+.dropzone{
+  position: absolute;
+  transform: rotatez(-60deg) skewY(30deg);
+  /* background-color: #bfe4ff; */
+  border: dashed 4px transparent;
+  border-radius: 4px;
+  /* margin: 10px auto 30px; */
+  padding: 10px;
+  /* width: 80%; */
+  transition: background-color 0.3s;
+
+  text-align: center;
+  color: white;
+  writing-mode: vertical-rl;
+  text-transform: uppercase;
+}
+
+.hack{
+  position: absolute;
+  width: 156px;
+  height: 252px;
+}
+.hack-0{
+  background: url('/wp-content/themes/scm-child/img/order-sorting/Racks/Rack-0.png') no-repeat;
+  background-size: cover;
+}
+.hack-1{
+  background: url('/wp-content/themes/scm-child/img/order-sorting/Racks/Rack-1.png') no-repeat;
+  background-size: cover;
+}
+.hack-2{
+  background: url('/wp-content/themes/scm-child/img/order-sorting/Racks/Rack-2.png') no-repeat;
+  background-size: cover;
+}
+.hack-3{
+  background: url('/wp-content/themes/scm-child/img/order-sorting/Racks/Rack-3.png') no-repeat;
+  background-size: cover;
+}
+.hack-4{
+  background: url('/wp-content/themes/scm-child/img/order-sorting/Racks/Rack-4.png') no-repeat;
+  background-size: cover;
+}
+.hack-5{
+  background: url('/wp-content/themes/scm-child/img/order-sorting/Racks/Rack-5.png') no-repeat;
+  background-size: cover;
+}
+.hack-6{
+  background: url('/wp-content/themes/scm-child/img/order-sorting/Racks/Rack-6.png') no-repeat;
+  background-size: cover;
+}
+.hack-7{
+  background: url('/wp-content/themes/scm-child/img/order-sorting/Racks/Rack-7.png') no-repeat;
+  background-size: cover;
+}
+.hack-8{
+  background: url('/wp-content/themes/scm-child/img/order-sorting/Racks/Rack-8.png') no-repeat;
+  background-size: cover;
+}
+.hack-9{
+  background: url('/wp-content/themes/scm-child/img/order-sorting/Racks/Rack-9.png') no-repeat;
+  background-size: cover;
+}
+.hack-10{
+  background: url('/wp-content/themes/scm-child/img/order-sorting/Racks/Rack-10.png') no-repeat;
+  background-size: cover;
+}
+.hack-11{
+  background: url('/wp-content/themes/scm-child/img/order-sorting/Racks/Rack-11.png') no-repeat;
+  background-size: cover;
+}
+.hack-12{
+  background: url('/wp-content/themes/scm-child/img/order-sorting/Racks/Rack-12.png') no-repeat;
+  background-size: cover;
+}
+
+.drop-active {
+  border-color: #aaa;
+}
+
+.drop-target {
+  background-color: #29e;
+  border-color: #fff;
+  border-style: solid;
+}
+
+.drag-drop {
+  text-align: center;
+  touch-action: none;
+  -webkit-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+  /* transition: transform 0.3s; */
+}
+
+#dropzone-truckA{
+    height: 120px;
+    width: 100px;
+    top: 429px;
+    left: 334px;
+}
+
+#dropzone-truckB{
+    height: 120px;
+    width: 100px;
+    top: 370px;
+    left: 434px;
+}
+
+#dropzone-truckC{
+    height: 120px;
+    width: 100px;
+    top: 311px;
+    left: 534px;
+}
+
+#hack-A{
+  bottom: 120px;
+  left: 455px;
+}
+#hack-B{
+  bottom: 235px;
+  left: 655px;
+}
+#hack-C{
+  bottom: 345px;
+  left: 845px;
+}
+
+.pallet-item{
+  width: 65px;
+  height: 74px;
+  background: url('/wp-content/themes/scm-child/img/warehouse/wrapped-pallet-l.png') no-repeat;
+  background-size: cover;
+}
+
+.pallet-in-truck{
+  position: absolute;
+}
+
+#pallet-in-truck-1{
+  top: 188px;
+  left: 163px;
+}
+#pallet-in-truck-2{
+  top: 205px;
+  left: 134px;
+}
+#pallet-in-truck-3{
+  top: 210px;
+  left: 201px;
+}
+#pallet-in-truck-4{
+  top: 227px;
+  left: 172px;
+}
+#pallet-in-truck-5{
+  top: 233px;
+  left: 241px;
+}
+#pallet-in-truck-6{
+  top: 250px;
+  left: 212px;
+}
+#pallet-in-truck-7{
+  top: 256px;
+  left: 280px;
+}
+#pallet-in-truck-8{
+  top: 272px;
+  left: 251px;
+}
+#pallet-in-truck-9{
+  top: 278px;
+  left: 319px;
+}
+#pallet-in-truck-10{
+  top: 294px;
+  left: 290px;
+}
+.pallet-info {
+    background: url(info.png) no-repeat;
+    background-size: cover;
+    position: relative;
+    background: rgb(255 255 255 / 74%);
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 3px;
+}
