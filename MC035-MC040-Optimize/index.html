@@ -1,0 +1,485 @@
+
+<!DOCTYPE html>
+
+<html class="no-js">
+	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="common.css">
+        <link rel="stylesheet" href="custom.css">
+        <link rel="stylesheet" href="typography.css">
+        <link rel="stylesheet" href="scanner.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+	<body>
+        <!-- Loader and instructions would be here -->
+        
+        <div class="interactive-content fade-in">
+            <div class="container">
+                <div class="map-legend flex-collection mb30">
+                    <a id="Departure" class="legend-item flex-3"><i class="fas fa-warehouse"></i> Departure</a>
+                    <a id="Arrival" class="legend-item flex-3"><i class="fas fa-city"></i> Arrival</a>
+                    <a id="Truck" class="legend-item flex-3"><i class="fas fa-truck"></i> Truck</a>
+                </div>
+                
+                <div id="map"></div>
+                
+            </div>
+            
+           
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <script src="jquery.min.js"></script>
+        <!-- script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js" integrity="sha512-BqNYFBAzGfZDnIWSAEGZSD/QFKeVxms2dIBPfw11gZubWwKUjEgmFUtUls8vZ6xTRZN/jaXGHD/ZaxD9+fDo0A==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8EOwtkXX5koPgCItK4zKvxSSKSQCwIgQ&callback=initMap"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="slick-master/slick/slick.js"></script>
+        <script>
+            function initMap() {
+            var styledMapType = new google.maps.StyledMapType(
+                [
+                    {
+                        "featureType": "water",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#e9e9e9"
+                            },
+                            {
+                                "lightness": 17
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "landscape",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#f5f5f5"
+                            },
+                            {
+                                "lightness": 20
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.highway",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#ffffff"
+                            },
+                            {
+                                "lightness": 17
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.highway",
+                        "elementType": "geometry.stroke",
+                        "stylers": [
+                            {
+                                "color": "#ffffff"
+                            },
+                            {
+                                "lightness": 29
+                            },
+                            {
+                                "weight": 0.2
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.arterial",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#ffffff"
+                            },
+                            {
+                                "lightness": 18
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.local",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#ffffff"
+                            },
+                            {
+                                "lightness": 16
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#f5f5f5"
+                            },
+                            {
+                                "lightness": 21
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.park",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#dedede"
+                            },
+                            {
+                                "lightness": 21
+                            }
+                        ]
+                    },
+                    {
+                        "elementType": "labels.text.stroke",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            },
+                            {
+                                "color": "#ffffff"
+                            },
+                            {
+                                "lightness": 16
+                            }
+                        ]
+                    },
+                    {
+                        "elementType": "labels.text.fill",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            },
+                            {
+                                "saturation": 36
+                            },
+                            {
+                                "color": "#333333"
+                            },
+                            {
+                                "lightness": 40
+                            }
+                        ]
+                    },
+                    {
+                        "elementType": "labels.icon",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "transit",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#f2f2f2"
+                            },
+                            {
+                                "lightness": 19
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#fefefe"
+                            },
+                            {
+                                "lightness": 20
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative",
+                        "elementType": "geometry.stroke",
+                        "stylers": [
+                            {
+                                "color": "#fefefe"
+                            },
+                            {
+                                "lightness": 17
+                            },
+                            {
+                                "weight": 1.2
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative.country",
+                        "elementType": "geometry.stroke",
+                        "stylers": [
+                            {
+                                "color": "#969696"
+                            },
+                            {
+                                "lightness": 17
+                            },
+                            {
+                                "weight": 1.2
+                            }
+                        ]
+                    }
+                ],{name: 'Styled Map'});
+
+                var directionsService = new google.maps.DirectionsService;
+                var directionsRenderer = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "#2196F3", strokeWeight: 5, strokeOpacity: 0.3 } });
+                var truckService = new google.maps.DirectionsService;
+                var truckRenderer = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "#2196F3", strokeWeight: 5 } });
+                
+                var mapLNGPASRE = parseFloat(-81.61070927073305); 
+                var mapLATPASRE = parseFloat(42.62431208972535); 
+                var mapZOOMPASRE = parseFloat(11); 
+                
+                var departureLNG = '-79.415168';
+                var departureLAT = '43.641424';
+                var departureHEADING = 'Toronto, Ontario';
+                var departureDESCRIPTION = 'Warehouse A';
+                var departureLNGPASRE = parseFloat(-79.415168); 
+                var departureLATPASRE = parseFloat(43.641424); 
+                
+                var arrivalLNG = '-83.25066642061606';
+                var arrivalLAT = '42.24852371362757';
+                var arrivalHEADING = 'Detroit, Michigan';
+                var arrivalDESCRIPTION = 'Warehouse B';
+                var arrivalLNGPASRE = parseFloat(-83.25066642061606);
+                var arrivalLATPASRE = parseFloat(42.24852371362757);
+                
+                var truckLNG = '42.62431208972535';
+                var truckLAT = '-81.61070927073305';
+                var truckHEADING = 'Stalled Truck';
+                var truckDESCRIPTION = 'The driver is 2hrs into his trip. His truck has stalled and he needs to know further details to ensure the packages get delivered. ';
+                var truckLNGPASRE = parseFloat(42.62431208972535);
+                var truckLATPASRE = parseFloat(-81.61070927073305);
+                
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: mapZOOMPASRE,
+                    center: {lat: mapLATPASRE, lng: mapLNGPASRE},
+                    scaleControl: false,
+                    scrollwheel: false,
+                    disableDefaultUI: true
+                });
+                
+                var icons = {
+                    truck: {
+                       icon: '<?php echo get_stylesheet_directory_uri(); ?>/img/info-i_truck.png',
+                    },
+                    departure: {
+                       icon: '<?php echo get_stylesheet_directory_uri(); ?>/img/info-i_depart.png'  
+                    },
+                    arrival: {
+                       icon: '<?php echo get_stylesheet_directory_uri(); ?>/img/info-i_arrival.png'  
+                    }
+                };
+
+                var features = [
+                    {
+                        position: new google.maps.LatLng(departureLAT, departureLNG),
+                        animation: '',
+                        type: 'departure',
+                        content: '<div class="google-modal">'+'<div id="siteNotice"></div>'+'<h1 id="firstHeading" class="firstHeading">' + departureHEADING + '</h1>' + '<p>' + departureDESCRIPTION + '</p>'
+                    }, {
+                        position: new google.maps.LatLng(arrivalLAT, arrivalLNG),
+                        animation: '',
+                        type: 'arrival',
+                        content: '<div class="google-modal">'+'<div id="siteNotice"></div>'+'<h1 id="firstHeading" class="firstHeading">' + arrivalHEADING + '</h1>' + '<p>' + arrivalDESCRIPTION + '</p>'
+                    }, {
+                        position: new google.maps.LatLng(truckLAT, truckLNG),
+                        animation: '',
+                        type: 'truck',
+                        content: '<div class="google-modal">'+'<div id="siteNotice"></div>'+'<h1 id="firstHeading" class="firstHeading">' + truckHEADING + '</h1>' + '<p>' + truckDESCRIPTION + '</p>'
+                    }
+                ]; 
+
+                for (var i = 0; i < features.length; i++) {
+                    var marker = new google.maps.Marker({
+                        position: features[i].position,
+                        icon: icons[features[i].type].icon,
+                        animation: features[i].animation,
+                        content: features[i].content,
+                        type: features[i].type,
+                        map: map
+                    });
+                    
+                    var infowindow = new google.maps.InfoWindow();
+                    
+                    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                        return function() {
+                            infowindow.setContent(marker.content);
+                            infowindow.open(map, marker);
+                        }
+                    })(marker, i));
+                };
+                
+                $( "#Truck" ).click(function() {
+                    map.setCenter(new google.maps.LatLng(truckLAT, truckLNG));
+                });
+                
+                $( "#Arrival" ).click(function() {
+                    map.setCenter(new google.maps.LatLng(arrivalLAT, arrivalLNG));
+                });
+                
+                $( "#Departure" ).click(function() {
+                    map.setCenter(new google.maps.LatLng(departureLAT, departureLNG));
+                });
+                
+                var routePathCoordinates = [
+                    { lat: departureLATPASRE, lng: departureLNGPASRE},
+                    { lat: arrivalLATPASRE, lng: arrivalLNGPASRE },
+                ];
+                
+                var routeTruckCoordinates = [
+                    { lat: departureLATPASRE, lng: departureLNGPASRE},
+                    { lat: truckLATPASRE, lng: truckLNGPASRE },
+                ];
+                
+                var routePath = new google.maps.Polyline({
+                    path: routePathCoordinates,
+                    geodesic: true,
+                    strokeOpacity: 0
+                });
+                
+                var truckPath = new google.maps.Polyline({
+                    path: routeTruckCoordinates,
+                    geodesic: true,
+                    strokeOpacity: 0
+                });
+                
+                var wayPoints = [];
+                for(j=1;j<routePathCoordinates.length-1;j++){            
+                      wayPoints.push({location: routePathCoordinates[j],
+                                   stopover: true});
+                }
+
+                var request = {
+                    origin: routePathCoordinates[0],
+                    destination: routePathCoordinates[routePathCoordinates.length-1],
+                    waypoints: wayPoints,
+                    travelMode: google.maps.DirectionsTravelMode.DRIVING
+                };
+
+                directionsService.route(request,function(result, status) {                
+                    if(status == google.maps.DirectionsStatus.OK) {                 
+                          directionsRenderer.setDirections(result);
+                          directionsRenderer.setOptions( { suppressMarkers: true, preserveViewport: true } );
+                    } else { alert("Directions request failed:" + status); }
+                });
+                
+                var wayPointsTruck = [];
+                for(j=1;j<routeTruckCoordinates.length-1;j++){            
+                      wayPointsTruck.push({location: routeTruckCoordinates[j],
+                                   stopover: true});
+                }
+
+                var requestTruck = {
+                    origin: routeTruckCoordinates[0],
+                    destination: routeTruckCoordinates[routeTruckCoordinates.length-1],
+                    waypoints: wayPointsTruck,
+                    travelMode: google.maps.DirectionsTravelMode.DRIVING
+                };
+
+                truckService.route(requestTruck,function(result, status) {                
+                    if(status == google.maps.DirectionsStatus.OK) {                 
+                          truckRenderer.setDirections(result);
+                          truckRenderer.setOptions( { suppressMarkers: true, preserveViewport: true } );
+                    } else { alert("Directions request failed:" + status); }
+                });
+                
+                routePath.setMap(map);
+                truckPath.setMap(map);
+                directionsRenderer.setMap(map);
+                truckRenderer.setMap(map);
+                map.mapTypes.set('styled_map', styledMapType);
+                map.setMapTypeId('styled_map');
+            }
+            $(".load-window").show();
+    $('body').css('height', '100vh');
+    $('body').css('overflow-y', 'hidden');
+    setTimeout(function () {
+        $(".load-window").fadeOut("slow");
+        $('body').css('height', 'auto');
+        $('body').css('overflow-y', 'visible');
+    }, 2000);
+    
+    setTimeout(function () {
+        $('html,body').animate({
+            scrollTop: 0
+        }, 0);
+    }, 1000);
+    
+    window.addEventListener("load", function(){
+      window.dispatchEvent(new Event('resize'));
+    });
+    
+    $('.nav').hide();
+    $('.nav').css('height', '0%');
+    $('#menuClose').hide();
+    
+    $('#menuToggle').click(function() {
+        $('.nav').fadeIn('slow');
+        $(this).hide();
+        $('#menuClose').fadeIn('slow');
+        $('.nav').css('height', '100%');
+    });
+    
+    $('#menuClose').click(function() {
+        $('.nav').fadeOut('fast');
+        $('.nav').css('height', '0%');
+        $(this).hide();
+        $('#menuToggle').fadeIn('slow');
+    });
+    
+    $('.activity-nav').hide();
+    $('.activity-nav.show').show();
+    
+    $('.instructions-link').click(function() {
+        $('.activity-nav').fadeIn('slow');
+        $(this).css('color', '#2196f3');
+    });
+    
+    $('.activity-close').click(function() {
+        $('.activity-nav').fadeOut('fast');
+        $('.instructions-link').css('color', '#FFFFFF');
+    });
+    
+    $(window).scroll(function() {
+       if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+           $('.branching-next').css('background', '#2294f0');
+       }
+    });
+    
+    $(".completed-activity").hide();
+    
+    H5P.externalDispatcher.on('xAPI', function(event){
+        if (event.getScore() === event.getMaxScore() && event.getMaxScore() > 0){
+            console.log(event);
+            console.log(event.getScore());
+            console.log(event.setActor());
+
+            $(".completed-activity").fadeIn("slow");
+            $('.branching-next').css('background', '#2294f0');
+            setTimeout(function () {
+                $(".completed-activity").fadeOut("slow");
+                $('.branching-next').css('background', '#444');
+            }, 8000);
+        }
+    });
+</script>
+    </body>
+</html>
