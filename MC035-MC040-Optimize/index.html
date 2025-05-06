@@ -41,7 +41,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <script src="slick-master/slick/slick.js"></script>
         <script>
-            function initMap() {
+function initMap() {
             var styledMapType = new google.maps.StyledMapType(
                 [
                     {
@@ -243,30 +243,33 @@
                 var truckService = new google.maps.DirectionsService;
                 var truckRenderer = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "#2196F3", strokeWeight: 5 } });
                 
-                var mapLNGPASRE = parseFloat(-81.61070927073305); 
-                var mapLATPASRE = parseFloat(42.62431208972535); 
-                var mapZOOMPASRE = parseFloat(11); 
+                var mapLAT = '42.62431208972535';
+                var mapLNG = '-81.61070927073305';
+                var mapZOOM = '11';
+                var mapLNGPASRE = parseFloat(mapLAT); 
+                var mapLATPASRE = parseFloat(mapLNG); 
+                var mapZOOMPASRE = parseFloat(mapZOOM); 
                 
                 var departureLNG = '-79.415168';
                 var departureLAT = '43.641424';
                 var departureHEADING = 'Toronto, Ontario';
                 var departureDESCRIPTION = 'Warehouse A';
-                var departureLNGPASRE = parseFloat(-79.415168); 
-                var departureLATPASRE = parseFloat(43.641424); 
+                var departureLNGPASRE = parseFloat(departureLNG); 
+                var departureLATPASRE = parseFloat(departureLAT); 
                 
                 var arrivalLNG = '-83.25066642061606';
                 var arrivalLAT = '42.24852371362757';
                 var arrivalHEADING = 'Detroit, Michigan';
                 var arrivalDESCRIPTION = 'Warehouse B';
-                var arrivalLNGPASRE = parseFloat(-83.25066642061606);
-                var arrivalLATPASRE = parseFloat(42.24852371362757);
+                var arrivalLNGPASRE = parseFloat(arrivalLNG);
+                var arrivalLATPASRE = parseFloat(arrivalLAT);
                 
-                var truckLNG = '42.62431208972535';
-                var truckLAT = '-81.61070927073305';
+                var truckLNG = '-81.61070927073305';
+                var truckLAT = '42.62431208972535';
                 var truckHEADING = 'Stalled Truck';
-                var truckDESCRIPTION = 'The driver is 2hrs into his trip. His truck has stalled and he needs to know further details to ensure the packages get delivered. ';
-                var truckLNGPASRE = parseFloat(42.62431208972535);
-                var truckLATPASRE = parseFloat(-81.61070927073305);
+                var truckDESCRIPTION = 'The driver is 2hrs into his trip. His truck has stalled and he needs to know further details to ensure the packages get delivered.';
+                var truckLNGPASRE = parseFloat(truckLNG);
+                var truckLATPASRE = parseFloat(truckLAT);
                 
                 var map = new google.maps.Map(document.getElementById('map'), {
                     zoom: mapZOOMPASRE,
