@@ -1,0 +1,767 @@
+
+<!DOCTYPE html>
+
+<html class="no-js">
+	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="common.css">
+        <link rel="stylesheet" href="custom.css">
+        <link rel="stylesheet" href="typography.css">
+        <link rel="stylesheet" href="scanner.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+	<body>
+        <!-- Loader and instructions would be here -->
+        
+        <div class="interactive-content fade-in">
+            <div class="container">
+                <!-- Progress would be here -->
+                <!-- Content would be here -->
+            </div>
+                
+            <div class="dashboard internal-dashboard">
+                <div class="ipad-layout">
+                    <div class="ipad-profile"><i class="far fa-user-circle"></i></div>
+                    <h2 class="ipad-credentials">Welcome, Employee</h2>
+                                        <div class="ipad-navigation"><h2 class="ipad-credentials"></h2>
+                       <ul>
+                           <li><i class="fas fa-compass"></i></li>
+                           <li><i class="fas fa-mail-bulk"></i></li>
+                           <li><i class="fas fa-list-ul"></i></li>
+                           <li><i class="fas fa-globe-americas"></i></li>
+                           <li><i class="fas fa-cog"></i></li>
+                           <li><i class="fas fa-sign-out-alt"></i></li>
+                       </ul>
+                    </div>
+
+                    <div class="ipad-inbox">
+                        <h5 class="ipad-title"> Messages</h5>
+                        <p>You have no current messages...</p>
+                    </div>
+
+                    <div class="ipad-widgets">
+                       <h5 class="ipad-title">Shipment Dashboard</h5>
+                        <div class="table-wrapper">
+                            <table class="mb30">
+                                <tr>
+                                    <th>Origin</th>
+                                    <th>Destination</th>
+                                    <th>Pickup</th>
+                                    <th>Weight</th>
+                                    <th>Distance</th>
+                                    <th>Cargo</th>
+                                </tr>
+                                <tr>
+                                    <td>Toronto, Ontario</td>
+                                    <td>Michigan, Detriot</td>
+                                    <td>02/10</td>
+                                    <td>TL - 43000 lbs</td>
+                                    <td>393.7 km</td>
+                                    <th>Lumber</th>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="ipad-new-items dashboard-map">
+                            <div class="map-legend">
+                                <a id="Departure" class="legend-item"><i class="fas fa-dolly"></i> Departure</a>
+                                <a id="Arrival" class="legend-item"><i class="fas fa-info-circle"></i> Arrival</a>
+                                <a id="RouteA" class="legend-item"><i class="fas fa-map-signs"></i> Route A</a>
+                                <a id="RouteB" class="legend-item"><i class="fas fa-map-signs"></i> Route B</a>
+                                <a id="Issue" class="legend-item"><i class="fas fa-exclamation-triangle"></i> Construction</a>
+                                <a id="Gas" class="legend-item"><i class="fas fa-gas-pump"></i> Gas Stations</a>
+                            </div>
+                            <div id="map"></div>
+                        </div>
+
+                        <div class="flex-collection ipad-new-items" style="background: rgb(255 255 255 / 8%);">
+                            <div class="dashboard-driver flex-4">
+                               <div class="driver-content">
+                                    <img src="driver-d.png" width="100%" alt="driver D">
+                                    <div class="identity-details">
+                                       <p class="mb0"><strong>Penelope Ashton</strong></p>
+                                        <p>Trenton, Ontario</p>
+                                        <p>Shift: 06:50:01</p>
+                                        <div class="progress"><div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div></div>
+                                        <p><span class="approved">International Travel <i class="fas fa-check-circle"></i></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dashboard-driver flex-4">
+                               <div class="driver-content">
+                                    <img src="driver-b.png" width="100%" alt="driver B">
+                                    <div class="identity-details">
+                                       <p class="mb0"><strong>Anthony Roberts</strong></p>
+                                        <p>Toronto, Ontario</p>
+                                        <p>Shift: 00:00:03</p>
+                                        <div class="progress"><div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dashboard-driver flex-4">
+                                <div class="driver-content">
+                                    <img src="driver-c.png" width="100%" alt="driver C">
+                                    <div class="identity-details">
+                                       <p class="mb0"><strong>David Williams</strong></p>
+                                        <p>Toronto, Ontario</p>
+                                        <p>Shift: 00:01:05</p>
+                                        <div class="progress"><div class="progress-bar" role="progressbar" style="width: 5%" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div></div>
+                                        <p><span class="approved">International Travel <i class="fas fa-check-circle"></i></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dashboard-driver flex-4">
+                                <div class="driver-content">
+                                    <img src="driver-a.png" width="100%" alt="driver A">
+                                    <div class="identity-details">
+                                        <p class="mb0"><strong>Elijah Johnson</strong></p>
+                                        <p>Ottawa, Ontario</p>
+                                        <p>Shift: 10:00:04</p>
+                                        <div class="progress"><div class="progress-bar" role="progressbar" style="width: 76%" aria-valuenow="76" aria-valuemin="0" aria-valuemax="100"></div></div>
+                                        <p><span class="approved">International Travel <i class="fas fa-check-circle"></i></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slider2 regular mb30">
+                           <div class="slide">
+                                <img class="mb30" src="van-a.svg" height="150px" alt="truck A">
+                                <div class="identity-details">
+                                    <p><strong>53’ Dry Vans</strong></p>
+                                    <p>450 lbs</p>
+                                    <p>Premium</p>
+                                </div>
+                           </div>
+                           <div class="slide">
+                                <img class="mb30" src="van-a.svg" height="150px" alt="truck B">
+                                <div class="identity-details">
+                                    <p><strong>48’ Dry Vans</strong></p>
+                                    <p>350 lbs</p>
+                                    <p>Regular</p>
+                                </div>
+                           </div>
+                           <div class="slide">
+                                <img class="mb30" src="truck-a.svg" height="150px" alt="truck C">
+                                <div class="identity-details">
+                                    <p><strong>Flatbeds/Step Decks</strong></p>
+                                    <p>45800 lbs</p>
+                                    <p>Diesel</p>
+                                </div>
+                           </div>
+                           <div class="slide">
+                                <img class="mb30" src="truck-a.svg" height="150px" alt="truck D">
+                                <div class="identity-details">
+                                    <p><strong>Straight Trucks with Liftgates</strong></p>
+                                    <p>41100 lbs</p>
+                                    <p>Diesel</p>
+                                </div>
+                           </div>
+                           <div class="slide">
+                                <img class="mb30" src="truck-a.svg" height="150px" alt="truck D">
+                                <div class="identity-details">
+                                    <p><strong>PUP (28′ – 40′ Trailers)</strong></p>
+                                    <p>41200 lbs</p>
+                                    <p>Diesel</p>
+                                </div>
+                           </div>
+                           <div class="slide">
+                                <img class="mb30" src="van-a.svg" height="150px" alt="truck D">
+                                <div class="identity-details">
+                                    <p><strong>Refrigerated (Temperature Controlled) Vans</strong></p>
+                                    <p>200 lbs</p>
+                                    <p>Diesel</p>
+                                </div>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+           
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <script src="jquery.min.js"></script>
+        <!-- script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js" integrity="sha512-BqNYFBAzGfZDnIWSAEGZSD/QFKeVxms2dIBPfw11gZubWwKUjEgmFUtUls8vZ6xTRZN/jaXGHD/ZaxD9+fDo0A==" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8EOwtkXX5koPgCItK4zKvxSSKSQCwIgQ&callback=initMap"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="slick-master/slick/slick.js"></script>
+        <script>
+            function initMap() {
+            var styledMapType = new google.maps.StyledMapType(
+                [
+                    {
+                        "featureType": "water",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#000000"
+                            },
+                            {
+                                "lightness": 17
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "landscape",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#000000"
+                            },
+                            {
+                                "lightness": 20
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.highway",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#000000"
+                            },
+                            {
+                                "lightness": 17
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.highway",
+                        "elementType": "geometry.stroke",
+                        "stylers": [
+                            {
+                                "color": "#000000"
+                            },
+                            {
+                                "lightness": 29
+                            },
+                            {
+                                "weight": 0.2
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.arterial",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#000000"
+                            },
+                            {
+                                "lightness": 18
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "road.local",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#000000"
+                            },
+                            {
+                                "lightness": 16
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#000000"
+                            },
+                            {
+                                "lightness": 21
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "poi.park",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#000000"
+                            },
+                            {
+                                "lightness": 21
+                            }
+                        ]
+                    },
+                    {
+                        "elementType": "labels.text.stroke",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            },
+                            {
+                                "color": "#000000"
+                            },
+                            {
+                                "lightness": 16
+                            }
+                        ]
+                    },
+                    {
+                        "elementType": "labels.text.fill",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            },
+                            {
+                                "saturation": 36
+                            },
+                            {
+                                "color": "#000000"
+                            },
+                            {
+                                "lightness": 40
+                            }
+                        ]
+                    },
+                    {
+                        "elementType": "labels.icon",
+                        "stylers": [
+                            {
+                                "visibility": "off"
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "transit",
+                        "elementType": "geometry",
+                        "stylers": [
+                            {
+                                "color": "#000000"
+                            },
+                            {
+                                "lightness": 19
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative",
+                        "elementType": "geometry.fill",
+                        "stylers": [
+                            {
+                                "color": "#000000"
+                            },
+                            {
+                                "lightness": 20
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative",
+                        "elementType": "geometry.stroke",
+                        "stylers": [
+                            {
+                                "color": "#000000"
+                            },
+                            {
+                                "lightness": 17
+                            },
+                            {
+                                "weight": 1.2
+                            }
+                        ]
+                    },
+                    {
+                        "featureType": "administrative.country",
+                        "elementType": "geometry.stroke",
+                        "stylers": [
+                            {
+                                "color": "#000000"
+                            },
+                            {
+                                "lightness": 17
+                            },
+                            {
+                                "weight": 1.2
+                            }
+                        ]
+                    }
+                ],{name: 'Styled Map'});
+
+                var directionsService = new google.maps.DirectionsService;
+                var directionsRenderer = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "#2196F3", strokeWeight: 5, strokeOpacity: 0.3 } });
+                
+                var detourService = new google.maps.DirectionsService;
+                var detourRenderer = new google.maps.DirectionsRenderer({ polylineOptions: { strokeColor: "#FFFFFF", strokeWeight: 5, strokeOpacity: 0.3 } });
+                
+                var mapLNG = '-79.415168';
+                var mapLAT = '43.641424';
+                var mapZOOM = '9';
+                var mapLNGPASRE = parseFloat(mapLNG); 
+                var mapLATPASRE = parseFloat(mapLAT); 
+                var mapZOOMPASRE = parseFloat(mapZOOM); 
+                
+                var departureLNG = '-79.415168';
+                var departureLAT = '43.641424';
+                var departureHEADING = 'Toronto, Ontario';
+                var departureDESCRIPTION = 'Warehouse A';
+                var departureLNGPASRE = parseFloat(departureLNG); 
+                var departureLATPASRE = parseFloat(departureLAT); 
+                
+                var arrivalLNG = '-83.25066642061606';
+                var arrivalLAT = '42.24852371362757';
+                var arrivalHEADING = 'Detroit, Michigan';
+                var arrivalDESCRIPTION = 'Warehouse B';
+                var arrivalLNGPASRE = parseFloat(arrivalLNG);
+                var arrivalLATPASRE = parseFloat(arrivalLAT);
+                
+                var routeALNG = '-79.96457406253272';
+                var routeALAT = '43.219880457534316';
+                var routeAHEADING = 'Route A';
+                var routeADESCRIPTION = 'via ON-403 W';
+                var routeALNGPASRE = parseFloat(routeALNG);
+                var routeALATPASRE = parseFloat(routeALAT);
+                
+                var routeBLNG = '-80.2306454352538';
+                var routeBLAT = '43.43744520154605';
+                var routeBHEADING = 'Route B';
+                var routeBDESCRIPTION = 'via ON-401 W';
+                var routeBLNGPASRE = parseFloat(routeBLNG);
+                var routeBLATPASRE = parseFloat(routeBLAT);
+                
+                var detourLNG = '-79.37747172374502';
+                var detourLAT = '43.643999119421856';
+                var detourLNGPASRE = parseFloat(detourLNG);
+                var detourLATPASRE = parseFloat(detourLAT);
+                
+                var midLNG = '-80.57148869008995';
+                var midLAT = '43.250301558109875';
+                var midLNGPASRE = parseFloat(midLNG);
+                var midLATPASRE = parseFloat(midLAT);
+                
+                var gasALNG = '-83.04527902113091';
+                var gasALAT = '42.311698547193856';
+                var gasAHEADING = 'Petro Canada';
+                var gasADESCRIPTION = 'Regular (87 Octane) $1.28L<br>Premium (91 Octane) $1.59L<br>Diesel $1.09L';
+                var gasALNGPASRE = parseFloat(gasALNG);
+                var gasALATPASRE = parseFloat(gasALAT);
+                
+                var gasBLNG = '-83.03939524070405';
+                var gasBLAT = '42.315048180794584';
+                var gasBHEADING = 'Esso';
+                var gasBDESCRIPTION = 'Regular (87 Octane) $1.33L<br>Premium (91 Octane) $1.64L<br>Diesel $1.12L';
+                var gasBLNGPASRE = parseFloat(gasBLNG);
+                var gasBLATPASRE = parseFloat(gasBLAT);
+                
+                var issueLNG = '-80.423073';
+                var issueLAT = '43.151262';
+                var issueHEADING = 'Road Construction';
+                var issueDESCRIPTION = 'Expect 20-30 Minute Delays';
+                var issueLNGPASRE = parseFloat(issueLNG);
+                var issueLATPASRE = parseFloat(issueLAT);
+                                
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: mapZOOMPASRE,
+                    center: {lat: mapLATPASRE, lng: mapLNGPASRE},
+                    scrollwheel: false,
+                    disableDefaultUI: true
+                });
+                
+                var icons = {
+                    departure: {
+                       icon: 'info-i_depart.png'  
+                    },
+                    arrival: {
+                       icon: 'info-i_arrival.png'  
+                    },
+                    gas: {
+                       icon: 'info-i_gas.png'  
+                    },
+                    issue: {
+                       icon: 'info-i_issue.png'  
+                    },
+                    route: {
+                       icon: 'info-i_route.png'  
+                    }
+                };
+
+                var features = [
+                    {
+                        position: new google.maps.LatLng(departureLAT, departureLNG),
+                        animation: '',
+                        type: 'departure',
+                        content: '<div class="google-modal">'+'<div id="siteNotice"></div>'+'<h5 id="firstHeading" class="firstHeading">' + departureHEADING + '</h5>' + '<p>' + departureDESCRIPTION + '</p>'
+                    }, {
+                        position: new google.maps.LatLng(arrivalLAT, arrivalLNG),
+                        animation: '',
+                        type: 'arrival',
+                        content: '<div class="google-modal">'+'<div id="siteNotice"></div>'+'<h5 id="firstHeading" class="firstHeading">' + arrivalHEADING + '</h5>' + '<p>' + arrivalDESCRIPTION + '</p>'
+                    }, {
+                        position: new google.maps.LatLng(gasALAT, gasALNG),
+                        animation: '',
+                        type: 'gas',
+                        content: '<div class="google-modal">'+'<div id="siteNotice"></div>'+'<h5 id="firstHeading" class="firstHeading">' + gasAHEADING + '</h5>' + '<p>' + gasADESCRIPTION + '</p>'
+                    }, {
+                        position: new google.maps.LatLng(gasBLAT, gasBLNG),
+                        animation: '',
+                        type: 'gas',
+                        content: '<div class="google-modal">'+'<div id="siteNotice"></div>'+'<h5 id="firstHeading" class="firstHeading">' + gasBHEADING + '</h5>' + '<p>' + gasBDESCRIPTION + '</p>'
+                    }, {
+                        position: new google.maps.LatLng(issueLAT, issueLNG),
+                        animation: '',
+                        type: 'issue',
+                        content: '<div class="google-modal">'+'<div id="siteNotice"></div>'+'<h5 id="firstHeading" class="firstHeading">' + issueHEADING + '</h5>' + '<p>' + issueDESCRIPTION + '</p>'
+                    }, {
+                        position: new google.maps.LatLng(routeALAT, routeALNG),
+                        animation: '',
+                        type: 'route',
+                        content: '<div class="google-modal">'+'<div id="siteNotice"></div>'+'<h5 id="firstHeading" class="firstHeading">' + routeAHEADING + '</h5>' + '<p>' + routeADESCRIPTION + '</p>'
+                    }, {
+                        position: new google.maps.LatLng(routeBLAT, routeBLNG),
+                        animation: '',
+                        type: 'route',
+                        content: '<div class="google-modal">'+'<div id="siteNotice"></div>'+'<h5 id="firstHeading" class="firstHeading">' + routeBHEADING + '</h5>' + '<p>' + routeBDESCRIPTION + '</p>'
+                    }
+                ]; 
+
+                for (var i = 0; i < features.length; i++) {
+                    var marker = new google.maps.Marker({
+                        position: features[i].position,
+                        icon: icons[features[i].type].icon,
+                        animation: features[i].animation,
+                        content: features[i].content,
+                        type: features[i].type,
+                        map: map
+                    });
+                    
+                    var infowindow = new google.maps.InfoWindow();
+                    
+                    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                        return function() {
+                            infowindow.setContent(marker.content);
+                            infowindow.open(map, marker);
+                        }
+                    })(marker, i));
+                };
+                
+                $( "#Issue" ).click(function() {
+                    map.setCenter(new google.maps.LatLng(issueLAT, issueLNG));
+                });
+                
+                $( "#Gas" ).click(function() {
+                    map.setCenter(new google.maps.LatLng(gasALAT, gasALNG));
+                });
+                
+                $( "#Arrival" ).click(function() {
+                    map.setCenter(new google.maps.LatLng(arrivalLAT, arrivalLNG));
+                });
+                
+                $( "#Departure" ).click(function() {
+                    map.setCenter(new google.maps.LatLng(departureLAT, departureLNG));
+                });
+                
+                $( "#RouteA" ).click(function() {
+                    map.setCenter(new google.maps.LatLng(routeALAT, routeALNG));
+                    google.maps.DirectionsRenderer({ polylineOptions: { strokeOpacity: 1 } });
+                });
+                
+                $( "#RouteB" ).click(function() {
+                    map.setCenter(new google.maps.LatLng(routeBLAT, routeBLNG));
+                    google.maps.DirectionsRenderer({ polylineOptions: { strokeOpacity: 1 } });
+                });
+                
+                var routePathCoordinates = [
+                    { lat: departureLATPASRE, lng: departureLNGPASRE},
+                    { lat: arrivalLATPASRE, lng: arrivalLNGPASRE },
+                ];
+                
+                var routePath = new google.maps.Polyline({
+                    path: routePathCoordinates,
+                    geodesic: true,
+                    strokeOpacity: 0
+                });
+                
+                var wayPoints = [];
+                for(j=1;j<routePathCoordinates.length-1;j++){            
+                      wayPoints.push({location: routePathCoordinates[j],
+                                   stopover: true});
+                }
+
+                var request = {
+                    origin: routePathCoordinates[0],
+                    destination: routePathCoordinates[routePathCoordinates.length-1],
+                    waypoints: wayPoints,
+                    travelMode: google.maps.DirectionsTravelMode.DRIVING
+                };
+                
+                directionsService.route(request,function(result, status) {                
+                    if(status == google.maps.DirectionsStatus.OK) {                 
+                          directionsRenderer.setDirections(result);
+                          directionsRenderer.setOptions( { suppressMarkers: true, preserveViewport: true } );
+                    } else { alert("Directions request failed:" + status); }
+                });
+                
+                var detourPathCoordinates = [
+                    { lat: detourLATPASRE, lng: detourLNGPASRE},
+                    { lat: midLATPASRE, lng: midLNGPASRE},
+                    { lat: arrivalLATPASRE, lng: arrivalLNGPASRE },
+                ];
+                
+                var detourPath = new google.maps.Polyline({
+                    path: detourPathCoordinates,
+                    geodesic: true,
+                    strokeOpacity: 0
+                });
+
+                var wayPointsDetour = [];
+                for(j=1;j<detourPathCoordinates.length-1;j++){            
+                      wayPointsDetour.push({location: detourPathCoordinates[j],
+                                   stopover: true});
+                }
+
+                var requestDetour = {
+                    origin: detourPathCoordinates[0],
+                    destination: detourPathCoordinates[detourPathCoordinates.length-1],
+                    waypoints: wayPointsDetour,
+                    travelMode: google.maps.DirectionsTravelMode.DRIVING
+                };
+                
+                detourService.route(requestDetour,function(result, status) {                
+                    if(status == google.maps.DirectionsStatus.OK) {                 
+                          detourRenderer.setDirections(result);
+                          detourRenderer.setOptions( { suppressMarkers: true, preserveViewport: true } );
+                    } else { alert("Directions request failed:" + status); }
+                });
+
+                routePath.setMap(map);
+                detourPath.setMap(map);
+                directionsRenderer.setMap(map);
+                detourRenderer.setMap(map);
+                map.mapTypes.set('styled_map', styledMapType);
+                map.setMapTypeId('styled_map');
+            }
+
+ $(".dashboard-close").hide();
+            
+            $(".dashboard-open").on("click", function(){
+                $(".dashboard").animate({top: "0"});
+                $(".dashboard-close").show();
+                $(this).hide();
+            });
+            
+            $(".dashboard-close").on("click", function(){
+                $(".dashboard").animate({top: "65vh"});
+                $(".dashboard-open").show();
+                $(this).hide();
+            });
+            
+            $('.inbox-items').hide();
+            $('.inbox-items').append('<p>You currently have no messages</p>');
+
+            $(".slider2").slick({
+                dots: true,
+                slidesToShow: 5,
+                slidesToScroll: 1,
+                adaptiveHeight: true,
+                cssEase: 'ease', 
+                responsive: [{
+                    breakpoint: 1450,
+                    settings: {
+                    slidesToShow: 3
+                }
+
+                }, {
+                    breakpoint: 1320,
+                    settings: {
+                    slidesToShow: 3,
+                    dots: true
+                }
+
+                }, {
+                    breakpoint: 700,
+                    settings: "unslick" // destroys slick
+                }]
+            });
+            
+            $('#inboxInstructions').click(function() {
+                $('.activity-nav').fadeIn('slow');
+                $(this).css('color', '#2196f3');
+            });
+
+            $(".load-window").show();
+    $('body').css('height', '100vh');
+    $('body').css('overflow-y', 'hidden');
+    setTimeout(function () {
+        $(".load-window").fadeOut("slow");
+        $('body').css('height', 'auto');
+        $('body').css('overflow-y', 'visible');
+    }, 2000);
+    
+    setTimeout(function () {
+        $('html,body').animate({
+            scrollTop: 0
+        }, 0);
+    }, 1000);
+    
+    window.addEventListener("load", function(){
+      window.dispatchEvent(new Event('resize'));
+    });
+    
+    $('.nav').hide();
+    $('.nav').css('height', '0%');
+    $('#menuClose').hide();
+    
+    $('#menuToggle').click(function() {
+        $('.nav').fadeIn('slow');
+        $(this).hide();
+        $('#menuClose').fadeIn('slow');
+        $('.nav').css('height', '100%');
+    });
+    
+    $('#menuClose').click(function() {
+        $('.nav').fadeOut('fast');
+        $('.nav').css('height', '0%');
+        $(this).hide();
+        $('#menuToggle').fadeIn('slow');
+    });
+    
+    $('.activity-nav').hide();
+    $('.activity-nav.show').show();
+    
+    $('.instructions-link').click(function() {
+        $('.activity-nav').fadeIn('slow');
+        $(this).css('color', '#2196f3');
+    });
+    
+    $('.activity-close').click(function() {
+        $('.activity-nav').fadeOut('fast');
+        $('.instructions-link').css('color', '#FFFFFF');
+    });
+    
+    $(window).scroll(function() {
+       if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+           $('.branching-next').css('background', '#2294f0');
+       }
+    });
+    
+    $(".completed-activity").hide();
+    
+    H5P.externalDispatcher.on('xAPI', function(event){
+        if (event.getScore() === event.getMaxScore() && event.getMaxScore() > 0){
+            console.log(event);
+            console.log(event.getScore());
+            console.log(event.setActor());
+
+            $(".completed-activity").fadeIn("slow");
+            $('.branching-next').css('background', '#2294f0');
+            setTimeout(function () {
+                $(".completed-activity").fadeOut("slow");
+                $('.branching-next').css('background', '#444');
+            }, 8000);
+        }
+    });
+</script>
+    </body>
+</html>
