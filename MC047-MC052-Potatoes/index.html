@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+
+<html class="no-js">
+	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="common.css">
+        <link rel="stylesheet" href="typography.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+	<body>
+        <!-- Loader and instructions would be here -->
+        
+        <div class="interactive-content fade-in">
+            <div class="container">
+                <!-- Progress would be here -->
+                <!-- Content would be here -->
+            </div>
+                
+            <div class="dashboard internal-dashboard">
+                <div class="ipad-layout">
+                    <div class="ipad-profile"><i class="far fa-user-circle"></i></div>
+                    <h2 class="ipad-credentials">Welcome, Employee</h2>
+                   <div class="ipad-navigation"><h2 class="ipad-credentials"></h2>
+                       <ul>
+                           <li><i class="fas fa-compass"></i></li>
+                           <li><i class="fas fa-mail-bulk"></i></li>
+                           <li><i class="fas fa-list-ul"></i></li>
+                           <li><i class="fas fa-globe-americas"></i></li>
+                           <li><i class="fas fa-cog"></i></li>
+                           <li><i class="fas fa-sign-out-alt"></i></li>
+                       </ul>
+                    </div>
+
+                    <div class="ipad-inbox">
+                        <h5 class="ipad-title"> Messages</h5>
+                        <p>You have no current messages...</p>
+                    </div>
+
+                    <div class="ipad-widgets flex-collection">
+                        <h5 class="ipad-title">French Fries</h5>
+                        <div class="flex-collection">
+                            <div class="ipad-graphic flex-2">
+                                <h5 class="ipad-title">Inventory to Sales</h5>
+                                <canvas id="chartA" width="100%" height="120"></canvas>
+                            </div>
+                            <div class="ipad-graphic flex-2">
+                                <h5 class="ipad-title">Inventory Turnover</h5>
+                                <canvas id="productChart" width="100%" height="120"></canvas>
+                            </div>
+                            <div class="ipad-graphic flex-2">
+                                <h5 class="ipad-title">Carrying Costs (%)</h5>
+                                <canvas id="storageChart" width="100%" height="120"></canvas>
+                            </div>
+                            <div class="ipad-graphic flex-2">
+                                <h5 class="ipad-title">Out of Stock (%)</h5>
+                                <canvas id="kpiChart" width="100%" height="120"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<script src="jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        <script>
+            var ctxA = document.getElementById('productChart').getContext('2d');
+            var ctxB = document.getElementById('storageChart').getContext('2d');
+            var ctxC = document.getElementById('kpiChart').getContext('2d');
+            var ctxD = document.getElementById('chartA').getContext('2d');
+            Chart.defaults.global.defaultFontColor = 'rgba(255,255,255,0.2)';
+            var produceChart = new Chart(ctxA, {
+                type: 'horizontalBar',
+                responsive: true,
+                data: {
+                    labels: ['2021', '2020', '2019', '2018', '2017', '2016'],
+                    datasets: [{
+                        label: '# of Products',
+                        data: [120, 190, 230, 250, 150, 130],
+                        borderColor: 'rgba(0, 188, 212, 1)',
+                        borderWidth: 1,
+                        backgroundColor: [
+                            'rgba(0, 188, 212, 0.6)',
+                            'rgba(0, 188, 212, 0.6)',
+                            'rgba(0, 188, 212, 0.6)',
+                            'rgba(0, 188, 212, 0.6)',
+                            'rgba(0, 188, 212, 0.6)',
+                            'rgba(0, 188, 212, 0.6)'
+                        ]
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            barPercentage: 0.2,
+                            stacked: true,
+                            ticks: {
+                                beginAtZero: true,
+                            }
+                        }],
+                        yAxes: [{
+                            barPercentage: 0.2,
+                            stacked: true
+                        }]
+                    },
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            fontColor: 'white'
+                        }
+                    },
+                    tooltips: {
+                        backgroundColor: 'rgba(255,255,255,0.2)'
+                    }
+                }
+            });
+            var storageChart = new Chart(ctxB, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Risk', 'Freight', 'Service', 'Storage', 'Admin'],
+                    datasets: [{
+                        label: '%',
+                        data: [39, 22, 17, 11, 5],
+                        backgroundColor: [
+                            'rgb(71, 91, 178, 0.6)',
+                            'rgba(40, 167, 69, 0.6)',
+                            'rgba(0, 123, 255, 0.6)',
+                            'rgba(103, 58, 183, 0.6)',
+                            'rgba(63, 81, 181, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgb(71, 91, 178, 1)',
+                            'rgba(40, 167, 69, 1)',
+                            'rgba(0, 123, 255, 1)',
+                            'rgba(103, 58, 183, 1)',
+                            'rgba(63, 81, 181, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    cutoutPercentage: 80,
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            fontColor: 'white'
+                        }
+                    },
+                    tooltips: {
+                        backgroundColor: 'rgba(255,255,255,0.2)'
+                    }
+                }
+            });
+            var kpiChart = new Chart(ctxC, {
+                type: 'polarArea',
+                responsive: true,
+                data: {
+                    labels: ['2021', '2020', '2019', '2018', '2017', '2016'],
+                    datasets: [{
+                        data: [12, 19, 23, 25, 15, 13],
+                        borderColor: [
+                            'rgba(244, 67, 54, 1)',
+                            'rgba(233, 30, 99, 1)',
+                            'rgba(156, 39, 176, 1)',
+                            'rgba(103, 58, 183, 1)',
+                            'rgba(63, 81, 181, 1)',
+                            'rgba(33, 150, 243, 1)'
+                        ],
+                        borderWidth: 1,
+                        backgroundColor: [
+                            'rgba(244, 67, 54, 0.6)',
+                            'rgba(233, 30, 99, 0.6)',
+                            'rgba(156, 39, 176, 0.6)',
+                            'rgba(103, 58, 183, 0.6)',
+                            'rgba(63, 81, 181, 0.6)',
+                            'rgba(33, 150, 243, 0.6)'
+                        ]
+                    }]
+                },
+                options: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            fontColor: 'white'
+                        }
+                    },
+                    tooltips: {
+                        backgroundColor: 'rgba(255,255,255,0.2)'
+                    },
+                    scale: {
+                        ticks: {
+                          backdropColor: 'rgba(255, 255, 255, 0)'
+                        }
+                    }
+                },
+                animation:{
+                    animateScale:true
+                },
+            });
+            var chartD = new Chart(ctxD, {
+                type: 'line',
+                data: {
+                    labels: ['2015', '2016', '2017', '2018', '2019', '2020'],
+                    datasets: [{
+                        label: '# Sold',
+                        data: [612, 719, 833, 615, 742, 1323],
+                        backgroundColor: [
+                            'rgba(0, 123, 255, 0.6)',
+                            'rgba(0, 123, 255, 0.6)',
+                            'rgba(0, 123, 255, 0.6)',
+                            'rgba(0, 123, 255, 0.6)',
+                            'rgba(0, 123, 255, 0.6)',
+                            'rgba(0, 123, 255, 0.6)'
+                        ],
+                        borderColor: [
+                            'rgba(0, 123, 255, 1)',
+                            'rgba(0, 123, 255, 1)',
+                            'rgba(0, 123, 255, 1)',
+                            'rgba(0, 123, 255, 1)',
+                            'rgba(0, 123, 255, 1)',
+                            'rgba(0, 123, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        </script>
+        <script>
+            $( '.t2, .t3, .t4, .t5' ).hide();
+    
+            $('.tab1').click(function() {
+                $('.t1').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t2').hide();
+                $('.t3').hide();
+                $('.t4').hide();
+                $('.t5').hide();
+                $('.t6').hide();
+                $('.t7').hide();
+                $( '.tab2, .tab3, .tab4, .tab5' ).removeClass('active');
+
+            });
+
+            $('.tab2').click(function() {
+                $('.t2').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t1').hide();
+                $('.t3').hide();
+                $('.t4').hide();
+                $('.t5').hide();
+                $('.t6').hide();
+                $('.t7').hide();
+                $( '.tab1, .tab3, .tab4, .tab5' ).removeClass('active');
+
+            });
+
+            $('.tab3').click(function() {
+                $('.t3').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t2').hide();
+                $('.t1').hide();
+                $('.t4').hide();
+                $('.t5').hide();
+                $('.t6').hide();
+                $('.t7').hide();
+                $( '.tab2, .tab1, .tab4, .tab5' ).removeClass('active');
+
+            });
+
+            $('.tab4').click(function() {
+                $('.t4').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t2').hide();
+                $('.t3').hide();
+                $('.t1').hide();
+                $('.t5').hide();
+                $('.t6').hide();
+                $('.t7').hide();
+                $( '.tab2, .tab3, .tab1, .tab5' ).removeClass('active');
+            });
+
+            $('.tab5').click(function() {
+                $('.t5').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t2').hide();
+                $('.t3').hide();
+                $('.t4').hide();
+                $('.t1').hide();
+                $('.t6').hide();
+                $('.t7').hide();
+                $( '.tab2, .tab3, .tab4, .tab1' ).removeClass('active');
+            });
+        </script>
+    </body>
+</html>
