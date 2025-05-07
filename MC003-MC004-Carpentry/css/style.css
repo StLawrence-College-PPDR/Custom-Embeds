@@ -1114,7 +1114,7 @@ body.modal-open {
 
 .slick-slider .draggable {
     width: inherit;
-    height: inherit;
+    height: auto !important;
     position: relative !important;
 }
 
