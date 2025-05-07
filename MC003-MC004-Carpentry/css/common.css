@@ -1,3 +1,6 @@
+@import url(../js/slick-master/slick/slick-theme.css);
+@import url(../js/slick-master/slick/slick.css);
+
 @-ms-viewport {
 	width: device-width;
 }
