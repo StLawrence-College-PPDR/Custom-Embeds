@@ -1,0 +1,618 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Carpentry Hand Tools</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="js/ie/html5shiv.js"></script><![endif]-->
+		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous"> 
+		
+		<link rel="stylesheet" href="../css/style.css">
+		<link rel="stylesheet" href="../css/common.css" />
+		<link rel="stylesheet" href="../css/typography.css" />
+		<link rel="stylesheet" href="../css/imperial.css">
+		
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+	</head>
+	<body>
+        <div class="interactive-content fade-in">
+            <div class="container">
+                <blockquote class="document">
+                   <div class="flex-collection mb30">
+                        <div class="flex-2">
+                            <p class="mb0"><strong>Company Name</strong></p>
+                            <p class="mb0">123 Company Address Drive</p>
+                            <p class="mb0">Company City, Prov. Postal Code</p>
+                            <p class="mb0">123-123-123</p>
+                            <p class="mb0">email@domain.ca</p>
+                        </div>
+                        <div class="flex-2">
+                            <img src="../img/image-6.svg" class="logo" aria-hidden="true">
+                        </div>
+                    </div>
+                    <h5>Work Order #120039C</h5>
+                    <table class="has-fixed-layout mb30">
+                        <thead>
+                            <tr>
+                                <th>Work Description</th>
+                                <th>Additional Comments</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>For this project you will be building a shelf bracket using traditional wood joinery. Careful attention must be made to ensure the parts fit together tightly for the connections to be strong.</td>
+                                <td><p>These brackets are made out of solid wood and should be able to be held together without fasteners (no screws or nails).</p>
+                                
+                                <p>Note: 8/4 refers to how thick the material is when bought from a sawmill. This means it is 8 x ¼” thick which = 2” thick. We start with thicker material because in the process of making it square (90º) we will loose some thickness.</p></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h5>Hardware and Lumber</h5>
+                    <table class="has-fixed-layout mb30">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>8/4" x 6" x 2’ Poplar (typically 8’ long)</td><td>1</td></tr>
+                            <tr><td>3/8” dowel (approximately 3’ long)</td><td>1</td></tr>
+                            <tr><td>Wood glue</td><td>1</td></tr>
+                        </tbody>
+                    </table>
+                    
+                    <h5>Blueprint</h5>
+                        
+                    <iframe src="https://learningatslc.h5p.com/content/1291956106029602698/embed" width="1089" height="637" frameborder="0" allowfullscreen="allowfullscreen" allow="autoplay *; geolocation *; microphone *; camera *; midi *; encrypted-media *" aria-label="Carpentry - Blueprint Shelf Bracket (WOC)"></iframe><script src="https://learningatslc.h5p.com/js/h5p-resizer.js" charset="UTF-8"></script>
+                </blockquote>
+            </div>
+        </div>
+
+        
+		<!-- Scripts -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script>
+            //------------------------------------------ Tabs ---//
+            $('.tab6').hide();
+            $('.tab4').hide();
+            $('.tab1').hide();
+            $('.tab8').hide();
+            $('.feedback-notification-correct').hide();
+            $('.feedback-notification-incorrect').hide();
+
+            $( '.t1, .t2, .t4, .t5, .t6, .t7, .t8' ).show(0).delay( 1000 ).hide(0);
+
+            $('.tab1').click(function() {
+                $('.t1').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t2').hide();
+                $('.t3').hide();
+                $('.t4').hide();
+                $('.t5').hide();
+                $('.t6').hide();
+                $('.t7').hide();
+                $('.t8').hide();
+                $( '.tab2, .tab3, .tab4, .tab5, .tab6, .tab7, .tab8' ).removeClass('active');
+                $('.feedback-notification-correct').hide();
+                $('.feedback-notification-incorrect').hide();
+                $('.angle-left-check').show();
+                $('.tab4').hide();
+            });
+
+            $('.tab2').click(function() {
+                $('.t2').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t1').hide();
+                $('.t3').hide();
+                $('.t4').hide();
+                $('.t5').hide();
+                $('.t6').hide();
+                $('.t7').hide();
+                $('.t8').hide();
+                $( '.tab1, .tab3, .tab4, .tab5, .tab6, .tab7, .tab8' ).removeClass('active');
+                $('.feedback-notification-correct').hide();
+                $('.feedback-notification-incorrect').hide();
+            });
+
+            $('.tab3').click(function() {
+                $('.t3').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t3').addClass('active');
+                $('.t2').hide();
+                $('.t1').hide();
+                $('.t4').hide();
+                $('.t5').hide();
+                $('.t6').hide();
+                $('.t7').hide();
+                $('.t8').hide();
+                $( '.tab2, .tab1, .tab4, .tab5, .tab6, .tab7, .tab8' ).removeClass('active');
+                $('.feedback-notification-correct').hide();
+                $('.feedback-notification-incorrect').hide();
+            });
+
+            $('.tab4').click(function() {
+                $('.t4').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t2').hide();
+                $('.t3').hide();
+                $('.t1').hide();
+                $('.t5').hide();
+                $('.t6').hide();
+                $('.t7').hide();
+                $('.t8').hide();
+                $( '.tab2, .tab3, .tab1, .tab5, .tab6, .tab7, .tab8' ).removeClass('active');
+                $('.feedback-notification-correct').hide();
+                $('.feedback-notification-incorrect').hide();
+                $('.tab4').hide();
+                $('.noangle-check').show();
+
+                if($('.lumber-collection .lumber').length === $('.lumber-collection .lumber.selected').length){
+                  $('.tab6').fadeIn('fast');
+                } else{
+                }
+            });
+
+            $('.tabMaterials').click(function() {
+                $('.t4').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t2').hide();
+                $('.t3').hide();
+                $('.t1').hide();
+                $('.t5').hide();
+                $('.t6').hide();
+                $('.t7').hide();
+                $('.t8').hide();
+                $( '.tab2, .tab3, .tab1, .tab5, .tab6, .tab7, .tab8' ).removeClass('active');
+                $('.feedback-notification-correct').hide();
+                $('.feedback-notification-incorrect').hide();
+                $('.tab4').hide();
+            });
+
+            $('.tab5').click(function() {
+                $('.t5').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t2').hide();
+                $('.t3').hide();
+                $('.t4').hide();
+                $('.t1').hide();
+                $('.t6').hide();
+                $('.t7').hide();
+                $('.t8').hide();
+                $( '.tab2, .tab3, .tab4, .tab1, .tab6, .tab7, .tab8' ).removeClass('active');
+                $('.feedback-notification-correct').hide();
+                $('.feedback-notification-incorrect').hide();
+            });
+
+            $('.tab7').click(function() {
+                $('.t7').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t2').hide();
+                $('.t3').hide();
+                $('.t4').hide();
+                $('.t1').hide();
+                $('.t5').hide();
+                $('.t6').hide();
+                $('.t8').hide();
+                $( '.tab2, .tab3, .tab4, .tab1, .tab5, .tab6, .tab8' ).removeClass('active');
+                $('.feedback-notification-correct').hide();
+                $('.feedback-notification-incorrect').hide();
+            });
+
+            $('.tab8').click(function() {
+                $('.t8').fadeIn('slow');
+                $(this).addClass('active');
+                $('.t2').hide();
+                $('.t3').hide();
+                $('.t4').hide();
+                $('.t1').hide();
+                $('.t5').hide();
+                $('.t7').hide();
+                $('.t6').hide();
+                $( '.tab2, .tab3, .tab4, .tab1, .tab5, .tab7, .tab6' ).removeClass('active');
+                $('.feedback-notification-correct').hide();
+                $('.feedback-notification-incorrect').hide();
+                $('.angle-right-check').show();
+                $('.tab1').hide();
+            });
+
+            //------------------------------------------ Speed Square ---//
+
+            $('controls-counter').css('visibility', 'hidden');
+
+            var degreesStartRight = 0;
+            var degreesStartLeft = 0;
+            var degreesRight = 0;
+            var degreesLeft = 0;
+            var degreesTickRight = 0;
+            var degreesTickLeft = 0;
+            var degreesChangedRight = degreesStartRight - degreesTickRight;
+            var degreesChangedLeft = degreesStartLeft - degreesTickLeft;
+
+            function updateStatusRight(){
+                $('.control-amount-right').text(degreesChangedRight); 
+            }
+            updateStatusRight(); 
+
+            $('.plus-right').click(function rotateMeRight(e) {
+
+                degreesRight += 5;
+                degreesStartRight = 0;
+                degreesTickRight += -5;
+                degreesChangedRight = degreesStartRight + degreesTickRight;
+
+                $('.speed-square-right').css({
+
+                  'transform': 'rotate(' + degreesRight + 'deg)',
+                  '-ms-transform': 'rotate(' + degreesRight + 'deg)',
+                  '-moz-transform': 'rotate(' + degreesRight + 'deg)',
+                  '-webkit-transform': 'rotate(' + degreesRight + 'deg)',
+                  '-o-transform': 'rotate(' + degreesRight + 'deg)'
+                });
+
+                updateStatusRight();
+            })
+
+            $('.minus-right').click(function rotateMeRight(e) {
+
+                degreesRight += -5;
+                degreesStartRight = 0;
+                degreesTickRight += 5;
+                degreesChangedRight = degreesStartRight + degreesTickRight;
+
+                $('.speed-square-right').css({
+
+                  'transform': 'rotate(' + degreesRight + 'deg)',
+                  '-ms-transform': 'rotate(' + degreesRight + 'deg)',
+                  '-moz-transform': 'rotate(' + degreesRight + 'deg)',
+                  '-webkit-transform': 'rotate(' + degreesRight + 'deg)',
+                  '-o-transform': 'rotate(' + degreesRight + 'deg)'
+                });
+
+                updateStatusRight();
+            })
+
+            function updateStatusLeft(){
+                $('.control-amount-left').text(degreesChangedLeft); 
+            }
+            updateStatusLeft(); 
+
+            $('.plus-left').click(function rotateMeLeft(e) {
+
+                degreesLeft += 5;
+                degreesStartLeft = 0;
+                degreesTickLeft += -5;
+                degreesChangedLeft = degreesStartLeft + degreesTickLeft;
+
+                $('.speed-square-left').css({
+
+                  'transform': 'rotate(' + degreesLeft + 'deg)',
+                  '-ms-transform': 'rotate(' + degreesLeft + 'deg)',
+                  '-moz-transform': 'rotate(' + degreesLeft + 'deg)',
+                  '-webkit-transform': 'rotate(' + degreesLeft + 'deg)',
+                  '-o-transform': 'rotate(' + degreesLeft + 'deg)'
+                });
+
+                updateStatusLeft();
+            })
+
+            $('.minus-left').click(function rotateMeLeft(e) {
+
+                degreesLeft += -5;
+                degreesStartLeft = 0;
+                degreesTickLeft += 5;
+                degreesChangedLeft = degreesStartLeft + degreesTickLeft;
+
+                $('.speed-square-left').css({
+
+                  'transform': 'rotate(' + degreesLeft + 'deg)',
+                  '-ms-transform': 'rotate(' + degreesLeft + 'deg)',
+                  '-moz-transform': 'rotate(' + degreesLeft + 'deg)',
+                  '-webkit-transform': 'rotate(' + degreesLeft + 'deg)',
+                  '-o-transform': 'rotate(' + degreesLeft + 'deg)'
+                });
+
+                updateStatusLeft();
+            })
+
+            $('.lum1').click(function() {
+                $(this).addClass('active');
+                $('.tab4').fadeIn('fast');
+                $( '.lum2, .lum3, .lum4, .lum5, .lum6' ).removeClass('active');
+                console.log('lum1');
+            });
+
+            $('.lum2').click(function() {
+                $(this).addClass('active');
+                $('.tab4').fadeIn('fast');
+                $( '.lum1, .lum3, .lum4, .lum5, .lum6' ).removeClass('active');
+                console.log('lum2');
+            });
+
+            $('.lum3').click(function() {
+                $(this).addClass('active');
+                $('.tab4').fadeIn('fast');
+                $( '.lum2, .lum1, .lum4, .lum5, .lum6' ).removeClass('active');
+                console.log('lum3');
+            });
+
+            $('.lum4').click(function() {
+                $(this).addClass('active');
+                $('.tab4').fadeIn('fast');
+                $( '.lum2, .lum3, .lum1, .lum5, .lum6' ).removeClass('active');
+                console.log('lum4');
+            });
+
+            $('.lum5').click(function() {
+                $(this).addClass('active');
+                $('.tab4').fadeIn('fast');
+                $( '.lum2, .lum3, .lum4, .lum1, .lum6' ).removeClass('active');
+                console.log('lum5');
+            });
+
+            $('.lum6').click(function() {
+                $(this).addClass('active');
+                $('.tab4').fadeIn('fast');
+                $( '.lum2, .lum3, .lum4, .lum5, .lum1' ).removeClass('active');
+                console.log('lum6');
+            });
+
+            $('.complete-measure').hide();
+
+            $('.lumber').click(function() {
+                var leftend = $(this).attr('data-angle-left');
+                var rightend = $(this).attr('data-angle-right');
+                var lengthimperial = $(this).attr('data-length-imperial');
+                var lengthmetric = $(this).attr('data-length-metric');
+                var name = $(this).attr('data-name');
+
+                $(this).addClass('selected');
+                $(this).find('.lumber-material').css('opacity', 0.1);
+                $(this).find('.complete-measure').show();
+
+                $("body").find('.piece-name').text(name);
+                $("body").find('.selected-wood').attr('data-selected-imperial', lengthimperial);
+                $("body").find('.selected-wood').attr('data-selected-metric', lengthmetric);
+                $("body").find('.selected-wood').attr('data-selected-left', leftend);
+                $("body").find('.selected-wood').attr('data-selected-right', rightend);
+            });
+
+            $('.measurement-check').click(function() {
+                var imperialSelect = $('.selected-wood').attr('data-selected-imperial');
+                var metricSelect = $('.selected-wood').attr('data-selected-metric');
+                var tapeSelect = $('.tape__num').text();
+
+                if (tapeSelect === imperialSelect || tapeSelect === metricSelect){
+                    $('.feedback-notification-correct').fadeIn('slow');
+                    $('.feedback-notification-incorrect').fadeOut('fast');
+                    $('.tab8').fadeIn('slow');
+                    $('.tab4').hide();
+                    $(this).hide();
+                } else {
+                    $('.feedback-notification-incorrect').fadeIn('slow');
+                    $('.feedback-notification-correct').fadeOut('fast');
+                }
+            });
+
+            $('.noangle-check').click(function() {
+                var imperialSelect = $('.selected-wood').attr('data-selected-imperial');
+                var metricSelect = $('.selected-wood').attr('data-selected-metric');
+                var tapeSelect = $('.tape__num').text();
+
+                if (tapeSelect === imperialSelect || tapeSelect === metricSelect){
+                    $('.feedback-notification-correct').fadeIn('slow');
+                    $('.feedback-notification-incorrect').fadeOut('fast');
+                    $('.tab4').fadeIn('slow');
+                    $(this).hide();
+                } else {
+                    $('.feedback-notification-incorrect').fadeIn('slow');
+                    $('.feedback-notification-correct').fadeOut('fast');
+                }
+            });
+
+            $('.angle-right-check').click(function() {
+                var rightSelect = $('.selected-wood').attr('data-selected-right');
+                var angleSelect = $('.control-amount-right').text();
+
+                if (rightSelect === angleSelect){
+                    $('.feedback-notification-correct').fadeIn('slow');
+                    $('.feedback-notification-incorrect').fadeOut('fast');
+                    $('.tab1').fadeIn('slow');
+                    $(this).hide();
+                } else {
+                    $('.feedback-notification-incorrect').fadeIn('slow');
+                    $('.feedback-notification-correct').fadeOut('fast');
+                }
+            });
+
+            $('.angle-left-check').click(function() {
+                var leftSelect = $('.selected-wood').attr('data-selected-left');
+                var angleSelect = $('.control-amount-left').text();
+
+                if (leftSelect === angleSelect){
+                    $('.feedback-notification-correct').fadeIn('slow');
+                    $('.feedback-notification-incorrect').fadeOut('fast');
+                    $('.tab4').fadeIn('slow');
+                    $(this).hide();
+                } else {
+                    $('.feedback-notification-incorrect').fadeIn('slow');
+                    $('.feedback-notification-correct').fadeOut('fast');
+                }
+            });
+
+            //------------------------------------------ Sliders ---//
+
+            $("#sliderA").slick({
+                accessibility: true,
+                centerMode: true,
+                centerPadding: '60px',
+                dots: true,
+                arrows: true,
+                infinite: true,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                adaptiveHeight: true,
+
+                responsive: [{
+                    breakpoint: 1400,
+                    settings: {
+                    slidesToShow: 3,
+                    infinite: true
+                }
+
+                }, {
+                    breakpoint: 1320,
+                    settings: {
+                    slidesToShow: 2,
+                    dots: true
+                }
+
+                }]
+            });
+       
+            class Tape {
+                constructor() {
+                    // Set caret size & increments.
+                    let $tape = document.querySelector(".tape");
+                    this.data = this.getDataSet($tape);
+
+                    let $input = this.createInput();
+                    let $output = this.createOutput();
+                    let $ruler = this.createRuler();
+                    let $ticks = this.createTicks();
+                    let $caret = this.createCaret();
+
+                    // Computed constants;
+                    this.barWidth = this.data.tick * this.data.increment;
+                    this.tapeWidth = this.getTapeWidth();
+                    this.bufferMin = Math.ceil((this.data.caretSize + this.data.caretOffset) / this.barWidth);
+
+                    this.setupTicks($ticks);
+
+                    $tape.appendChild($input);
+                    $tape.appendChild($output);
+                    $tape.appendChild($ruler);
+                    $ruler.appendChild($ticks);
+                    $ruler.appendChild($caret);
+
+                    $ticks.scrollLeft = (this.data.start - this.data.min + this.bufferMin) * this.barWidth - this.data.caretOffset - this.data.caretSize;
+
+                    $ticks.addEventListener("scroll", this.updateInput.bind(this, $input, $output));
+                    $input.value = this.updateInput($input, $output, { currentTarget: $ticks });
+                }
+
+                setupTicks($el) {
+                    let bufferMax = Math.floor(this.tapeWidth / this.barWidth);
+                    let scrollRight = this.data.max + bufferMax;
+                    let scrollLeft = this.data.min - this.bufferMin;
+
+                    for (let i = scrollLeft; i <= scrollRight; i++) {
+                        for (let j = 0; j < this.data.increment; j++) {
+                            let $tick = document.createElement("div");
+                            $tick.classList = `tape__tick tape__tick--${j}_${this.data.increment}`;
+                            $tick.style.width = `${this.data.tick}px`;
+
+                            if (i < this.data.min || i >= this.data.max) {
+                                // Mark as unavailable.
+                                $tick.classList = `${$tick.classList} tape__tick--unavailable`;
+                            }
+
+                            if (j === 0) {
+                                // Append number to ruler.
+                                let $mark = document.createElement("div");
+                                $mark.classList = "tape__mark";
+                                $mark.innerHTML = parseInt(i);
+                                $tick.appendChild($mark);
+                            }
+                            $el.appendChild($tick);
+                        }
+                    }
+                }
+
+                getTapeWidth() {
+                    let tapeWidth = this.data.bars * this.barWidth + this.data.caretSize + this.data.caretOffset;
+                    return Math.min(window.innerWidth, tapeWidth);
+                }
+
+                updateInput($input, $output, evt) {
+                    let scrollLeft = this.data.min - this.bufferMin;
+                    let val = Math.round((scrollLeft + (evt.currentTarget.scrollLeft + this.data.caretOffset + this.data.caretSize) / this.barWidth) * 8) / 8;
+                    $output.value = val;
+
+                    let dividend = (val * this.data.increment) % this.data.increment;
+                    $input.innerHTML = dividend === 0 ? Math.floor(val) : `${Math.floor(val) + dividend / this.data.increment}`;
+
+                    if (val < this.data.min || val > this.data.max) {
+                        $input.classList.add("-out-of-range");
+                    } else {
+                        $input.classList.remove("-out-of-range");
+                    }
+                }
+
+                createInput() {
+                    let $el = document.createElement("div");
+                    $el.classList = "tape__num tape__imperial";
+                    return $el;
+                }
+
+                createOutput() {
+                    let $el = document.createElement("input");
+                    $el.setAttribute("hidden", true);
+                    return $el;
+                }
+
+                createRuler() {
+                    let $el = document.createElement("div");
+                    $el.classList = "tape__ruler";
+                    return $el;
+                }
+
+                createCaret() {
+                    let $el = document.createElement("div");
+                    $el.classList = "tape__caret";
+                    $el.style.left = `${this.data.caretOffset}px`;
+                    $el.style.borderLeftWidth = `${this.data.caretSize}px`;
+                    $el.style.borderTopWidth = `${this.data.caretSize}px`;
+                    $el.style.borderRightWidth = `${this.data.caretSize}px`;
+                    return $el;
+                }
+
+                createTicks() {
+                    // Create ticks
+                    let $el = document.createElement("div");
+                    $el.classList = "tape__ticks";
+                    return $el;
+                }
+
+                getDataSet($el) {
+                    return Object.assign(
+                        {
+                            bars: 8,
+                            increment: 8,
+                            caretOffset: 106,
+                            caretSize: 15,
+                            max: 50,
+                            min: 10,
+                            start: 10,
+                            tick: 15,
+                            unit: "in",
+                        },
+                        Object.keys($el.dataset).reduce((memo, key) => {
+                            let val = $el.dataset[key];
+                            memo[key] = isNaN(val) ? val : parseInt(val);
+                            return memo;
+                        }, {})
+                    );
+                }
+            }
+
+            let tape = new Tape();
+        </script>           
+	</body>
+</html>
