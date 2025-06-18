@@ -1,0 +1,1150 @@
+@-ms-viewport {
+	width: device-width;
+}
+
+body {
+	-ms-overflow-style: scrollbar;
+    background: #f3f3f3;
+}
+
+@media screen and (max-width: 480px) {
+	html, body {
+		min-width: 320px;
+	}jQuery(document).ready(function($) {
+    
+    var parent = $('#drag1');
+
+    var stop = true;
+    $(".drag-item").on("drag", function (e) {
+
+        stop = true;
+
+        if (e.originalEvent.clientY < 150) {
+            stop = false;
+            scroll(-1)
+        }
+
+        if (e.originalEvent.clientY > ($(window).height() - 150)) {
+            stop = false;
+            scroll(1)
+        }
+
+    });
+
+
+    $(".drag-item").on("dragend", function (e) {
+         stop = true;
+    });
+
+    var scroll = function (step) {
+        var scrollY = $(window).scrollTop();
+        $(window).scrollTop(scrollY + step);
+        if (!stop) {
+            setTimeout(function () { scroll(step) }, 20);
+        }
+    }
+    
+    if (parent.length > 0) {
+        var drag_items = parent.find('.drag-item'),
+            drop_items = parent.find('.drop');
+
+        var updateScrollPos = function(e) {
+            $('html').css('cursor', 'row-resize');
+            $(window).scrollTop($(window).scrollTop() + (clickY - e.pageY));
+        }
+
+        var dragItem;
+
+        function setUpEventListeners() {
+            drag_items.each(function() {
+                var thisDrag = $(this);
+                thisDrag[0].addEventListener('dragstart', dragStart);
+                thisDrag[0].addEventListener('drag', drag);
+                thisDrag[0].addEventListener('dragend', dragEnd);
+
+            });
+
+            drop_items.each(function() {
+                var thisDrop = $(this);
+                thisDrop[0].addEventListener('dragenter', dragEnter);
+                thisDrop[0].addEventListener('dragover', dragOver);
+                thisDrop[0].addEventListener('dragleave', dragLeave);
+                thisDrop[0].addEventListener('drop', drop);
+            });
+        }
+        setUpEventListeners();
+
+        //called as soon as the draggable starts being dragged
+        //used to set up data and options
+        function dragStart(event) {
+            var drag = event.target;
+            var dragID = drag.attr('id');
+            dragItem = event.target;
+
+            console.log(event);
+
+            //set the effectAllowed for the drag item
+            event.dataTransfer.effectAllowed = 'copy';
+
+            var imageSrc = $(dragItem).prop('src');
+            var imageHTML = $(dragItem).prop('outerHTML');
+
+            //check for IE (it supports only 'text' or 'URL')
+            try {
+              event.dataTransfer.setData('text/uri-list', imageSrc);
+              event.dataTransfer.setData('text/html', imageHTML);
+            } catch (e) {
+              event.dataTransfer.setData('text', imageSrc);
+            }
+
+            $(drag).addClass('drag-active');
+        }
+
+        //called as the draggable enters a droppable 
+        //needs to return false to make droppable area valid
+        function dragEnter(event) {
+            var drop = this;
+
+            //set the drop effect for this zone
+            event.dataTransfer.dropEffect = 'copy';
+            $(drop).addClass('drop-active');
+
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        //called continually while the draggable is over a droppable 
+        //needs to return false to make droppable area valid
+        function dragOver(event) {
+            var drop = this;
+
+            //set the drop effect for this zone
+            event.dataTransfer.dropEffect = 'copy';
+            $(drop).addClass('drop-active');
+
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        //called when the draggable was inside a droppable but then left
+        function dragLeave(event) {
+            var drop = this;
+            $(drop).removeClass('drop-active');
+
+        }
+
+        //called continually as the draggable is dragged
+        function drag(event) {
+        }
+
+        //called when the draggable has been released (either on droppable or not)
+        //may be called on invalid or valid drop
+        function dragEnd(event) {
+            var drag = this;
+            $(drag).removeClass('drag-active');
+        }
+        
+        //called when draggable is dropped on droppable 
+        //final process, used to copy data or update UI on successful drop
+        
+        function drop(event) {
+            drop = this;
+            $(drop).removeClass('drop-active');
+            $(drag).remove();
+
+            var dataList, dataHTML, dataText;
+
+            //collect our data (based on what browser support we have)
+            try {
+              dataList = event.dataTransfer.getData('text/uri-list');
+              dataHTML = event.dataTransfer.getData('text/html');
+            } catch (e) {;
+              dataText = event.dataTransfer.getData('text');
+            }
+
+            //we have access to the HTML
+            if (dataHTML) {
+                $(drop).prepend(dataHTML);
+                var drag = $(drop).find('.drag-item:first-child');
+            }  else {
+                // only have access to text (old browsers + IE)
+                $(drop).prepend(dataHTML);
+                var drag = $(drop).find('.drag-item:first-child');
+            }
+            
+            // Begins checking the drag and drop ingredients, measurements, and cooking methods. 
+            checkIngredient(drop, drag);
+            
+            event.preventDefault();
+            event.stopPropagation();
+            
+        }
+        
+        function checkIngredient(drop, drag) {
+            var dropValue = $(drop).attr('data-value'),
+                
+                imageValue = $(drag).attr('data-value'),
+                imageAmount = $(drag).attr('data-amount'),
+                imageOrder = $(drag).attr('data-order'),
+                imageMeasure = $(drag).attr('data-measurement'),
+                
+                imageTemp = '',
+                imageTime = '',
+                
+                amount = '',
+                measure = '',
+                time = '',
+                temp = '',
+                
+                measureButton = $(drop).find( '.measurement-button' ),
+                cookingButton = $(drop).find( '.cooking-button' ),
+                
+                dragID = $(drag).attr('id'),
+                
+                stage1 = $('.dropped').find('.drop[data-value="1"]'),
+                stage2 = $('.dropped').find('.drop[data-value="2"]'),
+                stage3 = $('.dropped').find('.drop[data-value="3"]'),
+                stage4 = $('.dropped').find('.drop[data-value="4"]'),
+                stage5 = $('.dropped').find('.drop[data-value="5"]'),
+                stage6 = $('.dropped').find('.drop[data-value="6"]'),
+                stage7 = $('.dropped').find('.drop[data-value="7"]'),
+                
+                st1 = "Roux",
+                st2 = "Louisiana Holy Trinity",
+                st3 = "Aromatics",
+                st4 = "Broth",
+                st5 = "Vegetables, Meat/Seafood, Herbs & Spices",
+                st6 = "Season & Taste",
+                st7 = "Garnish";
+            
+            // The drag and drop values are checked and matched. Each drag has its own drop field and selectors. This avoids propagation of values. If correct, continues to measurement and amount checking. Each change function collects the users inputted values for temperature, time, measurement, and amount. if = correct, else = wrong.
+            
+            if (imageValue == dropValue) {
+                $('.dropped').append('<i class="fas fa-check"></i>');
+                setInterval(correctAnimation,800);
+
+                function correctAnimation(){ 
+                    $('.dropped').find('i').fadeOut('fast');
+                }
+            
+                $(drop).find('.measurement-selector').fadeIn();
+                $(drop).find('.measurement-label').append($(drag).attr('alt'));
+
+                $( '.amount-data' ).change(function () {
+                    var categoryA = "";
+
+                    $(drop).find( '.amount-data option:selected' ).each( function(){
+                        categoryA += $( this ).text();
+                    });
+
+                    $(drop).find('.amount-placeholder').attr('data-value', categoryA);
+
+                }).change();
+
+                $( '.measure-data' ).change(function () {
+                    var categoryM = '';
+
+                    $(drop).find( '.measure-data option:selected' ).each( function(){
+                        categoryM += $( this ).text();
+                    });
+
+                    $(drop).find('.measurement-placeholder').attr('data-value', categoryM);
+
+                }).change();
+                
+                $( '.temperature-data' ).change(function () {
+                    var categoryTemp = "";
+
+                    $(drop).find( '.temperature-data option:selected' ).each( function(){
+                        categoryTemp += $( this ).text();
+                    });
+
+                    $(drop).find('.temp-placeholder').attr('data-value', categoryTemp);
+
+                }).change();
+
+                $( '.time-data' ).change(function () {
+                    var categoryTime = '';
+
+                    $(drop).find( '.time-data option:selected' ).each( function(){
+                        categoryTime += $( this ).text();
+                    });
+
+                    $(drop).find('.time-placeholder').attr('data-value', categoryTime);
+
+                }).change();
+                
+                // The measure button collects the correct measurement and amount from the dropped item. It recognizes what cooking stage the user is in and then sets the correct cooking temperature and time. If not at the right cooking stage, drop and drag instance is removed.  if = correct, else = wrong.
+                
+                measureButton.click(function(){
+                    measure = $(drop).find('.measurement-placeholder').attr('data-value'),
+                    amount = $(drop).find('.amount-placeholder').attr('data-value');
+                    
+                    if (amount == imageAmount && measure == imageMeasure) {
+                        $(drop).prepend('<i class="fas fa-check"></i>');
+                        $('.material-item').has('#' + dragID).remove();
+                        $(drag).attr('draggable', 'false');
+
+                        $('.dropped').append('<i class="fas fa-check"></i>');
+                        setInterval(correctAnimation,800);
+
+                        function correctAnimation(){ 
+                            $('.dropped').find('i').fadeOut('fast');
+                        }
+                        
+                        switch (true) {
+                            case (stage7.length  ==  1  && stage6.length == 0):
+                                imageTime = "1 Min",
+                                imageTemp = "Off";
+
+                                $(drag).attr('data-time', imageTime);
+                                $(drag).attr('data-temp', imageTemp);
+                                $(drop).find('.cooking-selector').fadeIn();
+                                $(drop).find('.cooking-label').append(st7);
+                            break; 
+
+                            case (stage6.length  ==  1  && stage5.length == 0):
+                                imageTime = "1 Min",
+                                imageTemp = "Simmer";
+
+                                $(drag).attr('data-time', imageTime);
+                                $(drag).attr('data-temp', imageTemp);
+                                $(drop).find('.cooking-selector').fadeIn();
+                                $(drop).find('.cooking-label').append(st6);
+                            break; 
+
+                            case (stage5.length  ==  1  && stage4.length == 0):
+                                imageTime = "30 Min",
+                                imageTemp = "Medium";
+
+                                $(drag).attr('data-time', imageTime);
+                                $(drag).attr('data-temp', imageTemp);
+                                $(drop).find('.cooking-selector').fadeIn();
+                                $(drop).find('.cooking-label').append(st5);
+                            break; 
+
+                            case (stage4.length  ==  1  && stage3.length == 0):
+                                imageTime = "5 Min",
+                                imageTemp = "Medium";
+
+                                $(drag).attr('data-time', imageTime);
+                                $(drag).attr('data-temp', imageTemp);
+                                $(drop).find('.cooking-selector').fadeIn();
+                                $(drop).find('.cooking-label').append(st4);
+                            break; 
+
+                            case (stage3.length  ==  1 && stage2.length == 0):
+                                imageTime = "1 Min",
+                                imageTemp = "Medium";
+
+                                $(drag).attr('data-time', imageTime);
+                                $(drag).attr('data-temp', imageTemp);
+                                $(drop).find('.cooking-selector').fadeIn();
+                                $(drop).find('.cooking-label').append(st3);
+                            break;  
+
+                            case (stage2.length  ==  1 && stage1.length == 0):
+                                imageTime = "5 Min",
+                                imageTemp = "Low";
+
+                                $(drag).attr('data-time', imageTime);
+                                $(drag).attr('data-temp', imageTemp);
+                                $(drop).find('.cooking-selector').fadeIn();
+                                $(drop).find('.cooking-label').append(st2);
+                            break; 
+
+                            case (stage1.length  ==  1):
+                                imageTime = "5 Min",
+                                imageTemp = "Low";
+
+                                $(drag).attr('data-time', imageTime);
+                                $(drag).attr('data-temp', imageTemp);
+                                $(drop).find('.cooking-selector').fadeIn();
+                                $(drop).find('.cooking-label').append(st1);
+                            break; 
+
+                            default:
+                                $(drag).remove();
+                                $(drop).remove();
+                        }
+                        
+                        $(drop).find('.measurement-selector').fadeOut('fast');
+                        $(drop).find('.measurement-label').empty();
+                        
+                    } else {
+                        $(drop).prepend('<i class="fas fa-times"></i>');
+
+                        $('.reset-message').fadeIn('slow');
+                        $('.reset').prepend('<span class="remove-message"><h3 class="mb30">Oh no!</h3><p>That amount looks a little off.</p><button class="clean-button fit" data-dismiss="modal">Continue Cooking</button></span>');
+
+                        $('.clean-button').click(function() {
+                            $('.reset-message').fadeOut('slow');
+                            $('.remove-message').remove();
+                        });
+
+                        setInterval(correctAnimation,800);
+
+                        function correctAnimation(){
+                            $(drop).find('i').fadeOut('fast');
+                        }
+                        
+//                        $(drop).find('.drag-item').remove();
+                    }
+                });
+                
+                // The cooking button collects the users inputted time and temp values and compares it to the set stage values in the measurement function above. If not correct drag and drop instance is removed. if = correct, else = wrong.
+                
+                cookingButton.click(function(){
+                    imageTime = $(drag).attr('data-time'),
+                    imageTemp = $(drag).attr('data-temp'),
+                    time = $(drop).find('.time-placeholder').attr('data-value'),
+                    temp = $(drop).find('.temp-placeholder').attr('data-value');
+                    
+                    if (time == imageTime && temp == imageTemp) {
+
+                        $('.dropped').append('<i class="fas fa-check"></i>');
+                        setInterval(correctAnimation,800);
+
+                        function correctAnimation(){ 
+                            $('.dropped').find('i').fadeOut('fast');
+                        }
+                        
+                        $(drop).find('.cooking-selector').fadeOut('fast');
+                        $(drop).find('.cooking-label').empty();
+                        
+                        if (stage7.length  ==  1  && stage6.length == 0) {
+                            $('.reset-message').fadeIn('slow');
+                            $('.reset').prepend('<span class="remove-message"><h3 class="mb30">Woohoo!</h3><p>All of the guests are so pleased with Louisiana Shrimp Gumbo <i>Congrats, you have completed culinary basics. </i></p></span>');
+
+                            $('.clean-button').click(function() {
+                                $('.reset-message').fadeOut('slow');
+                                $('.remove-message').remove();
+                            });
+
+                            $(drag).remove();
+                            $(drop).remove();
+                        } else {
+                            $(drag).remove();
+                            $(drop).remove();
+                        }
+                    } else {
+                        $(drop).prepend('<i class="fas fa-times"></i>');
+
+                        $('.reset-message').fadeIn('slow');
+                        $('.reset').prepend('<span class="remove-message"><h3 class="mb30">Oh no!</h3><p>Woops! That is not the right temperature.</p><button class="clean-button fit" data-dismiss="modal">Continue Cooking</button></span>');
+
+                        $('.clean-button').click(function() {
+                            $('.reset-message').fadeOut('slow');
+                            $('.remove-message').remove();
+                        });
+
+                        setInterval(correctAnimation,800);
+
+                        function correctAnimation(){
+                            $(drop).find('i').fadeOut('fast');
+                        }
+                        
+                        $(drop).find('.drag-item').remove();
+                    }
+
+                });
+                
+            } else {
+                
+                $(drop).prepend('<i class="fas fa-times"></i>');
+
+                $('.reset-message').fadeIn('slow');
+                $('.reset').prepend('<span class="remove-message"><h3 class="mb30">Oh no!</h3><p>Hmm... that ingredient does not meet the requirements of your guests or perhaps you are adding it into the pot to soon...</p><button class="clean-button fit" data-dismiss="modal">Continue Cooking</button></span>');
+
+                $('.clean-button').click(function() {
+                    $('.reset-message').fadeOut('slow');
+                    $('.remove-message').remove();
+                });
+
+                setInterval(correctAnimation,800);
+
+                function correctAnimation(){
+                    $(drop).find('i').fadeOut('fast');
+                }
+                
+                $(drop).find('.drag-item').remove();
+            }
+        }
+    }
+});
+
+}
+
+body.is-loading *, body.is-loading *:before, body.is-loading *:after {
+	-moz-animation: none !important;
+	-webkit-animation: none !important;
+	-ms-animation: none !important;
+	animation: none !important;
+	-moz-transition: none !important;
+	-webkit-transition: none !important;
+	-ms-transition: none !important;
+	transition: none !important;
+}
+
+body::-webkit-scrollbar {
+    width: 1rem;
+    transition: 0.9s cubic-bezier(0.18, 1, 0.21, 1);
+}
+ 
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: 0;
+    background-color: rgba(160, 160, 160, 0.3);
+}
+ 
+body::-webkit-scrollbar-thumb {
+    background-color: rgba(52,52,52,0.3);
+    outline: 1px solid rgba(52,52,52,0.3);
+}
+
+.container {
+    width: 100%;
+    padding: 0 15%;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 100%;
+    }
+}
+@media (min-width: 992px) {
+    .container {
+        max-width: 100%;
+    }
+}
+@media (min-width: 768px) {
+    .container {
+        max-width: 100%;
+    }
+}
+@media (max-width: 576px) {
+    .container {
+        max-width: 100%;
+    }
+}
+@media (min-width: 576px) {
+    .container {
+        max-width: 100%;
+    }
+}
+
+*, *:before, *:after {
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/*--------------------------------------- Flexbox ---*/
+
+.flex-collection {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: space-between;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+}
+
+.flex-selected {
+    width: 100% !important;
+}
+
+.flex-collection.no-space {
+    justify-content: center !important;
+}
+
+.flex-border {
+    border-bottom: 1px solid #d3d6d8;
+    border-radius: 0;
+    margin-bottom: 30px;
+}
+
+.flex-collection.no-response .flex-1 {
+    width: 100%;
+}
+.flex-collection.no-response .flex-2 {
+    width: 48%;
+}
+.flex-collection.no-response .flex-3 {
+    width: 32%;
+}
+.flex-collection.no-response .flex-4 {
+    width: 23%;
+}
+.flex-collection.no-response .flex-5 {
+    width: 18%;
+}
+.flex-collection.no-response .flex-6 {
+    width: 15%;
+}
+.flex-collection.no-response .flex-7 {
+    width: 13%;
+}
+.flex-collection.no-response .flex-10 {
+    width: 10%;
+}
+.flex-collection.no-response .flex-full {
+    width: 100%;
+}
+
+.flex-full {
+    width: 100%;
+}
+
+@media (min-width: 1300px) {
+    .flex-3 {
+        width: 32%;
+    }
+    
+    .flex-2 {
+        width: 48%;
+    }
+    
+    .flex-4 {
+        width: 23%;
+    }
+    
+    .flex-5 {
+        width: 18%;
+    }
+    
+    .flex-6 {
+        width: 15%;
+    }
+    
+    .flex-7 {
+        width: 13%;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1300px) {
+    .flex-3 {
+        width: 48%;
+    }
+    
+    .flex-2 {
+        width: 48%;
+    }
+    
+    .flex-4 {
+        width: 23%;
+    }
+    
+    .flex-5 {
+        width: 48%;
+    }
+    
+    .flex-6 {
+        width: 100%;
+    }
+    
+    .flex-7 {
+        width: 100%;
+    }
+}
+
+@media (max-width: 992px) {
+    .flex-3 {
+        width: 100%;
+    }
+    
+    .flex-2 {
+        width: 100%;
+    }
+    
+    .flex-4 {
+        width: 100%;
+    }
+    
+    .flex-5 {
+        width: 100%;
+    }
+    
+    .flex-6 {
+        width: 100%;
+    }
+    
+    .flex-7 {
+        width: 100%;
+    }
+}
+
+.pd0 {
+    padding: 0;
+}
+
+.pb0 {
+    padding-bottom: 0;
+}
+
+.mb0 {
+    margin: 0;
+}
+
+.pb30 {
+    padding-bottom: 30px;
+}
+
+.pb50 {
+    padding-bottom: 50px !important;
+}
+
+.mb30 {
+    margin-bottom: 30px !important;
+}
+
+.mt50 {
+    margin-top: 50px !important;
+}
+
+.borderless {
+    border: 0;
+}
+
+.borderless:hover {
+    border: 0;
+}
+
+.centered {
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    left: 0;
+    right: 15px;
+    text-align: right;
+}
+
+/*--------------------------------------- Responsive iframe */
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 35px;
+    height: 0;
+    overflow: hidden;
+    transition: 0.9s cubic-bezier(0.18, 1, 0.21, 1);
+}
+
+.video-container iframe {
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/*--------------------------------------- Form Components */
+
+button {
+	border: 0 !important;
+	margin: 1em 0;
+}
+
+button a {
+	display: block;
+	text-decoration: none;
+	border: 0;
+}
+
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+button,
+.button {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	-ms-appearance: none;
+	appearance: none;
+
+	border: 0;
+
+	color: #FFFFFF !important;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 0.8em;
+	font-weight: 800;
+	line-height: 1;
+	padding: 1em 2.5em;
+	text-align: center;
+	text-decoration: none;
+	white-space: nowrap;
+    
+    background: rgba(255,255,255,0.12);
+}
+
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+input[type="button"]:hover,
+button:hover,
+.button:hover {
+	opacity: 0.8;
+    color: #FFFFFF;
+    border: 0;
+}
+
+	input[type="submit"]:hover:active,
+	input[type="reset"]:hover:active,
+	input[type="button"]:hover:active,
+	button:hover:active,
+	.button:hover:active {
+        color: #FFFFFF !important;
+	}
+
+input[type="submit"]:before, input[type="submit"]:after,
+input[type="reset"]:before,
+input[type="reset"]:after,
+input[type="button"]:before,
+input[type="button"]:after
+button:before,
+button:after,
+.button:before,
+.button:after {
+	color: #FFFFFF !important;
+	position: relative;
+}
+
+input[type="submit"]:before,
+input[type="reset"]:before,
+input[type="button"]:before,
+button:before,
+.button:before {
+	left: -1em;
+	padding: 0 0 0 0.75em;
+    
+}
+
+input[type="submit"]:after,
+input[type="reset"]:after,
+input[type="button"]:after,
+button:after,
+.button:after {
+	left: 1em;
+	padding: 0 0.75em 0 0;
+}
+
+input[type="submit"].fit,
+input[type="reset"].fit,
+input[type="button"].fit,
+button.fit,
+.button.fit {
+	display: block;
+	margin: 0 0 1em 0;
+	width: 100%;
+}
+
+input[type="submit"].big,
+input[type="reset"].big,
+input[type="button"].big,
+button.big,
+.button.big {
+	font-size: 0.7em;
+	padding: 1.5em 3em;
+}
+
+input[type="submit"].small,
+input[type="reset"].small,
+input[type="button"].small,
+button.small,
+.button.small {
+	font-size: 0.5em;
+}
+
+input[type="submit"].disabled, input[type="submit"]:disabled,
+input[type="reset"].disabled,
+input[type="reset"]:disabled,
+input[type="button"].disabled,
+input[type="button"]:disabled,
+button.disabled,
+button:disabled,
+.button.disabled,
+.button:disabled {
+	-moz-pointer-events: none;
+	-webkit-pointer-events: none;
+	-ms-pointer-events: none;
+	pointer-events: none;
+	color: #FFFFFF !important;
+}
+
+input[type="submit"].disabled:before, input[type="submit"]:disabled:before,
+input[type="reset"].disabled:before,
+input[type="reset"]:disabled:before,
+input[type="button"].disabled:before,
+input[type="button"]:disabled:before,
+button.disabled:before,
+button:disabled:before,
+.button.disabled:before,
+.button:disabled:before {
+	color: #FFFFFF !important;
+}
+
+form {
+	margin: 0 0 2em 0;
+}
+
+label {
+	color: #3c3b3b;
+	display: block;
+	font-size: 0.9em;
+	font-weight: 700;
+	margin: 0 0 1em 0;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+select,
+textarea {
+	-moz-appearance: none !important;
+	-webkit-appearance: none !important;
+	-ms-appearance: none !important;
+	appearance: none !important;
+	background: rgba(160, 160, 160, 0.075) !important;
+	border: none !important;
+	border: solid 1px rgba(160, 160, 160, 0.3) !important;
+	border-radius: 0 !important;
+	color: inherit !important;
+	display: block !important;
+	outline: 0 !important;
+	padding: 0 1em !important;
+	text-decoration: none !important;
+	width: 100% !important;
+    font-size: 14pt;
+}
+
+input[type="text"]:invalid,
+input[type="password"]:invalid,
+input[type="email"]:invalid,
+input[type="tel"]:invalid,
+select:invalid,
+textarea:invalid {
+	box-shadow: none !important;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+select:focus,
+textarea:focus {
+	border-color: #678a75 !important;
+	box-shadow: inset 0 0 0 1px #678a75 !important;
+}
+
+textarea {
+    padding: 15px !important;
+}
+
+.select-wrapper {
+	text-decoration: none;
+	display: block;
+	position: relative;
+}
+
+.select-wrapper:before {
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+	text-transform: none !important;
+}
+
+.select-wrapper:before {
+	color: rgba(160, 160, 160, 0.3);
+	content: '\f078';
+	display: block;
+	height: 2.75em;
+	line-height: 2.75em;
+	pointer-events: none;
+	position: absolute;
+	right: 0;
+	text-align: center;
+	top: 0;
+	width: 2.75em;
+}
+
+.select-wrapper select::-ms-expand {
+	display: none;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select {
+	height: 2.75em;
+}
+
+
+input[type="checkbox"],
+input[type="radio"] {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	-ms-appearance: none;
+	appearance: none;
+	display: block;
+	float: left;
+	margin-right: -2em;
+	opacity: 0;
+	width: 1em;
+	z-index: -1;
+}
+
+input[type="checkbox"] + label,
+input[type="radio"] + label {
+	text-decoration: none;
+	color: #343a40;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 1em;
+	font-weight: 400;
+	padding-left: 2.4em;
+	padding-right: 0.75em;
+	position: relative;
+}
+
+input[type="checkbox"] + label:before,
+input[type="radio"] + label:before {
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+	text-transform: none !important;
+}
+
+input[type="checkbox"] + label:before,
+input[type="radio"] + label:before {
+	background: rgba(160, 160, 160, 0.075);
+	border: solid 1px rgba(160, 160, 160, 0.3);
+	content: '';
+	display: inline-block;
+	height: 1.65em;
+	left: 0;
+	line-height: 1.58125em;
+	position: absolute;
+	text-align: center;
+	top: 0;
+	width: 1.65em;
+}
+
+input[type="checkbox"]:checked + label:before,
+input[type="radio"]:checked + label:before {
+	background: #274e65;
+	border-color: #274e65;
+	color: #ffffff;
+	content: '\f00c';
+}
+
+input[type="checkbox"]:focus + label:before,
+input[type="radio"]:focus + label:before {
+	border-color: #678a75;
+	box-shadow: 0 0 0 1px #678a75;
+}
+
+input[type="radio"] + label:before {
+	border-radius: 100%;
+}
+
+::-webkit-input-placeholder {
+	color: #aaaaaa !important;
+	opacity: 1.0;
+}
+
+:-moz-placeholder {
+	color: #aaaaaa !important;
+	opacity: 1.0;
+}
+
+::-moz-placeholder {
+	color: #aaaaaa !important;
+	opacity: 1.0;
+}
+
+:-ms-input-placeholder {
+	color: #aaaaaa !important;
+	opacity: 1.0;
+}
+
+.table-wrapper {
+	-webkit-overflow-scrolling: touch;
+	overflow-x: auto;
+}
+
+/*--------------------------------------- Tables */
+
+table {
+	margin: 2em 0;
+	width: 100%;
+}
+
+table tbody tr {
+	border: solid 1px #adb5be;
+	border-left: 0;
+	border-right: 0;
+}
+
+table tbody tr:nth-child(2n + 1) {
+	background-color: #f7f7f7;
+}
+
+table td {
+	padding: 0.75em 0.75em;
+    position: relative;
+}
+
+table th {
+	font-size: 0.9em;
+	font-weight: 700;
+	padding: 0.75em 0.75em 0.75em 0;
+	text-align: left;
+}
+
+table thead th {
+	color: #40c057;
+}
+
+table tbody th {
+	color: #343a40;
+}
+
+table thead {
+	border-bottom: solid 2px #adb5be;
+}
+
+table tfoot {
+	border-top: solid 2px #adb5be;
+}
+
+table.alt {
+	border-collapse: separate;
+}
+
+table.alt tbody tr td {
+	border: solid 1px rgba(160, 160, 160, 0.3);
+	border-left-width: 0;
+	border-top-width: 0;
+}
+
+table.alt tbody tr td:first-child {
+	border-left-width: 1px;
+}
+
+table.alt tbody tr:first-child td {
+	border-top-width: 1px;
+}
+
+table.alt thead {
+	border-bottom: 0;
+}
+
+table.alt tfoot {
+	border-top: 0;
+}
