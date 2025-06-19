@@ -11,7 +11,7 @@ Inside the HTML object you can provide a comment containing a JSON string that w
 Copy the file ```plugin.js``` into the plugin folder of your reveal.js presentation, i.e. ```plugin/anything``` and load the plugin as shown below.
 
 ```html
-<script src="./Slider-Plugin/plugin/anything/plugin.js"></script>
+<script src="../Slider-Plugin/plugin/anything/plugin.js"></script>
 
 <script>
     Reveal.initialize({
@@ -94,7 +94,7 @@ The plugin can be used to easily integrate external javascript libraries.
 With the plugin charts created by [Chart.js](http://www.chartjs.org/) can easily be  included in the slides by including
 
 ```html
-<script src="./Slider-Plugin/plugin/anything/plugin.js"></script>
+<script src="../Slider-Plugin/plugin/anything/plugin.js"></script>
 <script src="Chart.min.js"></script>
 ```
 and
@@ -145,7 +145,7 @@ Note, that the [Chart  plugin](https://github.com/rajgoel/reveal.js-plugins/tree
 With the plugin plots of functions created by [Function-plot.js](https://github.com/maurizzzio/function-plot) can be included in the slides by including
 
 ```html
-<script src="./Slider-Plugin/plugin/anything/plugin.js"></script>
+<script src="../Slider-Plugin/plugin/anything/plugin.js"></script>
 <script src="d3/d3.v3.min.js"></script>				
 <script src="d3.patch.js"></script>			
 <script src="d3/queue.v1.min.js"></script>		
@@ -208,7 +208,7 @@ In the following example, the function ```options.initialize(container)``` is ca
 
 The example uses
 ```html
-<script src="./Slider-Plugin/plugin/anything/plugin.js"></script>
+<script src="../Slider-Plugin/plugin/anything/plugin.js"></script>
 <script src="d3/d3.v3.min.js"></script>				
 <script src="d3/topojson.v1.min.js"></script>		
 ```

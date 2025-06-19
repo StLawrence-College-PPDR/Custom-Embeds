@@ -12,7 +12,7 @@ Add the plugin and Chart.js to the dependencies in your presentation, as below.
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.min.js"></script>
-<script src="./Slider-Plugin/plugin/chart/plugin.js"></script>
+<script src="../Slider-Plugin/plugin/chart/plugin.js"></script>
 
 <script>
     Reveal.initialize({
