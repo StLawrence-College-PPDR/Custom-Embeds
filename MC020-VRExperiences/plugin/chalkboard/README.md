@@ -18,8 +18,8 @@ The chalkboard effect is based on [Chalkboard](https://github.com/mmoustafa/Chal
 Copy the file `plugin.js` and the  `img` directory into the plugin folder of your reveal.js presentation, i.e. `plugin/chalkboard` and load the plugin as shown below.
 
 ```html
-<script src="plugin/chalkboard/plugin.js"></script>
-<script src="plugin/customcontrols/plugin.js"></script>
+<script src="Slider-Plugin/plugin/chalkboard/plugin.js"></script>
+<script src="Slider-Plugin/plugin/customcontrols/plugin.js"></script>
 
 <script>
     Reveal.initialize({

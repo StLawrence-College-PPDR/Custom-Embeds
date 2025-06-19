@@ -9,7 +9,7 @@ A plugin for [Reveal.js](https://github.com/hakimel/reveal.js) allowing allowing
 Copy the files ```plugin.js``` into the plugin folder of your reveal.js presentation, i.e. ```plugin/fullscreen``` and load the plugin as shown below.
 
 ```html
-<script src="plugin/fullscreen/plugin.js"></script>
+<script src="Slider-Plugin/plugin/fullscreen/plugin.js"></script>
 
 <script>
     Reveal.initialize({

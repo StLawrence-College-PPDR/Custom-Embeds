@@ -12,9 +12,9 @@ When an audio file has finished playing, the plugin and automatically advances t
 Copy the files ```plugin.js```, ```recorder.js```, and ```RecordRTC.js``` into the plugin folder of your reveal.js presentation, i.e. ```plugin/audio-slideshow``` and load the plugin as shown below.
 
 ```html
-<script src="plugin/audio-slideshow/plugin.js"></script>
-<script src="plugin/audio-slideshow/recorder.js"></script>
-<script src="plugin/audio-slideshow/RecordRTC.js"></script>
+<script src="Slider-Plugin/plugin/audio-slideshow/plugin.js"></script>
+<script src="Slider-Plugin/plugin/audio-slideshow/recorder.js"></script>
+<script src="Slider-Plugin/plugin/audio-slideshow/RecordRTC.js"></script>
 
 <script>
     Reveal.initialize({
