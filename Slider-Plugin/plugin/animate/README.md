@@ -9,8 +9,8 @@ A plugin for [Reveal.js](https://github.com/hakimel/reveal.js) allowing to add a
 Copy the files ```plugin.js``` and ```svg.min.js``` into the plugin folder of your reveal.js presentation, i.e. ```plugin/animate``` and load the plugin as shown below.
 
 ```html
-<script src="Slider-Plugin/plugin/animate/plugin.js"></script>
-<script src="Slider-Plugin/plugin/animate/svg.min.js"></script>
+<script src="./Slider-Plugin/plugin/animate/plugin.js"></script>
+<script src="./Slider-Plugin/plugin/animate/svg.min.js"></script>
 
 <script>
     Reveal.initialize({

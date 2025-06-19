@@ -11,7 +11,7 @@ Copy the files `plugin.js` and `style.css` into the plugin folder of your reveal
 
 ```html
 <link rel="stylesheet" href="plugin/customcontrols/style.css">
-<script src="Slider-Plugin/plugin/customcontrols/plugin.js"></script>
+<script src="./Slider-Plugin/plugin/customcontrols/plugin.js"></script>
 
 <script>
     Reveal.initialize({
