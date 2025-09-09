@@ -1,0 +1,187 @@
+@media print {
+
+    /*-----------------///// Common elements /////-----------------*/
+
+    body {
+        background: #FFFFFF;
+    }
+    
+    /* Setting all div elements to not overlap.*/
+
+    div {
+        position: relative !important;
+    }
+
+    /* Getting rid of any unneccessary components */
+
+    nav, footer {
+        display: none !important;
+    }
+
+    section {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .container, .container-reading {
+        padding: 0 2cm;
+    } 
+    
+    /*-----------------///// Typography elements /////-----------------*/
+
+    body {
+        font-size: 12pt;
+    }
+
+    .text-center {
+        text-align: left;
+    }
+
+    /*-----------------///// Custom elements /////-----------------*/
+
+    #header {
+        position: relative;
+        border-bottom: 0;
+    }
+
+    .hero-image, .banner-image {
+        height: auto !important;
+        min-height: auto !important;
+        position: relative !important;
+        display: none;
+    }
+
+    .hero-content h1 {
+        font-size: 5em;
+    }
+
+    .banner-content, .hero-content {
+        text-align: left !important;
+        position: relative !important;
+        top: 0;
+        left: 2cm;
+        right: 0;
+    }
+
+    /* Getting rid of any unneccessary components */
+
+    .keep-scrolling, .card-icon, section#game-zone {
+        display: none !important;
+    }
+
+    .objective-card {
+        border: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    .objective-card .category {
+        transform: none;
+        left: 0;
+        top: 0;
+    }
+
+    .video-caption-media, .video-caption-content, .image-caption-content {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .image {
+        border-top: 1px solid black;
+        margin: 1cm 0;
+    }
+
+    section.white {
+        border: 0;
+    }
+
+    .tertiary-border,
+    .secondary-border, 
+    .primary-border {
+        border: 0;
+    }
+    
+    .tertiary-text,
+    .secondary-text, 
+    .primary-text {
+        color: #343a40;
+    }
+
+    .notification-primary,
+    .notification-secondary,
+    .notification-tertiary,
+    .notification-quarternary,
+    .notification-quinary,
+    .notification-senary {
+        padding: 20px 0;
+        border-radius: 5px;
+        margin: 0 0 0.5cm 0;
+    }
+
+    section.landing-content {
+        padding: 0.5cm 0 !important;
+    }
+    
+    .carousel-item,
+    .carousel-item active {
+        position: relative;
+        width: 100%;
+        display: block !important;
+        
+    }
+    
+    .carousel-controls {
+        display: none;
+    }
+    
+    .carousel-description {
+        background: white;
+        color: black;
+        position: absolute !important;
+        top: bottom;
+    }
+    
+    .objective-card,
+    .checkitem,
+    .listing li {
+        border: 1px solid black;
+        margin-bottom: 30px;
+    }
+    
+    .objective-card .numberical-value {
+        background: black !important;
+        color: #FFF !important;
+    }
+    
+    .objective-card .numberical-value i {
+        display: none;
+    }
+    
+    .icon-container {
+        background: black;
+    }
+    
+    table thead th {
+        color: black;
+    }
+    
+    .navigation-bar {
+        display: none;
+    }
+
+    section.internal-heading .heading-content {
+        min-height: auto;
+        padding: 100px 10%;
+    }
+
+    section.internal-heading .module-number {
+        background: #FFF;
+    }
+}
+
+@media print and (color) {
+   * {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+   }
+}

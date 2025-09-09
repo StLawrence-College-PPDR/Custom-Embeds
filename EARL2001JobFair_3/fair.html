@@ -1,0 +1,742 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Early Childhood Education Job Fair </title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="js/ie/html5shiv.js"></script><![endif]-->
+		
+         <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous"> 
+		
+		<link rel="stylesheet" href="assets/css/custom.css">
+		<link rel="stylesheet" href="assets/css/common.css" />
+		<link rel="stylesheet" href="assets/css/typography.css" />
+
+		<link rel="stylesheet" media="print" href="assets/css/print.css" />
+
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+	</head>
+	<body class="fade-in interactive-environment">
+        <div class="notification"></div>   
+       
+        <header id="header">
+            <a href="index.html" class="borderless primary-text back-button"><i class="fas fa-arrow-left"></i> Back to Instructions</a>
+        </header>
+        
+        <!--------------------------------------- Instructions -----> 
+        
+        <div class="modal fade-in" id="instructions" tabindex="-1" role="dialog" style="z-index: 2000;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body"> 
+                        <div class="container">
+                            <button type="button" class="modal-button primary-text mb30" data-dismiss="modal"><i class="fas fa-times"></i></button>
+                        
+                            <div class="flex-collection">
+                                <div class="flex-2">
+                                    <h5 class="mb30">How to Use</h5>
+
+                                    <p>You're required to complete two interviews with two different companies. To choose a company click on the person icon closiest to their booth <i class="fas fa-street-view"></i>.</p>
+
+                                    <p>Listen to the directors questions by clicking on the play button on the audio player of each question card. After listening, record your response by selecting 'record' button. Then the 'stop' button when you are finished. Your recordings will appear below. You can record your answer more than once.</p>
+
+                                    <p>When you are satisfied with your response you can download a MP3 file by following the instructions below.</p>
+                                </div>
+                                <div class="flex-2">
+                                     <h5 class="mb30">Save Your Work</h5>
+
+                                    <div class="mb30 notification-area">
+                                        <p class="mb0"><strong>Downloading</strong></p>
+                                        <p>To get a copy of your recording select the 3 dot icon, located on the right-hand side the audio player. Then click download.</p>
+
+                                        <img src="images/download@72x.png" width="288px" style="margin: 0 auto;" alt="Download Button">
+                                    </div>
+                                    <div class="mb30 notification-area">
+                                        <p class="mb0"><strong>Zipped Files</strong></p>
+                                        <p>After downloading, rename your files according to the question number and philosphy type. Zip them in a folder with your name. Provide this to your professor as directed.</p>
+
+                                        <p>Example: <i>montessori-question1.mp3</i></p>
+
+                                        <img src="images/naming-convention@72x.png" width="120px" alt="File Names" style="margin: 0 auto;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="environment-setup">
+        <!--------------------------------------- Inline SVG ----->
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1200 967">
+              <defs/>
+              <defs>
+                <style>
+                  .cls-1{fill:#009688}
+                </style>
+              </defs>
+              <g id="Layer_2" data-name="Layer 2">
+                <image id="Layer_1-2" width="1200" height="967" data-name="Layer 1" xlink:href="images/background.png"/>
+                <path id="boothC" d="M281 688a21 21 0 1021 21 21 21 0 00-21-21zm-1 13a2 2 0 011-1 2 2 0 010 5 2 2 0 01-1-1 2 2 0 010-3zm-2 5a1 1 0 011-1 1 1 0 011 0h3a1 1 0 011 0 1 1 0 011 1v4a1 1 0 01-1 0 1 1 0 010 1h-1v3a1 1 0 010 1h-3a1 1 0 010-1v-3h-1a1 1 0 01-1-1zm10 10a4 4 0 01-2 1 13 13 0 01-2 0 20 20 0 01-5 0 13 13 0 01-2 0 4 4 0 01-2-1 1 1 0 010-1 1 1 0 010-1 2 2 0 011 0 7 7 0 011-1 10 10 0 011 0 1 1 0 011 0 1 1 0 010 1 1 1 0 01-1 0 8 8 0 00-1 0 5 5 0 000 1 5 5 0 00-1 0 3 3 0 001 1 9 9 0 001 0 12 12 0 002 0 19 19 0 003 0 12 12 0 002 0 8 8 0 001 0 3 3 0 001-1 4 4 0 00-1 0 5 5 0 00-1-1 8 8 0 00-1 0 1 1 0 010-1 1 1 0 011 0 10 10 0 011 0 7 7 0 011 1 2 2 0 011 0 1 1 0 010 1 1 1 0 010 1z" class="cls-1 booth-item" data-name="Layer 2" data-toggle="modal" data-target="#boothCardC"/>
+                <path id="boothA" d="M812 526a21 21 0 1021 21 21 21 0 00-21-21zm-1 13a2 2 0 011-1 2 2 0 012 4 2 2 0 01-2 0 2 2 0 01-1-3zm-2 5a1 1 0 011-1h4a1 1 0 011 1v4h-1v4a1 1 0 01-1 1h-2a1 1 0 01-1-1v-4a1 1 0 01-1 0zm9 10a4 4 0 01-1 1 13 13 0 01-2 0 20 20 0 01-5 0 13 13 0 01-2 0 5 5 0 01-2-1 1 1 0 01-1-1 1 1 0 011-1 2 2 0 011-1 9 9 0 011 0 12 12 0 011-1 1 1 0 010 1 1 1 0 011 0 1 1 0 01-1 1h-1a7 7 0 00-1 0 1 1 0 000 1 4 4 0 001 0l1 1a12 12 0 001 0 19 19 0 004 0 12 12 0 002 0 9 9 0 001-1 3 3 0 001 0 2 2 0 00-1-1 7 7 0 00-1 0h-1a1 1 0 010-1 1 1 0 010-1 13 13 0 012 1 9 9 0 011 0 3 3 0 011 1 1 1 0 010 1 1 1 0 01-1 1z" class="cls-1 booth-item" data-name="Layer 3" data-toggle="modal" data-target="#boothCardA"/>
+                <path id="boothB" d="M507 543a21 21 0 1021 21 21 21 0 00-21-21zm-1 13a2 2 0 013 0 2 2 0 010 3 2 2 0 01-4-2 2 2 0 011-2zm-2 5a1 1 0 010-1 1 1 0 011-1h4a1 1 0 011 1 1 1 0 010 1v3a1 1 0 010 1h-1v4a1 1 0 01-1 0h-2a1 1 0 01-1 0v-4a1 1 0 01-1-1zm9 9a5 5 0 01-1 1 14 14 0 01-2 1 20 20 0 01-5 0 14 14 0 01-3-1 5 5 0 01-1-1 1 1 0 01-1-1 1 1 0 011 0 3 3 0 010-1 9 9 0 012-1 13 13 0 011 0 1 1 0 011 1 1 1 0 01-1 0l-1 1a6 6 0 00-1 0v1a4 4 0 001 0 9 9 0 001 0l1 1h4l2-1a11 11 0 001 0l1-1h-1a9 9 0 00-2-1 1 1 0 010-1 13 13 0 012 0 9 9 0 011 1 3 3 0 011 1 1 1 0 01-1 1z" class="cls-1 booth-item" data-name="Layer 4" data-toggle="modal" data-target="#boothCardB"/>
+                <path id="boothD" d="M605 422a21 21 0 1021 21 21 21 0 00-21-21zm-2 13a2 2 0 013 0 2 2 0 011 2 2 2 0 01-4 0 2 2 0 010-2zm-1 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 010 1 1 1 0 01-1 0v3a1 1 0 010 1 1 1 0 01-1 0h-2a1 1 0 01-1 0 1 1 0 010-1v-3h-1a1 1 0 010-1zm9 10a5 5 0 01-2 1 13 13 0 01-2 0 20 20 0 01-5 0 13 13 0 01-2 0 5 5 0 01-1-1 1 1 0 01-1-1 1 1 0 010-1 3 3 0 011 0 9 9 0 011-1 10 10 0 012 0 1 1 0 010 1h-1a6 6 0 00-1 1 1 1 0 00-1 0h1a4 4 0 000 1 11 11 0 001 0 12 12 0 002 0 19 19 0 004 0 12 12 0 001 0 9 9 0 001 0 4 4 0 001-1 9 9 0 00-2-1 1 1 0 01-1 0 1 1 0 010-1 1 1 0 011 0 10 10 0 011 0 9 9 0 012 1 1 1 0 011 1 1 1 0 01-1 1z" class="cls-1 booth-item" data-name="Layer 5" data-toggle="modal" data-target="#boothCardD"/>
+              </g>
+            </svg>
+        </div>
+           
+        <!------------------------------------- Clones (Booth Card & Slide Questions) ------>
+        
+        <div id="cloneChild" style="display: none;">
+            <div id="clone" style="z-index: 1050;">
+                <div class="modal modal-light fade-in" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="container">
+                                <button type="button" class="modal-button primary-text mb30" data-dismiss="modal"><i class="fas fa-times"></i></button>
+                                
+                                <div class="instruction-recorder">
+                                    <div class="flex-collection">
+                                        <div class="flex-2">
+                                            <h5 class="mb30">How to Use</h5>
+
+                                            <p>You're required to complete two interviews with two different companies. To choose a company click on the person icon closiest to their booth <i class="fas fa-street-view"></i>.</p>
+
+                                            <p>Listen to the directors questions by clicking on the play button on the audio player of each question card. After listening, record your response by selecting 'record' button. Then the 'stop' button when you are finished. Your recordings will appear below. You can record your answer more than once.</p>
+
+                                            <p>When you are satisfied with your response you can download a MP3 file by following the instructions below.</p>
+                                            
+                                            <button class="hide-info">Hide Instructions</button>
+                                        </div>
+                                        <div class="flex-2">
+                                             <h5 class="mb30">Save Your Work</h5>
+
+                                            <div class="mb30 notification-area">
+                                                <p class="mb0"><strong>Downloading</strong></p>
+                                                <p>To get a copy of your recording select the 3 dot icon, located on the right-hand side the audio player. Then click download. (If using firefox, right click on the player and select 'Save Audio As...' from the menu)</p>
+
+                                                <img src="images/download@72x.png" width="288px" style="margin: 0 auto;" alt="Download Button">
+                                            </div>
+                                            <div class="mb30 notification-area">
+                                                <p class="mb0"><strong>Zipped Files</strong></p>
+                                                <p>After downloading, rename your files according to the question number and philosphy type. Zip them in a folder with your name. Provide this to your professor as directed.</p>
+
+                                                <p>Example: <i>montessori-question1.mp3</i></p>
+
+                                                <img src="images/naming-convention@72x.png" width="120px" alt="File Names" style="margin: 0 auto;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="booth-card">
+                                <div class="booth-director">
+                                    <div class="booth-image"></div>
+                                    <div class="booth-content">
+                                        <h6 class="card-name mb30"></h6>
+
+                                        <p class="card-description"></p>
+
+                                        <a class="card-button button secondary">Begin Interview</a>
+                                        
+                                        <button class="clean-button info-button"><i class="fas fa-info-circle"></i> Instructions</button>
+                                    </div>
+                                </div>
+                                <div class="booth-area">
+                                </div>
+                                <div class="question-content">
+                                </div>
+                            </div>
+                            <div class="question-playlist"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="cloneSlide" style="display: none;">
+            <div class="slide">
+                <div class="slide-content">
+                    <div class="director-data">
+                        <div class="question-audio"></div>
+                    </div>
+                    <div class="recorder-data">
+                        <div class="question-recorder"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="clonedChildren"></div>
+        
+        <!--------------------------------------- Button Dashboard ----->
+
+        <div class="button-dash">
+            <button  class="clean-button" data-toggle="modal" data-target="#instructions"><i class="fas fa-info-circle"></i> Instructions</button>
+        </div> 
+
+		<!-- Scripts -->
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+        
+        <script src="https://unpkg.com/mic-recorder-to-mp3/dist/index.min.js"></script>
+        
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/bootstrap.js"></script>
+        
+		<script src="assets/js/skel.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+		<script src="assets/js/main.js"></script>
+		<script src="assets/js/slick-master/slick/slick.js"></script>
+		
+		<script>
+            $(document).ready(function(){
+                $("#instructions").modal('show');
+            });
+            
+            
+            $(function () {
+                json = {
+                    "directors": [
+                        {
+                            "name": "Brian Malloy",
+                            "jobTitle": "Director A",
+                            "image": "images/profiles/image-1.jpg",
+                            "bootharea": "images/profiles/booth-1.jpg",
+                            "description": "&quot; Thank you for choosing our institution. Select the button below to begin your interview. Be sure to answer all 3 questions. &quot;",
+                            "booth": "A",
+                            "category": "Emergent",
+                            "company": "Centre for Early Childhood Education"
+                        },
+                        {
+                            "name": "Robert Smith",
+                            "jobTitle": "Director B",
+                            "image": "images/profiles/image-2.jpg",
+                            "bootharea": "images/profiles/booth-2.jpg",
+                            "description": "&quot; Thank you for choosing our institution. Select the button below to begin your interview. Be sure to answer all 3 questions. &quot;",
+                            "booth": "B",
+                            "category": "Montessori",
+                            "company": "Casa dei Bambini"
+                        },
+                        {
+                            "name": "Nora Lee",
+                            "jobTitle": "Director C",
+                            "image": "images/profiles/image-3.jpg",
+                            "bootharea": "images/profiles/booth-3.jpg",
+                            "description": "&quot; Thank you for choosing our institution. Select the button below to begin your interview. Be sure to answer all 3 questions. &quot;",
+                            "booth": "C",
+                            "category": "Reggio",
+                            "company": "The Diana School"
+                        },
+                        {
+                            "name": "Jessica Harris",
+                            "jobTitle": "Director D",
+                            "image": "images/profiles/image-4.jpg",
+                            "bootharea": "images/profiles/booth-4.jpg",
+                            "description": "&quot; Thank you for choosing our institution. Select the button below to begin your interview. Be sure to answer all 3 questions. &quot;",
+                            "booth": "D",
+                            "category": "Waldorf",
+                            "company": "Story Book Garden School"
+                        }
+                    ],
+
+                    "emergant": [
+                       {
+                           "questionAudio": "audio/q8-Emergent-audio.mp3",
+                           "answerRecorder": "Add Recorder",
+                           "identifier": "emergant8",
+                           "title": "Question 1 Response"
+                       },
+                       {
+                           "questionAudio": "audio/q9-Emergent-audio.mp3",
+                           "answerRecorder": "Add Recorder",
+                           "identifier": "emergant9",
+                           "title": "Question 2 Response"
+                       },
+                       {
+                           "questionAudio": "audio/q10-Emergent-audio.mp3",
+                           "answerRecorder": "Add Recorder",
+                           "identifier": "emergant10",
+                           "title": "Question 3 Response"
+                       }
+                    ],
+
+                    "montessori": [
+                       {
+                           "questionAudio": "audio/q8-Montessori-audio.mp3",
+                           "answerRecorder": "Add Recorder",
+                           "identifier": "montessori8",
+                           "title": "Question 1 Response"
+                       },
+                       {
+                           "questionAudio": "audio/q9-Montessori-audio.mp3",
+                           "answerRecorder": "Add Recorder",
+                           "identifier": "montessori9",
+                           "title": "Question 2 Response"
+                       },
+                       {
+                           "questionAudio": "audio/q10-Montessori-audio.mp3",
+                           "answerRecorder": "Add Recorder",
+                           "identifier": "montessori10",
+                           "title": "Question 3 Response"
+                       }
+                    ],
+
+                    "reggio": [
+                       {
+                           "questionAudio": "audio/q8-Reggio-audio.mp3",
+                           "answerRecorder": "Add Recorder",
+                           "identifier": "reggio8",
+                           "title": "Question 1 Response"
+                       },
+                       {
+                           "questionAudio": "audio/q9-Reggie-audio.mp3",
+                           "answerRecorder": "Add Recorder",
+                           "identifier": "reggio9",
+                           "title": "Question 2 Response"
+                       },
+                       {
+                           "questionAudio": "audio/q10-Reggio-audio.mp3",
+                           "answerRecorder": "Add Recorder",
+                           "identifier": "reggio10",
+                           "title": "Question 3 Response"
+                       }
+                    ],
+
+                    "waldorf": [
+                       {
+                           "questionAudio": "audio/q8-Reggio-audio.mp3",
+                           "answerRecorder": "Add Recorder",
+                           "identifier": "waldorf8",
+                           "title": "Question 1 Response"
+                       },
+                       {
+                           "questionAudio": "audio/q9-Waldorf-audio.mp3",
+                           "answerRecorder": "Add Recorder",
+                           "identifier": "waldorf9",
+                           "title": "Question 2 Response"
+                       },
+                       {
+                           "questionAudio": "audio/q10-Waldorf-audio.mp3",
+                           "answerRecorder": "Add Recorder",
+                           "identifier": "waldorf10",
+                           "title": "Question 3 Response"
+                       }
+                   ]
+                };
+                
+            $('.question-content').hide();
+            $('.notification').hide();
+            $('.instruction-recorder').hide();
+            $('.info-button').hide();
+                             
+            //-------------------------------- Directors Card
+
+            $.each(json.directors, function () {
+                var newProfile = $("body").find("#cloneChild > #clone").clone();
+
+                // Content
+                newProfile.find(".card-name").append('<span class="primary-text">' + this.name + ',</span> ' + this.company + '<br><i>(' + this.category + ')</i>');
+                newProfile.find(".card-description").append(this.description);
+                newProfile.find(".card-category").append(this.category);
+                newProfile.find(".booth-image").css('background-image', 'url(' + this.image + ')');
+                newProfile.find(".booth-area").css('background-image', 'url(' + this.bootharea + ')');
+
+                // Identifiers
+                newProfile.find(".modal-light").attr('id', 'boothCard' + this.booth);
+                newProfile.find(".card-button").attr('id', 'button' + this.booth);
+                newProfile.find(".card-instructions").attr('id', 'instructions' + this.booth);
+                newProfile.find(".question-content").attr('id', 'questions' + this.booth);
+           
+                newProfile.find(".question-content").append('<div id="slider' + this.booth + '" class="regular slider"></div>');
+                
+                newProfile.find(".question-playlist").append('<ul id="playlist' + this.booth + '" class="listing alpha"></ul>');
+
+                // Populate Item
+                $(newProfile).appendTo(".clonedChildren");
+                
+            });
+                
+            // ---------------------------------- EMERGANT
+
+            $.each(json.emergant, function () {
+                var newQuestion = $("body").find("#cloneSlide > .slide").clone();
+
+                // Question Identifier
+                newQuestion.find(".slide-content").attr('id', this.identifier);
+                
+                //Question Audio
+                newQuestion.find(".question-audio").append('<audio controls controlsList="nodownload"><source src="' + this.questionAudio + '" type="audio/mpeg">Your browser does not support the audio element.</audio>');
+                
+                newQuestion.find(".question-recorder").append('<button id="button' + this.identifier + '" class="recording-button">Start recording</button>');
+                                                
+                // Populate Item
+                $(newQuestion).appendTo("#sliderA");
+                
+                var filename = this.identifier + '.mp3';
+                var filetitle = this.title;
+                
+                const button = document.querySelector('#button' + this.identifier);
+                const recorder = new MicRecorder({
+                  bitRate: 128
+                });
+
+                button.addEventListener('click', startRecording);
+                button.textContent = 'Record';
+
+                function startRecording() {
+                  recorder.start().then(() => {
+                    button.textContent = 'Stop';
+                    button.classList.toggle('btn-danger');
+                    button.removeEventListener('click', startRecording);
+                    button.addEventListener('click', stopRecording);
+                  }).catch((e) => {
+                    console.error(e);
+                    $('.notification').show();
+                    $('.modal').css('padding-top', '5rem');
+                    $('.notification').append('<p class="mb0">Your browser is incompatible. Make sure you are using the most recent version.</p>');
+                  });
+                }
+
+                function stopRecording() {
+                  recorder.stop().getMp3().then(([buffer, blob]) => {
+                    console.log(buffer, blob);
+                    const file = new File(buffer, filename, {
+                      type: blob.type,
+                      title: filename,
+                      lastModified: Date.now()
+                    });
+                      
+                    const li = document.createElement('li');
+                    const player = new Audio(URL.createObjectURL(file));
+                    player.controls = true;
+                    li.innerHTML = '<div class="file-title">' + filetitle + '</div>';
+                    li.appendChild(player);
+                    li.className = 'recorded-item';
+                    document.querySelector('#playlistA').appendChild(li);
+                      
+                    button.textContent = 'Record Again';
+                    button.classList.toggle('btn-danger');
+                    button.removeEventListener('click', stopRecording);
+                    button.addEventListener('click', startRecording);
+                  }).catch((e) => {
+                    console.error(e);
+                    $('.notification').show();
+                    $('.modal').css('padding-top', '5rem');
+                    $('.notification').append('<p class="mb0">Your browser is incompatible. Make sure you are using the most recent version.</p>');
+                  });
+                }
+            });
+                
+                
+            $('#buttonA').click(function() {
+                $('#questionsA').fadeIn();
+                $('#buttonA').fadeOut();
+                $('.info-button').fadeIn();
+                
+                $("#sliderA").slick({
+                    dots: true,
+                    adaptiveHeight: true,
+                    centerMode: true,
+                    centerPadding: '60px',
+                    arrows: true,
+                    infinite: false,
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                });
+
+            });
+                
+            // ---------------------------------- MONTESSORI
+
+            $.each(json.montessori, function () {
+                var newQuestion = $("body").find("#cloneSlide > .slide").clone();
+
+                // Question Identifier
+                newQuestion.find(".slide-content").attr('id', this.identifier);
+                
+                //Question Audio
+                newQuestion.find(".question-audio").append('<audio controls controlsList="nodownload"><source src="' + this.questionAudio + '" type="audio/mpeg">Your browser does not support the audio element.</audio>');
+                
+                newQuestion.find(".question-recorder").append('<button id="button' + this.identifier + '" class="recording-button">Start recording</button>');
+                                
+
+                // Populate Item
+                $(newQuestion).appendTo("#sliderB");
+                
+                var filename = this.identifier + '.mp3';
+                var filetitle = this.title;
+                
+                const button = document.querySelector('#button' + this.identifier);
+                const recorder = new MicRecorder({
+                  bitRate: 128
+                });
+
+                button.addEventListener('click', startRecording);
+                button.textContent = 'Record';
+
+                function startRecording() {
+                  recorder.start().then(() => {
+                    button.textContent = 'Stop';
+                    button.classList.toggle('btn-danger');
+                    button.removeEventListener('click', startRecording);
+                    button.addEventListener('click', stopRecording);
+                  }).catch((e) => {
+                    console.error(e);
+                    $('.notification').show();
+                    $('.modal').css('padding-top', '5rem');
+                    $('.notification').append('<p class="mb0">Your browser is incompatible. Make sure you are using the most recent version.</p>');
+                  });
+                }
+
+                function stopRecording() {
+                  recorder.stop().getMp3().then(([buffer, blob]) => {
+                    console.log(buffer, blob);
+                    const file = new File(buffer, filename, {
+                      type: blob.type,
+                      title: filename,
+                      lastModified: Date.now()
+                    });
+                      
+                    const li = document.createElement('li');
+                    const player = new Audio(URL.createObjectURL(file));
+                    player.controls = true;
+                    li.innerHTML = '<div class="file-title">' + filetitle + '</div>';
+                    li.appendChild(player);
+                    li.className = 'recorded-item';
+                    document.querySelector('#playlistB').appendChild(li);
+                      
+                    button.textContent = 'Record Again';
+                    button.classList.toggle('btn-danger');
+                    button.removeEventListener('click', stopRecording);
+                    button.addEventListener('click', startRecording);
+                  }).catch((e) => {
+                    console.error(e);
+                    $('.notification').show();
+                    $('.modal').css('padding-top', '5rem');
+                    $('.notification').append('<p class="mb0">Your browser is incompatible. Make sure you are using the most recent version.</p>');
+                  });
+                }
+            });
+
+                
+            $('#buttonB').click(function() {
+                $('#questionsB').fadeIn();
+                $('#buttonB').fadeOut();
+                $('.info-button').fadeIn();
+                
+                $("#sliderB").slick({
+                    dots: true,
+                    adaptiveHeight: true,
+                    centerMode: true,
+                    centerPadding: '60px',
+                    arrows: true,
+                    infinite: false,
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                });
+            });
+
+            // ---------------------------------- REGGIO
+
+            $.each(json.reggio, function () {
+                var newQuestion = $("body").find("#cloneSlide > .slide").clone();
+
+                // Question Identifier
+                newQuestion.find(".slide-content").attr('id', this.identifier);
+                
+                //Question Audio
+                newQuestion.find(".question-audio").append('<audio controls controlsList="nodownload"><source src="' + this.questionAudio + '" type="audio/mpeg">Your browser does not support the audio element.</audio>');
+                
+                newQuestion.find(".question-recorder").append('<button id="button' + this.identifier + '" class="recording-button">Start recording</button>');
+                
+                // Populate Item
+                $(newQuestion).appendTo("#sliderC");
+                
+                var filename = this.identifier + '.mp3';
+                var filetitle = this.title;
+                
+                const button = document.querySelector('#button' + this.identifier);
+                const recorder = new MicRecorder({
+                  bitRate: 128
+                });
+
+                button.addEventListener('click', startRecording);
+                button.textContent = 'Record';
+
+                function startRecording() {
+                  recorder.start().then(() => {
+                    button.textContent = 'Stop';
+                    button.classList.toggle('btn-danger');
+                    button.removeEventListener('click', startRecording);
+                    button.addEventListener('click', stopRecording);
+                  }).catch((e) => {
+                    console.error(e);
+                    $('.notification').show();
+                    $('.modal').css('padding-top', '5rem');
+                    $('.notification').append('<p class="mb0">Your browser is incompatible. Make sure you are using the most recent version.</p>');
+                  });
+                }
+
+                function stopRecording() {
+                  recorder.stop().getMp3().then(([buffer, blob]) => {
+                    console.log(buffer, blob);
+                    const file = new File(buffer, filename, {
+                      type: blob.type,
+                      title: filename,
+                      lastModified: Date.now()
+                    });
+                      
+                    const li = document.createElement('li');
+                    const player = new Audio(URL.createObjectURL(file));
+                    player.controls = true;
+                    li.innerHTML = '<div class="file-title">' + filetitle + '</div>';
+                    li.appendChild(player);
+                    li.className = 'recorded-item';
+                    document.querySelector('#playlistC').appendChild(li);
+                      
+                    button.textContent = 'Record';
+                    button.classList.toggle('btn-danger');
+                    button.removeEventListener('click', stopRecording);
+                    button.addEventListener('click', startRecording);
+                  }).catch((e) => {
+                    console.error(e);
+                    $('.notification').show();
+                    $('.modal').css('padding-top', '5rem');
+                    $('.notification').append('<p class="mb0">Your browser is incompatible. Make sure you are using the most recent version.</p>');
+                  });
+                }
+            });
+                
+            $('#buttonC').click(function() {
+                $('#questionsC').fadeIn();
+                $('#buttonC').fadeOut();
+                $('.info-button').fadeIn();
+                
+                $("#sliderC").slick({
+                    dots: true,
+                    adaptiveHeight: true,
+                    centerMode: true,
+                    centerPadding: '60px',
+                    arrows: true,
+                    infinite: false,
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                });
+            });
+
+
+            // ---------------------------------- WALDORF
+
+            $.each(json.waldorf, function () {
+                var newQuestion = $("body").find("#cloneSlide > .slide").clone();
+
+                // Question Identifier
+                newQuestion.find(".slide-content").attr('id', this.identifier);
+                
+                //Question Audio
+                newQuestion.find(".question-audio").append('<audio controls controlsList="nodownload"><source src="' + this.questionAudio + '" type="audio/mpeg">Your browser does not support the audio element.</audio>');
+                
+                newQuestion.find(".question-recorder").append('<button id="button' + this.identifier + '" class="recording-button">Start recording</button>');
+                
+                // Populate Item
+                $(newQuestion).appendTo("#sliderD");
+                
+                var filename = this.identifier + '.mp3';
+                var filetitle = this.title;
+                
+                const button = document.querySelector('#button' + this.identifier);
+                const recorder = new MicRecorder({
+                  bitRate: 128
+                });
+
+                button.addEventListener('click', startRecording);
+                button.textContent = 'Record';
+
+                function startRecording() {
+                  recorder.start().then(() => {
+                    button.textContent = 'Stop';
+                    button.classList.toggle('btn-danger');
+                    button.removeEventListener('click', startRecording);
+                    button.addEventListener('click', stopRecording);
+                  }).catch((e) => {
+                    console.error(e);
+                    $('.notification').show();
+                    $('.modal').css('padding-top', '5rem');
+                    $('.notification').append('<p class="mb0">Your browser is incompatible. Make sure you are using the most recent version.</p>');
+                  });
+                }
+
+                function stopRecording() {
+                  recorder.stop().getMp3().then(([buffer, blob]) => {
+                    console.log(buffer, blob);
+                    const file = new File(buffer, filename, {
+                      type: blob.type,
+                      title: filename,
+                      lastModified: Date.now()
+                    });
+                      
+                    const li = document.createElement('li');
+                    const player = new Audio(URL.createObjectURL(file));
+                    player.controls = true;
+                    li.innerHTML = '<div class="file-title">' + filetitle + '</div>';
+                    li.appendChild(player);
+                    li.className = 'recorded-item';
+                    document.querySelector('#playlistD').appendChild(li);
+                      
+                    button.textContent = 'Record Again';
+                    button.classList.toggle('btn-danger');
+                    button.removeEventListener('click', stopRecording);
+                    button.addEventListener('click', startRecording);
+                  }).catch((e) => {
+                    console.error(e);
+                    $('.notification').show();
+                    $('.modal').css('padding-top', '5rem');
+                    $('.notification').append('<p class="mb0">Your browser is incompatible. Make sure you are using the most recent version.</p>');
+                  });
+                }
+            });
+
+            $('#buttonD').click(function() {
+                $('#questionsD').fadeIn();
+                $('#buttonD').fadeOut();
+                $('.info-button').fadeIn();
+                
+                $("#sliderD").slick({
+                    dots: true,
+                    adaptiveHeight: true,
+                    centerMode: true,
+                    centerPadding: '60px',
+                    arrows: true,
+                    infinite: false,
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                });
+            });
+                
+            $('.info-button').click(function() {
+                $('.instruction-recorder').fadeIn();
+            });
+                
+            $('.hide-info').click(function() {
+                $('.instruction-recorder').fadeOut();
+            });
+                
+            $('.modal-button').click(function() {
+                $('.instruction-recorder').fadeOut();
+            });
+        });   
+        </script>
+	</body>
+</html>
