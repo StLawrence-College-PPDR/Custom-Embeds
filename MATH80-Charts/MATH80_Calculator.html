@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Advanced Calculator</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <style>
+            body {
+                width:100%;
+                height:100%;
+                margin:0;
+            }
+            
+            form {
+                margin-bottom: 10px;
+            }
+
+            #calc {
+                width:100%;
+                height:100%;
+                margin:0;
+                padding:5%;
+            }
+
+            #regular,
+            #advanced  {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: stretch;
+            }
+            
+            #regular button,
+            #advanced button {
+                width: 24%;
+                margin: 0 2px 10px 0;
+            }
+
+            #math {
+                display:none;
+                /*if you set this value to 'block', you can see the magic.*/
+            }
+            
+            .btnR {
+                width: 100%;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="calc">
+        <form name="inp">
+            <input type="text" name="ut" readonly id="display" value="" placeholder="0" class="form-control">
+        </form>
+        <div id="advanced">
+        <button class="xtraNum btn btn-secondary" onclick= "myInput('&pi;','M', 'PI')">&pi;</button>
+        <button class="xtraNum btn btn-secondary" onclick= "myInput('e^(', 'M')">e^x</button>
+        <button class="xtraNum btn btn-secondary" onclick= "myInput('&radic;(', 'M', 'sqrt(')">&radic;</button>
+        <button class="xtraNum btn btn-secondary" onclick= "squared()">x^y</button>
+        <button class="xtraNum btn btn-secondary" onclick= "myInput('1÷(', 'O')">1/x</button>
+        <button class="xtraNum btn btn-secondary" onclick= "myInput('tan(','M')">tan</button>
+        <button class="xtraNum btn btn-secondary" onclick= "myInput('sin(','M')">sin</button>
+        <button class="xtraNum btn btn-secondary" onclick= "myInput('cos(','M')">cos</button>
+        <button class="xtraNum btn btn-secondary" onclick= "myInput('log(','M')">log</button>
+        <button class="xtraNum btn btn-secondary" onclick= "myInput('atan(','M')">tanh</button>
+        <button class="xtraNum btn btn-secondary" onclick= "myInput('sin(','M')">sinh</button>
+        <button class="xtraNum btn btn-secondary" onclick= "myInput('acos(','M')">cosh</button>
+        <button class="xtraNum btn btn-secondary" onclick= "myInput('abs(','M')">| x |</button>
+        <button class="xtraNum btn btn-secondary" onclick= "CLR()">CLR</button>
+        <button class="xtraNum btn btn-secondary" onclick= "DEL()">DEL</button>
+        <button class="Ans btn btn-secondary" onclick= "myInput('Ans', 'N')">Ans</button>
+        
+        </div>
+        <div id="regular">
+        <button class= "opr btn btn-outline-primary" onclick= "myInput('+','O')">+</button>
+        <button class= "opr btn btn-outline-primary" onclick= "myInput('-','O')">-</button>
+        <button class= "opr btn btn-outline-primary" onclick= "myInput('×','O')">×</button>
+        <button class= "opr btn btn-outline-primary" onclick= "myInput('÷','O')">÷</button>
+        
+        <button class="btnN btn btn-light" onclick= "myInput('1','N')">1</button>
+        <button class="btnN btn btn-light" onclick= "myInput('2','N')">2</button>
+        <button class="btnN btn btn-light" onclick= "myInput('3','N')">3</button>
+        <button class="btnN btn btn-light" onclick= "myInput('4','N')">4</button>
+        <button class="btnN btn btn-light" onclick= "myInput('5','N')">5</button>
+        <button class="btnN btn btn-light" onclick= "myInput('6','N')">6</button>
+        <button class="btnN btn btn-light" onclick= "myInput('7','N')">7</button>
+        <button class="btnN btn btn-light" onclick= "myInput('8','N')">8</button>
+        <button class="btnN btn btn-light" onclick= "myInput('9','N')">9</button>
+        <button class="btnN btn btn-light" onclick= "myInput('0','N')">0</button>
+        <button class="btnD btn btn-light" onclick= "myInput('.','N')">.</button>
+        <button class="bct btn btn-light" onclick= "Brackets('b')">( )</button>
+       </div>
+       <button class="btnR btn btn-primary btn-lg" onclick= "myResult()">=</button>
+       </div>
+        <footer style="font-size:12px; font-variant:italic; margin-left:8px;">
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+        <script>
+            var x = 0;
+            var D = [[],[],[]];
+            var br = 0;
+            var math = '';
+            var ans = null;
+
+            function myInput(n, t, m) {
+                i = inp.ut.value;
+                if (i == 'Syntax Error' || i == 'infinity' || i == 'NaN' || i == 'undefined' || (i == '0' && (n != '.' && t != 'O')) || i == '-infinity') {
+                    CLR();
+                }
+                n = n.toString();
+                D[0].unshift(n);
+                inp.ut.value += n;
+                if (n == 'Ans') {
+                    if (ans != null) {
+                        if (D[2][0] == 'N') {n = '*';}
+                        else {n = '';}
+                        n += '(' + ans + ')';
+                    }
+                    else {
+                        i = inp.ut.value;
+                        inp.ut.value = i.substr(0, i.length - 3);
+                        return;
+                    }
+                }
+                else if (t == 'O') {
+                    if (D[2][0] == 'N' && n == '(') {n = '*('}
+                    switch (n) {
+                        case '×': n = '*'; break;
+                        case '÷': n = '/'; break;
+                        case '1÷(': n = '1/('; br++; if (D[2][0] == 'N') {n = '*' + n;} break;
+                    }
+                }
+                else if (t == 'M') {
+                    if (n.endsWith('(')) {br++}
+                    if (m == undefined) {
+                        switch (n) {
+                            case 'e^(': n = 'exp('; break;
+                        }
+                    }
+                    else {n = m}
+                    n = 'Math.' + n;
+                    if (D[2][0] == "N") {
+                        n = '*' + n;
+                    }
+                }
+                math += n;
+                D[1].unshift(n);
+                D[2].unshift(t);
+            }
+
+            var Brackets = function(b) {
+                if (b == 'b') {
+                    if (br == 0) {
+                        br++
+                        myInput('(', 'O');
+                    }
+                    else if (br > 0 && (D[2][0] == 'O' || D[2][0] === '')) {
+                        br += 1;
+                        myInput('(','O');
+                    }
+                    else {
+                        br -= 1;
+                        myInput(')','N');
+                    }
+                }
+            }
+
+            function CLR() {
+                inp.ut.value = '';
+                math = '';
+                D = [[],[],[]]
+                br = 0;
+            }
+
+            function DEL() {
+                i = inp.ut.value.length;
+                if (i === "") {return}
+                inp.ut.value = inp.ut.value.substr(0, i-D[0][0].length);
+                math = math.substr(0, math.length - D[1][0].length);
+                if (D[0][0].endsWith(')')) {br++}
+                if (D[0][0].endsWith('(')) {br--}
+                D[0].shift();
+                D[1].shift();
+                D[2].shift();
+            }
+
+            function myResult() {
+                if (math === '') {return}
+                for (f=0; f<br; f++) {
+                    Brackets('b');
+                }
+            var r;
+                try {
+                    r = eval(math).toString();
+                    CLR();
+                }
+                catch (err) {
+                    inp.ut.value = "Syntax Error";
+                    math = '';
+                    ans = null;
+                    return;
+                }
+                if (r == 'NaN' || r == 'undefined') {
+                    ans = null;
+                }
+                else {
+                    ans = r;
+                }
+                for (f = 0; f < r.length; f++) {
+                    i = r.charAt(f);
+                    myInput(i, 'N');
+                }
+            }
+
+            function squared() {
+            if (math === '') {return}
+                c1 = ''; c2 = '';
+                var bool = true;
+                while (bool) {
+                    c1 = D[0][0] + c1;
+                    c2 = D[1][0] + c2;
+                    DEL();
+                    bool = !(D[2].length == 0 || D[0][0].endsWith(")") || D[2][0] == 'O');
+                }
+                br++;
+                c1 = '(' + c1 + ')^(';
+                c2 = 'Math.pow(' + c2 + ',';
+                inp.ut.value += c1;
+                math += c2;
+                D[0].unshift(c1);
+                D[1].unshift(c2);
+                D[2].unshift('M');
+            }
+        </script>
+    </body>
+</html>

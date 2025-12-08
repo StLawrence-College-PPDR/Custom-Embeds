@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head> 
+		<title>Business Fundamentals - Chart A</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=400, height=600, initial-scale=0.8, maximum-scale=1">
+		<style>
+        @keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}
+        .chartjs-render-monitor{animation:chartjs-render-animation 1ms}
+        .chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}
+        .chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}
+        .chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}
+        </style>
+	</head>
+	<body>
+		<header id="header" class="landing">
+			<div class="container">
+			</div>
+		</header>
+		<div class="chartjs-size-monitor">
+			<div class="chartjs-size-monitor-expand">
+				<div class=""></div>
+			</div>
+			<div class="chartjs-size-monitor-shrink">
+				<div class=""></div>
+			</div>
+		</div>
+            <canvas id="canvas" style="display: block; width: 1379px; height: 689px;" width="1379" height="689" class="chartjs-render-monitor"></canvas>
+            <script src="https://cdn2.hubspot.net/hubfs/476360/Chart.js" crossorigin="anonymous"></script>
+            <script src="https://cdn2.hubspot.net/hubfs/476360/utils.js" crossorigin="anonymous"></script>
+        <script>
+            var config = {
+                type: 'line',
+                data: {
+                    labels: ['1995', '1996', '1997', '1998', '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007','2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+                    datasets: [{
+                        label: 'Percent (%)',
+                        backgroundColor: '#d84738',
+                        borderColor: '#d84738',
+                        fill: false,
+                        data: [
+                            8.23,
+                            5.74,
+                            3.25,
+                            4.5,
+                            5.5,
+                            5,
+                            5.75,
+                            2.25,
+                            3,
+                            3,
+                            2.75,
+                            3.75,
+                            4.5,
+                            4.75,
+                            2.5,
+                            0.5,
+                            1.25,
+                            1.25,
+                            1.25,
+                            1.25,
+                            1,
+                            0.75,
+                            0.75,
+                            1,
+                            1.5,
+                            1.75,
+                            0.5,
+                            0.5,
+                            4.5,
+                            5.75
+                        ],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Historical Canadian Bank Overnight Lending Rates'
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                  scaleLabel: {
+                    display: true,
+                    labelString: 'Date'
+                  },
+
+                        }],
+                        yAxes: [{
+                            display: true,
+                            //type: 'logarithmic',
+                  scaleLabel: {
+                                    display: true,
+                                    labelString: 'Overnight Bank Lending Rate'
+                                },
+                                ticks: {
+                                    min: 0,
+                                    max: 10,
+
+                                    // forces step size to be 5 units
+                                    stepSize: 2
+                                }
+                        }]
+                    }
+                }
+            };
+
+            window.onload = function() {
+                var ctx = document.getElementById('canvas').getContext('2d');
+                window.myLine = new Chart(ctx, config);
+            };
+
+            document.getElementById('randomizeData').addEventListener('click', function() {
+                config.data.datasets.forEach(function(dataset) {
+                    dataset.data = dataset.data.map(function() {
+                        return randomScalingFactor();
+                    });
+
+                });
+
+                window.myLine.update();
+            });
+        </script>
+	</body>
+</html>

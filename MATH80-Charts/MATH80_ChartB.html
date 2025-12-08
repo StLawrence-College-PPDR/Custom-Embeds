@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head> 
+		<title>Business Fundamentals - Chart B</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=400, height=600, initial-scale=0.8, maximum-scale=1">
+		<style>
+        @keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}
+        .chartjs-render-monitor{animation:chartjs-render-animation 1ms}
+        .chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}
+        .chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}
+        .chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}
+        </style>
+	</head>
+	<body>
+		<header id="header" class="landing">
+			<div class="container">
+			</div>
+		</header>
+		<div class="chartjs-size-monitor">
+			<div class="chartjs-size-monitor-expand">
+				<div class=""></div>
+			</div>
+			<div class="chartjs-size-monitor-shrink">
+				<div class=""></div>
+			</div>
+		</div>
+            <canvas id="canvas" style="display: block; width: 1379px; height: 689px;" width="1379" height="689" class="chartjs-render-monitor"></canvas>
+            <script src="https://cdn2.hubspot.net/hubfs/476360/Chart.js" crossorigin="anonymous"></script>
+            <script src="https://cdn2.hubspot.net/hubfs/476360/utils.js" crossorigin="anonymous"></script>
+        <script>
+            var config = {
+                type: 'line',
+                data: {
+                    labels: ['0', '1.5', '1', '1.5', '2', '2.5', '3', '3.5', '4'],
+                    datasets: [{
+                        label: 'Compound Interest (12% Compounded Annually)',
+                        backgroundColor: '#d84738',
+                        borderColor: '#d84738',
+                        fill: false,
+                        data: [
+                            5000,
+                            5300,
+                            5600,
+                            5900,
+                            6200,
+                            6500,
+                            6800,
+                            7100,
+                            7400
+                        ],
+                    },
+                    {
+                        label: 'Simple Interest (12% p.a.)',
+                        backgroundColor: '#673ab7',
+                        borderColor: '#673ab7',
+                        fill: false,
+                        data: [
+                            5000,
+                            5291.50,
+                            5600,
+                            5926.48,
+                            6272,
+                            6637.66,
+                            7024.64,
+                            7434.18,
+                            7867.60
+                        ],
+                    },
+                    {
+                        label: 'Compound Interest (12% Compounded Semi-annually)',
+                        backgroundColor: '#8bc34a',
+                        borderColor: '#8bc34a',
+                        fill: false,
+                        data: [
+                            5000,
+                            5300,
+                            5618,
+                            5955.08,
+                            6312.38,
+                            6691.12,
+                            7092.59,
+                            7518.15,
+                            7969.24
+                        ],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Future Values of a $5,000 Investment at Various Simple and Compound Interest Rates'
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                  scaleLabel: {
+                    display: true,
+                    labelString: 'Years Invested'
+                  },
+
+                        }],
+                        yAxes: [{
+                            display: true,
+                            //type: 'logarithmic',
+                  scaleLabel: {
+                                    display: true,
+                                    labelString: 'Future Value ($)'
+                                },
+                                ticks: {
+                                    min: 4500,
+                                    max: 8500,
+
+                                    // forces step size to be 5 units
+                                    stepSize: 500
+                                }
+                        }]
+                    }
+                }
+            };
+
+            window.onload = function() {
+                var ctx = document.getElementById('canvas').getContext('2d');
+                window.myLine = new Chart(ctx, config);
+            };
+
+            document.getElementById('randomizeData').addEventListener('click', function() {
+                config.data.datasets.forEach(function(dataset) {
+                    dataset.data = dataset.data.map(function() {
+                        return randomScalingFactor();
+                    });
+
+                });
+
+                window.myLine.update();
+            });
+        </script>
+	</body>
+</html>
