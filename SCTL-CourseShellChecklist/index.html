@@ -1,0 +1,166 @@
+
+<!-- Checklist — Ultra-safe version -->
+<style>
+  /* Keep styles simple so Ultra doesn't strip them */
+  .checklist {
+    max-width: 100%;
+    margin: 0 auto;
+    background: #fff;            /* white only */
+    color: #000;                 /* black font */
+    padding: 16px;
+    box-sizing: border-box;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    background: #f1f1f1;
+    border-radius: 5px; 
+    padding: 40px 45px 50px 45px;
+    border: #cdcbcb 1px solid;
+  }
+
+  .item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .item input[type="checkbox"] {
+    margin-top: 2px; /* aligns checkbox with label text */
+  }
+
+  .progress {
+    margin-top: 16px;
+  }
+
+  .progress-label {
+    font-weight: 600;
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #cdcbcb; /* light gray track */
+    border: 3px solid #cdcbcb;    /* black border to keep monochrome */
+    margin-top: 8px;
+    position: relative;
+  }
+
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background-color: #a234b5;     /* black fill */
+    transition: width 0.3s ease;
+  }
+
+  /* Optional: focus styles for accessibility */
+  .item input[type="checkbox"]:focus-visible {
+    outline: 2px solid #000;
+    outline-offset: 2px;
+  }
+
+</style>
+
+<div class="checklist">
+  <h2 style="margin-bottom: 16px; font-size: 18px; font-weight: 700;">
+    Before the first class or first learning experience:
+  </h2>
+
+  <div class="item">
+    <input type="checkbox" class="task" id="task1">
+    <label for="task1">Upload the most recent approved Course Outline for your Course Code and Course Title</label>
+  </div>
+  <div class="item">
+    <input type="checkbox" class="task" id="task2">
+    <label for="task2">Upload a signed copy of your Learning Plan for the current term</label>
+  </div>
+  <div class="item">
+    <input type="checkbox" class="task" id="task3">
+    <label for="task3">Organize your course content using the layout provided within the prepopulated SLC Course Template</label>
+  </div>
+  <div class="item">
+    <input type="checkbox" class="task" id="task4">
+    <label for="task4">Ensure the Learning Modules align with the module structure in the Learning Plan and Course Outline</label>
+  </div>
+  <div class="item">
+    <input type="checkbox" class="task" id="task5">
+    <label for="task5">Ensure your assessments are built out within the Assessments Module and show in the Gradebook</label>
+  </div>
+  <div class="item">
+    <input type="checkbox" class="task" id="task6">
+    <label for="task6">Set up the Overall Grade Column according to the weightings in your Learning Plan</label>
+  </div>
+
+  <div class="progress">
+    <span class="progress-label">Progress: <span id="progress-text">0%</span></span>
+    <div
+      class="progress-bar"
+      role="progressbar"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="0"
+      aria-label="Checklist completion"
+    >
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+  </div>
+
+
+<script>
+  (function () {
+    const tasks = document.querySelectorAll('.task');
+    const progressText = document.getElementById('progress-text');
+    const progressFill = document.getElementById('progress-fill');
+    const progressBar = document.querySelector('.progress-bar');
+
+    function updateProgress() {
+      const completed = document.querySelectorAll('.task:checked').length;
+      const total = tasks.length;
+      const percent = total === 0 ? 0 : Math.round((completed / total) * 100);
+
+      progressText.textContent = percent + '%';
+      progressFill.style.width = percent + '%';
+      progressBar.setAttribute('aria-valuenow', String(percent));
+    }
+
+    tasks.forEach(task => task.addEventListener('change', updateProgress));
+    // Initialize once on load
+    updateProgress();
+  })();
+</script>
+
+<script>
+  (function () {
+    const tasks = document.querySelectorAll('.task');
+    const progressText = document.getElementById('progress-text');
+    const progressFill = document.getElementById('progress-fill');
+    const progressBar = document.querySelector('.progress-bar');
+    const STORAGE_KEY = 'ultra-checklist-v1';
+
+    function loadState() {
+      try {
+        const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        tasks.forEach((task, i) => task.checked = !!data[i]);
+      } catch (e) {}
+    }
+
+    function saveState() {
+      const data = Array.from(tasks).map(t => t.checked);
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch (e) {}
+    }
+
+    function updateProgress() {
+      const completed = document.querySelectorAll('.task:checked').length;
+      const total = tasks.length;
+      const percent = total === 0 ? 0 : Math.round((completed / total) * 100);
+      progressText.textContent = percent + '%';
+      progressFill.style.width = percent + '%';
+      progressBar.setAttribute('aria-valuenow', String(percent));
+      saveState();
+    }
+
+    loadState();
+    tasks.forEach(task => task.addEventListener('change', updateProgress));
+    updateProgress();
+  })();
+</script>
