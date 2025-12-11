@@ -1,0 +1,136 @@
+<style>
+    /* Make sure the diagram scales properly */
+    .mermaid {
+        width: 100%;       /* Makes the diagram responsive */
+        height: auto;      /* Automatically adjusts height */
+        overflow: hidden;  /* Prevents scrollbars */
+        max-width: 100%;   /* Ensures it doesn't overflow */
+        margin: 0 auto;    /* Centers the diagram */
+    }
+
+    /* Optional: Add some padding for a cleaner look */
+    .mermaid-container {
+        padding: 10px;
+    }
+</style>
+
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ startOnLoad: true });
+</script>
+
+<div class="mermaid">
+---
+config:
+  theme: redux
+  layout: dagre
+---
+flowchart LR
+ subgraph s1["1"]
+        A["Start CPR<br><br>Begin bag-mask ventilation and give oxygen.<br>Attach monitor/defibrillator."]
+  end
+ subgraph s2["3"]
+        G["Shock ASAP"]
+  end
+ subgraph s3["5"]
+        H["Shock ASAP"]
+  end
+ subgraph s4["7"]
+        I["Shock ASAP"]
+  end
+ subgraph s5["9"]
+        L["Asystole/PEA"]
+  end
+ subgraph s6["2"]
+        K["VF/pVT"]
+  end
+ subgraph s7["4"]
+        O["CPR for 2 Min<br><br> IV/IO Access."]
+  end
+ subgraph s8["10"]
+        P["CPR for 2 Min<br><br> IV/IO Access.<br>Epinephrine every 3-5 min.<br>Consider advanced airway and capnography"]
+  end
+ subgraph s9["6"]
+        Q["CPR for 2 Min<br><br>Epinephrine every 3-5 min.<br>Consider advanced airway and capnography."]
+  end
+ subgraph s10["11"]
+        R["CPR for 2 Min<br><br>Treat reversible causes."]
+  end
+ subgraph s11["8"]
+        S["CPR for 2 Min<br><br>Amiodarone or lidocaine.<br>Treat reversible causes."]
+  end
+    A --> B{"Rhythm Shockable?"}
+    B -- Yes --> K
+    B -- No --> L
+    L --> J["Epinephrine ASAP"]
+    J --> P
+    P --> D{"Rhythm Shockable?"}
+    D -- No --> R
+    R --> F{"Rhythm Shockable?"}
+    K --> G
+    G --> O
+    O --> C{"Rhythm Shockable?"}
+    C -- Yes --> H
+    H --> Q
+    Q --> E{"Rhythm Shockable?"}
+    E -- Yes --> I
+    I --> S
+    S -.-> C
+    F -- No --> N["If no signs of return of spontaneous circulation (ROSC), go to 10.<br>If ROSC, go to Post-Cardiac Arrest Care checklist"]
+    F -- Yes --> M["Go to 5."]
+    E -- No --> N
+    D -- Yes --> M
+    C -- No --> N
+
+     B:::Shock
+     D:::Shock
+     F:::Shock
+     C:::Shock
+     E:::Shock
+    classDef Shock fill:#000000, stroke:#000000, color:#FFFFFF
+    style A stroke:#AA00FF,fill:#FFFFFF
+    style G stroke:#2962FF,fill:#FFFFFF
+    style H stroke:#2962FF,fill:#FFFFFF
+    style I stroke:#2962FF,fill:#FFFFFF
+    style L stroke:#D50000,fill:#FFFFFF
+    style K stroke:#2962FF,fill:#FFFFFF
+    style O stroke:#2962FF,fill:#FFFFFF
+    style P stroke:#D50000,fill:#FFFFFF
+    style Q stroke:#2962FF,fill:#FFFFFF
+    style R stroke:#D50000
+    style S stroke:#2962FF,fill:#FFFFFF
+    style J stroke:#D50000,fill:#FFFFFF
+    style N fill:#FFFFFF,stroke:#D50000
+    style M fill:#FFFFFF,stroke:#2962FF
+    style s6 fill:#BBDEFB,stroke:#2962FF,color:#2962FF
+    style s2 fill:#BBDEFB,stroke:#2962FF,color:#2962FF
+    style s7 color:#2962FF,fill:#BBDEFB,stroke:#2962FF
+    style s5 fill:#FFCDD2,color:#D50000,stroke:#D50000
+    style s8 stroke:#D50000,color:#D50000,fill:#FFCDD2
+    style s3 fill:#BBDEFB,stroke:#2962FF,color:#2962FF
+    style s9 fill:#BBDEFB,stroke:#2962FF,color:#2962FF
+    style s10 color:#D50000,fill:#FFCDD2,stroke:#D50000
+    style s4 color:#2962FF,fill:#BBDEFB,stroke:#2962FF
+    style s11 stroke:#2962FF,fill:#BBDEFB,color:#2962FF
+    style s1 fill:#E1BEE7,color:#AA00FF,stroke:#AA00FF
+    linkStyle 1 stroke:#2962FF,fill:none
+    linkStyle 2 stroke:#D50000,fill:none
+    linkStyle 3 stroke:#D50000,fill:none
+    linkStyle 4 stroke:#D50000,fill:none
+    linkStyle 5 stroke:#D50000,fill:none
+    linkStyle 6 stroke:#D50000,fill:none
+    linkStyle 7 stroke:#D50000,fill:none
+    linkStyle 8 stroke:#2962FF,fill:none
+    linkStyle 9 stroke:#2962FF,fill:none
+    linkStyle 10 stroke:#2962FF,fill:none
+    linkStyle 11 stroke:#2962FF,fill:none
+    linkStyle 12 stroke:#2962FF,fill:none
+    linkStyle 13 stroke:#2962FF,fill:none
+    linkStyle 14 stroke:#2962FF,fill:none
+    linkStyle 15 stroke:#2962FF,fill:none
+    linkStyle 17 stroke:#D50000,fill:none
+    linkStyle 18 stroke:#2962FF,fill:none
+    linkStyle 19 stroke:#D50000,fill:none
+    linkStyle 20 stroke:#2962FF,fill:none
+    linkStyle 21 stroke:#D50000,fill:none
+</div>
