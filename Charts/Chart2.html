@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Mermaid with External Pan/Zoom</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 20px;
+    }
+
+    /* Container that defines the viewport */
+    #viewport {
+      width: 100%;
+      height: 96vh;
+      border: 1px solid #ccc;
+      overflow: hidden;       /* important so the diagram pans "inside" this box */
+      background: #fafafa;
+      position: relative;
+    }
+
+    /* Prevent user-select issues while dragging */
+    svg {
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="viewport">
+    <div id="diagram" class="mermaid">
+---
+config:
+  theme: redux
+---
+flowchart TB
+ subgraph s1["BLS Assessment"]
+        A["1# Check for Responsiveness<br><br>#2 Call for help/get defibrillator<br><br>3# Check Pulse"]
+  end
+    A --> B["No Pulse"]
+    B --> C["Start CPR"]
+    C -- Push Hard, Push Fast --- D["Check rhythm/shock if indicated. Repeat every 2 minutes."]
+    C --> D
+
+    style A stroke:#AA00FF,fill:#FFFFFF
+    style B fill:#FFFFFF
+    style C fill:#FFFFFF
+    style D fill:#FFFFFF
+    style s1 color:#AA00FF,stroke:#AA00FF,fill:#E1BEE7
+    </div>
+  </div>
+
+  <!-- Mermaid -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+  <!-- External Panzoom Library -->
+  <script src="https://cdn.jsdelivr.net/npm/panzoom@9/dist/panzoom.min.js"></script>
+
+  <script>
+    // Initialize Mermaid normally.
+    mermaid.initialize({
+      startOnLoad: true,
+      securityLevel: 'loose' // helps with inline scripts / LMS
+    });
+
+    // Wait until Mermaid finishes rendering
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        const svg = document.querySelector("#viewport svg");
+
+        if (!svg) {
+          console.error("Mermaid SVG not found. Mermaid may not have rendered yet.");
+          return;
+        }
+
+        // Apply panzoom directly to the SVG
+        const controller = panzoom(svg, {
+          maxZoom: 4,
+          minZoom: 0.2,
+          smoothScroll: false,
+          bounds: false
+        });
+
+        // Optional: Zoom at mouse cursor position using the wheel
+        svg.addEventListener('wheel', function(ev) {
+          ev.preventDefault();
+          const deltaScale = ev.deltaY < 0 ? 1.1 : 0.9;
+
+          const rect = svg.getBoundingClientRect();
+          const x = ev.clientX - rect.left;
+          const y = ev.clientY - rect.top;
+
+          controller.zoomTo(x, y, deltaScale);
+        }, { passive: false });
+
+        console.log("Panzoom attached to diagram.");
+      }, 300); // slight delay ensures Mermaid finished drawing SVG
+    });
+  </script>
+</body>
+</html>
