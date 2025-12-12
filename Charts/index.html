@@ -1,24 +1,19 @@
-<style>
-    /* Make sure the diagram scales properly */
-    .mermaid {
-        width: 100%;       /* Makes the diagram responsive */
-        height: auto;      /* Automatically adjusts height */
-        overflow: hidden;  /* Prevents scrollbars */
-        max-width: 100%;   /* Ensures it doesn't overflow */
-        margin: 0 auto;    /* Centers the diagram */
-    }
 
-    /* Optional: Add some padding for a cleaner look */
-    .mermaid-container {
-        padding: 10px;
-    }
-</style>
 
 <script type="module">
   import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-  mermaid.initialize({ startOnLoad: true });
+  mermaid.initialize({ 
+      startOnLoad: true,
+      zoom: {
+      enabled: true,
+      maxZoom: 3,
+      minZoom: 0.3,
+      zoomSpeed: 0.1
+    }
+  });
 </script>
 
+<div style="width:100%; height:600px; overflow:auto; border:1px solid #ccc;">
 <div class="mermaid">
 ---
 config:
@@ -133,4 +128,5 @@ flowchart LR
     linkStyle 19 stroke:#D50000,fill:none
     linkStyle 20 stroke:#2962FF,fill:none
     linkStyle 21 stroke:#D50000,fill:none
+</div>
 </div>
