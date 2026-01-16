@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Biology Quiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --bg: #f3f4f6;
+            --card: #ffffff;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --success: #10b981;
+            --error: #ef4444;
+            --border: #e5e7eb;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-dark);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        #quiz-card {
+            background: var(--card);
+            width: 100%;
+            max-width: 600px;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin-bottom: 30px;
+        }
+
+        .bar-bg {
+            background: var(--border);
+            height: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        #bar-fill {
+            background: var(--primary);
+            width: 0%;
+            height: 100%;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        /* Questions */
+        h2 {
+            font-size: 1.4rem;
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 16px 20px;
+            border-radius: 14px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            text-align: left;
+            transition: all 0.2s;
+            color: var(--text-dark);
+            width: 100%;
+        }
+
+        .option:hover:not(.disabled) {
+            border-color: var(--primary);
+            background: #f8faff;
+        }
+
+        .option.correct {
+            background: #ecfdf5;
+            border-color: var(--success);
+            color: #065f46;
+        }
+
+        .option.wrong {
+            background: #fef2f2;
+            border-color: var(--error);
+            color: #991b1b;
+        }
+
+        .disabled {
+            cursor: not-allowed;
+        }
+
+        /* Controls */
+        .controls {
+            margin-top: 30px;
+            min-height: 50px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        #next-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            display: none;
+            transition: transform 0.2s;
+        }
+
+        #next-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Results Area */
+        #result-area {
+            display: none;
+            text-align: center;
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border: 8px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .restart-btn {
+            background: var(--text-dark);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 500px) {
+            #quiz-card { padding: 25px; }
+            h2 { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="quiz-card">
+    <div id="quiz-main">
+        <div class="progress-container">
+            <div class="bar-bg"><div id="bar-fill"></div></div>
+            <div class="stats">
+                <span id="q-label">Question 1/25</span>
+                <span id="score-label">Score: 0</span>
+            </div>
+        </div>
+
+        <h2 id="question-text">Loading question...</h2>
+        <div id="options-container" class="options-list"></div>
+
+        <div class="controls">
+            <button id="next-btn" onclick="nextQuestion()">Next Question →</button>
+        </div>
+    </div>
+
+    <div id="result-area">
+        <h2>Quiz Complete!</h2>
+        <div class="score-circle" id="final-pct">0%</div>
+        <p id="final-stats">You got 0 out of 25 correct.</p>
+        <button class="restart-btn" onclick="location.reload()">Restart Quiz</button>
+    </div>
+</div>
+
+<script>
+    const quizData = [
+        { q: "Cell division is best described as the process by which:", a: ["Cells increase in size only", "A cell divides to form new cells", "DNA is destroyed", "Organelles stop functioning"], c: 1 },
+        { q: "Cell division is necessary for all of the following EXCEPT:", a: ["Growth", "Repair", "Energy production", "Replacement of old cells"], c: 2 },
+        { q: "What must a cell do before the division phase actually begins?", a: ["Produce four genetically unique daughter cells", "Grow, copy its DNA, and prepare internal structures", "Undergo cytokinesis to split the cytoplasm", "Form a cleavage furrow or cell plate"], c: 1 },
+        { q: "Cell division is part of which larger process?", a: ["Photosynthesis", "Respiration", "The cell cycle", "Diffusion"], c: 2 },
+        { q: "During Metaphase, why is the alignment of chromosomes along the center so critical?", a: ["To ensure the DNA can decondense", "To allow the nuclear membrane to reform", "To ensure each daughter cell receives one copy of each chromosome", "To allow crossing over to occur"], c: 2 },
+        { q: "Cell division allows organisms to:", a: ["Change species", "Repair damaged tissues", "Eliminate all mutations", "Avoid aging completely"], c: 1 },
+        { q: "Which statement best describes the importance of cell division?", a: ["It increases chromosome number", "It ensures survival and maintenance", "It causes mutation", "It reduces metabolism"], c: 1 },
+        { q: "Mitosis occurs in which type of cells?", a: ["Gametes", "Reproductive cells", "Somatic cells", "Haploid cells"], c: 2 },
+        { q: "The main purpose of mitosis is to:", a: ["Reduce chromosome number", "Produce genetic variation", "Create identical cells", "Form gametes"], c: 2 },
+        { q: "Spindle fibers are responsible for:", a: ["Copying DNA", "Moving chromosomes", "Producing energy", "Digesting proteins"], c: 1 },
+        { q: "Nuclear membranes reform during:", a: ["Metaphase", "Anaphase", "Telophase", "Cytokinesis"], c: 2 },
+        { q: "How does cytokinesis differ between animal and plant cells?", a: ["Animal: cell plate; Plant: cleavage furrow", "Animal: divide nucleus twice; Plant: once", "Animal: cleavage furrow; Plant: cell plate", "Animal: no cytokinesis; Plant: yes"], c: 2 },
+        { q: "Mitosis produces daughter cells that are:", a: ["Haploid and different", "Diploid and identical", "Haploid and identical", "Diploid and different"], c: 1 },
+        { q: "Meiosis produces cells that are:", a: ["Diploid and identical", "Haploid and identical", "Haploid and genetically unique", "Diploid and unique"], c: 2 },
+        { q: "Meiosis occurs in:", a: ["Skin cells", "Muscle cells", "Reproductive cells", "Brain cells"], c: 2 },
+        { q: "The main purpose of meiosis is to:", a: ["Repair tissue", "Enable sexual reproduction", "Maintain chromosome number", "Create identical cells"], c: 1 },
+        { q: "How many divisions occur in meiosis?", a: ["One", "Two", "Three", "Four"], c: 1 },
+        { q: "Which process in Prophase I is compared to 'shuffling cards' to create variation?", a: ["Synapsis", "Crossing over", "Nondisjunction", "Cytokinesis"], c: 1 },
+        { q: "Homologous chromosomes separate during:", a: ["Anaphase I", "Anaphase II", "Metaphase I", "Prophase II"], c: 0 },
+        { q: "In which stage of Meiosis do sister chromatids finally separate?", a: ["Meiosis I", "Prophase I", "Meiosis II", "Metaphase I"], c: 2 },
+        { q: "Independent assortment increases:", a: ["Errors", "Cell size", "Genetic variation", "Chromosome number"], c: 2 },
+        { q: "Human gametes contain how many chromosomes?", a: ["46", "92", "23", "12"], c: 2 },
+        { q: "Why must Meiosis result in cells with only 23 chromosomes?", a: ["Because cells are smaller", "So fertilization results in 46 total", "To prevent cancer", "To skip interphase"], c: 1 },
+        { q: "What is the technical term for chromosomes failing to separate properly?", a: ["Synapsis", "Decondensation", "Nondisjunction", "Asexual reproduction"], c: 2 },
+        { q: "Which is a key difference between Mitosis and Meiosis?", a: ["Mitosis: 4 cells; Meiosis: 2", "Mitosis: Variation; Meiosis: Stability", "Mitosis: Sex cells; Meiosis: Body cells", "Mitosis: Identical cells; Meiosis: Unique cells"], c: 3 }
+    ];
+
+    let currentQ = 0;
+    let score = 0;
+    let answered = false;
+
+    function initQuiz() {
+        showQuestion();
+    }
+
+    function showQuestion() {
+        answered = false;
+        const q = quizData[currentQ];
+        
+        // Update Stats
+        document.getElementById('q-label').innerText = `Question ${currentQ + 1}/${quizData.length}`;
+        document.getElementById('bar-fill').style.width = `${(currentQ / quizData.length) * 100}%`;
+        document.getElementById('next-btn').style.display = 'none';
+        
+        // Set Text
+        document.getElementById('question-text').innerText = q.q;
+        
+        // Generate Options
+        const container = document.getElementById('options-container');
+        container.innerHTML = '';
+        
+        q.a.forEach((opt, idx) => {
+            const btn = document.createElement('button');
+            btn.className = 'option';
+            btn.innerHTML = opt;
+            btn.onclick = () => checkAnswer(idx, btn);
+            container.appendChild(btn);
+        });
+    }
+
+    function checkAnswer(idx, btn) {
+        if (answered) return;
+        answered = true;
+        
+        const correct = quizData[currentQ].c;
+        const options = document.querySelectorAll('.option');
+        
+        options.forEach(o => o.classList.add('disabled'));
+
+        if (idx === correct) {
+            btn.classList.add('correct');
+            score++;
+            document.getElementById('score-label').innerText = `Score: ${score}`;
+        } else {
+            btn.classList.add('wrong');
+            options[correct].classList.add('correct');
+        }
+        
+        document.getElementById('next-btn').style.display = 'block';
+    }
+
+    function nextQuestion() {
+        currentQ++;
+        if (currentQ < quizData.length) {
+            showQuestion();
+        } else {
+            showFinalResults();
+        }
+    }
+
+    function showFinalResults() {
+        document.getElementById('quiz-main').style.display = 'none';
+        document.getElementById('result-area').style.display = 'block';
+        document.getElementById('bar-fill').style.width = '100%';
+        
+        const pct = Math.round((score / quizData.length) * 100);
+        document.getElementById('final-pct').innerText = `${pct}%`;
+        document.getElementById('final-stats').innerText = `You answered ${score} out of ${quizData.length} questions correctly.`;
+    }
+
+    initQuiz();
+</script>
+
+</body>
+</html>

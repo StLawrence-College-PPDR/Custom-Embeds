@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cell Biology Matching Quiz</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f4f9; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .quiz-container { max-width: 800px; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h2 { color: #2c3e50; text-align: center; }
+        .instruction { text-align: center; margin-bottom: 20px; color: #666; }
+        
+        .game-area { display: flex; gap: 40px; margin-top: 20px; justify-content: space-between; }
+        
+        .column { width: 300px; }
+        .term { 
+            background: #3498db; color: white; padding: 12px; margin: 10px 0; 
+            border-radius: 5px; cursor: grab; text-align: center; font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .term:active { cursor: grabbing; transform: scale(0.95); }
+
+        .drop-zone { 
+            background: #ecf0f1; border: 2px dashed #bdc3c7; min-height: 50px; 
+            margin: 10px 0; border-radius: 5px; display: flex; align-items: center; 
+            justify-content: center; padding: 10px; position: relative;
+        }
+        .description-text { font-size: 0.9em; color: #34495e; margin-bottom: 5px; font-weight: bold; }
+        
+        .correct { background: #2ecc71 !important; border-color: #27ae60 !important; }
+        .wrong { background: #e74c3c !important; border-color: #c0392b !important; }
+        
+        button { 
+            margin-top: 30px; padding: 10px 25px; background: #2c3e50; color: white; 
+            border: none; border-radius: 5px; cursor: pointer; font-size: 1em; width: 100%;
+        }
+        button:hover { background: #34495e; }
+        #feedback { margin-top: 15px; text-align: center; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h2>Cell Biology: Match the Terms</h2>
+    <p class="instruction">Drag the blue terms into the correct gray description boxes.</p>
+
+    <div class="game-area">
+        <!-- Terms Column -->
+        <div class="column" id="terms">
+            <div class="term" draggable="true" id="term-5">Regulation</div>
+            <div class="term" draggable="true" id="term-2">DNA</div>
+            <div class="term" draggable="true" id="term-4">Daughter cells</div>
+            <div class="term" draggable="true" id="term-3">Cell cycle</div>
+            <div class="term" draggable="true" id="term-1">Cell division</div>
+        </div>
+
+        <!-- Descriptions Column -->
+        <div class="column">
+            <div>
+                <div class="description-text">A - Process that controls when cells divide</div>
+                <div class="drop-zone" data-match="term-5">Drop term here</div>
+            </div>
+            <div>
+                <div class="description-text">B - Genetic material of the cell</div>
+                <div class="drop-zone" data-match="term-2">Drop term here</div>
+            </div>
+            <div>
+                <div class="description-text">C - New cells formed after division</div>
+                <div class="drop-zone" data-match="term-4">Drop term here</div>
+            </div>
+            <div>
+                <div class="description-text">D - Ordered series of events leading to division</div>
+                <div class="drop-zone" data-match="term-3">Drop term here</div>
+            </div>
+            <div>
+                <div class="description-text">E - Process by which one cell becomes two</div>
+                <div class="drop-zone" data-match="term-1">Drop term here</div>
+            </div>
+        </div>
+    </div>
+
+    <button onclick="checkAnswers()">Check Answers</button>
+    <div id="feedback"></div>
+</div>
+
+<script>
+    const terms = document.querySelectorAll('.term');
+    const dropZones = document.querySelectorAll('.drop-zone');
+    let draggedItem = null;
+
+    terms.forEach(term => {
+        term.addEventListener('dragstart', () => {
+            draggedItem = term;
+            setTimeout(() => term.style.display = 'none', 0);
+        });
+
+        term.addEventListener('dragend', () => {
+            setTimeout(() => {
+                draggedItem.style.display = 'block';
+                draggedItem = null;
+            }, 0);
+        });
+    });
+
+    dropZones.forEach(zone => {
+        zone.addEventListener('dragover', e => e.preventDefault());
+        zone.addEventListener('dragenter', e => {
+            e.preventDefault();
+            zone.style.background = '#d5dbdb';
+        });
+        zone.addEventListener('dragleave', () => zone.style.background = '#ecf0f1');
+        
+        zone.addEventListener('drop', () => {
+            zone.style.background = '#ecf0f1';
+            if (zone.children.length > 0 && zone.innerText !== "Drop term here") {
+                // Return existing item to pool
+                document.getElementById('terms').appendChild(zone.children[0]);
+            }
+            zone.innerHTML = '';
+            zone.appendChild(draggedItem);
+        });
+    });
+
+    function checkAnswers() {
+        let score = 0;
+        dropZones.forEach(zone => {
+            const child = zone.children[0];
+            if (child && child.id === zone.getAttribute('data-match')) {
+                zone.className = "drop-zone correct";
+                score++;
+            } else {
+                zone.className = "drop-zone wrong";
+            }
+        });
+        document.getElementById('feedback').innerText = `You got ${score} out of 5 correct!`;
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cellular Energy Interactive Quiz</title>
+    <!-- Importing a modern font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2ecc71;
+            --secondary: #3498db;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --wrong: #e74c3c;
+            --bg: #f0f4f8;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--dark);
+        }
+
+        #quiz-container {
+            background: white;
+            width: 90%;
+            max-width: 650px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background: #eee;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        #progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            transition: width 0.4s ease;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        #question-number {
+            font-weight: 600;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9em;
+        }
+
+        h2 {
+            font-size: 1.4em;
+            margin-top: 0;
+            line-height: 1.4;
+            min-height: 60px;
+        }
+
+        .options-grid {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .option-btn {
+            background: white;
+            border: 2px solid #e0e0e0;
+            padding: 15px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1em;
+            text-align: left;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--secondary);
+            background-color: #f8fbff;
+            transform: translateY(-2px);
+        }
+
+        .option-btn.correct {
+            background-color: #d4edda !important;
+            border-color: var(--primary) !important;
+            color: #155724;
+            font-weight: 600;
+        }
+
+        .option-btn.wrong {
+            background-color: #f8d7da !important;
+            border-color: var(--wrong) !important;
+            color: #721c24;
+        }
+
+        #next-btn {
+            margin-top: 30px;
+            width: 100%;
+            background: var(--dark);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            display: none;
+            transition: background 0.3s;
+        }
+
+        #next-btn:hover {
+            background: #1a252f;
+        }
+
+        /* Results Screen */
+        .result-screen {
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            margin: 20px auto;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease forwards;
+        }
+    </style>
+</head>
+<body>
+
+<div id="quiz-container">
+    <div id="quiz-content">
+        <div class="progress-container">
+            <div id="progress-bar"></div>
+        </div>
+        
+        <div class="header">
+            <span id="question-number">Question 1</span>
+        </div>
+
+        <h2 id="question-text">Question loading...</h2>
+
+        <div class="options-grid" id="options-container">
+            <!-- Buttons will be injected here -->
+        </div>
+
+        <button id="next-btn" onclick="nextQuestion()">Next Question →</button>
+    </div>
+
+    <div id="result-area" class="result-screen" style="display:none;">
+        <h1>Quiz Complete!</h1>
+        <div class="score-circle" id="final-score">0</div>
+        <p id="score-message">Great effort!</p>
+        <button onclick="location.reload()" class="option-btn" style="justify-content: center; width: 200px; margin: 20px auto; background: var(--secondary); color: white; border: none;">Try Again</button>
+    </div>
+</div>
+
+<script>
+    const quizData = [
+        { q: "Cellular energy is primarily used to:", a: ["Change cell shape permanently", "Power cellular processes", "Destroy waste materials", "Store genetic information"], c: 1 },
+        { q: "The main energy currency of the cell is:", a: ["Glucose", "NADPH", "ATP", "Oxygen"], c: 2 },
+        { q: "Photosynthesis occurs in the:", a: ["Mitochondria", "Ribosome", "Chloroplast", "Nucleus"], c: 2 },
+        { q: "The light-dependent reactions require:", a: ["Carbon dioxide", "Oxygen", "Sunlight", "Glucose"], c: 2 },
+        { q: "Where exactly do the light-dependent reactions of photosynthesis take place?", a: ["In the stroma", "In the thylakoid membranes", "In the mitochondrial matrix", "In the cytoplasm"], c: 1 },
+        { q: "During the light-dependent reactions, what is the specific role of light energy regarding water molecules?", a: ["It combines water with carbon dioxide to make glucose.", "It turns water into ATP directly.", "It splits water molecules, releasing oxygen as a by-product.", "It moves water into the stroma for the Calvin cycle."], c: 2 },
+        { q: "Oxygen released during photosynthesis comes from:", a: ["Carbon dioxide", "Glucose", "Water", "ATP"], c: 2 },
+        { q: "The Calvin cycle occurs in the:", a: ["Thylakoid", "Stroma", "Cytoplasm", "Mitochondria"], c: 1 },
+        { q: "Which energy-carrying molecules are produced during the light-dependent reactions to power the Calvin cycle?", a: ["Glucose and Oxygen", "Carbon dioxide and Water", "ATP and NADPH", "Lactic acid and Pyruvate"], c: 2 },
+        { q: "The light-independent reactions (Calvin cycle) occur in the stroma. What is their primary purpose?", a: ["To absorb sunlight using chlorophyll.", "To convert carbon dioxide into glucose.", "To break down glucose into ATP.", "To release oxygen into the atmosphere."], c: 1 },
+        { q: "Cellular respiration occurs primarily in the:", a: ["Chloroplast", "Ribosome", "Mitochondria", "Cell wall"], c: 2 },
+        { q: "What is the universal 'energy currency' of the cell produced during cellular respiration?", a: ["Glucose", "NADPH", "ATP", "Pyruvate"], c: 2 },
+        { q: "Which stage of aerobic respiration occurs in the cytoplasm and involves breaking down glucose into pyruvate?", a: ["The Krebs Cycle", "The Electron Transport Chain", "The Calvin Cycle", "Glycolysis"], c: 3 },
+        { q: "In the Electron Transport Chain, what is the vital role of oxygen?", a: ["It acts as the final electron acceptor to form water.", "It breaks down glucose in the first step.", "It captures sunlight to charge the 'battery.'", "It is produced as a waste product of the Krebs cycle."], c: 0 },
+        { q: "Anaerobic respiration occurs when:", a: ["Light is present", "Oxygen is unavailable", "Glucose is absent", "Temperature is low"], c: 1 },
+        { q: "Anaerobic respiration in humans produces:", a: ["Oxygen", "Ethanol", "Lactic acid", "Carbon dioxide only"], c: 2 },
+        { q: "Why is aerobic respiration considered more efficient than anaerobic respiration?", a: ["It can occur without the use of any organelles.", "It produces 36–38 ATP per glucose molecule compared to much lower amounts in anaerobic.", "It allows plants to create their own food from sunlight.", "It produces lactic acid which provides extra energy to muscle"], c: 1 },
+        { q: "Oxygen’s role in respiration is to:", a: ["Absorb glucose", "Accept electrons", "Store energy", "Break down ATP"], c: 1 },
+        { q: "Which statement best describes the relationship between photosynthesis and cellular respiration?", a: ["They are identical processes that happen in different organelles.", "They are complementary; the products of one are the reactants of the other.", "Photosynthesis releases energy, while respiration stores it.", "Both processes require sunlight to produce ATP."], c: 1 }
+    ];
+
+    let currentIdx = 0;
+    let score = 0;
+
+    function loadQuestion() {
+        const data = quizData[currentIdx];
+        
+        // Update progress and header
+        const progress = ((currentIdx) / quizData.length) * 100;
+        document.getElementById("progress-bar").style.width = `${progress}%`;
+        document.getElementById("question-number").innerText = `Question ${currentIdx + 1} of ${quizData.length}`;
+        
+        // Update Question text with animation
+        const qText = document.getElementById("question-text");
+        qText.classList.remove("fade-in");
+        void qText.offsetWidth; // trigger reflow
+        qText.innerText = data.q;
+        qText.classList.add("fade-in");
+
+        // Clear and add options
+        const container = document.getElementById("options-container");
+        container.innerHTML = "";
+        document.getElementById("next-btn").style.display = "none";
+
+        data.a.forEach((option, index) => {
+            const btn = document.createElement("button");
+            btn.classList.add("option-btn", "fade-in");
+            btn.style.animationDelay = `${index * 0.1}s`;
+            btn.innerText = option;
+            btn.onclick = () => selectOption(index, data.c, btn);
+            container.appendChild(btn);
+        });
+    }
+
+    function selectOption(index, correct, btn) {
+        const allBtns = document.querySelectorAll(".option-btn");
+        
+        // Disable all buttons
+        allBtns.forEach(b => b.disabled = true);
+
+        if (index === correct) {
+            btn.classList.add("correct");
+            score++;
+        } else {
+            btn.classList.add("wrong");
+            allBtns[correct].classList.add("correct");
+        }
+
+        document.getElementById("next-btn").style.display = "block";
+    }
+
+    function nextQuestion() {
+        currentIdx++;
+        if (currentIdx < quizData.length) {
+            loadQuestion();
+        } else {
+            showFinalResults();
+        }
+    }
+
+    function showFinalResults() {
+        document.getElementById("quiz-content").style.display = "none";
+        document.getElementById("result-area").style.display = "block";
+        document.getElementById("final-score").innerText = `${score}`;
+        
+        let msg = "";
+        const percent = (score / quizData.length) * 100;
+        if(percent === 100) msg = "Perfect Score! You're a Biology Pro!";
+        else if(percent >= 80) msg = "Amazing job! You really know your cells!";
+        else if(percent >= 50) msg = "Good effort! Keep studying!";
+        else msg = "Keep practicing! You'll get there.";
+        
+        document.getElementById("score-message").innerText = msg;
+    }
+
+    // Start
+    loadQuestion();
+</script>
+
+</body>
+</html>

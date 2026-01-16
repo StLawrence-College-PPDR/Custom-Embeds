@@ -1,0 +1,19 @@
+<div id="quiz-container" style="font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
+    <h3 style="color: #2c3e50; font-size: 1.1em; line-height: 1.5;">Why is the three-dimensional folding of a polypeptide chain so critical to a protein’s role as a "workhorse" of the cell? What happens if this shape is altered?</h3>
+    
+    <textarea id="user-answer" placeholder="Type your answer here..." style="width: 100%; height: 80px; padding: 10px; margin-top: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;"></textarea>
+    
+    <button onclick="revealAnswer()" style="margin-top: 15px; padding: 10px 20px; background-color: #3498db; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Check Answer</button>
+    
+    <div id="feedback" style="display: none; margin-top: 20px; padding: 15px; background-color: #e8f4fd; border-left: 5px solid #3498db; border-radius: 4px;">
+        <strong style="color: #2980b9;">Correct Explanation:</strong>
+        <p style="margin-top: 5px; color: #34495e;">A protein’s 3D shape determines its function; denaturation alters this shape and causes loss of function.</p>
+    </div>
+</div>
+
+<script>
+    function revealAnswer() {
+        var feedback = document.getElementById('feedback');
+        feedback.style.display = 'block';
+    }
+</script>

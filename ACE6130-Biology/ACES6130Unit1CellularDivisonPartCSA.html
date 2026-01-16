@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mitosis vs. Meiosis Interactive Quiz</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f4f7f6;
+        }
+        .quiz-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .question-block {
+            margin-bottom: 30px;
+            padding: 15px;
+            border-left: 5px solid #3498db;
+            background: #fafafa;
+        }
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+        }
+        textarea {
+            width: 100%;
+            height: 80px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: inherit;
+            resize: vertical;
+            box-sizing: border-box;
+        }
+        button {
+            margin-top: 10px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #e8f4fd;
+            border-radius: 6px;
+            display: none; /* Hidden by default */
+            border: 1px dashed #3498db;
+        }
+        .feedback strong {
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .correct-answer {
+            color: #27ae60;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h2>Cell Division Review</h2>
+    
+    <!-- Question 1 -->
+    <div class="question-block">
+        <span class="question-text">1. During mitosis, the chromosome number stays the same, while meiosis reduces it by half. Why is this reduction important for sexual reproduction, and what would happen if it didn’t occur?</span>
+        <textarea placeholder="Type your answer here..."></textarea>
+        <button onclick="toggleFeedback(this)">Check Answer</button>
+        <div class="feedback">
+            <strong>Key Concept:</strong>
+            <span class="correct-answer">Meiosis reduces chromosome number by half so fertilization restores the correct diploid number. Without this reduction, chromosome numbers would double every generation.</span>
+        </div>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="question-block">
+        <span class="question-text">2. Meiosis creates genetically unique gametes, while mitosis produces identical daughter cells. What specific events during meiosis lead to genetic variation, and why is this variation beneficial for a species?</span>
+        <textarea placeholder="Type your answer here..."></textarea>
+        <button onclick="toggleFeedback(this)">Check Answer</button>
+        <div class="feedback">
+            <strong>Key Concept:</strong>
+            <span class="correct-answer">Crossing over and independent assortment during meiosis create genetic variation, which increases a species’ ability to adapt and survive.</span>
+        </div>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="question-block">
+        <span class="question-text">3. A cut on your skin heals through mitosis, while the formation of sperm or egg cells requires meiosis. How does each process support these different biological needs?</span>
+        <textarea placeholder="Type your answer here..."></textarea>
+        <button onclick="toggleFeedback(this)">Check Answer</button>
+        <div class="feedback">
+            <strong>Key Concept:</strong>
+            <span class="correct-answer">Mitosis produces identical cells for growth and repair, while meiosis produces gametes for sexual reproduction.</span>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function toggleFeedback(button) {
+        const feedback = button.nextElementSibling;
+        if (feedback.style.display === "block") {
+            feedback.style.display = "none";
+            button.innerText = "Check Answer";
+        } else {
+            feedback.style.display = "block";
+            button.innerText = "Hide Answer";
+        }
+    }
+</script>
+
+</body>
+</html>

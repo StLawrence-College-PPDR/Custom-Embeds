@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: system-ui, sans-serif; background: #f0f7ff; display: grid; place-items: center; min-height: 100vh; margin: 0; }
+        .card { background: #fff; padding: 30px; border-radius: 12px; border: 1px solid #bfdbfe; max-width: 500px; width: 90%; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        p { font-weight: 600; color: #1e3a8a; line-height: 1.5; }
+        textarea { width: 100%; height: 120px; border: 2px solid #d1d5db; border-radius: 8px; padding: 12px; box-sizing: border-box; resize: none; transition: 0.2s; }
+        textarea:focus { border-color: #2563eb; outline: none; }
+        button { background: #2563eb; color: white; border: none; width: 100%; padding: 14px; border-radius: 8px; margin-top: 15px; cursor: pointer; font-weight: 600; }
+        button:hover { background: #1d4ed8; }
+        #feedback { display: none; margin-top: 20px; padding: 15px; border-radius: 8px; font-size: 0.95rem; line-height: 1.4; }
+        .win { background: #ecfdf5; border: 1px solid #10b981; color: #065f46; }
+        .try { background: #f8fafc; border: 1px solid #cbd5e1; color: #334155; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <p>What specifically happens to a cell's DNA to cause it to lose control of its cycle and become "immortal"?</p>
+    
+    <textarea id="ans" placeholder="Your answer..."></textarea>
+    <button onclick="check()">Submit Answer</button>
+
+    <div id="feedback"></div>
+</div>
+
+<script>
+function check() {
+    const input = document.getElementById('ans').value.toLowerCase();
+    const keys = ['mutat', 'regul', 'apoptos', 'uncontrol', 'indefinit'];
+    const score = keys.filter(k => input.includes(k)).length;
+    const box = document.getElementById('feedback');
+
+    box.style.display = 'block';
+    box.className = score >= 3 ? 'win' : 'try';
+    box.innerHTML = `<strong>${score >= 3 ? 'Great Answer!' : 'Note:'}</strong><br>
+    Cancer-causing mutations damage genes that regulate the cell cycle, preventing apoptosis and allowing cells to divide uncontrollably and indefinitely.`;
+}
+</script>
+
+</body>
+</html>

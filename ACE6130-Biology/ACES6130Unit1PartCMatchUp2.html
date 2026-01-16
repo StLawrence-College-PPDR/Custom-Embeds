@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saccharide Match Game</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f4f9; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .container { display: flex; gap: 50px; margin-top: 20px; }
+        .column { display: flex; flex-direction: column; gap: 15px; }
+        .draggable { padding: 15px; background-color: #3498db; color: white; border-radius: 8px; cursor: grab; text-align: center; font-weight: bold; width: 150px; }
+        .drop-zone { width: 350px; min-height: 80px; border: 2px dashed #bdc3c7; border-radius: 8px; background-color: #fff; padding: 10px; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 0.9em; position: relative; }
+        .drop-zone.over { background-color: #ecf0f1; border-color: #3498db; }
+        .correct { background-color: #2ecc71 !important; border-style: solid; }
+        .incorrect { background-color: #e74c3c !important; }
+        h1 { color: #2c3e50; }
+    </style>
+</head>
+<body>
+
+    <h1>Match the Saccharide</h1>
+    <p>Drag the saccharide on the left to its matching function on the right.</p>
+
+    <div class="container">
+        <!-- Saccharides (Draggables) -->
+        <div class="column">
+            <div class="draggable" draggable="true" id="glucose">Glucose</div>
+            <div class="draggable" draggable="true" id="starch">Starch</div>
+            <div class="draggable" draggable="true" id="glycogen">Glycogen</div>
+            <div class="draggable" draggable="true" id="cellulose">Cellulose</div>
+            <div class="draggable" draggable="true" id="chitin">Chitin</div>
+        </div>
+
+        <!-- Functions (Drop Zones) -->
+        <div class="column">
+            <div class="drop-zone" data-answer="cellulose">A - Structural support used to build rigid plant cell walls.</div>
+            <div class="drop-zone" data-answer="glucose">B - Immediate, fast energy source used during cellular respiration.</div>
+            <div class="drop-zone" data-answer="starch">C - Long-term energy storage in plants (found in potatoes/grains).</div>
+            <div class="drop-zone" data-answer="chitin">D - Structural material found in fungal cell walls and insect exoskeletons.</div>
+            <div class="drop-zone" data-answer="glycogen">E - Short-term energy storage in animals (stored in liver and muscle).</div>
+        </div>
+    </div>
+
+    <script>
+        const draggables = document.querySelectorAll('.draggable');
+        const dropZones = document.querySelectorAll('.drop-zone');
+
+        draggables.forEach(draggable => {
+            draggable.addEventListener('dragstart', () => {
+                draggable.classList.add('dragging');
+            });
+            draggable.addEventListener('dragend', () => {
+                draggable.classList.remove('dragging');
+            });
+        });
+
+        dropZones.forEach(zone => {
+            zone.addEventListener('dragover', e => {
+                e.preventDefault();
+                zone.classList.add('over');
+            });
+
+            zone.addEventListener('dragleave', () => {
+                zone.classList.remove('over');
+            });
+
+            zone.addEventListener('drop', e => {
+                e.preventDefault();
+                zone.classList.remove('over');
+                const draggedId = document.querySelector('.dragging').id;
+                const answer = zone.getAttribute('data-answer');
+
+                if (draggedId === answer) {
+                    const el = document.getElementById(draggedId);
+                    zone.appendChild(el);
+                    zone.classList.add('correct');
+                    el.style.cursor = "default";
+                    el.draggable = false;
+                } else {
+                    alert("Incorrect! Try again.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

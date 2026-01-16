@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lipid Matching Activity</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --success: #27ae60;
+            --error: #e74c3c;
+            --bg: #f4f7f6;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        h1 { color: var(--primary); }
+        p { margin-bottom: 20px; color: #666; }
+
+        .game-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .list-column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .draggable {
+            background: white;
+            padding: 15px;
+            border: 2px solid var(--secondary);
+            border-radius: 8px;
+            cursor: grab;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .draggable:active { cursor: grabbing; }
+        .draggable.dragging { opacity: 0.5; }
+
+        .drop-zone {
+            background: #fff;
+            padding: 15px;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: border-color 0.3s;
+        }
+
+        .drop-zone.hover {
+            border-color: var(--secondary);
+            background: #e1f5fe;
+        }
+
+        .function-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            align-items: center;
+            background: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .function-text {
+            font-size: 0.95rem;
+            color: #444;
+            line-height: 1.4;
+        }
+
+        #controls {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+        }
+
+        button {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: opacity 0.2s;
+        }
+
+        #check-btn { background-color: var(--secondary); color: white; }
+        #reset-btn { background-color: #95a5a6; color: white; }
+        button:hover { opacity: 0.8; }
+
+        .correct { border: 2px solid var(--success) !important; background: #e8f5e9 !important; }
+        .incorrect { border: 2px solid var(--error) !important; background: #ffebee !important; }
+    </style>
+</head>
+<body>
+
+    <h1>Lipid Function Match</h1>
+    <p>Drag the Lipid Type from the left and drop it into the matching Function on the right.</p>
+
+    <div class="game-container">
+        <!-- Draggable Items -->
+        <div class="list-column" id="lipid-types">
+            <div class="draggable" draggable="true" id="lipid-1" data-match="B">Phospholipid</div>
+            <div class="draggable" draggable="true" id="lipid-2" data-match="A">Triglyceride</div>
+            <div class="draggable" draggable="true" id="lipid-3" data-match="D">Cholesterol</div>
+            <div class="draggable" draggable="true" id="lipid-4" data-match="C">Fatty Acid</div>
+        </div>
+
+        <!-- Drop Targets -->
+        <div class="list-column">
+            <div class="function-row">
+                <div class="drop-zone" data-id="A">Drop here</div>
+                <div class="function-text">A - Long-term energy storage and insulation for the body.</div>
+            </div>
+            <div class="function-row">
+                <div class="drop-zone" data-id="B">Drop here</div>
+                <div class="function-text">B - The main building block of the cell membrane (bilayer).</div>
+            </div>
+            <div class="function-row">
+                <div class="drop-zone" data-id="C">Drop here</div>
+                <div class="function-text">C - The individual building block (monomer) of most lipids.</div>
+            </div>
+            <div class="function-row">
+                <div class="drop-zone" data-id="D">Drop here</div>
+                <div class="function-text">D - Stabilizes membrane fluidity and acts as a base for hormones.</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="controls">
+        <button id="check-btn">Check Answers</button>
+        <button id="reset-btn">Reset</button>
+    </div>
+
+    <script>
+        const draggables = document.querySelectorAll('.draggable');
+        const dropZones = document.querySelectorAll('.drop-zone');
+        const checkBtn = document.getElementById('check-btn');
+        const resetBtn = document.getElementById('reset-btn');
+
+        let draggedItem = null;
+
+        // Drag events
+        draggables.forEach(draggable => {
+            draggable.addEventListener('dragstart', () => {
+                draggedItem = draggable;
+                draggable.classList.add('dragging');
+            });
+
+            draggable.addEventListener('dragend', () => {
+                draggable.classList.remove('dragging');
+            });
+        });
+
+        // Drop zone events
+        dropZones.forEach(zone => {
+            zone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                zone.classList.add('hover');
+            });
+
+            zone.addEventListener('dragleave', () => {
+                zone.classList.remove('hover');
+            });
+
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                zone.classList.remove('hover');
+                
+                // If a zone already has an item, return the old item to the list
+                if (zone.children.length > 0) {
+                    document.getElementById('lipid-types').appendChild(zone.children[0]);
+                }
+                
+                zone.innerHTML = ''; // Clear "Drop here" text
+                zone.appendChild(draggedItem);
+            });
+        });
+
+        // Check Logic
+        checkBtn.addEventListener('click', () => {
+            dropZones.forEach(zone => {
+                const item = zone.querySelector('.draggable');
+                if (item) {
+                    if (item.getAttribute('data-match') === zone.getAttribute('data-id')) {
+                        zone.classList.add('correct');
+                        zone.classList.remove('incorrect');
+                    } else {
+                        zone.classList.add('incorrect');
+                        zone.classList.remove('correct');
+                    }
+                }
+            });
+        });
+
+        // Reset Logic
+        resetBtn.addEventListener('click', () => {
+            const listColumn = document.getElementById('lipid-types');
+            dropZones.forEach(zone => {
+                const item = zone.querySelector('.draggable');
+                if (item) listColumn.appendChild(item);
+                zone.innerHTML = 'Drop here';
+                zone.classList.remove('correct', 'incorrect');
+            });
+            
+            // Re-shuffle list for variety
+            const items = Array.from(listColumn.children);
+            items.sort(() => Math.random() - 0.5);
+            items.forEach(item => listColumn.appendChild(item));
+        });
+
+        // Initialize with shuffle
+        window.onload = () => resetBtn.click();
+    </script>
+</body>
+</html>
+
+
+
+
+
+

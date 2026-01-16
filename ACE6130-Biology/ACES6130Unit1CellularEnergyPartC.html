@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Biology Review</title>
+    <style>
+        :root {
+            --primary: #2d6a4f;
+            --secondary: #40916c;
+            --accent: #d8f3dc;
+            --bg: #f0f2f5;
+            --text: #1b4332;
+            --white: #ffffff;
+            --border: #ced4da;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 750px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            color: #666;
+            margin-top: 0;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .question-label {
+            display: block;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 15px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: all 0.2s ease;
+            resize: vertical;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 4px rgba(64, 145, 108, 0.1);
+        }
+
+        /* Style when answer is checked */
+        .completed textarea {
+            background-color: #f8fdfa;
+            border-color: var(--secondary);
+        }
+
+        .controls {
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background-color: var(--secondary);
+        }
+
+        .feedback {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: var(--accent);
+            border-radius: 8px;
+            margin-top: 0;
+        }
+
+        .feedback.show {
+            max-height: 500px;
+            margin-top: 15px;
+            padding: 15px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .feedback-title {
+            display: block;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>Biology Concept Check</h1>
+        <p>Type your answer, then compare it with the model response.</p>
+    </div>
+
+    <!-- Question 1 -->
+    <div class="card" id="card-q1">
+        <label class="question-label" for="q1">
+            1. How do the reactants and products of photosynthesis compare to those of cellular respiration?
+        </label>
+        <textarea id="q1" placeholder="Enter your response..."></textarea>
+        
+        <div class="controls">
+            <button onclick="checkAnswer('q1')">Compare Answer</button>
+        </div>
+
+        <div id="feedback-q1" class="feedback">
+            <span class="feedback-title">Model Answer</span>
+            Photosynthesis uses carbon dioxide and water to produce glucose and oxygen, while cellular respiration uses glucose and oxygen to produce ATP, carbon dioxide, and water.
+        </div>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="card" id="card-q2">
+        <label class="question-label" for="q2">
+            2. Why do cells switch from aerobic respiration to fermentation during certain conditions? Compare the amount of ATP produced in each process and explain why fermentation is considered less efficient.
+        </label>
+        <textarea id="q2" placeholder="Enter your response..."></textarea>
+        
+        <div class="controls">
+            <button onclick="checkAnswer('q2')">Compare Answer</button>
+        </div>
+
+        <div id="feedback-q2" class="feedback">
+            <span class="feedback-title">Model Answer</span>
+            Cells switch to fermentation when oxygen is unavailable. Aerobic respiration produces about 36–38 ATP per glucose, while fermentation produces only 2 ATP, making it far less efficient.
+        </div>
+    </div>
+</div>
+
+<script>
+    function checkAnswer(id) {
+        const feedback = document.getElementById('feedback-' + id);
+        const card = document.getElementById('card-' + id);
+        const btn = card.querySelector('button');
+
+        if (feedback.classList.contains('show')) {
+            // Hide it
+            feedback.classList.remove('show');
+            btn.textContent = 'Compare Answer';
+            card.classList.remove('completed');
+        } else {
+            // Show it
+            feedback.classList.add('show');
+            btn.textContent = 'Hide Model Answer';
+            card.classList.add('completed');
+        }
+    }
+</script>
+
+</body>
+</html>

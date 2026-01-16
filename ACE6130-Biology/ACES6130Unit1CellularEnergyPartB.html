@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biology Interactive Match</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f3f4f6;
+            --card: #ffffff;
+            --primary: #4f46e5;
+            --success: #059669;
+            --error: #dc2626;
+            --border: #d1d5db;
+            --text: #111827;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .quiz-container {
+            background: var(--card);
+            max-width: 850px;
+            width: 100%;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        header { text-align: center; margin-bottom: 30px; }
+        h1 { margin: 0; font-size: 1.5rem; color: var(--primary); }
+        p { color: #6b7280; margin-top: 8px; }
+
+        .game-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+        }
+
+        /* Draggable items list */
+        .pool-container {
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            min-height: 400px;
+        }
+
+        .label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #9ca3af;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .draggable {
+            background: white;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            cursor: grab;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: transform 0.1s, box-shadow 0.1s;
+            user-select: none;
+            touch-action: manipulation;
+        }
+
+        .draggable:hover { box-shadow: 0 2px 4px rgba(0,0,0,0.1); border-color: var(--primary); }
+        .draggable.dragging { opacity: 0.5; cursor: grabbing; }
+
+        /* Drop Target Area */
+        .targets-container { display: flex; flex-direction: column; gap: 12px; }
+
+        .match-row {
+            display: grid;
+            grid-template-columns: 1fr 220px;
+            align-items: center;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #f3f4f6;
+            gap: 15px;
+        }
+
+        .description { font-size: 0.95rem; line-height: 1.4; }
+
+        .drop-zone {
+            height: 48px;
+            border: 2px dashed var(--border);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            background: #ffffff;
+        }
+
+        .drop-zone.drag-over {
+            background: #eef2ff;
+            border-color: var(--primary);
+        }
+
+        /* Status Styling */
+        .drop-zone.correct { border: 2px solid var(--success); background: #f0fdf4; }
+        .drop-zone.incorrect { border: 2px solid var(--error); background: #fef2f2; }
+        
+        .drop-zone .draggable { 
+            margin-bottom: 0; 
+            width: 90%; 
+            text-align: center; 
+            border: none;
+            background: transparent;
+        }
+
+        .controls {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .btn {
+            background: #374151;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn:hover { background: #111827; }
+
+        @media (max-width: 650px) {
+            .game-layout { grid-template-columns: 1fr; }
+            .match-row { grid-template-columns: 1fr; }
+            .pool-container { min-height: auto; order: 2; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <header>
+        <h1>Cellular Processes Match</h1>
+        <p>Drag each process into the correct description box.</p>
+    </header>
+
+    <div class="game-layout">
+        <div class="pool-side">
+            <span class="label">Processes</span>
+            <div class="pool-container" id="pool">
+                <div class="draggable" draggable="true" id="p1">Photosynthesis</div>
+                <div class="draggable" draggable="true" id="p2">Cellular respiration</div>
+                <div class="draggable" draggable="true" id="p3">Light-dependent reactions</div>
+                <div class="draggable" draggable="true" id="p4">Calvin cycle</div>
+                <div class="draggable" draggable="true" id="p5">Aerobic respiration</div>
+                <div class="draggable" draggable="true" id="p6">Anaerobic respiration</div>
+            </div>
+        </div>
+
+        <div class="targets-side">
+            <span class="label">Descriptions</span>
+            <div class="targets-container">
+                <div class="match-row">
+                    <div class="description">Produces glucose using carbon dioxide</div>
+                    <div class="drop-zone" data-correct="p1"></div>
+                </div>
+                <div class="match-row">
+                    <div class="description">Releases energy from glucose</div>
+                    <div class="drop-zone" data-correct="p2"></div>
+                </div>
+                <div class="match-row">
+                    <div class="description">Produces ATP and NADPH</div>
+                    <div class="drop-zone" data-correct="p3"></div>
+                </div>
+                <div class="match-row">
+                    <div class="description">Fixes carbon into sugar</div>
+                    <div class="drop-zone" data-correct="p4"></div>
+                </div>
+                <div class="match-row">
+                    <div class="description">Requires oxygen</div>
+                    <div class="drop-zone" data-correct="p5"></div>
+                </div>
+                <div class="match-row">
+                    <div class="description">Does not require oxygen</div>
+                    <div class="drop-zone" data-correct="p6"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="btn" onclick="resetGame()">Reset Activity</button>
+    </div>
+</div>
+
+<script>
+    const draggables = document.querySelectorAll('.draggable');
+    const dropZones = document.querySelectorAll('.drop-zone');
+    const pool = document.getElementById('pool');
+
+    let draggedItem = null;
+
+    draggables.forEach(item => {
+        item.addEventListener('dragstart', () => {
+            draggedItem = item;
+            setTimeout(() => item.classList.add('dragging'), 0);
+        });
+
+        item.addEventListener('dragend', () => {
+            draggedItem = null;
+            item.classList.remove('dragging');
+            // Re-validate all zones in case an item was pulled out
+            validateAll();
+        });
+    });
+
+    // Handle dragging over the pool to allow moving items back
+    pool.addEventListener('dragover', e => e.preventDefault());
+    pool.addEventListener('drop', e => {
+        e.preventDefault();
+        if (draggedItem) pool.appendChild(draggedItem);
+        validateAll();
+    });
+
+    dropZones.forEach(zone => {
+        zone.addEventListener('dragover', e => {
+            e.preventDefault();
+            zone.classList.add('drag-over');
+        });
+
+        zone.addEventListener('dragleave', () => {
+            zone.classList.remove('drag-over');
+        });
+
+        zone.addEventListener('drop', e => {
+            e.preventDefault();
+            zone.classList.remove('drag-over');
+            
+            if (draggedItem) {
+                // If zone already has an item, move the existing item back to pool
+                if (zone.children.length > 0) {
+                    pool.appendChild(zone.children[0]);
+                }
+                zone.appendChild(draggedItem);
+                validateAll();
+            }
+        });
+    });
+
+    function validateAll() {
+        dropZones.forEach(zone => {
+            zone.classList.remove('correct', 'incorrect');
+            
+            if (zone.children.length > 0) {
+                const childId = zone.children[0].id;
+                const correctId = zone.getAttribute('data-correct');
+                
+                if (childId === correctId) {
+                    zone.classList.add('correct');
+                } else {
+                    zone.classList.add('incorrect');
+                }
+            }
+        });
+    }
+
+    function resetGame() {
+        dropZones.forEach(zone => {
+            if (zone.children.length > 0) {
+                pool.appendChild(zone.children[0]);
+            }
+        });
+        validateAll();
+        
+        // Shuffle pool
+        for (let i = pool.children.length; i >= 0; i--) {
+            pool.appendChild(pool.children[Math.random() * i | 0]);
+        }
+    }
+</script>
+
+</body>
+</html>

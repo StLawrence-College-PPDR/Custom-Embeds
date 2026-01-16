@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biology Drag & Drop Quiz</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f4f9; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .container { max-width: 800px; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h2 { color: #333; }
+        .quiz-area { display: flex; gap: 40px; margin-top: 20px; }
+        .terms, .descriptions { flex: 1; }
+        
+        .term {
+            background: #007bff; color: white; padding: 10px; margin: 10px 0;
+            border-radius: 4px; cursor: grab; text-align: center; font-weight: bold;
+        }
+        .term:active { cursor: grabbing; }
+
+        .drop-zone {
+            border: 2px dashed #ccc; min-height: 40px; margin: 10px 0;
+            border-radius: 4px; display: flex; align-items: center; justify-content: center;
+            background: #fafafa; padding: 5px;
+        }
+        .description-text { font-size: 0.95em; color: #555; margin-bottom: 5px; }
+        .match-pair { margin-bottom: 20px; }
+
+        .correct { background-color: #d4edda !important; border-color: #28a745 !important; }
+        .incorrect { background-color: #f8d7da !important; border-color: #dc3545 !important; }
+        
+        button {
+            margin-top: 20px; padding: 10px 20px; background: #28a745; color: white;
+            border: none; border-radius: 4px; cursor: pointer; font-size: 16px;
+        }
+        button:hover { background: #218838; }
+        #result { margin-top: 15px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Match each term to its correct description:</h2>
+    <p>Drag the blue terms into the boxes next to their correct descriptions.</p>
+
+    <div class="quiz-area">
+        <!-- Draggable Terms -->
+        <div class="terms" id="terms-container">
+            <div class="term" draggable="true" id="term-1" data-id="1">Isotonic</div>
+            <div class="term" draggable="true" id="term-2" data-id="2">Hypertonic</div>
+            <div class="term" draggable="true" id="term-3" data-id="3">Hypotonic</div>
+            <div class="term" draggable="true" id="term-4" data-id="4">Hydrophilic</div>
+            <div class="term" draggable="true" id="term-5" data-id="5">Hydrophobic</div>
+        </div>
+
+        <!-- Description Drop Zones -->
+        <div class="descriptions">
+            <div class="match-pair">
+                <div class="description-text"><strong>A:</strong> A "water-fearing" substance that does not mix with water, like the interior of the cell membrane.</div>
+                <div class="drop-zone" data-correct="5"></div>
+            </div>
+            <div class="match-pair">
+                <div class="description-text"><strong>B:</strong> A solution where the solute concentration is lower than inside the cell, causing the cell to swell.</div>
+                <div class="drop-zone" data-correct="3"></div>
+            </div>
+            <div class="match-pair">
+                <div class="description-text"><strong>C:</strong> A solution with the same solute concentration as the cell; no net movement of water occurs.</div>
+                <div class="drop-zone" data-correct="1"></div>
+            </div>
+            <div class="match-pair">
+                <div class="description-text"><strong>D:</strong> A "water-loving" substance that attracts water, such as the heads of phospholipids.</div>
+                <div class="drop-zone" data-correct="4"></div>
+            </div>
+            <div class="match-pair">
+                <div class="description-text"><strong>E:</strong> A solution with a higher solute concentration than the cell, causing water to leave and the cell to shrink.</div>
+                <div class="drop-zone" data-correct="2"></div>
+            </div>
+        </div>
+    </div>
+
+    <button onclick="checkAnswers()">Check Answers</button>
+    <div id="result"></div>
+</div>
+
+<script>
+    const terms = document.querySelectorAll('.term');
+    const dropZones = document.querySelectorAll('.drop-zone');
+
+    terms.forEach(term => {
+        term.addEventListener('dragstart', e => {
+            e.dataTransfer.setData('text/plain', e.target.id);
+        });
+    });
+
+    dropZones.forEach(zone => {
+        zone.addEventListener('dragover', e => e.preventDefault());
+
+        zone.addEventListener('drop', e => {
+            e.preventDefault();
+            const id = e.dataTransfer.getData('text');
+            const draggableElement = document.getElementById(id);
+            
+            // If zone already has a term, move the old one back to the container
+            if (zone.children.length > 0) {
+                document.getElementById('terms-container').appendChild(zone.children[0]);
+            }
+            
+            zone.appendChild(draggableElement);
+        });
+    });
+
+    function checkAnswers() {
+        let score = 0;
+        dropZones.forEach(zone => {
+            const placedTerm = zone.children[0];
+            if (placedTerm) {
+                if (placedTerm.getAttribute('data-id') === zone.getAttribute('data-correct')) {
+                    zone.className = 'drop-zone correct';
+                    score++;
+                } else {
+                    zone.className = 'drop-zone incorrect';
+                }
+            } else {
+                zone.className = 'drop-zone';
+            }
+        });
+        document.getElementById('result').innerText = `You got ${score} out of 5 correct!`;
+    }
+</script>
+
+</body>
+</html>

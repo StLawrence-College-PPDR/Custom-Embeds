@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meiosis Matching Quiz</title>
+    <style>
+        :root {
+            --blue-dark: #003366;
+            --blue-mid: #007bff;
+            --blue-light: #e7f3ff;
+            --white: #ffffff;
+        }
+
+        body { font-family: system-ui, -apple-system, sans-serif; background: #f0f4f8; padding: 20px; display: flex; justify-content: center; }
+        
+        .quiz-container { 
+            width: 100%; max-width: 800px; background: var(--white); 
+            padding: 2rem; border-radius: 12px; border-top: 8px solid var(--blue-dark);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .header { text-align: center; margin-bottom: 2rem; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+
+        /* Draggable Items */
+        .term { 
+            background: var(--blue-mid); color: white; padding: 12px; 
+            margin-bottom: 10px; border-radius: 6px; cursor: grab; 
+            text-align: center; font-weight: 600; transition: 0.2s;
+        }
+        .term:active { cursor: grabbing; opacity: 0.6; }
+
+        /* Drop Zones */
+        .drop-box { 
+            border: 2px dashed #cbd5e0; background: #f8fafc; 
+            min-height: 45px; border-radius: 6px; padding: 8px;
+            display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;
+        }
+        .desc-label { font-size: 0.9rem; font-weight: 600; color: var(--blue-dark); margin-bottom: 4px; display: block; }
+
+        /* Feedback States */
+        .correct { background: #d1fae5; border-color: #10b981; color: #064e3b; }
+        .wrong { background: #fee2e2; border-color: #ef4444; color: #7f1d1d; }
+
+        .btn { 
+            width: 100%; padding: 12px; border: none; border-radius: 6px; 
+            font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 10px;
+        }
+        .btn-check { background: var(--blue-dark); color: white; }
+        .btn-reset { background: #edf2f7; color: var(--blue-dark); }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div class="header">
+        <h2>Meiosis: Stage Matching</h2>
+        <p>Drag each term to its matching description.</p>
+    </div>
+
+    <div class="grid">
+        <div id="term-pool"></div>
+        <div id="description-list"></div>
+    </div>
+
+    <button class="btn btn-check" onclick="checkAnswers()">Check Answers</button>
+    <button class="btn btn-reset" onclick="initQuiz()">Reset Quiz</button>
+    <h3 id="score-text" style="text-align:center; color: var(--blue-dark);"></h3>
+</div>
+
+<script>
+    // 1. Data Object (Easy to edit)
+    const quizData = [
+        { id: "1", term: "Prophase I", desc: "Pairing and crossing over" },
+        { id: "2", term: "Metaphase I", desc: "Homologous chromosomes align" },
+        { id: "3", term: "Anaphase I", desc: "Separation of homologous chromosomes" },
+        { id: "4", term: "Meiosis II", desc: "Similar to mitosis" },
+        { id: "5", term: "Gametes", desc: "Sex cells" }
+    ];
+
+    const pool = document.getElementById('term-pool');
+    const list = document.getElementById('description-list');
+    let draggedItem = null;
+
+    // 2. Initialize Quiz
+    function initQuiz() {
+        pool.innerHTML = ''; list.innerHTML = '';
+        document.getElementById('score-text').innerText = '';
+
+        // Shuffle terms for the pool
+        const shuffled = [...quizData].sort(() => Math.random() - 0.5);
+        
+        shuffled.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'term';
+            div.draggable = true;
+            div.id = `term-${item.id}`;
+            div.innerText = item.term;
+            div.addEventListener('dragstart', (e) => draggedItem = e.target);
+            pool.appendChild(div);
+        });
+
+        // Create Description Slots
+        quizData.forEach(item => {
+            const container = document.createElement('div');
+            container.innerHTML = `<span class="desc-label">${item.desc}</span>
+                                   <div class="drop-box" data-id="${item.id}">Drop here</div>`;
+            list.appendChild(container);
+        });
+
+        setupDropZones();
+    }
+
+    // 3. Drag & Drop Logic
+    function setupDropZones() {
+        document.querySelectorAll('.drop-box').forEach(zone => {
+            zone.addEventListener('dragover', e => e.preventDefault());
+            zone.addEventListener('drop', e => {
+                if (zone.children.length > 0) pool.appendChild(zone.children[0]);
+                zone.innerText = '';
+                zone.appendChild(draggedItem);
+            });
+        });
+    }
+
+    // 4. Check Results
+    function checkAnswers() {
+        let score = 0;
+        document.querySelectorAll('.drop-box').forEach(zone => {
+            const child = zone.children[0];
+            const isCorrect = child && child.id === `term-${zone.dataset.id}`;
+            zone.className = `drop-box ${isCorrect ? 'correct' : 'wrong'}`;
+            if (isCorrect) score++;
+        });
+        document.getElementById('score-text').innerText = `Score: ${score} / ${quizData.length}`;
+    }
+
+    initQuiz();
+</script>
+
+</body>
+</html>

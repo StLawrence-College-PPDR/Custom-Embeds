@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cell Transport Drag and Drop</title>
+    <style>
+        body { font-family: sans-serif; background-color: #f4f4f9; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        h1 { color: #333; }
+        .container { display: flex; gap: 40px; margin-top: 20px; max-width: 900px; }
+        .column { display: flex; flex-direction: column; gap: 15px; }
+        
+        /* Draggable Terms */
+        .term {
+            background: #007bff; color: white; padding: 15px; border-radius: 8px;
+            cursor: grab; text-align: center; font-weight: bold; width: 180px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2); transition: transform 0.2s;
+        }
+        .term:active { cursor: grabbing; transform: scale(0.95); }
+
+        /* Drop Zones (Descriptions) */
+        .drop-zone {
+            background: white; border: 2px dashed #ccc; padding: 15px;
+            border-radius: 8px; width: 350px; min-height: 50px;
+            display: flex; align-items: center; justify-content: space-between;
+            position: relative;
+        }
+        .drop-zone.hovered { border-color: #007bff; background: #e7f3ff; }
+        .drop-zone.correct { border-color: #28a745; background: #d4edda; border-style: solid; }
+        .drop-zone.incorrect { border-color: #dc3545; background: #f8d7da; border-style: solid; }
+
+        #message { margin-top: 30px; font-weight: bold; font-size: 1.2em; height: 30px; }
+        .reset-btn { margin-top: 20px; padding: 10px 20px; cursor: pointer; background: #6c757d; color: white; border: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <h1>Cell Transport Matching Game</h1>
+    <p>Drag the terms on the left to their matching descriptions on the right.</p>
+
+    <div class="container">
+        <!-- Terms Column -->
+        <div class="column" id="terms-column">
+            <div class="term" draggable="true" id="term-1" data-match="F">Diffusion</div>
+            <div class="term" draggable="true" id="term-2" data-match="A">Osmosis</div>
+            <div class="term" draggable="true" id="term-3" data-match="C">Facilitated Diffusion</div>
+            <div class="term" draggable="true" id="term-4" data-match="B">Active Transport</div>
+            <div class="term" draggable="true" id="term-5" data-match="E">Endocytosis</div>
+            <div class="term" draggable="true" id="term-6" data-match="D">Exocytosis</div>
+        </div>
+
+        <!-- Descriptions Column -->
+        <div class="column">
+            <div class="drop-zone" data-id="A">A - Movement of water across a membrane</div>
+            <div class="drop-zone" data-id="B">B - Energy-requiring movement against gradient</div>
+            <div class="drop-zone" data-id="C">C - Use of proteins without ATP</div>
+            <div class="drop-zone" data-id="D">D - Release of substances from the cell</div>
+            <div class="drop-zone" data-id="E">E - Engulfing materials into vesicles</div>
+            <div class="drop-zone" data-id="F">F - Movement of molecules from high to low concentration</div>
+        </div>
+    </div>
+
+    <div id="message"></div>
+    <button class="reset-btn" onclick="location.reload()">Reset Quiz</button>
+
+    <script>
+        const terms = document.querySelectorAll('.term');
+        const zones = document.querySelectorAll('.drop-zone');
+        const message = document.getElementById('message');
+        let correctCount = 0;
+
+        terms.forEach(term => {
+            term.addEventListener('dragstart', e => {
+                e.dataTransfer.setData('text/plain', e.target.id);
+            });
+        });
+
+        zones.forEach(zone => {
+            zone.addEventListener('dragover', e => {
+                e.preventDefault();
+                zone.classList.add('hovered');
+            });
+
+            zone.addEventListener('dragleave', () => {
+                zone.classList.remove('hovered');
+            });
+
+            zone.addEventListener('drop', e => {
+                e.preventDefault();
+                zone.classList.remove('hovered');
+                
+                const termId = e.dataTransfer.getData('text/plain');
+                const termElement = document.getElementById(termId);
+                const matchId = termElement.getAttribute('data-match');
+                const zoneId = zone.getAttribute('data-id');
+
+                if (matchId === zoneId) {
+                    // Correct Match
+                    zone.classList.add('correct');
+                    zone.innerText = `${zone.innerText} ✅ (${termElement.innerText})`;
+                    termElement.style.visibility = 'hidden';
+                    correctCount++;
+                    message.innerText = "Correct!";
+                    message.style.color = "green";
+                    if (correctCount === 6) {
+                        message.innerText = "🎉 Excellent! You matched all terms correctly!";
+                    }
+                } else {
+                    // Incorrect Match
+                    zone.classList.add('incorrect');
+                    message.innerText = "Try again!";
+                    message.style.color = "red";
+                    setTimeout(() => {
+                        zone.classList.remove('incorrect');
+                    }, 1000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

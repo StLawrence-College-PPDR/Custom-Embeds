@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mitosis Quiz - Blue Edition</title>
+    <style>
+        :root {
+            --primary-blue: #0056b3;
+            --medium-blue: #007bff;
+            --light-blue: #e3f2fd;
+            --border-blue: #90caf9;
+            --dark-blue: #003366;
+            --success-green: #28a745;
+            --error-red: #dc3545;
+        }
+
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: var(--light-blue); 
+            padding: 20px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+        }
+
+        .quiz-container { 
+            max-width: 800px; 
+            background: white; 
+            padding: 40px; 
+            border-radius: 12px; 
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1); 
+            border-top: 8px solid var(--primary-blue);
+        }
+
+        h2 { color: var(--dark-blue); text-align: center; margin-top: 0; }
+        .instruction { text-align: center; margin-bottom: 30px; color: #555; }
+        
+        .game-area { display: flex; gap: 40px; justify-content: space-between; }
+        
+        .column { width: 300px; }
+        
+        /* Draggable Terms */
+        .term { 
+            background: var(--medium-blue); 
+            color: white; 
+            padding: 15px; 
+            margin: 10px 0; 
+            border-radius: 6px; 
+            cursor: grab; 
+            text-align: center; 
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s, background 0.2s;
+        }
+        .term:hover { background: var(--primary-blue); }
+        .term:active { cursor: grabbing; transform: scale(0.98); }
+
+        /* Description Boxes */
+        .description-group { margin-bottom: 20px; }
+        .description-text { 
+            font-size: 0.9em; 
+            color: var(--dark-blue); 
+            margin-bottom: 5px; 
+            font-weight: 600; 
+        }
+        
+        .drop-zone { 
+            background: #f8fbff; 
+            border: 2px dashed var(--border-blue); 
+            min-height: 50px; 
+            border-radius: 6px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 5px; 
+            color: #7a9cb5;
+            font-style: italic;
+            transition: all 0.3s;
+        }
+
+        /* Result States */
+        .correct { background: #d4edda !important; border: 2px solid var(--success-green) !important; color: #155724 !important; font-style: normal; }
+        .wrong { background: #f8d7da !important; border: 2px solid var(--error-red) !important; color: #721c24 !important; font-style: normal; }
+        
+        /* Buttons */
+        .controls { display: flex; gap: 15px; margin-top: 30px; }
+        button { 
+            flex: 1; padding: 12px; border: none; border-radius: 6px; 
+            cursor: pointer; font-size: 1em; font-weight: bold; transition: 0.3s;
+        }
+        .check-btn { background: var(--primary-blue); color: white; }
+        .check-btn:hover { background: var(--dark-blue); }
+        .reset-btn { background: #dae6f2; color: var(--dark-blue); }
+        .reset-btn:hover { background: #cbdced; }
+        
+        #feedback { margin-top: 20px; text-align: center; font-size: 1.2em; font-weight: bold; color: var(--dark-blue); }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h2>Mitosis Stages Match-Up</h2>
+    <p class="instruction">Drag the stages from the left into the correct description boxes on the right.</p>
+
+    <div class="game-area">
+        <!-- Terms -->
+        <div class="column" id="terms-pool">
+            <div class="term" draggable="true" id="m-1">Prophase</div>
+            <div class="term" draggable="true" id="m-2">Metaphase</div>
+            <div class="term" draggable="true" id="m-3">Anaphase</div>
+            <div class="term" draggable="true" id="m-4">Telophase</div>
+            <div class="term" draggable="true" id="m-5">Cytokinesis</div>
+        </div>
+
+        <!-- Descriptions -->
+        <div class="column">
+            <div class="description-group">
+                <div class="description-text">A - Chromosomes separate</div>
+                <div class="drop-zone" data-match="m-3">Drop stage here</div>
+            </div>
+            <div class="description-group">
+                <div class="description-text">B - Cytoplasm divides</div>
+                <div class="drop-zone" data-match="m-5">Drop stage here</div>
+            </div>
+            <div class="description-group">
+                <div class="description-text">C - Chromosomes condense</div>
+                <div class="drop-zone" data-match="m-1">Drop stage here</div>
+            </div>
+            <div class="description-group">
+                <div class="description-text">D - Chromosomes line up</div>
+                <div class="drop-zone" data-match="m-2">Drop stage here</div>
+            </div>
+            <div class="description-group">
+                <div class="description-text">E - New nuclei form</div>
+                <div class="drop-zone" data-match="m-4">Drop stage here</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="reset-btn" onclick="location.reload()">Reset Quiz</button>
+        <button class="check-btn" onclick="checkAnswers()">Check My Answers</button>
+    </div>
+    <div id="feedback"></div>
+</div>
+
+<script>
+    const terms = document.querySelectorAll('.term');
+    const dropZones = document.querySelectorAll('.drop-zone');
+    let draggedItem = null;
+
+    terms.forEach(term => {
+        term.addEventListener('dragstart', () => {
+            draggedItem = term;
+            term.style.opacity = '0.5';
+        });
+
+        term.addEventListener('dragend', () => {
+            term.style.opacity = '1';
+            draggedItem = null;
+        });
+    });
+
+    dropZones.forEach(zone => {
+        zone.addEventListener('dragover', e => e.preventDefault());
+        
+        zone.addEventListener('dragenter', e => {
+            e.preventDefault();
+            zone.style.background = "#e1f5fe";
+            zone.style.borderColor = "#0288d1";
+        });
+
+        zone.addEventListener('dragleave', () => {
+            zone.style.background = "#f8fbff";
+            zone.style.borderColor = "#90caf9";
+        });
+        
+        zone.addEventListener('drop', () => {
+            zone.style.background = "#f8fbff";
+            // If there's already an item there, move it back to the pool
+            if (zone.children.length > 0) {
+                document.getElementById('terms-pool').appendChild(zone.children[0]);
+            }
+            zone.innerHTML = '';
+            zone.appendChild(draggedItem);
+            zone.style.fontStyle = "normal";
+        });
+    });
+
+    function checkAnswers() {
+        let score = 0;
+        dropZones.forEach(zone => {
+            const child = zone.children[0];
+            if (child && child.id === zone.getAttribute('data-match')) {
+                zone.className = "drop-zone correct";
+                score++;
+            } else {
+                zone.className = "drop-zone wrong";
+            }
+        });
+        
+        const feedback = document.getElementById('feedback');
+        feedback.innerText = `You scored ${score} out of 5!`;
+        if(score === 5) feedback.style.color = "#28a745";
+        else feedback.style.color = "#003366";
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!-- Interactive Quiz Question Embed Code -->
+<div id="quiz-container" style="max-width: 600px; margin: 20px auto; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; border: 1px solid #e0e0e0; border-radius: 12px; padding: 25px; background-color: #ffffff; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+    
+    <h3 style="margin-top: 0; color: #2c3e50; font-size: 1.2rem;">Self-Check Question</h3>
+    <p style="color: #4a5568; line-height: 1.6; font-size: 1rem;">
+        Contrast how plants and animals store excess glucose for later use. Which specific polysaccharides do they use, and where are they stored in animals?
+    </p>
+
+    <textarea id="user-answer" placeholder="Type your answer here..." style="width: 100%; height: 100px; padding: 12px; border: 2px solid #cbd5e0; border-radius: 8px; font-size: 1rem; margin-bottom: 15px; resize: vertical; box-sizing: border-box;"></textarea>
+
+    <div style="display: flex; gap: 10px;">
+        <button onclick="checkAnswer()" style="background-color: #4299e1; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: background 0.2s;">Submit Answer</button>
+        <button onclick="toggleHint()" style="background-color: #edf2f7; color: #4a5568; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold;">Show Correct Answer</button>
+    </div>
+
+    <div id="feedback" style="margin-top: 20px; padding: 15px; border-radius: 8px; display: none;"></div>
+</div>
+
+<script>
+function checkAnswer() {
+    const userInput = document.getElementById('user-answer').value.toLowerCase();
+    const feedback = document.getElementById('feedback');
+    
+    // Keywords for checking
+    const hasStarch = userInput.includes('starch');
+    const hasGlycogen = userInput.includes('glycogen');
+    const hasLocation = userInput.includes('liver') || userInput.includes('muscle');
+
+    feedback.style.display = "block";
+    
+    if (hasStarch && hasGlycogen && hasLocation) {
+        feedback.style.backgroundColor = "#c6f6d5";
+        feedback.style.color = "#22543d";
+        feedback.innerHTML = "<strong>Excellent!</strong> You correctly identified starch (plants), glycogen (animals), and the storage locations (liver/muscles).";
+    } else if (hasStarch || hasGlycogen) {
+        feedback.style.backgroundColor = "#feebc8";
+        feedback.style.color = "#744210";
+        feedback.innerHTML = "<strong>Partially Correct:</strong> You mentioned the polysaccharides, but make sure to include both starch for plants, glycogen for animals, and specify that animals store it in the liver and muscles.";
+    } else {
+        feedback.style.backgroundColor = "#fed7d7";
+        feedback.style.color = "#822727";
+        feedback.innerHTML = "<strong>Not quite.</strong> Remember: Plants use <b>starch</b> and animals use <b>glycogen</b> (stored in liver and muscles). Try again!";
+    }
+}
+
+function toggleHint() {
+    const feedback = document.getElementById('feedback');
+    feedback.style.display = "block";
+    feedback.style.backgroundColor = "#ebf8ff";
+    feedback.style.color = "#2c5282";
+    feedback.innerHTML = "<strong>Reference Answer:</strong> Plants store excess glucose as <b>starch</b>, while animals store it as <b>glycogen</b> in the liver and muscles.";
+}
+</script>

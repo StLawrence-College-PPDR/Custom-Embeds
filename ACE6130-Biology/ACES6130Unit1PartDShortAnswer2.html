@@ -1,0 +1,46 @@
+<div id="phospholipid-quiz" style="max-width: 600px; margin: 20px auto; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; border: 1px solid #ddd; border-radius: 8px; padding: 20px; background-color: #f9f9f9; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    <h3 style="color: #2c3e50; margin-top: 0;">Short Answer Question</h3>
+    <p style="font-size: 1.1em; line-height: 1.5; color: #34495e;">
+        <strong>Question:</strong> Explain the unique chemical structure of a phospholipid. How do its "opposing properties" help it form the structural foundation of a cell membrane?
+    </p>
+    
+    <textarea id="user-answer" placeholder="Type your answer here..." style="width: 100%; height: 100px; padding: 10px; border: 2px solid #bdc3c7; border-radius: 5px; font-size: 1em; box-sizing: border-box; resize: vertical; margin-bottom: 15px;"></textarea>
+    
+    <button onclick="checkPhospholipidAnswer()" style="background-color: #3498db; color: white; border: none; padding: 10px 20px; font-size: 1em; border-radius: 5px; cursor: pointer; transition: background 0.3s;">Submit Answer</button>
+    <button onclick="showPhospholipidAnswer()" style="background-color: #95a5a6; color: white; border: none; padding: 10px 20px; font-size: 1em; border-radius: 5px; cursor: pointer; margin-left: 10px;">Show Key Concepts</button>
+
+    <div id="feedback-area" style="margin-top: 20px; padding: 15px; border-radius: 5px; display: none;"></div>
+
+    <script>
+        function checkPhospholipidAnswer() {
+            const input = document.getElementById('user-answer').value.toLowerCase();
+            const feedback = document.getElementById('feedback-area');
+            const keywords = ['hydrophilic', 'hydrophobic', 'head', 'tail', 'bilayer'];
+            
+            let found = keywords.filter(word => input.includes(word));
+            feedback.style.display = "block";
+            
+            if (found.length >= 3) {
+                feedback.style.backgroundColor = "#d4edda";
+                feedback.style.color = "#155724";
+                feedback.innerHTML = "<strong>Great work!</strong> Your answer covers the key concepts: " + found.join(", ") + ". <br><br><strong>Refined Answer:</strong> Phospholipids have hydrophilic heads and hydrophobic tails, allowing them to form a bilayer in water.";
+            } else if (input.trim() === "") {
+                feedback.style.backgroundColor = "#fff3cd";
+                feedback.style.color = "#856404";
+                feedback.innerHTML = "Please enter an answer before submitting.";
+            } else {
+                feedback.style.backgroundColor = "#f8d7da";
+                feedback.style.color = "#721c24";
+                feedback.innerHTML = "<strong>Almost there!</strong> Try to mention the specific names for the heads (hydrophilic) and tails (hydrophobic) and how they arrange themselves (bilayer).";
+            }
+        }
+
+        function showPhospholipidAnswer() {
+            const feedback = document.getElementById('feedback-area');
+            feedback.style.display = "block";
+            feedback.style.backgroundColor = "#e2e3e5";
+            feedback.style.color = "#383d41";
+            feedback.innerHTML = "<strong>Correct Answer:</strong> Phospholipids have hydrophilic (water-loving) heads and hydrophobic (water-fearing) tails. In water, they spontaneously arrange into a <strong>bilayer</strong>, with heads facing out toward the liquid and tails tucked inside, forming the cell membrane's foundation.";
+        }
+    </script>
+</div>

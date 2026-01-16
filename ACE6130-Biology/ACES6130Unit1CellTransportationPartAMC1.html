@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Biology Quiz</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; padding: 20px; }
+        .quiz-card { background: white; max-width: 600px; width: 100%; padding: 30px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; font-size: 1.5rem; text-align: center; margin-bottom: 20px; }
+        .question-text { font-size: 1.1rem; font-weight: 600; margin-bottom: 15px; color: #34495e; }
+        .option { display: block; padding: 12px; margin: 8px 0; border: 2px solid #edeff2; border-radius: 8px; cursor: pointer; transition: 0.2s; }
+        .option:hover { background-color: #f8f9fa; border-color: #d1d8e0; }
+        .option.selected { border-color: #3498db; background-color: #ebf5fb; }
+        .option.correct { background-color: #d4edda !important; border-color: #28a745 !important; color: #155724; font-weight: bold; }
+        .option.incorrect { background-color: #f8d7da !important; border-color: #dc3545 !important; color: #721c24; }
+        button { width: 100%; padding: 12px; margin-top: 20px; border: none; border-radius: 8px; font-size: 1rem; cursor: pointer; background: #3498db; color: white; font-weight: bold; transition: 0.3s; }
+        button:hover { background: #2980b9; }
+        button:disabled { background: #bdc3c7; cursor: not-allowed; }
+        #feedback { margin-top: 15px; padding: 10px; border-radius: 8px; display: none; text-align: center; font-weight: bold; }
+        .progress { text-align: center; font-size: 0.9rem; color: #7f8c8d; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-card">
+    <div class="progress" id="progress">Question 1 of 22</div>
+    <div id="quiz-content">
+        <div class="question-text" id="question">Loading...</div>
+        <div id="options-container"></div>
+        <button id="action-btn" onclick="handleSubmit()">Submit Answer</button>
+        <div id="feedback"></div>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        { q: "The primary role of cellular transportation is to:", o: ["Produce energy for the cell", "Exchange materials between the cell and its environment", "Protect DNA inside the nucleus", "Control cell division"], a: 1 },
+        { q: "Homeostasis refers to a cell’s ability to:", o: ["Grow rapidly", "Divide continuously", "Maintain stable internal conditions", "Absorb all surrounding substances"], a: 2 },
+        { q: "The fluid mosaic model describes the cell membrane as:", o: ["A rigid wall of carbohydrates", "A fixed layer of proteins", "A flexible phospholipid bilayer with embedded proteins", "A single layer of lipids"], a: 2 },
+        { q: "In the fluid mosaic model, what does the term 'fluid' specifically refer to?", o: ["Ability of membrane components to move sideways", "Presence of water-soluble proteins", "Constant flow of water through tails", "Liquid state of cytoplasm"], a: 0 },
+        { q: "Which part of a phospholipid is hydrophilic?", o: ["Fatty acid tails", "Cholesterol", "Phosphate head", "Protein channel"], a: 2 },
+        { q: "Which feature allows phospholipids to form a bilayer?", o: ["Completely hydrophobic", "Hydrophilic heads and hydrophobic tails", "Strong covalent bonds", "Glucose chains"], a: 1 },
+        { q: "What prevents the membrane from becoming too rigid or fluid in animal cells?", o: ["Phospholipid heads", "Cholesterol", "Carrier proteins", "Peripheral proteins"], a: 1 },
+        { q: "Passive transport differs from active because it:", o: ["Requires ATP", "Moves substances against the gradient", "Does not require energy", "Uses vesicles"], a: 2 },
+        { q: "Diffusion occurs when molecules move:", o: ["From low to high concentration", "Using ATP", "From high to low concentration", "Only through proteins"], a: 2 },
+        { q: "Which molecule can pass directly through the phospholipid bilayer?", o: ["Glucose", "Oxygen", "Sodium ions", "Proteins"], a: 1 },
+        { q: "Osmosis specifically involves the movement of:", o: ["Glucose", "Ions", "Proteins", "Water"], a: 3 },
+        { q: "If a cell shrinks (crenation), the solution is:", o: ["Hypotonic", "Isotonic", "Hypertonic", "Pure water"], a: 2 },
+        { q: "Facilitated diffusion requires:", o: ["Energy and vesicles", "Carrier or channel proteins", "Pumps and ATP", "Temperature change"], a: 1 },
+        { q: "Which molecule likely requires facilitated diffusion?", o: ["Oxygen", "Carbon dioxide", "Glucose", "Lipid-soluble vitamin"], a: 2 },
+        { q: "What is the primary difference between passive and active transport?", o: ["Passive moves against gradient; active moves down", "Active requires energy (ATP); passive does not", "Passive involves water; active involves ions", "Active uses vesicles; passive uses channels"], a: 1 },
+        { q: "The sodium-potassium pump is active transport because it:", o: ["Allows sodium to diffuse naturally", "Uses ATP to move ions against gradients", "Uses osmosis", "Moves 3 potassium out for 2 sodium in"], a: 1 },
+        { q: "Endocytosis is used when substances are:", o: ["Very small and nonpolar", "Large or in bulk", "Moving out of the cell", "Moving down a gradient"], a: 1 },
+        { q: "A white blood cell engulfing a bacterium is:", o: ["Pinocytosis", "Exocytosis", "Phagocytosis", "Facilitated diffusion"], a: 2 },
+        { q: "Exocytosis involves:", o: ["Engulfing solids", "Releasing substances from the cell", "Diffusing gases", "Absorbing water"], a: 1 },
+        { q: "Vesicles are best described as:", o: ["Energy molecules", "Protein channels", "Membrane-bound sacs", "Enzymes"], a: 2 },
+        { q: "How does increased temperature affect diffusion rate?", o: ["Decreases rate", "Increases rate (more kinetic energy)", "No effect", "Stops diffusion"], a: 1 },
+        { q: "Nerve cells release neurotransmitters through:", o: ["Endocytosis", "Exocytosis", "Simple Diffusion", "Osmosis"], a: 1 }
+    ];
+
+    let currentQ = 0;
+    let score = 0;
+    let selectedIdx = null;
+    let answered = false;
+
+    function loadQuestion() {
+        answered = false;
+        selectedIdx = null;
+        const q = questions[currentQ];
+        document.getElementById("progress").innerText = `Question ${currentQ + 1} of ${questions.length}`;
+        document.getElementById("question").innerText = q.q;
+        const container = document.getElementById("options-container");
+        container.innerHTML = "";
+        document.getElementById("feedback").style.display = "none";
+        document.getElementById("action-btn").innerText = "Submit Answer";
+        document.getElementById("action-btn").disabled = true;
+
+        q.o.forEach((opt, i) => {
+            const div = document.createElement("div");
+            div.className = "option";
+            div.innerText = String.fromCharCode(65 + i) + ". " + opt;
+            div.onclick = () => selectOption(i);
+            container.appendChild(div);
+        });
+    }
+
+    function selectOption(i) {
+        if (answered) return;
+        selectedIdx = i;
+        document.querySelectorAll('.option').forEach(el => el.classList.remove('selected'));
+        document.querySelectorAll('.option')[i].classList.add('selected');
+        document.getElementById("action-btn").disabled = false;
+    }
+
+    function handleSubmit() {
+        if (!answered) {
+            checkAnswer();
+        } else {
+            currentQ++;
+            if (currentQ < questions.length) {
+                loadQuestion();
+            } else {
+                showResult();
+            }
+        }
+    }
+
+    function checkAnswer() {
+        answered = true;
+        const q = questions[currentQ];
+        const options = document.querySelectorAll('.option');
+        const feedback = document.getElementById("feedback");
+
+        if (selectedIdx === q.a) {
+            score++;
+            options[selectedIdx].classList.add('correct');
+            feedback.innerText = "Correct!";
+            feedback.style.color = "#28a745";
+        } else {
+            options[selectedIdx].classList.add('incorrect');
+            options[q.a].classList.add('correct');
+            feedback.innerText = "Incorrect. The correct answer was " + String.fromCharCode(65 + q.a);
+            feedback.style.color = "#dc3545";
+        }
+        feedback.style.display = "block";
+        document.getElementById("action-btn").innerText = "Next Question";
+    }
+
+    function showResult() {
+        document.getElementById("quiz-content").innerHTML = `
+            <h2 style="text-align:center">Quiz Complete!</h2>
+            <p style="text-align:center; font-size: 1.5rem">Your Score: ${score} / ${questions.length}</p>
+            <button onclick="location.reload()">Restart Quiz</button>
+        `;
+    }
+
+    loadQuestion();
+</script>
+</body>
+</html>

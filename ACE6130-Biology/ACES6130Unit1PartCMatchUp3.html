@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enzyme Matching Activity</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        h2 { color: #333; }
+        .container {
+            display: flex;
+            gap: 40px;
+            margin-top: 20px;
+            max-width: 900px;
+        }
+        .terms, .descriptions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .term {
+            padding: 15px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 8px;
+            cursor: grab;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            user-select: none;
+        }
+        .term:active { cursor: grabbing; }
+        .drop-zone {
+            min-height: 60px;
+            width: 400px;
+            padding: 15px;
+            background-color: #fff;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: background 0.3s, border 0.3s;
+            position: relative;
+        }
+        .drop-zone.hover {
+            background-color: #e3f2fd;
+            border-color: #007bff;
+        }
+        .drop-zone.correct {
+            background-color: #d4edda;
+            border-color: #28a745;
+            border-style: solid;
+        }
+        .description-text {
+            font-size: 0.95em;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        .description-container {
+            display: flex;
+            flex-direction: column;
+        }
+        .success-message {
+            margin-top: 30px;
+            font-weight: bold;
+            color: #28a745;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Match the Enzyme Terms</h2>
+    <p>Drag the term on the left into the correct description box on the right.</p>
+
+    <div class="container">
+        <!-- Draggable Terms -->
+        <div class="terms" id="terms-container">
+            <div class="term" draggable="true" id="term-1" data-match="B">Competitive inhibitor</div>
+            <div class="term" draggable="true" id="term-2" data-match="C">Non-competitive inhibitor</div>
+            <div class="term" draggable="true" id="term-3" data-match="D">Denaturation</div>
+            <div class="term" draggable="true" id="term-4" data-match="A">Optimal Range</div>
+        </div>
+
+        <!-- Drop Zones with Descriptions -->
+        <div class="descriptions">
+            <div class="description-container">
+                <div class="description-text">A- The specific environment (like pH 2 or pH 7) where an enzyme works best.</div>
+                <div class="drop-zone" data-id="A">Drop Term Here</div>
+            </div>
+            <div class="description-container">
+                <div class="description-text">B- A molecule that binds to the active site, physically blocking the substrate.</div>
+                <div class="drop-zone" data-id="B">Drop Term Here</div>
+            </div>
+            <div class="description-container">
+                <div class="description-text">C- A molecule that binds to an allosteric site, changing the enzyme's shape.</div>
+                <div class="drop-zone" data-id="C">Drop Term Here</div>
+            </div>
+            <div class="description-container">
+                <div class="description-text">D- The process where an enzyme loses its shape due to extreme heat or pH.</div>
+                <div class="drop-zone" data-id="D">Drop Term Here</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="success" class="success-message">Great job! All terms matched correctly.</div>
+
+    <script>
+        const terms = document.querySelectorAll('.term');
+        const dropZones = document.querySelectorAll('.drop-zone');
+        let correctMatches = 0;
+
+        terms.forEach(term => {
+            term.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('text/plain', e.target.id);
+            });
+        });
+
+        dropZones.forEach(zone => {
+            zone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                zone.classList.add('hover');
+            });
+
+            zone.addEventListener('dragleave', () => {
+                zone.classList.remove('hover');
+            });
+
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                zone.classList.remove('hover');
+                
+                const termId = e.dataTransfer.getData('text/plain');
+                const termElement = document.getElementById(termId);
+                const matchId = termElement.getAttribute('data-match');
+                const zoneId = zone.getAttribute('data-id');
+
+                if (matchId === zoneId) {
+                    zone.classList.add('correct');
+                    zone.innerText = termElement.innerText;
+                    termElement.style.visibility = 'hidden';
+                    correctMatches++;
+                    
+                    if (correctMatches === 4) {
+                        document.getElementById('success').style.display = 'block';
+                    }
+                } else {
+                    alert("Not quite! Try matching that term to a different description.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

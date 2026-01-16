@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --success-color: #16a34a;
+            --error-color: #dc2626;
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--primary-color);
+            display: inline-block;
+            width: 100%;
+            padding-bottom: 10px;
+        }
+
+        .question-card {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .options-grid {
+            display: grid;
+            gap: 10px;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option-label:hover {
+            background-color: #eff6ff;
+            border-color: var(--primary-color);
+        }
+
+        input[type="radio"] {
+            margin-right: 12px;
+            transform: scale(1.2);
+        }
+
+        button#submit-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 20px;
+        }
+
+        button#submit-btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* Result Styles */
+        .correct {
+            background-color: #dcfce7 !important;
+            border-color: var(--success-color) !important;
+            color: #166534;
+        }
+
+        .incorrect {
+            background-color: #fee2e2 !important;
+            border-color: var(--error-color) !important;
+            color: #991b1b;
+        }
+
+        #score-display {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .feedback-icon {
+            margin-left: auto;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Applications</h1>
+    
+    <div id="score-display"></div>
+
+    <form id="quiz-form">
+        <div id="quiz-content"></div>
+        <button type="button" id="submit-btn" onclick="calculateScore()">Check My Answers</button>
+    </form>
+</div>
+
+<script>
+    const questions = [
+        {
+            q: "What is the fundamental cause of cancer at the cellular level?",
+            options: ["The inability of cells to produce enough energy in the mitochondria.", "A mutation in the DNA causing a loss of control over the cell cycle.", "A failure of the cell membrane to allow nutrients to enter.", "The natural aging process of healthy somatic cells"],
+            correct: 1
+        },
+        {
+            q: "How does radiation therapy specifically function to treat cancer according to the passage?",
+            options: ["It reverses mutations to turn cancer cells back into healthy cells.", "It strengthens the cell membrane of healthy cells.", "It damages the DNA of cancer cells so severely they can no longer divide.", "It provides extra oxygen to diseased tissues."],
+            correct: 2
+        },
+        {
+            q: "Modern 'targeted therapies' identify cancer cells by looking for:",
+            options: ["The unique proteins found on the cancer cell's membrane.", "The amount of glucose the cell is storing.", "The size of the cell’s nucleus.", "The speed at which the cell moves through the blood."],
+            correct: 0
+        },
+        {
+            q: "What are stem cells specifically defined as?",
+            options: ["Specialized cells found only in the nervous system.", "Cells that have lost the ability to divide.", "Unspecialized cells that can transform into specialized cells.", "Cells used primarily for radiation therapy."],
+            correct: 2
+        },
+        {
+            q: "Regenerative medicine is a field that focuses on:",
+            options: ["Preventing the cell cycle from starting.", "Repairing tissues that the body cannot fix naturally.", "Studying the history of cellular observation.", "Developing new types of radiation for cancer."],
+            correct: 1
+        },
+        {
+            q: "Which of the following is a current application of stem cell therapy?",
+            options: ["Curing all known genetic diseases.", "Regrowing skin for burn victims.", "Editing genes to change eye color.", "Strengthening the human immune system against the common cold."],
+            correct: 1
+        },
+        {
+            q: "Why does stem cell research lead to important ethical discussions?",
+            options: ["Because it involves the different sources from which cells are obtained.", "Because stem cells are too small to be seen with regular microscopes.", "Because the therapy is only effective on muscle tissue.", "Because it is a research field that does not use DNA."],
+            correct: 0
+        },
+        {
+            q: "Scientists can now 'screen for genetic diseases.' When does this process take place?",
+            options: ["Only after a person reaches adulthood.", "Before a baby is born.", "Only when a cell has already become cancerous.", "During the process of radiation therapy."],
+            correct: 1
+        },
+        {
+            q: "What is one of the ethical concerns regarding 'gene editing'?",
+            options: ["It might make cells divide too slowly.", "It could have long-term effects on the human population.", "It only works on specialized cells like nerves.", "It prevents the body from using stem cells."],
+            correct: 1
+        },
+        {
+            q: "Aside from medical outcomes, what 'fairness' issue does the text raise regarding new health technologies?",
+            options: ["Whether the technology is too loud for hospitals.", "Who gets access to these expensive technologies.", "If the technology can be used on plants as well as humans.", "Whether scientists are allowed to use computers for research."],
+            correct: 1
+        }
+    ];
+
+    function initQuiz() {
+        const container = document.getElementById('quiz-content');
+        questions.forEach((item, index) => {
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            card.innerHTML = `
+                <span class="question-text">${index + 1}. ${item.q}</span>
+                <div class="options-grid" id="q${index}-options">
+                    ${item.options.map((opt, i) => `
+                        <label class="option-label" id="q${index}-l${i}">
+                            <input type="radio" name="question${index}" value="${i}">
+                            ${opt}
+                        </label>
+                    `).join('')}
+                </div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function calculateScore() {
+        let score = 0;
+        questions.forEach((item, index) => {
+            const selected = document.querySelector(`input[name="question${index}"]:checked`);
+            const correctIndex = item.correct;
+            
+            // Reset colors
+            item.options.forEach((_, i) => {
+                document.getElementById(`q${index}-l${i}`).classList.remove('correct', 'incorrect');
+            });
+
+            if (selected) {
+                const userChoice = parseInt(selected.value);
+                if (userChoice === correctIndex) {
+                    score++;
+                    document.getElementById(`q${index}-l${userChoice}`).classList.add('correct');
+                } else {
+                    document.getElementById(`q${index}-l${userChoice}`).classList.add('incorrect');
+                    document.getElementById(`q${index}-l${correctIndex}`).classList.add('correct');
+                }
+            } else {
+                // If no answer selected, highlight the correct one
+                document.getElementById(`q${index}-l${correctIndex}`).classList.add('correct');
+            }
+        });
+
+        const scoreDisplay = document.getElementById('score-display');
+        scoreDisplay.style.display = 'block';
+        scoreDisplay.innerHTML = `Your Score: ${score} / ${questions.length}`;
+        scoreDisplay.className = score >= 7 ? 'correct' : 'incorrect';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    initQuiz();
+</script>
+
+</body>
+</html>
