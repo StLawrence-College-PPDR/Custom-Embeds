@@ -1,0 +1,135 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "name": "Ontario", "capital": "Toronto" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-95, 49], [-79, 43], [-74, 45], [-90, 52], [-95, 49]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Quebec", "capital": "Quebec City" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-71, 47], [-57, 53], [-62, 54], [-70, 52], [-71, 47]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "British Columbia", "capital": "Victoria" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-139, 49], [-123, 49], [-123, 60], [-139, 60], [-139, 49]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Alberta", "capital": "Edmonton" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-120, 49], [-110, 49], [-110, 60], [-120, 60], [-120, 49]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Manitoba", "capital": "Winnipeg" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-102, 49], [-95, 49], [-95, 60], [-102, 60], [-102, 49]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Saskatchewan", "capital": "Regina" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-110, 49], [-102, 49], [-102, 60], [-110, 60], [-110, 49]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Nova Scotia", "capital": "Halifax" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-66, 43], [-60, 43], [-60, 46], [-66, 46], [-66, 43]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "New Brunswick", "capital": "Fredericton" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-69, 45], [-64, 45], [-64, 48], [-69, 48], [-69, 45]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Prince Edward Island", "capital": "Charlottetown" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-64, 46], [-62, 46], [-62, 47], [-64, 47], [-64, 46]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Newfoundland & Labrador", "capital": "St. John's" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-61, 47], [-52, 47], [-52, 53], [-61, 53], [-61, 47]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Yukon", "capital": "Whitehorse" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-141, 60], [-120, 60], [-120, 69], [-141, 69], [-141, 60]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Northwest Territories", "capital": "Yellowknife" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-125, 60], [-110, 60], [-110, 70], [-125, 70], [-125, 60]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": { "name": "Nunavut", "capital": "Iqaluit" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-100, 60], [-70, 60], [-70, 80], [-100, 80], [-100, 60]
+        ]]
+      }
+    }
+  ]
+}

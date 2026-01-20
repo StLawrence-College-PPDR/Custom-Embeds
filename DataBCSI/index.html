@@ -1,100 +1,126 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Canada Bubble Map – Working</title>
-<style>
-html, body, #chartdiv {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-</style>
+  <meta charset="utf-8" />
+  <title>Canada Capitals 2021 - deck.gl</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/map.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/geodata/canadaLow.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+  <link href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.css" rel="stylesheet" />
+  <script src="https://unpkg.com/maplibre-gl/dist/maplibre-gl.js"></script>
+  <script src="https://unpkg.com/deck.gl@8.10.0/dist.min.js"></script>
+
+  <style>
+    body { margin: 0; padding: 0; }
+    #map { position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
+    #tooltip {
+      position:absolute;
+      z-index:10;
+      pointer-events:none;
+      background:rgba(0,0,0,0.75);
+      color:#fff;
+      padding:8px;
+      border-radius:4px;
+      font-size:14px;
+      display:none;
+    }
+  </style>
 </head>
 <body>
+  <div id="map"></div>
+  <div id="tooltip"></div>
 
-<div id="chartdiv"></div>
+  <script>
+    // 2021 capital populations
+    const capitalPop2021 = {
+      "Toronto": 2794356,
+      "Ottawa": 1017449,
+      "Quebec City": 549459,
+      "Victoria": 91867,
+      "Edmonton": 1010899,
+      "Winnipeg": 749607,
+      "Regina": 226404,
+      "Halifax": 348634,
+      "Fredericton": 63116,
+      "Charlottetown": 40500,
+      "St. John's": 205995,
+      "Whitehorse": 25000,
+      "Yellowknife": 20000,
+      "Iqaluit": 7429
+    };
 
-<script>
-am5.ready(function() {
-  var root = am5.Root.new("chartdiv");
-  root.setThemes([am5themes_Animated.new(root)]);
+    const maxPop = Math.max(...Object.values(capitalPop2021));
+    const minPop = Math.min(...Object.values(capitalPop2021));
 
-  var chart = root.container.children.push(
-    am5map.MapChart.new(root, {
-      projection: am5map.geoMercator(),
-      homeGeoPoint: { latitude: 56, longitude: -96 },
-      homeZoomLevel: 3,
-      maxZoomLevel: 10
-    })
-  );
+    function scaleElevation(pop) {
+      const minHeight = 10000;
+      const maxHeight = 400000;
+      return ((pop - minPop) / (maxPop - minPop)) * (maxHeight - minHeight) + minHeight;
+    }
 
-  // --- Provinces ---
-  var polygonSeries = chart.series.push(
-    am5map.MapPolygonSeries.new(root, {
-      geoJSON: am5geodata_canadaLow
-    })
-  );
-  polygonSeries.mapPolygons.template.setAll({
-    fill: am5.color(0xe5e5e5),
-    stroke: am5.color(0xffffff)
-  });
+    function scaleColor(pop) {
+      const ratio = (pop - minPop) / (maxPop - minPop);
+      const r = Math.floor(255 * ratio);
+      const g = Math.floor(255 * (1 - ratio));
+      return [r, g, 100, 180];
+    }
 
-  // --- City data ---
-  var cities = [
-    { city: "Toronto", lat: 43.65, lon: -79.38, pop: 2731571, value: 647648 },
-    { city: "Vancouver", lat: 49.28, lon: -123.12, pop: 2463431, value: 800220 },
-    { city: "Ottawa–Gatineau", lat: 45.42, lon: -75.70, pop: 1323783, value: 349818 },
-    { city: "Calgary", lat: 51.05, lon: -114.07, pop: 1392609, value: 450406 },
-    { city: "Montreal", lat: 45.50, lon: -73.57, pop: 1704694, value: 300794 },
-    { city: "Edmonton", lat: 53.55, lon: -113.49, pop: 1321426, value: 399932 },
-    { city: "Halifax", lat: 44.65, lon: -63.57, pop: 403390, value: 269126 },
-    { city: "Winnipeg", lat: 49.90, lon: -97.14, pop: 778489, value: 299614 },
-    { city: "Victoria", lat: 48.43, lon: -123.37, pop: 369780, value: 590424 },
-    { city: "Saskatoon", lat: 52.13, lon: -106.67, pop: 260600, value: 350148 },
-    { city: "Regina", lat: 50.45, lon: -104.61, pop: 236481, value: 348426 }
-  ];
-
-  // --- Color function ---
-  function getColor(val) {
-    if (val > 650000) return am5.color(0x7a0177);
-    if (val > 500000) return am5.color(0xc51b8a);
-    if (val > 400000) return am5.color(0xf768a1);
-    if (val > 300000) return am5.color(0xfbb4b9);
-    return am5.color(0xfde0dd);
-  }
-
-  // --- MapPointSeries ---
-  var pointSeries = chart.series.push(
-    am5map.MapPointSeries.new(root, {
-      latitudeField: "lat",
-      longitudeField: "lon",
-      data: cities
-    })
-  );
-
-  pointSeries.bullets.push(function(root, series, dataItem) {
-    // Radius based on population
-    var radius = Math.sqrt(dataItem.dataContext.pop)/120;
-    return am5.Bullet.new(root, {
-      sprite: am5.Circle.new(root, {
-        radius: radius,
-        fill: getColor(dataItem.dataContext.value),
-        fillOpacity: 0.7,
-        stroke: am5.color(0x000000),
-        strokeWidth: 1,
-        tooltipText: "{city}\nPopulation: {pop.formatNumber('#,###')}\nMedian Value: ${value.formatNumber('#,###')}"
-      })
+    const map = new maplibregl.Map({
+      container: 'map',
+      style: 'https://demotiles.maplibre.org/style.json',
+      center: [-95, 60],
+      zoom: 3
     });
-  });
 
-});
-</script>
+    const deckOverlay = new deck.DeckGL({
+      canvas: 'deck-canvas',
+      width: '100%',
+      height: '100%',
+      initialViewState: {
+        longitude: -95,
+        latitude: 60,
+        zoom: 3,
+        pitch: 45,
+        bearing: 0
+      },
+      controller: true
+    });
+
+    // Load the simplified GeoJSON file
+    fetch("canada_provinces_simplified.geojson")
+      .then(r => r.json())
+      .then(data => {
+        const geoJsonLayer = new deck.GeoJsonLayer({
+          id: "canada-provinces",
+          data: data,
+          pickable: true,
+          stroked: true,
+          filled: true,
+          extruded: true,
+          wireframe: true,
+          getElevation: f => scaleElevation(capitalPop2021[f.properties.capital]),
+          getFillColor: f => scaleColor(capitalPop2021[f.properties.capital]),
+          getLineColor: [0, 0, 0, 180],
+          onHover: ({ object, x, y }) => {
+            const tooltip = document.getElementById('tooltip');
+            if (object) {
+              const pop = capitalPop2021[object.properties.capital];
+              tooltip.style.display = 'block';
+              tooltip.style.left = x + 'px';
+              tooltip.style.top = y + 'px';
+              tooltip.innerHTML = `
+                <strong>${object.properties.name}</strong><br/>
+                Capital: ${object.properties.capital}<br/>
+                Population (2021): ${pop.toLocaleString()}
+              `;
+            } else {
+              tooltip.style.display = 'none';
+            }
+          }
+        });
+
+        deckOverlay.setProps({ layers: [geoJsonLayer] });
+      })
+      .catch(err => console.error(err));
+  </script>
 </body>
 </html>
