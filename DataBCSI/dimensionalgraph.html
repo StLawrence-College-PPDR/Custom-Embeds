@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Life Expectancy vs Schooling vs GNI</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+  <div id="plot" style="width: 100%; height: 100vh;"></div>
+
+  <script>
+    const countries = [
+      "Iceland",
+      "Norway",
+      "Switzerland",
+      "Denmark",
+      "Germany",
+      "Sweden",
+      "Australia",
+      "Hong Kong, China (SAR)",
+      "Netherlands",
+      "Belgium"
+    ];
+
+    const lifeExpectancy = [82.7, 83.3, 84.0, 81.9, 81.4, 83.3, 83.9, 85.5, 82.2, 82.1];
+    const schooling = [13.9, 13.1, 13.9, 13.0, 14.3, 12.7, 12.9, 12.4, 12.7, 12.7];
+    const gni = [69117, 112710, 81949, 76008, 64053, 66102, 58277, 69436, 68344, 63582];
+
+    const trace = {
+      x: lifeExpectancy,
+      y: schooling,
+      z: gni,
+      mode: 'markers',
+      type: 'scatter3d',
+      text: countries,
+      marker: {
+        size: 8,
+        color: gni,
+        colorscale: 'Viridis',
+        showscale: true,
+        colorbar: { title: "GNI (PPP $)" }
+      }
+    };
+
+    const layout = {
+      title: "Life Expectancy vs Schooling vs GNI",
+      scene: {
+        xaxis: { title: "Life Expectancy (years)" },
+        yaxis: { title: "Mean Years of Schooling (years)" },
+        zaxis: { title: "GNI per capita (PPP $)" }
+      }
+    };
+
+    Plotly.newPlot("plot", [trace], layout);
+  </script>
+</body>
+</html>
