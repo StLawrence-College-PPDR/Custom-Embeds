@@ -1,126 +1,180 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" />
-  <title>Canada Capitals 2021 - deck.gl</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <title>Vancover Po</title>
 
-  <link href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.css" rel="stylesheet" />
-  <script src="https://unpkg.com/maplibre-gl/dist/maplibre-gl.js"></script>
-  <script src="https://unpkg.com/deck.gl@8.10.0/dist.min.js"></script>
+  <!-- deck.gl and MapLibre dependencies -->
+  <script src="https://unpkg.com/deck.gl@^9.0.0/dist.min.js"></script>
+  <script src="https://unpkg.com/maplibre-gl@3.6.0/dist/maplibre-gl.js"></script>
+  <link
+    href="https://unpkg.com/maplibre-gl@3.6.0/dist/maplibre-gl.css"
+    rel="stylesheet"
+  />
 
   <style>
-    body { margin: 0; padding: 0; }
-    #map { position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
-    #tooltip {
-      position:absolute;
-      z-index:10;
-      pointer-events:none;
-      background:rgba(0,0,0,0.75);
-      color:#fff;
-      padding:8px;
-      border-radius:4px;
-      font-size:14px;
-      display:none;
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .deck-tooltip {
+      font-family: Arial, sans-serif;
+      padding: 6px !important;
+      margin: 8px;
+      max-width: 300px;
+      font-size: 10px;
+    }
+
+    /* Legend styling */
+    .legend {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 9999;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 6px;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+
+    .legend-title {
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .legend-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .legend-color {
+      width: 18px;
+      height: 12px;
+      margin-right: 8px;
+      border: 1px solid #ddd;
     }
   </style>
 </head>
+
 <body>
-  <div id="map"></div>
-  <div id="tooltip"></div>
+<div class="legend" id="legend">
+  <div class="legend-title">Vancouver Property Value</div>
+  <p>The property value of Vancouver, BC</p>
+  <p>Height of polygons - average property value per square meter of lot.</p>
+  <p>Color - value growth from last assessment.</p>
+  <p>Data source: <a href="http://data.vancouver.ca/">City of Vancouver</a></p>
+</div>
 
-  <script>
-    // 2021 capital populations
-    const capitalPop2021 = {
-      "Toronto": 2794356,
-      "Ottawa": 1017449,
-      "Quebec City": 549459,
-      "Victoria": 91867,
-      "Edmonton": 1010899,
-      "Winnipeg": 749607,
-      "Regina": 226404,
-      "Halifax": 348634,
-      "Fredericton": 63116,
-      "Charlottetown": 40500,
-      "St. John's": 205995,
-      "Whitehorse": 25000,
-      "Yellowknife": 20000,
-      "Iqaluit": 7429
-    };
+<script type="text/javascript">
 
-    const maxPop = Math.max(...Object.values(capitalPop2021));
-    const minPop = Math.min(...Object.values(capitalPop2021));
+  const {DeckGL, GeoJsonLayer} = deck;
 
-    function scaleElevation(pop) {
-      const minHeight = 10000;
-      const maxHeight = 400000;
-      return ((pop - minPop) / (maxPop - minPop)) * (maxHeight - minHeight) + minHeight;
+  const COLOR_SCALE = [
+    [65, 182, 196],
+    [127, 205, 187],
+    [199, 233, 180],
+    [237, 248, 177],
+    [255, 255, 204],
+    [255, 237, 160],
+    [254, 217, 118],
+    [254, 178, 76],
+    [253, 141, 60],
+    [252, 78, 42],
+    [227, 26, 28],
+    [189, 0, 38],
+    [128, 0, 38]
+  ];
+
+  const geojsonLayer = new GeoJsonLayer({
+    id: "geojson-polygons",
+    data: "https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/geojson/vancouver-blocks.json",
+    opacity: 0.8,
+    stroked: false,
+    filled: true,
+    extruded: true,
+    wireframe: true,
+    pickable: true,
+
+    getElevation: f => Math.sqrt(f.properties.valuePerSqm) * 10,
+    getFillColor: f => colorScale(f.properties.growth),
+    getLineColor: [255, 255, 255]
+  });
+
+  // Initialize DeckGL
+  new DeckGL({
+    mapStyle: "https://basemaps.cartocdn.com/gl/positron-nolabels-gl-style/style.json",
+    initialViewState: {
+      latitude: 49.254,
+      longitude: -123.13,
+      zoom: 11,
+      maxZoom: 16,
+      pitch: 45
+    },
+    controller: true,
+    layers: [geojsonLayer],
+    getTooltip
+  });
+
+  function colorScale(x) {
+    const i = Math.round(x * 7) + 4;
+    if (x < 0) {
+      return COLOR_SCALE[i] || COLOR_SCALE[0];
     }
+    return COLOR_SCALE[i] || COLOR_SCALE[COLOR_SCALE.length - 1];
+  }
 
-    function scaleColor(pop) {
-      const ratio = (pop - minPop) / (maxPop - minPop);
-      const r = Math.floor(255 * ratio);
-      const g = Math.floor(255 * (1 - ratio));
-      return [r, g, 100, 180];
-    }
+  function getTooltip({object}) {
+    return object && `
+Property Value:
+  ${object.properties.valuePerSqm} per m²
+Growth:
+  ${Math.round(object.properties.growth * 100)}%`;
+  }
 
-    const map = new maplibregl.Map({
-      container: 'map',
-      style: 'https://demotiles.maplibre.org/style.json',
-      center: [-95, 60],
-      zoom: 3
-    });
+  // --- LEGEND ---
+  const legend = document.getElementById("legend");
 
-    const deckOverlay = new deck.DeckGL({
-      canvas: 'deck-canvas',
-      width: '100%',
-      height: '100%',
-      initialViewState: {
-        longitude: -95,
-        latitude: 60,
-        zoom: 3,
-        pitch: 45,
-        bearing: 0
-      },
-      controller: true
-    });
+  // Define legend breaks (approximate)
+  const breaks = [
+    "< -4%",
+    "-4% to -2%",
+    "-2% to 0%",
+    "0% to 2%",
+    "2% to 4%",
+    "4% to 6%",
+    "6% to 8%",
+    "8% to 10%",
+    "10% to 12%",
+    "12% to 14%",
+    "14% to 16%",
+    "> 16%"
+  ];
 
-    // Load the simplified GeoJSON file
-    fetch("canada_provinces_simplified.geojson")
-      .then(r => r.json())
-      .then(data => {
-        const geoJsonLayer = new deck.GeoJsonLayer({
-          id: "canada-provinces",
-          data: data,
-          pickable: true,
-          stroked: true,
-          filled: true,
-          extruded: true,
-          wireframe: true,
-          getElevation: f => scaleElevation(capitalPop2021[f.properties.capital]),
-          getFillColor: f => scaleColor(capitalPop2021[f.properties.capital]),
-          getLineColor: [0, 0, 0, 180],
-          onHover: ({ object, x, y }) => {
-            const tooltip = document.getElementById('tooltip');
-            if (object) {
-              const pop = capitalPop2021[object.properties.capital];
-              tooltip.style.display = 'block';
-              tooltip.style.left = x + 'px';
-              tooltip.style.top = y + 'px';
-              tooltip.innerHTML = `
-                <strong>${object.properties.name}</strong><br/>
-                Capital: ${object.properties.capital}<br/>
-                Population (2021): ${pop.toLocaleString()}
-              `;
-            } else {
-              tooltip.style.display = 'none';
-            }
-          }
-        });
+  for (let i = 0; i < breaks.length; i++) {
+    const row = document.createElement("div");
+    row.className = "legend-row";
 
-        deckOverlay.setProps({ layers: [geoJsonLayer] });
-      })
-      .catch(err => console.error(err));
-  </script>
+    const color = document.createElement("div");
+    color.className = "legend-color";
+    color.style.background = `rgb(${COLOR_SCALE[i].join(",")})`;
+
+    const label = document.createElement("div");
+    label.textContent = breaks[i];
+
+    row.appendChild(color);
+    row.appendChild(label);
+    legend.appendChild(row);
+  }
+
+</script>
 </body>
 </html>
