@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .quiz-wrapper {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 850px;
+            margin: 20px auto;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+        }
+        .quiz-header {
+            text-align: center;
+            border-bottom: 2px solid #3b82f6;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+        .quiz-header h2 { color: #1e3a8a; margin: 0; }
+        .quiz-header p { color: #64748b; font-size: 0.95em; margin-top: 5px; }
+
+        .matching-table { width: 100%; border-collapse: collapse; }
+        .match-row { border-bottom: 1px solid #e5e7eb; transition: background 0.2s; }
+        .match-row:hover { background-color: #f8fafc; }
+        
+        .symptoms-cell {
+            padding: 15px;
+            width: 65%;
+            color: #334155;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        .select-cell {
+            padding: 15px;
+            width: 35%;
+            text-align: right;
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #cbd5e1;
+            background-color: #fff;
+            font-size: 0.9em;
+            cursor: pointer;
+        }
+
+        .btn-check {
+            display: block;
+            width: 100%;
+            margin-top: 25px;
+            padding: 12px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn-check:hover { background-color: #1d4ed8; }
+
+        #feedback-area {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            display: none;
+            text-align: center;
+            font-weight: bold;
+        }
+        .correct-style { background-color: #dcfce7; color: #166534; border: 1px solid #86efac; }
+        .incorrect-style { background-color: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-wrapper">
+    <div class="quiz-header">
+        <h2>Heart Valve Pathology Matching</h2>
+        <p>Match the clinical manifestations to the correct valve condition.</p>
+    </div>
+
+    <table class="matching-table">
+        <!-- Row 1 -->
+        <tr class="match-row">
+            <td class="symptoms-cell">Neck vein distention, Hepatic engorgement, Ascites, Edema, Pleural effusions, Decreased CO</td>
+            <td class="select-cell">
+                <select class="quiz-ans" data-correct="E">
+                    <option value="">-- Select Condition --</option>
+                    <option value="A">A: Mitral Stenosis</option>
+                    <option value="B">B: Mitral Regurgitation</option>
+                    <option value="C">C: Aortic Stenosis</option>
+                    <option value="D">D: Aortic Regurgitation</option>
+                    <option value="E">E: Tricuspid Stenosis</option>
+                    <option value="F">F: Tricuspid Regurgitation</option>
+                </select>
+            </td>
+        </tr>
+        <!-- Row 2 -->
+        <tr class="match-row">
+            <td class="symptoms-cell">Peripheral edema, Ascites, Hepatic engorgement, Anorexia, Venous distention</td>
+            <td class="select-cell">
+                <select class="quiz-ans" data-correct="F">
+                    <option value="">-- Select Condition --</option>
+                    <option value="A">A: Mitral Stenosis</option>
+                    <option value="B">B: Mitral Regurgitation</option>
+                    <option value="C">C: Aortic Stenosis</option>
+                    <option value="D">D: Aortic Regurgitation</option>
+                    <option value="E">E: Tricuspid Stenosis</option>
+                    <option value="F">F: Tricuspid Regurgitation</option>
+                </select>
+            </td>
+        </tr>
+        <!-- Row 3 -->
+        <tr class="match-row">
+            <td class="symptoms-cell">Dyspnea, Palpitations, Fatigue</td>
+            <td class="select-cell">
+                <select class="quiz-ans" data-correct="B">
+                    <option value="">-- Select Condition --</option>
+                    <option value="A">A: Mitral Stenosis</option>
+                    <option value="B">B: Mitral Regurgitation</option>
+                    <option value="C">C: Aortic Stenosis</option>
+                    <option value="D">D: Aortic Regurgitation</option>
+                    <option value="E">E: Tricuspid Stenosis</option>
+                    <option value="F">F: Tricuspid Regurgitation</option>
+                </select>
+            </td>
+        </tr>
+        <!-- Row 4 -->
+        <tr class="match-row">
+            <td class="symptoms-cell">Exercise intolerance, Exertional dyspnea, Syncope, Angina, LV failure (Heart Failure)</td>
+            <td class="select-cell">
+                <select class="quiz-ans" data-correct="C">
+                    <option value="">-- Select Condition --</option>
+                    <option value="A">A: Mitral Stenosis</option>
+                    <option value="B">B: Mitral Regurgitation</option>
+                    <option value="C">C: Aortic Stenosis</option>
+                    <option value="D">D: Aortic Regurgitation</option>
+                    <option value="E">E: Tricuspid Stenosis</option>
+                    <option value="F">F: Tricuspid Regurgitation</option>
+                </select>
+            </td>
+        </tr>
+        <!-- Row 5 -->
+        <tr class="match-row">
+            <td class="symptoms-cell">Exertional dyspnea, Weakness and fatigue, Palpitations, Low output and pulmonary congestion</td>
+            <td class="select-cell">
+                <select class="quiz-ans" data-correct="D">
+                    <option value="">-- Select Condition --</option>
+                    <option value="A">A: Mitral Stenosis</option>
+                    <option value="B">B: Mitral Regurgitation</option>
+                    <option value="C">C: Aortic Stenosis</option>
+                    <option value="D">D: Aortic Regurgitation</option>
+                    <option value="E">E: Tricuspid Stenosis</option>
+                    <option value="F">F: Tricuspid Regurgitation</option>
+                </select>
+            </td>
+        </tr>
+        <!-- Row 6 -->
+        <tr class="match-row">
+            <td class="symptoms-cell">Fatigue and weakness, Exertional dyspnea, Orthopnea, PND, Mild hemoptysis, Pulmonary infection susceptibility</td>
+            <td class="select-cell">
+                <select class="quiz-ans" data-correct="A">
+                    <option value="">-- Select Condition --</option>
+                    <option value="A">A: Mitral Stenosis</option>
+                    <option value="B">B: Mitral Regurgitation</option>
+                    <option value="C">C: Aortic Stenosis</option>
+                    <option value="D">D: Aortic Regurgitation</option>
+                    <option value="E">E: Tricuspid Stenosis</option>
+                    <option value="F">F: Tricuspid Regurgitation</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+
+    <button class="btn-check" onclick="checkAnswers()">Check My Answers</button>
+    <div id="feedback-area"></div>
+</div>
+
+<script>
+    function checkAnswers() {
+        const selects = document.querySelectorAll('.quiz-ans');
+        let correctCount = 0;
+        
+        selects.forEach(select => {
+            const userVal = select.value;
+            const correctVal = select.getAttribute('data-correct');
+            
+            if (userVal === correctVal) {
+                correctCount++;
+                select.style.borderColor = "#22c55e";
+                select.style.backgroundColor = "#f0fdf4";
+            } else {
+                select.style.borderColor = "#ef4444";
+                select.style.backgroundColor = "#fef2f2";
+            }
+        });
+
+        const feedback = document.getElementById('feedback-area');
+        feedback.style.display = "block";
+        
+        if (correctCount === selects.length) {
+            feedback.className = "correct-style";
+            feedback.innerHTML = "Perfect! You got " + correctCount + " out of " + selects.length + " correct.";
+        } else {
+            feedback.className = "incorrect-style";
+            feedback.innerHTML = "You got " + correctCount + " out of " + selects.length + " correct. Review the red highlighted rows and try again.";
+        }
+    }
+</script>
+
+</body>
+</html>

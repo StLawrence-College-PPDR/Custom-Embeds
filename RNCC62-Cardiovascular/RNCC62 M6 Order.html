@@ -1,0 +1,134 @@
+<div id="ecg-quiz-container" style="max-width: 600px; margin: 20px auto; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; border: 2px solid #0056b3; border-radius: 10px; padding: 20px; background-color: #f9fbff;">
+    <h3 style="color: #0056b3; text-align: center;">ECG Interpretation: Putting the Steps in Order</h3>
+    <p style="font-size: 0.9em; color: #555; text-align: center;">Drag the steps below into the correct sequence (1 to 9).</p>
+
+    <ul id="sortable-list" style="list-style: none; padding: 0;">
+        <!-- The list items are randomized on load via JavaScript -->
+    </ul>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <button id="check-answer" style="background-color: #0056b3; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px;">Check My Order</button>
+        <p id="feedback" style="margin-top: 15px; font-weight: bold;"></p>
+    </div>
+</div>
+
+<style>
+    .sortable-item {
+        background-color: white;
+        border: 1px solid #ccc;
+        margin: 8px 0;
+        padding: 12px;
+        border-radius: 5px;
+        cursor: grab;
+        display: flex;
+        align-items: center;
+        transition: background-color 0.2s;
+    }
+    .sortable-item:active { cursor: grabbing; }
+    .sortable-item.dragging { opacity: 0.5; background-color: #e0e0e0; }
+    .number-box {
+        background: #0056b3;
+        color: white;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        font-size: 0.8em;
+    }
+    .correct { border: 2px solid #28a745 !important; background-color: #d4edda; }
+    .incorrect { border: 2px solid #dc3545 !important; background-color: #f8d7da; }
+</style>
+
+<script>
+(function() {
+    const steps = [
+        "Four questions about the rhythm",
+        "Determine the heart rate",
+        "Axis determination",
+        "Examine each of the intervals",
+        "Determine if there are conduction blocks present",
+        "Is there evidence of pre-excitation?",
+        "Is there evidence of hypertrophy and atrial or ventricular enlargement?",
+        "Is there evidence of coronary artery disease?",
+        "Does the ECG suggest anything?"
+    ];
+
+    const listElement = document.getElementById('sortable-list');
+    const feedback = document.getElementById('feedback');
+
+    // Shuffle and display
+    function init() {
+        let shuffled = [...steps].sort(() => Math.random() - 0.5);
+        listElement.innerHTML = '';
+        shuffled.forEach((step) => {
+            const li = document.createElement('li');
+            li.className = 'sortable-item';
+            li.draggable = true;
+            li.innerHTML = `<span class="number-box">?</span> ${step}`;
+            li.dataset.answer = step;
+            listElement.appendChild(li);
+        });
+        addEventListeners();
+    }
+
+    function addEventListeners() {
+        const items = document.querySelectorAll('.sortable-item');
+        items.forEach(item => {
+            item.addEventListener('dragstart', () => item.classList.add('dragging'));
+            item.addEventListener('dragend', () => item.classList.remove('dragging'));
+        });
+
+        listElement.addEventListener('dragover', e => {
+            e.preventDefault();
+            const draggingItem = document.querySelector('.dragging');
+            const afterElement = getDragAfterElement(listElement, e.clientY);
+            if (afterElement == null) {
+                listElement.appendChild(draggingItem);
+            } else {
+                listElement.insertBefore(draggingItem, afterElement);
+            }
+        });
+    }
+
+    function getDragAfterElement(container, y) {
+        const draggableElements = [...container.querySelectorAll('.sortable-item:not(.dragging)')];
+        return draggableElements.reduce((closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = y - box.top - box.height / 2;
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child };
+            } else {
+                return closest;
+            }
+        }, { offset: Number.NEGATIVE_INFINITY }).element;
+    }
+
+    document.getElementById('check-answer').addEventListener('click', () => {
+        const items = document.querySelectorAll('.sortable-item');
+        let correctCount = 0;
+        items.forEach((item, index) => {
+            const numBox = item.querySelector('.number-box');
+            numBox.innerText = index + 1;
+            if (item.dataset.answer === steps[index]) {
+                item.className = 'sortable-item correct';
+                correctCount++;
+            } else {
+                item.className = 'sortable-item incorrect';
+            }
+        });
+
+        if (correctCount === steps.length) {
+            feedback.innerText = "Perfect! You have the clinical sequence exactly right.";
+            feedback.style.color = "#28a745";
+        } else {
+            feedback.innerText = `You got ${correctCount} out of 9 correct. Keep trying!`;
+            feedback.style.color = "#dc3545";
+        }
+    });
+
+    init();
+})();
+</script>

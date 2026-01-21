@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Heart Failure Sequence Activity</title>
+    <style>
+        body { font-family: sans-serif; background: #f4f7f6; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        .container { max-width: 600px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h2 { color: #2c3e50; text-align: center; }
+        .item { padding: 10px; margin: 10px 0; background: #ecf0f1; border: 2px solid #bdc3c7; cursor: move; border-radius: 4px; transition: background 0.3s; }
+        .item:hover { background: #d5dbdb; }
+        .correct { background: #2ecc71 !important; color: white; border-color: #27ae60; }
+        button { margin-top: 20px; padding: 10px 20px; font-size: 16px; cursor: pointer; background: #3498db; color: white; border: none; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Sequence the Heart Failure RAAS Cycle</h2>
+    <p>Drag the events to put them in the correct physiological order (1-9).</p>
+    <div id="sortable-list">
+        <!-- List items will be shuffled and rendered here -->
+    </div>
+    <button onclick="checkOrder()">Check My Answer</button>
+    <p id="result"></p>
+</div>
+
+<script>
+    const correctOrder = [
+        "Heart Failure results in low CO",
+        "Angiotensinogen is manufactured and released by the liver",
+        "Low CO causes renal vasoconstriction, stimulating release of renin",
+        "Renin converts angiotensinogen into angiotensin I",
+        "Angiotensin I converted to Angiotensin II in pulmonary bed",
+        "Angiotensin II causes vasoconstriction",
+        "Angiotensin II causes release of aldosterone by adrenal glands",
+        "Na and H2O are retained due to aldosterone secretion",
+        "SVR worsens, symptoms increase due to increased preload"
+    ];
+
+    let items = [...correctOrder].sort(() => Math.random() - 0.5);
+
+    function render() {
+        const list = document.getElementById('sortable-list');
+        list.innerHTML = '';
+        items.forEach((text, index) => {
+            const div = document.createElement('div');
+            div.className = 'item';
+            div.draggable = true;
+            div.innerText = text;
+            div.dataset.index = index;
+            div.addEventListener('dragstart', dragStart);
+            div.addEventListener('dragover', dragOver);
+            div.addEventListener('drop', drop);
+            list.appendChild(div);
+        });
+    }
+
+    let draggedItemIndex = null;
+
+    function dragStart(e) { draggedItemIndex = e.target.closest('.item').dataset.index; }
+    function dragOver(e) { e.preventDefault(); }
+    function drop(e) {
+        const targetIndex = e.target.closest('.item').dataset.index;
+        const temp = items[draggedItemIndex];
+        items.splice(draggedItemIndex, 1);
+        items.splice(targetIndex, 0, temp);
+        render();
+    }
+
+    function checkOrder() {
+        const itemElements = document.querySelectorAll('.item');
+        let allCorrect = true;
+        itemElements.forEach((el, i) => {
+            if (el.innerText === correctOrder[i]) {
+                el.classList.add('correct');
+            } else {
+                el.classList.remove('correct');
+                allCorrect = false;
+            }
+        });
+        document.getElementById('result').innerText = allCorrect ? "🎉 Perfect! You mastered the sequence." : "Some steps are out of order. Try again!";
+    }
+
+    render();
+</script>
+</body>
+</html>

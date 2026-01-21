@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardiac Cath Lab Interactive Quiz</title>
+    <style>
+        :root {
+            --primary-blue: #2c3e50;
+            --accent-blue: #3498db;
+            --success-green: #27ae60;
+            --error-red: #e74c3c;
+            --bg-gray: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e9ecef;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 850px) {
+            .container { grid-template-columns: 1fr; }
+        }
+
+        /* Patient Info Panel */
+        .info-panel {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .info-panel h2 { color: var(--primary-blue); margin-top: 0; border-bottom: 2px solid var(--accent-blue); padding-bottom: 10px; }
+        .narrative { font-style: italic; font-size: 0.95em; line-height: 1.5; margin-bottom: 20px; background: #f1f8ff; padding: 15px; border-radius: 8px; }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.9em; }
+        .stat-item { padding: 5px; border-bottom: 1px solid #eee; }
+        .stat-label { font-weight: bold; color: #555; }
+
+        /* Quiz Panel */
+        .quiz-panel {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .progress-bar { height: 8px; background: #eee; border-radius: 4px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: var(--accent-blue); width: 0%; border-radius: 4px; transition: width 0.3s; }
+
+        .question-text { font-size: 1.2em; font-weight: 600; margin-bottom: 20px; }
+        .options-list { list-style: none; padding: 0; }
+        .option {
+            background: #fff;
+            border: 2px solid #dee2e6;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option:hover { border-color: var(--accent-blue); background: #f7fbff; }
+        .option.correct { background: #d4edda !important; border-color: var(--success-green) !important; color: #155724; font-weight: bold; }
+        .option.wrong { background: #f8d7da !important; border-color: var(--error-red) !important; color: #721c24; }
+
+        .feedback { display: none; padding: 15px; border-radius: 8px; margin-top: 15px; font-weight: bold; }
+        .btn {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .btn:hover { background: #1a252f; }
+
+        #result-screen { text-align: center; display: none; }
+        .score-circle {
+            width: 120px; height: 120px; border-radius: 50%; background: var(--accent-blue);
+            color: white; line-height: 120px; font-size: 2em; margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Left Column: Patient Case -->
+    <div class="info-panel">
+        <h2>Case Presentation</h2>
+        <div class="narrative">
+            A 51-year-old white male presented to the cardiac cath lab with a recent, progressive history of shortness of breath, chest pain on exertion, and fatigue. History includes poorly controlled hypertension, hyperlipidemia, family history of CAD, and arthritis. Left and right heart cath + coronary angiography performed. <strong>Result:</strong> No obstructive lesions. <strong>LV Gram:</strong> EF 40%, global hypokinesis.
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-item"><span class="stat-label">1. Weight:</span> 234 lbs</div>
+            <div class="stat-item"><span class="stat-label">2. Height:</span> 6’0”</div>
+            <div class="stat-item"><span class="stat-label">3. Hemoglobin:</span> 16.5</div>
+            <div class="stat-item"><span class="stat-label">4. Heart Rate:</span> 110 bpm</div>
+            <div class="stat-item"><span class="stat-label">5. SvO2:</span> 52%</div>
+            <div class="stat-item"><span class="stat-label">6. SaO2:</span> 96%</div>
+            <div class="stat-item"><span class="stat-label">7. Creatinine:</span> 1.07 mg/dL</div>
+            <div class="stat-item"><span class="stat-label">8. Potassium:</span> 3.9 mEq/L</div>
+            <div class="stat-item"><span class="stat-label">9. Platelets:</span> 234k</div>
+            <div class="stat-item"><span class="stat-label">10. INR:</span> 1.0</div>
+            <div class="stat-item"><span class="stat-label">11. BP:</span> 160/90 mmHg</div>
+            <div class="stat-item"><span class="stat-label">12. SpO2:</span> 94%</div>
+        </div>
+    </div>
+
+    <!-- Right Column: Interactive Quiz -->
+    <div class="quiz-panel">
+        <div id="quiz-ui">
+            <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+            <div id="question-count" style="font-size: 0.8em; color: #666; margin-bottom: 5px;">Question 1 of 11</div>
+            <div class="question-text" id="question-text">Loading question...</div>
+            <div class="options-list" id="options-list"></div>
+            <div id="feedback" class="feedback"></div>
+            <button id="next-btn" class="btn" style="display:none;" onclick="handleNext()">Next Question</button>
+        </div>
+
+        <div id="result-screen">
+            <h2>Evaluation Complete</h2>
+            <div class="score-circle" id="final-score-val">0</div>
+            <p id="score-text"></p>
+            <button class="btn" onclick="location.reload()">Restart Quiz</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        { q: "What is the normal mean pressure range for the right atrium?", a: ["2-6mmHg", "4-18mmHg", "25/5 mmHg", "12-16mmHg"], c: 0 },
+        { q: "What is this patient’s mean right atrial pressure? (Based on assessment)", a: ["25mmHg", "10mmHg", "5mmHg", "100mmHg"], c: 1 },
+        { q: "What is the normal pressure for the right ventricle?", a: ["12/16/14", "25/5", "75/15/15", "40/15"], c: 1 },
+        { q: "Which portion of the ventricular waveform represents the preload state?", a: ["Systolic peak", "Beginning diastole", "End diastolic pressure", "The ventricular upstroke"], c: 2 },
+        { q: "What is the normal pressure for the pulmonary artery?", a: ["45/10/40", "30/30/24", "25/10/15", "50/15/33"], c: 2 },
+        { q: "What is a normal pulmonary capillary wedge pressure?", a: ["12-16mmHg mean", "2-6mmHg mean", "10-30mmHg mean", "14-45mmHg"], c: 0 },
+        { q: "What does the left ventricular end diastolic pressure (LVEDP) indicate?", a: ["Afterload", "Preload", "Congestive heart failure", "The end of the systolic cycle"], c: 1 },
+        { q: "What is cardiac output?", a: ["Weight in kg/heart rate x 1.36", "Stroke volume x heart rate", "Stroke volume x cardiac index", "Cardiac index x heart rate"], c: 1 },
+        { q: "Based on the heart rate and cardiac output, what is the patient’s stroke volume?", a: ["333ml", "30.3ml", "8.5L/min", "200L/min"], c: 1 },
+        { q: "Where, on the respiratory cycle, is the optimal measurement point for measuring atrial and wedge pressures?", a: ["End inspiration", "Average of inspiration and expiration", "End expiration", "Either one is OK"], c: 2 },
+        { q: "What is the most likely diagnosis for this patient, based off of the hemodynamic assessment?", a: ["Left heart failure", "Pulmonary hypertension", "Mitral valve regurgitation", "Atrial septal defect"], c: 0 }
+    ];
+
+    let currentQ = 0;
+    let score = 0;
+    let canAnswer = true;
+
+    function initQuiz() {
+        const q = questions[currentQ];
+        document.getElementById('question-count').innerText = `Question ${currentQ + 1} of ${questions.length}`;
+        document.getElementById('question-text').innerText = q.q;
+        document.getElementById('progress').style.width = ((currentQ) / questions.length * 100) + "%";
+        
+        const list = document.getElementById('options-list');
+        list.innerHTML = '';
+        q.a.forEach((opt, i) => {
+            const div = document.createElement('div');
+            div.className = 'option';
+            div.innerText = opt;
+            div.onclick = () => checkAnswer(i);
+            list.appendChild(div);
+        });
+        
+        document.getElementById('feedback').style.display = 'none';
+        document.getElementById('next-btn').style.display = 'none';
+        canAnswer = true;
+    }
+
+    function checkAnswer(idx) {
+        if (!canAnswer) return;
+        canAnswer = false;
+        
+        const correctIdx = questions[currentQ].c;
+        const options = document.getElementsByClassName('option');
+        
+        if (idx === correctIdx) {
+            options[idx].classList.add('correct');
+            score++;
+            showFeedback("Correct!", "#d4edda", "#155724");
+        } else {
+            options[idx].classList.add('wrong');
+            options[correctIdx].classList.add('correct');
+            showFeedback("Incorrect. See correct answer highlighted above.", "#f8d7da", "#721c24");
+        }
+        
+        document.getElementById('next-btn').style.display = 'block';
+    }
+
+    function showFeedback(txt, bg, col) {
+        const fb = document.getElementById('feedback');
+        fb.innerText = txt;
+        fb.style.backgroundColor = bg;
+        fb.style.color = col;
+        fb.style.display = 'block';
+    }
+
+    function handleNext() {
+        currentQ++;
+        if (currentQ < questions.length) {
+            initQuiz();
+        } else {
+            showResults();
+        }
+    }
+
+    function showResults() {
+        document.getElementById('quiz-ui').style.display = 'none';
+        document.getElementById('result-screen').style.display = 'block';
+        document.getElementById('final-score-val').innerText = score;
+        document.getElementById('score-text').innerText = `You correctly answered ${score} out of ${questions.length} questions.`;
+    }
+
+    window.onload = initQuiz;
+</script>
+
+</body>
+</html>
