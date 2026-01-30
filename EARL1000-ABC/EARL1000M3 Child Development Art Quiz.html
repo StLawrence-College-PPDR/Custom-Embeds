@@ -1,0 +1,77 @@
+<div id="quiz-wrapper" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 20px auto; padding: 30px; border: 1px solid #ddd; border-radius: 15px; background-color: #ffffff; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
+    
+    <h2 style="text-align: center; color: #2c3e50; margin-top: 0;">Child Development & Art Quiz</h2>
+    <hr style="border: 0; border-top: 1px solid #eee; margin-bottom: 25px;">
+
+    <!-- Question 1 -->
+    <div class="question-block" style="margin-bottom: 35px;">
+        <p style="font-weight: 600; font-size: 1.1rem; color: #34495e;">1. A child's unique method of drawing is called a...</p>
+        <div class="options-grid" style="display: grid; gap: 10px; margin-top: 15px;">
+            <button onclick="checkAnswer(this, 1, true, 'Correct! A schema is a mental model or repetitive pattern a child uses to represent the world.')" style="padding: 12px; border: 1px solid #cbd5e0; border-radius: 8px; background: #fff; cursor: pointer; text-align: left; transition: all 0.2s;">Schema</button>
+            <button onclick="checkAnswer(this, 1, false, 'Incorrect. The term used by developmental psychologists is Schema.')" style="padding: 12px; border: 1px solid #cbd5e0; border-radius: 8px; background: #fff; cursor: pointer; text-align: left; transition: all 0.2s;">Personality</button>
+            <button onclick="checkAnswer(this, 1, false, 'Incorrect. While it relates to style, the technical term is Schema.')" style="padding: 12px; border: 1px solid #cbd5e0; border-radius: 8px; background: #fff; cursor: pointer; text-align: left; transition: all 0.2s;">Style</button>
+            <button onclick="checkAnswer(this, 1, false, 'Incorrect. The correct term is Schema.')" style="padding: 12px; border: 1px solid #cbd5e0; border-radius: 8px; background: #fff; cursor: pointer; text-align: left; transition: all 0.2s;">Charisma</button>
+        </div>
+        <div id="feedback-1" class="feedback" style="display:none; margin-top: 15px; padding: 12px; border-radius: 6px; font-size: 0.95rem;"></div>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="question-block" style="margin-bottom: 35px;">
+        <p style="font-weight: 600; font-size: 1.1rem; color: #34495e;">2. According to Kellogg, the critical period of art is between the ages of 5 and 7 for a child.</p>
+        <div class="options-grid" style="display: flex; gap: 10px; margin-top: 15px;">
+            <button onclick="checkAnswer(this, 2, true, 'Correct! Rhoda Kellogg identified this as the period where pictorial representation becomes standard.')" style="flex: 1; padding: 12px; border: 1px solid #cbd5e0; border-radius: 8px; background: #fff; cursor: pointer; text-align: center; transition: all 0.2s;">True</button>
+            <button onclick="checkAnswer(this, 2, false, 'Incorrect. This is True; Kellogg noted ages 5–7 as the peak transition to representative art.')" style="flex: 1; padding: 12px; border: 1px solid #cbd5e0; border-radius: 8px; background: #fff; cursor: pointer; text-align: center; transition: all 0.2s;">False</button>
+        </div>
+        <div id="feedback-2" class="feedback" style="display:none; margin-top: 15px; padding: 12px; border-radius: 6px; font-size: 0.95rem;"></div>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="question-block" style="margin-bottom: 20px;">
+        <p style="font-weight: 600; font-size: 1.1rem; color: #34495e;">3. The size of an object in a child's drawing is representative of...</p>
+        <div class="options-grid" style="display: grid; gap: 10px; margin-top: 15px;">
+            <button onclick="checkAnswer(this, 3, true, 'Correct! Children use size to denote importance; the most significant person is often drawn largest.')" style="padding: 12px; border: 1px solid #cbd5e0; border-radius: 8px; background: #fff; cursor: pointer; text-align: left; transition: all 0.2s;">The object\'s emotional importance</button>
+            <button onclick="checkAnswer(this, 3, false, 'Incorrect. Children rarely draw based on visual frequency.')" style="padding: 12px; border: 1px solid #cbd5e0; border-radius: 8px; background: #fff; cursor: pointer; text-align: left; transition: all 0.2s;">How often the child sees the object</button>
+            <button onclick="checkAnswer(this, 3, false, 'Incorrect. Children use subjective scale, not physical proportions.')" style="padding: 12px; border: 1px solid #cbd5e0; border-radius: 8px; background: #fff; cursor: pointer; text-align: left; transition: all 0.2s;">The object\'s physical size</button>
+            <button onclick="checkAnswer(this, 3, false, 'Incorrect. Size is linked to importance, not color preference.')" style="padding: 12px; border: 1px solid #cbd5e0; border-radius: 8px; background: #fff; cursor: pointer; text-align: left; transition: all 0.2s;">How much the child likes the color</button>
+        </div>
+        <div id="feedback-3" class="feedback" style="display:none; margin-top: 15px; padding: 12px; border-radius: 6px; font-size: 0.95rem;"></div>
+    </div>
+</div>
+
+<script>
+    function checkAnswer(button, questionNum, isCorrect, message) {
+        // Find all buttons in this specific question block
+        const container = button.parentElement;
+        const buttons = container.querySelectorAll('button');
+        const feedback = document.getElementById('feedback-' + questionNum);
+
+        // Disable all buttons in this question to prevent multi-clicking
+        buttons.forEach(btn => {
+            btn.disabled = true;
+            btn.style.cursor = 'default';
+            btn.style.opacity = '0.6';
+        });
+
+        // Style the selected button
+        button.style.opacity = '1';
+        if (isCorrect) {
+            button.style.backgroundColor = "#d4edda";
+            button.style.borderColor = "#28a745";
+            button.style.color = "#155724";
+            feedback.style.backgroundColor = "#d4edda";
+            feedback.style.color = "#155724";
+            feedback.style.border = "1px solid #c3e6cb";
+        } else {
+            button.style.backgroundColor = "#f8d7da";
+            button.style.borderColor = "#dc3545";
+            button.style.color = "#721c24";
+            feedback.style.backgroundColor = "#fff3cd";
+            feedback.style.color = "#856404";
+            feedback.style.border = "1px solid #ffeeba";
+        }
+
+        // Show feedback
+        feedback.innerHTML = message;
+        feedback.style.display = "block";
+    }
+</script>

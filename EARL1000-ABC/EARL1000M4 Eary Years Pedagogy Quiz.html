@@ -1,0 +1,59 @@
+<!-- Interactive Ministry of Education Quiz -->
+<div id="quiz-container" style="max-width: 600px; margin: 20px auto; padding: 20px; border: 2px solid #e0e0e0; border-radius: 12px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f9f9f9; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    
+    <h2 style="color: #2c3e50; margin-top: 0; font-size: 1.4rem;">Early Years Pedagogy Quiz</h2>
+    <p style="font-size: 1.1rem; line-height: 1.5; color: #34495e;">
+        According to the Ministry of Education, what are the four foundations of learning?
+    </p>
+
+    <div id="options-space" style="display: flex; flex-direction: column; gap: 10px;">
+        <button onclick="checkAnswer(this, false)" style="padding: 12px; border: 1px solid #bdc3c7; border-radius: 8px; background: white; cursor: pointer; text-align: left; font-size: 1rem; transition: 0.2s;">
+            A. Expression, belonging, encouragement, and studying.
+        </button>
+        <button onclick="checkAnswer(this, true)" style="padding: 12px; border: 1px solid #bdc3c7; border-radius: 8px; background: white; cursor: pointer; text-align: left; font-size: 1rem; transition: 0.2s;">
+            B. Expression, well-being, engagement, and belonging.
+        </button>
+        <button onclick="checkAnswer(this, false)" style="padding: 12px; border: 1px solid #bdc3c7; border-radius: 8px; background: white; cursor: pointer; text-align: left; font-size: 1rem; transition: 0.2s;">
+            C. Engagement, helpfulness, encouragement, and well-being.
+        </button>
+    </div>
+
+    <div id="feedback" style="display: none; margin-top: 20px; padding: 15px; border-radius: 8px; line-height: 1.6;">
+        <strong id="result-text" style="display: block; margin-bottom: 8px; font-size: 1.2rem;"></strong>
+        <p id="explanation-text" style="margin: 0; color: #2c3e50;"></p>
+    </div>
+
+    <script>
+        function checkAnswer(btn, isCorrect) {
+            // Disable all buttons after choice
+            const buttons = document.querySelectorAll('#options-space button');
+            buttons.forEach(b => {
+                b.disabled = true;
+                b.style.cursor = 'default';
+            });
+
+            const feedback = document.getElementById('feedback');
+            const resultText = document.getElementById('result-text');
+            const explanationText = document.getElementById('explanation-text');
+
+            if (isCorrect) {
+                btn.style.backgroundColor = '#d4edda';
+                btn.style.borderColor = '#c3e6cb';
+                resultText.innerText = "Correct! 🎉";
+                resultText.style.color = "#155724";
+                feedback.style.backgroundColor = "#d4edda";
+                feedback.style.border = "1px solid #c3e6cb";
+            } else {
+                btn.style.backgroundColor = '#f8d7da';
+                btn.style.borderColor = '#f5c6cb';
+                resultText.innerText = "Not quite.";
+                resultText.style.color = "#721c24";
+                feedback.style.backgroundColor = "#fff3cd";
+                feedback.style.border = "1px solid #ffeeba";
+            }
+
+            explanationText.innerHTML = "<strong>The Answer is B: Expression, well-being, engagement, and belonging.</strong><br><br>These are the core pillars of <em>How Does Learning Happen?</em>, Ontario's pedagogy for the early years. They are 'ways of being' that children naturally seek to grow and flourish.";
+            feedback.style.display = 'block';
+        }
+    </script>
+</div>

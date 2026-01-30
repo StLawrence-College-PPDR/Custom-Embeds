@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --primary: #4a90e2;
+            --accent: #50e3c2;
+            --dark: #2c3e50;
+            --bg: #f4f7f6;
+            --white: #ffffff;
+        }
+
+        .cd-container {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 20px auto;
+            background: var(--bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            color: var(--dark);
+        }
+
+        .cd-header {
+            background: var(--primary);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .cd-header h1 { margin: 0; font-size: 1.8rem; }
+        .cd-header p { margin: 10px 0 0; opacity: 0.9; }
+
+        .cd-tabs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            background: #eef2f3;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .cd-tab-btn {
+            padding: 15px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-weight: bold;
+            color: #777;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .cd-tab-btn:hover { background: #e2e8ea; }
+        .cd-tab-btn.active {
+            background: var(--white);
+            color: var(--primary);
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .cd-content {
+            padding: 40px;
+            background: var(--white);
+            min-height: 300px;
+            line-height: 1.6;
+        }
+
+        .cd-stage { display: none; animation: fadeIn 0.5s ease; }
+        .cd-stage.active { display: block; }
+
+        .badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .milestones {
+            margin-top: 20px;
+            padding-left: 20px;
+        }
+
+        .milestones li { margin-bottom: 10px; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .cd-tabs { grid-template-columns: 1fr 1fr; }
+            .cd-content { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="cd-container">
+    <div class="cd-header">
+        <h1>Cognitive Development</h1>
+        <p>Exploring Piaget's 4 Stages of Intellectual Growth</p>
+    </div>
+
+    <nav class="cd-tabs" id="tabBar">
+        <button class="cd-tab-btn active" onclick="showStage(0)">Sensorimotor</button>
+        <button class="cd-tab-btn" onclick="showStage(1)">Preoperational</button>
+        <button class="cd-tab-btn" onclick="showStage(2)">Concrete</button>
+        <button class="cd-tab-btn" onclick="showStage(3)">Formal</button>
+    </nav>
+
+    <div class="cd-content">
+        <!-- Stage 1 -->
+        <div class="cd-stage active">
+            <span class="badge">Birth to 2 Years</span>
+            <h2>Sensorimotor Stage</h2>
+            <p>During this earliest stage, infants and toddlers acquire knowledge through sensory experiences and manipulating objects.</p>
+            <ul class="milestones">
+                <li><strong>Object Permanence:</strong> Learning that things exist even when they cannot be seen.</li>
+                <li><strong>Basic Actions:</strong> Sucking, grasping, looking, and listening.</li>
+                <li><strong>Goal-Oriented Behavior:</strong> Moving from reflexive actions to intentional steps.</li>
+            </ul>
+        </div>
+
+        <!-- Stage 2 -->
+        <div class="cd-stage">
+            <span class="badge">2 to 7 Years</span>
+            <h2>Preoperational Stage</h2>
+            <p>At this stage, kids learn through pretend play but still struggle with logic and taking the point of view of other people.</p>
+            <ul class="milestones">
+                <li><strong>Symbolic Thought:</strong> Using words and pictures to represent objects.</li>
+                <li><strong>Egocentrism:</strong> Difficulty seeing things from the perspective of others.</li>
+                <li><strong>Language Development:</strong> Rapid growth in vocabulary and sentence structure.</li>
+            </ul>
+        </div>
+
+        <!-- Stage 3 -->
+        <div class="cd-stage">
+            <span class="badge">7 to 11 Years</span>
+            <h2>Concrete Operational Stage</h2>
+            <p>Children begin to think logically about concrete events. They begin to understand the concept of conservation.</p>
+            <ul class="milestones">
+                <li><strong>Conservation:</strong> Realizing that the amount of liquid in a short, wide cup is equal to that in a tall, skinny glass.</li>
+                <li><strong>Inductive Logic:</strong> Reasoning from specific information to a general principle.</li>
+                <li><strong>Reduced Egocentrism:</strong> Beginning to think about how other people might think and feel.</li>
+            </ul>
+        </div>
+
+        <!-- Stage 4 -->
+        <div class="cd-stage">
+            <span class="badge">12 Years and Up</span>
+            <h2>Formal Operational Stage</h2>
+            <p>The final stage involves an increase in logic, the ability to use deductive reasoning, and an understanding of abstract ideas.</p>
+            <ul class="milestones">
+                <li><strong>Abstract Thinking:</strong> Reasoning about hypothetical problems and moral issues.</li>
+                <li><strong>Deductive Logic:</strong> Reasoning from a general principle to specific information.</li>
+                <li><strong>Systematic Planning:</strong> Ability to plan for the future and consider "what if" scenarios.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showStage(index) {
+        // Update Buttons
+        const buttons = document.querySelectorAll('.cd-tab-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        buttons[index].classList.add('active');
+
+        // Update Content
+        const stages = document.querySelectorAll('.cd-stage');
+        stages.forEach(stage => stage.classList.remove('active'));
+        stages[index].classList.add('active');
+    }
+</script>
+
+</body>
+</html>

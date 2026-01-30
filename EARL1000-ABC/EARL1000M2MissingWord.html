@@ -1,0 +1,88 @@
+<div id="quiz-container" style="font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; padding: 20px; border: 2px solid #e0e0e0; border-radius: 10px; background-color: #f9f9f9;">
+    <h2 style="color: #2c3e50; text-align: center;">Erikson’s Psychosocial Stages</h2>
+    <p style="text-align: center; font-style: italic; color: #666;">Fill in the missing words from the word bank below.</p>
+
+    <!-- Word Bank -->
+    <div style="background: #fff; padding: 15px; border-radius: 8px; border: 1px dashed #3498db; margin-bottom: 20px; text-align: center;">
+        <strong>Word Bank:</strong><br>
+        <span style="display: inline-block; margin: 5px; padding: 5px 10px; background: #e1f5fe; border-radius: 4px;">Guilt</span>
+        <span style="display: inline-block; margin: 5px; padding: 5px 10px; background: #e1f5fe; border-radius: 4px;">Inferiority</span>
+        <span style="display: inline-block; margin: 5px; padding: 5px 10px; background: #e1f5fe; border-radius: 4px;">Doubt</span>
+        <span style="display: inline-block; margin: 5px; padding: 5px 10px; background: #e1f5fe; border-radius: 4px;">Mistrust</span>
+    </div>
+
+    <!-- Questions -->
+    <div style="margin-bottom: 15px;">
+        <strong>1. Trust vs.</strong> 
+        <input type="text" id="q1" placeholder="..." style="padding: 5px; border: 1px solid #ccc; border-radius: 4px; width: 120px;">
+        <p style="font-size: 0.9em; color: #555; margin-top: 5px;">(0-2 years): The child develops trust which later leads to feelings of security.</p>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        <strong>2. Autonomy vs.</strong> 
+        <input type="text" id="q2" placeholder="..." style="padding: 5px; border: 1px solid #ccc; border-radius: 4px; width: 120px;">
+        <p style="font-size: 0.9em; color: #555; margin-top: 5px;">(2-3 years): Children want to explore and be independent and in control.</p>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        <strong>3. Initiative vs.</strong> 
+        <input type="text" id="q3" placeholder="..." style="padding: 5px; border: 1px solid #ccc; border-radius: 4px; width: 120px;">
+        <p style="font-size: 0.9em; color: #555; margin-top: 5px;">(4-5 years): Children want to take tasks, tempered with a conscience about right and wrong.</p>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        <strong>4. Industry vs.</strong> 
+        <input type="text" id="q4" placeholder="..." style="padding: 5px; border: 1px solid #ccc; border-radius: 4px; width: 120px;">
+        <p style="font-size: 0.9em; color: #555; margin-top: 5px;">(6-11 years): Productivity and recognition are important; negatives damage self-concept.</p>
+    </div>
+
+    <!-- Controls -->
+    <div style="text-align: center; margin-top: 20px;">
+        <button onclick="checkAnswers()" style="padding: 10px 20px; background-color: #27ae60; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Check Answers</button>
+        <button onclick="resetQuiz()" style="padding: 10px 20px; background-color: #95a5a6; color: white; border: none; border-radius: 5px; cursor: pointer; margin-left: 10px;">Reset</button>
+    </div>
+
+    <div id="results" style="margin-top: 20px; text-align: center; font-weight: bold; font-size: 1.1em;"></div>
+</div>
+
+<script>
+    function checkAnswers() {
+        const answers = {
+            q1: "mistrust",
+            q2: "doubt",
+            q3: "guilt",
+            q4: "inferiority"
+        };
+        
+        let score = 0;
+        let total = 4;
+
+        for (let key in answers) {
+            let input = document.getElementById(key);
+            let userAns = input.value.trim().toLowerCase();
+            
+            if (userAns === answers[key]) {
+                input.style.borderColor = "#27ae60";
+                input.style.backgroundColor = "#e8f5e9";
+                score++;
+            } else {
+                input.style.borderColor = "#e74c3c";
+                input.style.backgroundColor = "#fdecea";
+            }
+        }
+
+        const resultDiv = document.getElementById('results');
+        resultDiv.innerHTML = "You got " + score + " out of " + total + " correct!";
+        resultDiv.style.color = score === total ? "#27ae60" : "#e74c3c";
+    }
+
+    function resetQuiz() {
+        const inputs = document.querySelectorAll('#quiz-container input');
+        inputs.forEach(input => {
+            input.value = "";
+            input.style.borderColor = "#ccc";
+            input.style.backgroundColor = "#fff";
+        });
+        document.getElementById('results').innerHTML = "";
+    }
+</script>

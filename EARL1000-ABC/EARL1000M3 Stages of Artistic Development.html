@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stages of Artistic Development Quiz</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 20px auto; padding: 20px; background-color: #f4f7f6; }
+        .quiz-container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .question { margin-bottom: 25px; padding: 15px; border-radius: 8px; background: #fff; border: 1px solid #e0e0e0; transition: 0.3s; }
+        .question:hover { border-color: #3498db; }
+        .options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        button { padding: 10px 15px; border: 1px solid #3498db; background: white; color: #3498db; border-radius: 5px; cursor: pointer; transition: all 0.2s; font-size: 0.9em; }
+        button:hover { background: #3498db; color: white; }
+        button.correct { background: #27ae60 !important; color: white !important; border-color: #27ae60; }
+        button.incorrect { background: #e74c3c !important; color: white !important; border-color: #e74c3c; }
+        #result-area { margin-top: 20px; font-weight: bold; text-align: center; font-size: 1.2em; color: #2c3e50; }
+        .feedback { margin-top: 10px; font-size: 0.85em; display: none; padding: 8px; border-radius: 4px; }
+        .reset-btn { display: block; width: 200px; margin: 20px auto; background: #34495e; color: white; border: none; padding: 12px; border-radius: 5px; cursor: pointer; }
+        .reset-btn:hover { background: #2c3e50; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h2>Stages of Artistic Development</h2>
+    <p>Match the description to the correct developmental stage.</p>
+    
+    <div id="quiz-content"></div>
+    
+    <div id="result-area"></div>
+    <button class="reset-btn" onclick="buildQuiz()">Reset Quiz</button>
+</div>
+
+<script>
+    const quizData = [
+        {
+            q: "The child scribbles with many strokes. They mean something to the child but are not discernable as shapes to an adult.",
+            a: "Implied Shape Stage",
+            options: ["Implied Shape Stage", "Outline Shapes", "Design Stage", "Early Pictorial"]
+        },
+        {
+            q: "The child begins to draw specific ovals, circles, squares, and crosses (Age 3+).",
+            a: "Stage of Outline Shapes",
+            options: ["Implied Shape Stage", "Stage of Outline Shapes", "Design Stage", "Later Pictorial"]
+        },
+        {
+            q: "Shapes are put into structured forms (e.g., a sun or mandala). Muscle coordination becomes much more refined.",
+            a: "Design Stage",
+            options: ["Outline Shapes", "Laterality Stage", "Design Stage", "Early Pictorial"]
+        },
+        {
+            q: "The child creates symbols representing humans (often just a circle) or trees. Focus is on perception rather than accuracy.",
+            a: "Early Pictorial",
+            options: ["Design Stage", "Early Pictorial", "Later Pictorial", "Laterality Stage"]
+        },
+        {
+            q: "Hand movements are controlled from wrist to fingertips (Age 5-5.5). Drawings become very fine in detail.",
+            a: "Later Pictorial",
+            options: ["Early Pictorial", "Later Pictorial", "Design Stage", "Laterality Stage"]
+        },
+        {
+            q: "Children realize they have a left/right and top/bottom. They begin perfecting hand movements and crossing the midline.",
+            a: "Laterality Stage",
+            options: ["Later Pictorial", "Laterality Stage", "Design Stage", "Implied Shape Stage"]
+        }
+    ];
+
+    function buildQuiz() {
+        const container = document.getElementById('quiz-content');
+        const resultArea = document.getElementById('result-area');
+        resultArea.innerHTML = "";
+        container.innerHTML = "";
+        
+        quizData.forEach((item, index) => {
+            const qDiv = document.createElement('div');
+            qDiv.className = 'question';
+            qDiv.innerHTML = `<p><strong>${index + 1}.</strong> ${item.q}</p>`;
+            
+            const optDiv = document.createElement('div');
+            optDiv.className = 'options';
+            
+            item.options.sort(() => Math.random() - 0.5).forEach(opt => {
+                const btn = document.createElement('button');
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(btn, opt, item.a, index);
+                optDiv.appendChild(btn);
+            });
+            
+            qDiv.appendChild(optDiv);
+            const feedback = document.createElement('div');
+            feedback.id = `feedback-${index}`;
+            feedback.className = 'feedback';
+            qDiv.appendChild(feedback);
+            container.appendChild(qDiv);
+        });
+    }
+
+    let score = 0;
+    let completed = 0;
+
+    function checkAnswer(btn, selected, correct, index) {
+        const parent = btn.parentElement;
+        const buttons = parent.querySelectorAll('button');
+        const feedback = document.getElementById(`feedback-${index}`);
+        
+        buttons.forEach(b => b.disabled = true);
+        
+        if (selected === correct) {
+            btn.classList.add('correct');
+            feedback.innerHTML = "Correct!";
+            feedback.style.display = "block";
+            feedback.style.background = "#d4edda";
+            feedback.style.color = "#155724";
+            score++;
+        } else {
+            btn.classList.add('incorrect');
+            feedback.innerHTML = `Incorrect. The correct stage is: ${correct}`;
+            feedback.style.display = "block";
+            feedback.style.background = "#f8d7da";
+            feedback.style.color = "#721c24";
+        }
+        
+        completed++;
+        if (completed === quizData.length) {
+            document.getElementById('result-area').innerHTML = `Quiz Complete! Your Score: ${score} / ${quizData.length}`;
+        }
+    }
+
+    buildQuiz();
+</script>
+
+</body>
+</html>

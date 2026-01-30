@@ -1,0 +1,53 @@
+<div id="sorting-game-container" style="font-family: sans-serif; max-width: 600px; margin: 20px auto; padding: 20px; border: 2px solid #ddd; border-radius: 12px; background: #f9f9f9; text-align: center;">
+    <h2 style="color: #333;">Process vs. Product</h2>
+    <p style="color: #666;">Drag each item to the correct category!</p>
+    
+    <div style="display: flex; justify-content: space-around; margin-bottom: 20px;">
+        <div id="product-bin" ondrop="drop(event)" ondragover="allowDrop(event)" style="width: 45%; min-height: 150px; border: 2px dashed #ff6b6b; border-radius: 10px; padding: 10px; background: #fff5f5;">
+            <h3 style="color: #ff6b6b; margin-top:0;">PRODUCT</h3>
+        </div>
+        <div id="process-bin" ondrop="drop(event)" ondragover="allowDrop(event)" style="width: 45%; min-height: 150px; border: 2px dashed #4dabf7; border-radius: 10px; padding: 10px; background: #e7f5ff;">
+            <h3 style="color: #4dabf7; margin-top:0;">PROCESS</h3>
+        </div>
+    </div>
+
+    <div id="item-bank" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 15px; border: 1px solid #eee; background: #fff; border-radius: 10px;">
+        <div id="item1" draggable="true" ondragstart="drag(event)" data-answer="product" style="padding: 10px 15px; background: #eee; border: 1px solid #ccc; border-radius: 5px; cursor: grab;">Educator fixes mistakes</div>
+        <div id="item2" draggable="true" ondragstart="drag(event)" data-answer="product" style="padding: 10px 15px; background: #eee; border: 1px solid #ccc; border-radius: 5px; cursor: grab;">everyone creates same item</div>
+        <div id="item3" draggable="true" ondragstart="drag(event)" data-answer="process" style="padding: 10px 15px; background: #eee; border: 1px solid #ccc; border-radius: 5px; cursor: grab;">experimental</div>
+        <div id="item4" draggable="true" ondragstart="drag(event)" data-answer="process" style="padding: 10px 15px; background: #eee; border: 1px solid #ccc; border-radius: 5px; cursor: grab;">no fixed result</div>
+        <div id="item5" draggable="true" ondragstart="drag(event)" data-answer="process" style="padding: 10px 15px; background: #eee; border: 1px solid #ccc; border-radius: 5px; cursor: grab;">calm, unrushed</div>
+    </div>
+
+    <button onclick="checkAnswers()" style="margin-top: 20px; padding: 10px 25px; background: #333; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold;">Check Answers</button>
+    <p id="feedback" style="margin-top: 15px; font-weight: bold;"></p>
+</div>
+
+<script>
+function allowDrop(ev) { ev.preventDefault(); }
+function drag(ev) { ev.dataTransfer.setData("text", ev.target.id); }
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    var target = ev.target;
+    while (target && !target.id.includes('bin')) { target = target.parentElement; }
+    if (target) target.appendChild(document.getElementById(data));
+}
+function checkAnswers() {
+    let items = ['item1', 'item2', 'item3', 'item4', 'item5'];
+    let correct = 0;
+    items.forEach(id => {
+        let el = document.getElementById(id);
+        let parent = el.parentElement.id;
+        let ans = el.getAttribute('data-answer');
+        if ((ans === 'product' && parent === 'product-bin') || (ans === 'process' && parent === 'process-bin')) {
+            el.style.background = "#d4edda";
+            correct++;
+        } else {
+            el.style.background = "#f8d7da";
+        }
+    });
+    document.getElementById('feedback').innerText = correct === 5 ? "Perfect! You understand the difference." : "Some items are in the wrong spot. Try again!";
+    document.getElementById('feedback').style.color = correct === 5 ? "green" : "red";
+}
+</script>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: sans-serif; padding: 20px; background-color: #f4f7f6; }
+        .activity-container { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 600px; margin: auto; }
+        h2 { color: #2c3e50; font-size: 1.2rem; }
+        p { line-height: 1.6; color: #34495e; margin-bottom: 20px; }
+        input { border: 1px solid #bdc3c7; padding: 5px; width: 40px; text-align: center; border-radius: 4px; font-weight: bold; }
+        input:focus { outline: none; border-color: #3498db; }
+        button { background: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 1rem; margin-top: 10px; }
+        button:hover { background: #2980b9; }
+        .feedback { margin-top: 20px; font-weight: bold; display: none; }
+        .correct { color: #27ae60; }
+        .incorrect { color: #e74c3c; }
+    </style>
+</head>
+<body>
+
+<div class="activity-container">
+    <h2>Activity: Developmental Stages in Art</h2>
+    <p>Fill in the missing ages for each stage of development:</p>
+
+    <p>1. Random Manipulation typically begins at an age of 
+       <input type="text" id="q1a"> to <input type="text" id="q1b"> years old.</p>
+
+    <p>2. The Early Symbolic Stage typically begins between the ages of 
+       <input type="text" id="q2a"> and <input type="text" id="q2b">.</p>
+
+    <p>3. The Late Symbolic stage typically begins between the ages of 
+       <input type="text" id="q3a"> and <input type="text" id="q3b">.</p>
+
+    <button onclick="checkAnswers()">Check Answers</button>
+    <div id="feedback" class="feedback"></div>
+</div>
+
+<script>
+    function checkAnswers() {
+        const answers = {
+            q1a: "2", q1b: "3",
+            q2a: "3", q2b: "4",
+            q3a: "4", q3b: "5"
+        };
+        
+        let score = 0;
+        let total = 6;
+        
+        for (let id in answers) {
+            let userVal = document.getElementById(id).value.trim();
+            if (userVal === answers[id]) {
+                document.getElementById(id).style.borderColor = "#27ae60";
+                score++;
+            } else {
+                document.getElementById(id).style.borderColor = "#e74c3c";
+            }
+        }
+
+        const feedbackDiv = document.getElementById('feedback');
+        feedbackDiv.style.display = 'block';
+        if (score === total) {
+            feedbackDiv.innerHTML = "Perfect! You got all ages correct.";
+            feedbackDiv.className = "feedback correct";
+        } else {
+            feedbackDiv.innerHTML = `You got ${score} out of ${total} correct. Keep trying!`;
+            feedbackDiv.className = "feedback incorrect";
+        }
+    }
+</script>
+
+</body>
+</html>

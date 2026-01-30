@@ -1,0 +1,53 @@
+<div id="quiz-container" style="max-width: 600px; margin: 20px auto; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; border: 1px solid #ddd; border-radius: 10px; padding: 25px; background: #f9f9f9; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <h2 style="text-align: center; color: #2c3e50; margin-bottom: 25px;">Early Childhood Art Quiz</h2>
+    
+    <!-- Question 1 -->
+    <div style="margin-bottom: 25px; background: white; padding: 15px; border-radius: 8px;">
+        <p style="font-weight: 600; color: #34495e;">1. According to Schirrmacher, asking a child "What is it?" while they are drawing can stimulate a child's learning.</p>
+        <button onclick="checkAnswer(this, false, `Schirrmacher notes that this can actually stifle creativity and make children feel defensive.`)" style="margin-right: 10px; padding: 8px 20px; cursor: pointer; border: 1px solid #3498db; background: white; border-radius: 4px;">True</button>
+        <button onclick="checkAnswer(this, true, `Correct! Schirrmacher suggests avoiding this question in favor of open-ended prompts.`)" style="padding: 8px 20px; cursor: pointer; border: 1px solid #3498db; background: white; border-radius: 4px;">False</button>
+        <div class="feedback" style="margin-top: 10px; display: none; font-size: 0.9em;"></div>
+    </div>
+
+    <!-- Question 2 -->
+    <div style="margin-bottom: 25px; background: white; padding: 15px; border-radius: 8px;">
+        <p style="font-weight: 600; color: #34495e;">2. For children, the process of creating art is more important than the end product.</p>
+        <button onclick="checkAnswer(this, true, `Correct! The learning happens during the process of exploration.`)" style="margin-right: 10px; padding: 8px 20px; cursor: pointer; border: 1px solid #3498db; background: white; border-radius: 4px;">True</button>
+        <button onclick="checkAnswer(this, false, `Actually, Process Art is considered the foundation of early childhood art education.`)" style="padding: 8px 20px; cursor: pointer; border: 1px solid #3498db; background: white; border-radius: 4px;">False</button>
+        <div class="feedback" style="margin-top: 10px; display: none; font-size: 0.9em;"></div>
+    </div>
+
+    <!-- Question 3 -->
+    <div style="margin-bottom: 25px; background: white; padding: 15px; border-radius: 8px;">
+        <p style="font-weight: 600; color: #34495e;">3. Always put up a child's best work to encourage them.</p>
+        <button onclick="checkAnswer(this, false, `Displaying all efforts, not just the 'best,' encourages a growth mindset.`)" style="margin-right: 10px; padding: 8px 20px; cursor: pointer; border: 1px solid #3498db; background: white; border-radius: 4px;">True</button>
+        <button onclick="checkAnswer(this, true, `Correct! Showing diverse work honors the creative journey.`)" style="padding: 8px 20px; cursor: pointer; border: 1px solid #3498db; background: white; border-radius: 4px;">False</button>
+        <div class="feedback" style="margin-top: 10px; display: none; font-size: 0.9em;"></div>
+    </div>
+
+    <!-- Question 4 -->
+    <div style="margin-bottom: 25px; background: white; padding: 15px; border-radius: 8px;">
+        <p style="font-weight: 600; color: #34495e;">4. Frames or background mats can improve the look of a child's art piece.</p>
+        <button onclick="checkAnswer(this, true, `Correct! Matting art shows respect for the child's work.`)" style="margin-right: 10px; padding: 8px 20px; cursor: pointer; border: 1px solid #3498db; background: white; border-radius: 4px;">True</button>
+        <button onclick="checkAnswer(this, false, `Actually, a simple frame or mat significantly enhances the presentation.`)" style="padding: 8px 20px; cursor: pointer; border: 1px solid #3498db; background: white; border-radius: 4px;">False</button>
+        <div class="feedback" style="margin-top: 10px; display: none; font-size: 0.9em;"></div>
+    </div>
+</div>
+
+<script>
+function checkAnswer(btn, isCorrect, feedbackText) {
+    const parent = btn.parentElement;
+    const feedbackDiv = parent.querySelector('.feedback');
+    const buttons = parent.querySelectorAll('button');
+    
+    // Disable buttons after click
+    buttons.forEach(b => b.disabled = true);
+    
+    feedbackDiv.style.display = 'block';
+    feedbackDiv.innerText = feedbackText;
+    feedbackDiv.style.color = isCorrect ? '#27ae60' : '#e74c3c';
+    
+    btn.style.background = isCorrect ? '#27ae60' : '#e74c3c';
+    btn.style.color = 'white';
+}
+</script>

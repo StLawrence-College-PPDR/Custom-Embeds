@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-6 Year Old Musical Milestones Quiz</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #fdf6e3; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        h1 { color: #5d4037; margin-bottom: 10px; }
+        .instructions { margin-bottom: 20px; color: #795548; text-align: center; max-width: 600px; }
+        
+        .container { display: flex; gap: 15px; width: 100%; max-width: 1000px; flex-wrap: wrap; justify-content: center; }
+        
+        .drop-zone { background: #fff; border: 2px dashed #d7ccc8; border-radius: 12px; width: 280px; min-height: 200px; padding: 15px; display: flex; flex-direction: column; gap: 10px; transition: background 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .drop-zone h2 { font-size: 1.1rem; text-align: center; color: #5d4037; border-bottom: 2px solid #efebe9; padding-bottom: 10px; margin-top: 0; }
+        .drop-zone.over { background: #efebe9; border-color: #8d6e63; }
+
+        .items-pool { width: 100%; max-width: 900px; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 30px; }
+        
+        .draggable { background: #8d6e63; color: white; padding: 10px 15px; border-radius: 8px; cursor: grab; font-size: 0.9rem; user-select: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.2); text-align: center; width: calc(30% - 10px); min-width: 180px; }
+        .draggable:active { cursor: grabbing; }
+        .draggable.correct { background: #689f38 !important; }
+        .draggable.wrong { background: #d32f2f !important; }
+
+        .controls { margin-top: 30px; display: flex; gap: 15px; }
+        button { padding: 10px 25px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: opacity 0.2s; }
+        .check-btn { background: #5d4037; color: white; }
+        .reset-btn { background: #bcaaa4; color: white; }
+        button:hover { opacity: 0.9; }
+
+        #feedback { margin-top: 20px; font-weight: bold; font-size: 1.1rem; }
+    </style>
+</head>
+<body>
+
+    <h1>3-6 Year Old Musical Milestones</h1>
+    <p class="instructions">Drag the developmental milestones to the correct age group.</p>
+
+    <div class="items-pool" id="pool">
+        <div class="draggable" draggable="true" data-cat="3yo">Begins to understand changes in tempo and dynamics</div>
+        <div class="draggable" draggable="true" data-cat="4yo">Starts creating new rhythms</div>
+        <div class="draggable" draggable="true" data-cat="3yo">Can clap at different tempos when imitating adults</div>
+        <div class="draggable" draggable="true" data-cat="4yo">Can sing complete songs for memory</div>
+        <div class="draggable" draggable="true" data-cat="5yo">Can create songs on instruments</div>
+        <div class="draggable" draggable="true" data-cat="3yo">Begins to understand changes in tempo and dynamics (Part II)</div>
+    </div>
+
+    <div class="container">
+        <div class="drop-zone" id="3yo" data-target="3yo">
+            <h2>The Three Year Old</h2>
+        </div>
+        <div class="drop-zone" id="4yo" data-target="4yo">
+            <h2>The Four Year Old</h2>
+        </div>
+        <div class="drop-zone" id="5yo" data-target="5yo">
+            <h2>The Five to Six Year Old</h2>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="check-btn" onclick="checkAnswers()">Check My Answers</button>
+        <button class="reset-btn" onclick="resetQuiz()">Reset Quiz</button>
+    </div>
+
+    <div id="feedback"></div>
+
+    <script>
+        const draggables = document.querySelectorAll('.draggable');
+        const containers = document.querySelectorAll('.drop-zone, .items-pool');
+        let draggedItem = null;
+
+        draggables.forEach(draggable => {
+            draggable.addEventListener('dragstart', () => {
+                draggedItem = draggable;
+                draggable.classList.add('dragging');
+            });
+
+            draggable.addEventListener('dragend', () => {
+                draggedItem = null;
+                draggable.classList.remove('dragging');
+            });
+        });
+
+        containers.forEach(container => {
+            container.addEventListener('dragover', e => {
+                e.preventDefault();
+                if (container.classList.contains('drop-zone')) {
+                    container.classList.add('over');
+                }
+            });
+
+            container.addEventListener('dragleave', () => {
+                container.classList.remove('over');
+            });
+
+            container.addEventListener('drop', e => {
+                e.preventDefault();
+                container.classList.remove('over');
+                if (draggedItem) {
+                    container.appendChild(draggedItem);
+                    draggedItem.classList.remove('correct', 'wrong');
+                }
+            });
+        });
+
+        function checkAnswers() {
+            let correctCount = 0;
+            const total = draggables.length;
+            const feedback = document.getElementById('feedback');
+            
+            draggables.forEach(item => {
+                const parent = item.parentElement;
+                if (parent.classList.contains('drop-zone')) {
+                    if (item.getAttribute('data-cat') === parent.getAttribute('data-target')) {
+                        item.classList.add('correct');
+                        item.classList.remove('wrong');
+                        correctCount++;
+                    } else {
+                        item.classList.add('wrong');
+                        item.classList.remove('correct');
+                    }
+                }
+            });
+
+            if (correctCount === total) {
+                feedback.innerHTML = "Excellent! 🎵 You correctly identified all preschool milestones!";
+                feedback.style.color = "#33691e";
+            } else {
+                feedback.innerHTML = `You placed ${correctCount} out of ${total} correctly. Keep practicing!`;
+                feedback.style.color = "#b71c1c";
+            }
+        }
+
+        function resetQuiz() {
+            const pool = document.getElementById('pool');
+            draggables.forEach(item => {
+                item.classList.remove('correct', 'wrong');
+                pool.appendChild(item);
+            });
+            document.getElementById('feedback').innerHTML = "";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+    .spider-container {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        max-width: 600px;
+        margin: 20px auto;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .accordion-item {
+        border-bottom: 1px solid #ddd;
+    }
+
+    .accordion-item:last-child {
+        border-bottom: none;
+    }
+
+    .accordion-header {
+        background-color: #f8f9fa;
+        padding: 15px 20px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: bold;
+        color: #2c3e50;
+        transition: background-color 0.3s;
+    }
+
+    .accordion-header:hover {
+        background-color: #e9ecef;
+    }
+
+    .accordion-content {
+        display: none;
+        padding: 15px 20px;
+        background-color: #ffffff;
+        line-height: 1.6;
+        color: #444;
+    }
+
+    .accordion-header::after {
+        content: '▼';
+        font-size: 12px;
+        color: #777;
+    }
+
+    .accordion-item.active .accordion-content {
+        display: block;
+    }
+
+    .accordion-item.active .accordion-header {
+        background-color: #edf2f7;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .accordion-item.active .accordion-header::after {
+        content: '▲';
+    }
+
+    .verse-box {
+        background: #fff9db;
+        border-left: 4px solid #fcc419;
+        padding: 10px;
+        margin: 10px 0;
+        font-style: italic;
+    }
+
+    ul {
+        margin: 5px 0;
+        padding-left: 20px;
+    }
+</style>
+</head>
+<body>
+
+<div class="spider-container">
+    <!-- Cognitive Section -->
+    <div class="accordion-item">
+        <div class="accordion-header">🧠 Cognitive Development</div>
+        <div class="accordion-content">
+            <p>Children explore complex concepts through simple play:</p>
+            <ul>
+                <li><strong>Learning actions:</strong> Sequencing the steps of the spider's journey.</li>
+                <li><strong>Cause and Effect:</strong> Understanding how the rain "washes" the spider out and how the sun "dries" the environment.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Physical Section -->
+    <div class="accordion-item">
+        <div class="accordion-header">🏃 Physical & Movement</div>
+        <div class="accordion-content">
+            <p>Moving to instructions improves gross motor skills. Use these verses to get the children moving:</p>
+            
+            <div class="verse-box">
+                "The <strong>Great Big Spider</strong> climbed up the mountain side,<br>
+                Down came the rain and he took a giant slide!"<br>
+                <em>(Action: Have children take huge steps and then slide down to the floor)</em>
+            </div>
+
+            <div class="verse-box">
+                "The <strong>Teeny Tiny Spider</strong> tiptoed on the leaf,<br>
+                Along came the wind—it was such a little thief!"<br>
+                <em>(Action: Have children tiptoe quietly and then sway gently like a leaf)</em>
+            </div>
+        </div>
+    </div>
+
+    <!-- Emotional/Social Section -->
+    <div class="accordion-item">
+        <div class="accordion-header">🤝 Emotional & Social</div>
+        <div class="accordion-content">
+            <p>Group music activities foster a sense of belonging:</p>
+            <ul>
+                <li><strong>Comradery:</strong> Develops a feeling of joy and shared experience within the circle.</li>
+                <li><strong>Confidence:</strong> Sound circle activities build the child's self-esteem and self-confidence as they master the movements.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Musical Elements Section -->
+    <div class="accordion-item">
+        <div class="accordion-header">🎵 Musical Elements</div>
+        <div class="accordion-content">
+            <ul>
+                <li><strong>Rhyme:</strong> Essential for language development and phonetic awareness.</li>
+                <li><strong>Tempo:</strong> Play with speed! Try the song <em>fast</em>, then <em>slow</em>, then even <em>slower</em>.</li>
+                <li><strong>Beat:</strong> Have children keep the beat with their hands—clapping rhythmically for the "Teeny Tiny Spider" vs. stomping for the "GREAT BIG SPIDER."</li>
+                <li><strong>Create:</strong> Encourage children to make up their own verses (e.g., a "Jumping Spider" or a "Blue Spider").</li>
+                <li><strong>Instruments:</strong> Incorporate drums (thunder), bells (rain), and rhythm sticks (climbing).</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Active Listening Section -->
+    <div class="accordion-item">
+        <div class="accordion-header">👂 Active Listening & Progression</div>
+        <div class="accordion-content">
+            <p><strong>Hearing and Responding:</strong> Use this song as the focus of the musical circle all week. Take your time and introduce a new dimension each day:</p>
+            <ul>
+                <li><strong>Day 1:</strong> Learn the basic song and movements.</li>
+                <li><strong>Day 3:</strong> Add instruments and tempo changes.</li>
+                <li><strong>Day 5:</strong> Children lead by making up their own verses and adding colors.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.accordion-header').forEach(button => {
+        button.addEventListener('click', () => {
+            const accordionItem = button.parentElement;
+            
+            // Close other items (optional - remove if you want multiple open at once)
+            document.querySelectorAll('.accordion-item').forEach(item => {
+                if (item !== accordionItem) {
+                    item.classList.remove('active');
+                }
+            });
+
+            accordionItem.classList.toggle('active');
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0-2 Year Old Listening Quiz</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f4f8; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        h1 { color: #2c3e50; margin-bottom: 10px; }
+        .instructions { margin-bottom: 20px; color: #555; text-align: center; max-width: 600px; }
+        
+        .container { display: flex; gap: 20px; width: 100%; max-width: 900px; flex-wrap: wrap; justify-content: center; }
+        
+        .drop-zone { background: #fff; border: 2px dashed #cbd5e0; border-radius: 12px; width: 300px; min-height: 250px; padding: 15px; display: flex; flex-direction: column; gap: 10px; transition: background 0.3s; }
+        .drop-zone h2 { font-size: 1.2rem; text-align: center; color: #34495e; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 0; }
+        .drop-zone.over { background: #e2e8f0; border-color: #4a90e2; }
+
+        .items-pool { width: 100%; max-width: 800px; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 30px; }
+        
+        .draggable { background: #4a90e2; color: white; padding: 12px 18px; border-radius: 8px; cursor: grab; font-size: 0.95rem; user-select: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.2); text-align: center; width: calc(45% - 10px); }
+        .draggable:active { cursor: grabbing; }
+        .draggable.correct { background: #48bb78 !important; }
+        .draggable.wrong { background: #f56565 !important; }
+
+        .controls { margin-top: 30px; display: flex; gap: 15px; }
+        button { padding: 10px 25px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: opacity 0.2s; }
+        .check-btn { background: #2c3e50; color: white; }
+        .reset-btn { background: #a0aec0; color: white; }
+        button:hover { opacity: 0.9; }
+
+        #feedback { margin-top: 20px; font-weight: bold; font-size: 1.1rem; }
+    </style>
+</head>
+<body>
+
+    <h1>0-2 Year Old Listening Quiz</h1>
+    <p class="instructions">Drag the milestones from the bottom pool and drop them into the correct age category.</p>
+
+    <div class="items-pool" id="pool">
+        <div class="draggable" draggable="true" data-cat="infant">Begin to react with eyes to music</div>
+        <div class="draggable" draggable="true" data-cat="toddler">Enjoys clapping game, finger plays and action songs</div>
+        <div class="draggable" draggable="true" data-cat="toddler">Responds to songs with simple patterns</div>
+        <div class="draggable" draggable="true" data-cat="infant">Hitting, banging and pounding with palms or fists</div>
+        <div class="draggable" draggable="true" data-cat="toddler">Can learn short, simple songs</div>
+        <div class="draggable" draggable="true" data-cat="infant">Chanted words and rhyme appear to enhance pleasure</div>
+    </div>
+
+    <div class="container">
+        <div class="drop-zone" id="infant" data-target="infant">
+            <h2>Infant and Toddler</h2>
+        </div>
+        <div class="drop-zone" id="toddler" data-target="toddler">
+            <h2>The Two Year Old</h2>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="check-btn" onclick="checkAnswers()">Check My Answers</button>
+        <button class="reset-btn" onclick="resetQuiz()">Reset Quiz</button>
+    </div>
+
+    <div id="feedback"></div>
+
+    <script>
+        const draggables = document.querySelectorAll('.draggable');
+        const containers = document.querySelectorAll('.drop-zone, .items-pool');
+        let draggedItem = null;
+
+        draggables.forEach(draggable => {
+            draggable.addEventListener('dragstart', () => {
+                draggedItem = draggable;
+                draggable.classList.add('dragging');
+            });
+
+            draggable.addEventListener('dragend', () => {
+                draggedItem = null;
+                draggable.classList.remove('dragging');
+            });
+        });
+
+        containers.forEach(container => {
+            container.addEventListener('dragover', e => {
+                e.preventDefault();
+                if (container.classList.contains('drop-zone')) {
+                    container.classList.add('over');
+                }
+            });
+
+            container.addEventListener('dragleave', () => {
+                container.classList.remove('over');
+            });
+
+            container.addEventListener('drop', e => {
+                e.preventDefault();
+                container.classList.remove('over');
+                if (draggedItem) {
+                    container.appendChild(draggedItem);
+                    draggedItem.classList.remove('correct', 'wrong');
+                }
+            });
+        });
+
+        function checkAnswers() {
+            let correctCount = 0;
+            const total = 6;
+            const feedback = document.getElementById('feedback');
+            
+            draggables.forEach(item => {
+                const parent = item.parentElement;
+                if (parent.classList.contains('drop-zone')) {
+                    if (item.getAttribute('data-cat') === parent.getAttribute('data-target')) {
+                        item.classList.add('correct');
+                        item.classList.remove('wrong');
+                        correctCount++;
+                    } else {
+                        item.classList.add('wrong');
+                        item.classList.remove('correct');
+                    }
+                }
+            });
+
+            if (correctCount === total) {
+                feedback.innerHTML = "Perfect! 🌟 You've mastered the 0-2 musical milestones!";
+                feedback.style.color = "#2f855a";
+            } else {
+                feedback.innerHTML = `You got ${correctCount} out of ${total} correct. Keep trying!`;
+                feedback.style.color = "#c53030";
+            }
+        }
+
+        function resetQuiz() {
+            const pool = document.getElementById('pool');
+            draggables.forEach(item => {
+                item.classList.remove('correct', 'wrong');
+                pool.appendChild(item);
+            });
+            document.getElementById('feedback').innerHTML = "";
+        }
+    </script>
+</body>
+</html>
