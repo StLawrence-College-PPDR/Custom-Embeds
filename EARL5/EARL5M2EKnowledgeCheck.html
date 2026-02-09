@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LGBTQ Knowledge Check</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f4f7f6;
+        }
+        .quiz-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-left: 5px solid #3498db;
+            background: #fafafa;
+        }
+        .question p {
+            font-weight: bold;
+            margin-top: 0;
+        }
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+        .options li {
+            margin-bottom: 10px;
+        }
+        label {
+            cursor: pointer;
+            display: block;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        label:hover {
+            background: #edf2f7;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        #submit-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        #submit-btn:hover {
+            background-color: #2980b9;
+        }
+        #results {
+            margin-top: 20px;
+            padding: 20px;
+            display: none;
+            border-radius: 8px;
+        }
+        .correct {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .incorrect {
+            color: #c0392b;
+            font-weight: bold;
+        }
+        .feedback {
+            font-size: 0.9em;
+            margin-top: 5px;
+            font-style: italic;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>Knowledge Check: LGBTQ Concepts</h1>
+    <form id="quizForm">
+        <!-- Question 1 -->
+        <div class="question">
+            <p>1. Gender identity results from a combination of which factors?</p>
+            <ul class="options">
+                <li><label><input type="radio" name="q1" value="a"> Only biological factors</label></li>
+                <li><label><input type="radio" name="q1" value="b"> Social and economic factors</label></li>
+                <li><label><input type="radio" name="q1" value="c"> Biological, social, and psychological factors</label></li>
+            </ul>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question">
+            <p>2. Which term describes individuals whose gender identity is the opposite of their biological sex and who live as that gender?</p>
+            <ul class="options">
+                <li><label><input type="radio" name="q2" value="a"> Transsexual</label></li>
+                <li><label><input type="radio" name="q2" value="b"> Bisexual</label></li>
+                <li><label><input type="radio" name="q2" value="c"> Heterosexual</label></li>
+            </ul>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question">
+            <p>3. How does the text define gender orientation?</p>
+            <ul class="options">
+                <li><label><input type="radio" name="q3" value="a"> The gender traditional expectations for males and females</label></li>
+                <li><label><input type="radio" name="q3" value="b"> The gender to which you are emotionally and sexually attracted</label></li>
+                <li><label><input type="radio" name="q3" value="c"> The biological sex assigned at birth</label></li>
+            </ul>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question">
+            <p>4. True or False: Isolated sexual experiences in adolescence are the best indicator of true sexual orientation.</p>
+            <ul class="options">
+                <li><label><input type="radio" name="q4" value="a"> True</label></li>
+                <li><label><input type="radio" name="q4" value="b"> False</label></li>
+            </ul>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question">
+            <p>5. According to Ford and Beach (1951), in how many of the 76 preliterate societies was homosexual activity regarded as normal or acceptable?</p>
+            <ul class="options">
+                <li><label><input type="radio" name="q5" value="a"> 10 of 76</label></li>
+                <li><label><input type="radio" name="q5" value="b"> 49 of 76</label></li>
+                <li><label><input type="radio" name="q5" value="c"> 76 of 76</label></li>
+            </ul>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question">
+            <p>6. What is the First Nations term for the belief in a third gender (male-female)?</p>
+            <ul class="options">
+                <li><label><input type="radio" name="q6" value="a"> Dual-identity</label></li>
+                <li><label><input type="radio" name="q6" value="b"> Trans-spiritual</label></li>
+                <li><label><input type="radio" name="q6" value="c"> Two-spirited</label></li>
+            </ul>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question">
+            <p>7. What does Bill C-38, passed on July 19, 2005, signify in Canada?</p>
+            <ul class="options">
+                <li><label><input type="radio" name="q7" value="a"> The legalization of same-sex marriages</label></li>
+                <li><label><input type="radio" name="q7" value="b"> New rules for adoption</label></li>
+                <li><label><input type="r

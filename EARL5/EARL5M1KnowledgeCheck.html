@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Dynamics Knowledge Check</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+            background-color: #f4f7f6;
+        }
+        .quiz-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { color: #2c3e50; text-align: center; }
+        .question { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #eee; }
+        .question p { font-weight: 600; margin-bottom: 10px; }
+        .options { list-style-type: none; padding: 0; }
+        .options li { margin-bottom: 8px; }
+        label { cursor: pointer; display: block; padding: 8px; border-radius: 4px; transition: background 0.2s; }
+        label:hover { background: #f0f4f8; }
+        input[type="radio"] { margin-right: 10px; }
+        
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover { background-color: #2980b9; }
+        
+        #results { margin-top: 30px; display: none; }
+        .feedback { margin-top: 10px; padding: 10px; border-radius: 4px; display: none; font-size: 0.9em; }
+        .correct { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .incorrect { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .score-display { font-size: 24px; font-weight: bold; text-align: center; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>Knowledge Check: What is a Family?</h1>
+    <form id="quiz-form">
+        <!-- Q1 -->
+        <div class="question">
+            <p>1. According to the definition by Burgess and Locke (1960), a family is a group united by which three ties?</p>
+            <ul class="options">
+                <li><label><input type="radio" name="q1" value="a"> Friendship, love, and shared history</label></li>
+                <li><label><input type="radio" name="q1" value="b"> Marriage, blood, or adoption</label></li>
+                <li><label><input type="radio" name="q1" value="c"> Economic need, legal status, and housing</label></li>
+            </ul>
+            <div id="feedback-q1" class="feedback"></div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="question">
+            <p>2. Margaret Mead argued that when counting members of a family, you must also include:</p>
+            <ul class="options">
+                <li><label><input type="radio" name="q2" value="a"> Neighbors and close community friends</label></li>
+                <li><label><input type="radio" name="q2" value="b"> Only those currently living in the same household</label></li>
+                <li><label><input type="radio" name="q2" value="c"> Deceased parents and stepchildren, even if they live elsewhere</label></li>
+            </ul>
+            <div id="feedback-q2" class="feedback"></div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="question">
+            <p>3. According to Statistics Canada, do grandchildren living with grandparents (without parents present) constitute a "census family"?</p>
+            <ul class="options">
+                <li><label><input type="radio" name="q3" value="a"> Yes</label></li>
+                <li><label><input type="radio" name="q3" value="b"> No</label></li>
+                <li><label><input type="radio" name="q3" value="c"> Only if they are legally adopted</label></li>
+            </ul>
+            <div id="feedback-q3" class="feedback"></div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="question">
+            <p>4. Letty Cottin Pogrebin uses the metaphor of a _____ to describe a family that makes no progress unless everyone paddles.</p>
+            <ul class="options">
+                <li><label><input type="radio" name="q4" value="a"> Sailboat</label></li>
+                <li><label><input type="radio" name="q4" value="b"> Canoe</label></li>
+                <li><label><input type="radio" name="q4" value="c"> Raft</label></li>
+            </ul>
+            <div id="feedback-q4" class="feedback"></div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="question">
+            <p>5. The Vanier Institute's definition includes "affective nurturance." What is another word for this?</p>
+            <ul class="options">
+                <li><label><input type="radio" name="q5" value="a"> Financial support</label></li>
+                <li><label><input type="radio" name="q5" value="b"> Social control</label></li>
+                <li><label><input type="radio" name="q5" value="c"> Love</label></li>
+            </ul>
+            <div id="feedback-q5" class="feedback"></div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="question">
+            <p>6. In Evelyn Duvall’s "Basic Family Tasks," what does the task of "socialization" primarily involve?</p>
+            <ul class="options">
+                <li><label><input type="radio" name="q6" value="a"> Providing food and medical care</label></li>
+                <li><label><input type="radio" name="q6" value="b"> Teaching members how to act as men, women, husbands, or wives</label></li>
+                <li><label><input type="radio" name="q6" value="c"> Allocating financial resources to members</label></li>
+            </ul>
+            <div id="feedback-q6" class="feedback"></div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="question">
+            <p>7. Why is looking at family dynamics difficult for most people, according to the text?</p>
+            <ul class="options">
+                <li><label><input type="radio" name="q7" value="a"> Because there are too many different definitions</label></li>
+                <li><label><input type="radio" name="q7" value="b"> Because we identify so closely with our own families that it's hard to be unbiased</label></li>
+                <li><label><input type="radio" name="q7" value="c"> Because family data is usually private and unavailable</label></li>
+            </ul>
+            <div id="feedback-q7" class="feedback"></div>
+        </div>
+
+        <!-- Q8 -->
+        <div class="question">
+            <p>8. Which stage of the Family Life Cycle involves the critical task of "balancing freedom with responsibility"?</p>
+            <ul class="options">
+                <li><label><input type="radio" name="q8" value="a"> School age</label></li>
+                <li><label><input type="radio" name="q8" value="b"> Teenage</label></li>
+                <li><label><input type="radio" name="q8" value="c"> Launching centre</label></li>
+            </ul>
+            <div id="feedback-q8" class="feedback"></div>
+        </div>
+
+        <!-- Q9 -->
+        <div class="question">
+            <p>9. What is a "stage-critical developmental task" for the Launching Centre stage?</p>
+            <ul class="options">
+                <li><label><input type="radio" name="q9" value="a"> Fitting into the kin network</label></li>
+                <li><label><input type="radio" name="q9" value="b"> Rebuilding the marriage</label></li>
+                <li><label><input type="radio" name="q9" value="c"> Releasing young adults to work, education, or marriage</label></li>
+            </ul>
+            <div id="feedback-q9" class="feedback"></div>
+        </div>
+
+        <!-- Q10 -->
+        <div class="question">
+            <p>10. In the "Aging family members" stage, which task is specifically mentioned regarding the home?</p>
+            <ul class="options">
+                <li><label><input type="radio" name="q10" value="a"> Purchasing a larger home for grandchildren</label></li>
+                <li><label><input type="radio" name="q10" value="b"> Closing or adapting the home to the needs of the elderly</label></li>
+                <li><label><input type="radio" name="q10" value="c"> Handing over management of the home to the eldest child</label></li>
+            </ul>
+            <div id="feedback-q10" class="feedback"></div>
+        </div>
+
+        <button type="button" onclick="submitQuiz()">Submit Answers</button>
+    </form>
+
+    <div id="results">
+        <div class="score-display" id="score-text"></div>
+        <button type="button" onclick="resetQuiz()">Restart Quiz</button>
+    </div>
+</div>
+
+<script>
+    const correctAnswers = {
+        q1: 'b',
+        q2: 'c',
+        q3: 'a',
+        q4: 'b',
+        q5: 'c',
+        q6: 'b',
+        q7: 'b',
+        q8: 'b',
+        q9: 'c',
+        q10: 'b'
+    };
+
+    const explanations = {
+        q1: "Correct! Burgess and Locke define family by ties of marriage, blood, or adoption.",
+        q2: "Correct! Mead emphasized counting all members, including dead fathers/mothers and stepchildren.",
+        q3: "Correct! Stats Canada specifically includes grandchildren with grandparents when no parents are present.",
+        q4: "Correct! The canoe metaphor highlights the need for everyone to paddle together.",
+        q5: "Correct! The Vanier Institute lists 'Affective nurturance – love' as a key family responsibility.",
+        q6: "Correct! Duvall defines socialization as teaching or modelling how members ought to act in the family and beyond.",
+        7: "Correct! Our close identification with our own families creates bias that is difficult to distance ourselves from.",
+        q8: "Correct! The Teenage stage is defined by balancing freedom with responsibility.",
+        q9: "Correct! The Launching Centre stage focuses on releasing young adults while maintaining a supportive home base.",
+        q10: "Correct! Adjusting to retirement and adapting or closing the home are key tasks for aging family members."
+    };
+
+    function submitQuiz() {
+        let score = 0;
+        const form = document.getElementById('quiz-form');
+        const resultsDiv = document.getElementById('results');
+        const scoreText = document.getElementById('score-text');
+
+        for (let key in correctAnswers) {
+            const selected = form.querySelector(`input[name="${key}"]:checked`);
+            const feedback = document.getElementById(`feedback-${key}`);
+            feedback.style.display = 'block';
+
+            if (selected && selected.value === correctAnswers[key]) {
+                score++;
+                feedback.innerHTML = explanations[key];
+                feedback.className = 'feedback correct';
+            } else {
+                feedback.innerHTML = `Incorrect. The correct answer was: ${correctAnswers[key].toUpperCase()}. ${explanations[key]}`;
+                feedback.className = 'feedback incorrect';
+            }
+        }
+
+        scoreText.innerHTML = `Your Score: ${score} / 10`;
+        resultsDiv.style.display = 'block';
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function resetQuiz() {
+        document.getElementById('quiz-form').reset();
+        const feedbacks = document.querySelectorAll('.feedback');
+        feedbacks.forEach(f => f.style.display = 'none');
+        document.getElementById('results').style.display = 'none';
+        window.scrollTo(0, 0);
+    }
+</script>
+
+</body>
+</html>

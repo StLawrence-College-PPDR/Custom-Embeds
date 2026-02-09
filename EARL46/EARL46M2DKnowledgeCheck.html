@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.5; color: #333; max-width: 700px; margin: 20px auto; padding: 20px; background-color: #f9f9f9; }
+        .quiz-container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { color: #2c3e50; border-bottom: 3px solid #4a90e2; padding-bottom: 10px; }
+        .q-wrap { margin-bottom: 25px; padding: 15px; border-left: 5px solid #4a90e2; background: #fcfcfc; }
+        .q-text { font-weight: 600; margin-bottom: 10px; display: block; }
+        label { display: block; margin: 8px 0; cursor: pointer; transition: 0.2s; }
+        label:hover { color: #4a90e2; }
+        button { background: #4a90e2; color: white; border: none; padding: 12px 25px; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; width: 100%; margin-top: 20px; }
+        button:hover { background: #357abd; }
+        #results { margin-top: 25px; padding: 20px; display: none; border-radius: 8px; }
+        .feedback { font-size: 0.9em; margin-top: 10px; color: #555; font-style: italic; }
+        .correct-ans { color: #27ae60; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h2>Knowledge Check: Community Resources</h2>
+    <form id="quizForm">
+        <!-- Q1 -->
+        <div class="q-wrap">
+            <span class="q-text">1. Why are child care centres and communities considered "interdependent"?</span>
+            <label><input type="radio" name="q1" value="0"> They should remain isolated.</label>
+            <label><input type="radio" name="q1" value="1"> Quality care allows parents to work, and the community provides resources.</label>
+            <label><input type="radio" name="q1" value="0"> Because the law mandates they stay away from each other.</label>
+        </div>
+
+        <!-- Q2 -->
+        <div class="q-wrap">
+            <span class="q-text">2. What are the two main facets of utilizing community resources?</span>
+            <label><input type="radio" name="q2" value="0"> Fundraising and Marketing.</label>
+            <label><input type="radio" name="q2" value="1"> Children going out and the community coming to the children.</label>
+            <label><input type="radio" name="q2" value="0"> Staff hiring and Child enrollment.</label>
+        </div>
+
+        <!-- Q3 -->
+        <div class="q-wrap">
+            <span class="q-text">3. Which is NOT required for a field trip inventory?</span>
+            <label><input type="radio" name="q3" value="0"> Contact person.</label>
+            <label><input type="radio" name="q3" value="1"> Cost of transportation.</label>
+            <label><input type="radio" name="q3" value="0"> Number of children accommodated.</label>
+        </div>
+
+        <!-- Q4 -->
+        <div class="q-wrap">
+            <span class="q-text">4. What should be included in a guest speaker's inventory entry?</span>
+            <label><input type="radio" name="q4" value="1"> Name, phone number, and description of the topic.</label>
+            <label><input type="radio" name="q4" value="0"> Their personal home address.</label>
+            <label><input type="radio" name="q4" value="0"> A list of their favorite foods.</label>
+        </div>
+
+        <!-- Q5 -->
+        <div class="q-wrap">
+            <span class="q-text">5. How does family involvement benefit the child?</span>
+            <label><input type="radio" name="q5" value="0"> It makes the child work harder.</label>
+            <label><input type="radio" name="q5" value="1"> It eases the transition between home and the centre.</label>
+            <label><input type="radio" name="q5" value="0"> It replaces the need for a curriculum.</label>
+        </div>
+
+        <!-- Q6 -->
+        <div class="q-wrap">
+            <span class="q-text">6. Why is senior citizen interaction valuable?</span>
+            <label><input type="radio" name="q6" value="1"> It allows children to experience another generation.</label>
+            <label><input type="radio" name="q6" value="0"> They provide free medical care.</label>
+            <label><input type="radio" name="q6" value="0"> They are the only ones who can teach crafts.</label>
+        </div>
+
+        <!-- Q7 -->
+        <div class="q-wrap">
+            <span class="q-text">7. How do teenagers benefit from involvement?</span>
+            <label><input type="radio" name="q7" value="0"> They get to skip school.</label>
+            <label><input type="radio" name="q7" value="1"> It helps them make future career choices.</label>
+            <label><input type="radio" name="q7" value="0"> They are not mentioned as benefiting.</label>
+        </div>
+
+        <!-- Q8 -->
+        <div class="q-wrap">
+            <span class="q-text">8. Which agency advises on treatment for poisoning?</span>
+            <label><input type="radio" name="q8" value="0"> National Film Board.</label>
+            <label><input type="radio" name="q8" value="1"> Poison Control Centre.</label>
+            <label><input type="radio" name="q8" value="0"> Dairy Farmers of Ontario.</label>
+        </div>
+
+        <!-- Q9 -->
+        <div class="q-wrap">
+            <span class="q-text">9. Who supplies information on the safety of toys/equipment?</span>
+            <label><input type="radio" name="q9" value="1"> Consumer and Corporate Affairs Product Safety.</label>
+            <label><input type="radio" name="q9" value="0"> Local Public Health Units.</label>
+            <label><input type="radio" name="q9" value="0"> The Humane Society.</label>
+        </div>
+
+        <!-- Q10 -->
+        <div class="q-wrap">
+            <span class="q-text">10. What does the Ministry of Education provide online?</span>
+            <label><input type="radio" name="q10" value="0"> Coupons for supplies.</label>
+            <label><input type="radio" name="q10" value="1"> Publications for start-up and operation.</label>
+            <label><input type="radio" name="q10" value="0"> Children's television programs.</label>
+        </div>
+
+        <button type="button" onclick="submitQuiz()">Submit Knowledge Check</button>
+    </form>
+
+    <div id="results"></div>
+</div>
+
+<script>
+    function submitQuiz() {
+        const form = document.getElementById('quizForm');
+        const resultsDiv = document.getElementById('results');
+        let score = 0;
+        const total = 10;
+        
+        const answers = {
+            q1: "1", q2: "1", q3: "1", q4: "1", q5: "1",
+            q6: "1", q7: "1", q8: "1", q9: "1", q10: "1"
+        };
+
+        let output = "<h3>Your Results</h3>";
+        
+        for(let i=1; i<=total; i++) {
+            const selected = form.elements['q'+i].value;
+            if(selected === answers['q'+i]) {
+                score++;
+            }
+        }
+
+        output += `<p>You scored ${score} out of ${total}.</p><hr>`;
+        output += "<h4>Correct Answers:</h4><ol>";
+        output += "<li>Interdependent link between work and resources.</li>";
+        output += "<li>Children going out and community coming in.</li>";
+        output += "<li>Cost of transportation (not mentioned in text).</li>";
+        output += "<li>Name, phone, and topic description.</li>";
+        output += "<li>Link between home/centre for child's transition.</li>";
+        output += "<li>Experience a generation beyond parents.</li>";
+        output += "<li>Helps with career choices.</li>";
+        output += "<li>Poison Control Centre.</li>";
+        output += "<li>Consumer and Corporate Affairs Product Safety.</li>";
+        output += "<li>Start-up and operation publications.</li>";
+        output += "</ol>";
+
+        resultsDiv.innerHTML = output;
+        resultsDiv.style.display = "block";
+        resultsDiv.style.backgroundColor = score === total ? "#d4edda" : "#f8d7da";
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+</script>
+
+</body>
+</html>

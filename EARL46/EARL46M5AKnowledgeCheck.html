@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Child Care Program Knowledge Check</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 20px auto; padding: 20px; background-color: #f4f7f6; }
+        .quiz-container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; text-align: center; }
+        .question { margin-bottom: 25px; padding: 15px; border-bottom: 1px solid #eee; }
+        .question p { font-weight: bold; margin-bottom: 10px; }
+        .options label { display: block; margin: 8px 0; cursor: pointer; padding: 5px; border-radius: 4px; }
+        .options label:hover { background-color: #f0f0f0; }
+        button { background-color: #27ae60; color: white; border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 16px; display: block; margin: 20px auto; }
+        button:hover { background-color: #219150; }
+        #results { margin-top: 20px; padding: 20px; display: none; border-radius: 8px; }
+        .correct { color: #27ae60; font-weight: bold; }
+        .incorrect { color: #e74c3c; font-weight: bold; }
+        .feedback { font-size: 0.9em; margin-top: 5px; color: #666; font-style: italic; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>Knowledge Check: Opening a Child Care Program</h1>
+    <form id="quizForm">
+        <!-- Question 1 -->
+        <div class="question">
+            <p>1. According to the text, what are the two most important factors to determine during a needs assessment?</p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="a"> The cost of rent and the number of staff required.</label>
+                <label><input type="radio" name="q1" value="b"> The number of families who would use the service and the types of service that would meet their needs.</label>
+                <label><input type="radio" name="q1" value="c"> The proximity to schools and availability of parking.</label>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question">
+            <p>2. What is the very first step in the development of a needs assessment survey?</p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="a"> Prepare the questions.</label>
+                <label><input type="radio" name="q2" value="b"> Gather the information.</label>
+                <label><input type="radio" name="q2" value="c"> Define the objectives.</label>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question">
+            <p>3. Before a license is issued, the premises must comply with several codes. Which of the following is NOT specifically listed?</p>
+            <div class="options">
+                <label><input type="radio" name="q3" value="a"> The Building Code and Fire Code.</label>
+                <label><input type="radio" name="q3" value="b"> Zoning and local by-laws.</label>
+                <label><input type="radio" name="q3" value="c"> Interior Design and Decoration Act.</label>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question">
+            <p>4. To apply for a license, applicants must enroll in which web-based system?</p>
+            <div class="options">
+                <label><input type="radio" name="q4" value="a"> Child Care Licensing System (CCLS).</label>
+                <label><input type="radio" name="q4" value="b"> Ministry of Education Portal (MEP).</label>
+                <label><input type="radio" name="q4" value="c"> Early Years Connect (EYC).</label>
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question">
+            <p>5. How long must planned menus be kept after the last day for which they were applicable?</p>
+            <div class="options">
+                <label><input type="radio" name="q5" value="a"> 7 days.</label>
+                <label><input type="radio" name="q5" value="b"> 30 days.</label>
+                <label><input type="radio" name="q5" value="c"> 1 year.</label>
+            </div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question">
+            <p>6. When must a daily observation of each child be made by a provider?</p>
+            <div class="options">
+                <label><input type="radio" name="q6" value="a"> After the first outdoor play session.</label>
+                <label><input type="radio" name="q6" value="b"> Before the child begins to associate with other children.</label>
+                <label><input type="radio" name="q6" value="c"> During the afternoon nap time.</label>
+            </div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question">
+            <p>7. If a staff member suspects a child is in need of protection, who must report it to the Children’s Aid Society (CAS)?</p>
+            <div class="options">
+                <label><input type="radio" name="q7" value="a"> The person who has the reasonable grounds to suspect it.</label>
+                <label><input type="radio" name="q7" value="b"> The Supervisor, after the staff member tells them.</label>
+                <label><input type="radio" name="q7" value="c"> The Board of Directors.</label>
+            </div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question">
+            <p>8. According to the First Aid kit requirements, how many sterile gauze pads (3 inches square) must be included?</p>
+            <div class="options">
+                <label><input type="radio" name="q8" value="a"> 6.</label>
+                <label><input type="radio" name="q8" value="b"> 12.</label>
+                <label><input type="radio" name="q8" value="c"> 24.</label>
+            </div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question">
+            <p>9. To be counted for the purposes of meeting ratios, all employees must have current certification in:</p>
+            <div class="options">
+                <label><input type="radio" name="q9" value="a"> Food Handler’s Safety.</label>
+                <label><input type="radio" name="q9" value="b"> Standard First Aid and infant and child CPR.</label>
+                <label><input type="radio" name="q9" value="c"> Child and Youth Care Diploma.</label>
+            </div>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question">
+            <p>10. How often must an employee sign an offence declaration regarding Criminal Code convictions?</p>
+            <div class="options">
+                <label><input type="radio" name="q10" value="a"> Every 5 years.</label>
+                <label><input type="radio" name="q10" value="b"> Every 6 months.</label>
+                <label><input type="radio" name="q10" value="c"> Annually.</label>
+            </div>
+        </div>
+
+        <button type="button" onclick="submitQuiz()">Submit Answers</button>
+    </form>
+
+    <div id="results"></div>
+</div>
+
+<script>
+    function submitQuiz() {
+        const answers = {
+            q1: "b", q2: "c", q3: "c", q4: "a", q5: "b",
+            q6: "b", q7: "a", q8: "b", q9: "b", q10: "c"
+        };
+        
+        const feedbackText = {
+            q1: "Correct! The number of families and types of service are the two most important factors.",
+            q2: "Correct! Step 1 is to Define the Objectives.",
+            q3: "Correct! Interior design is not a legal licensing requirement listed.",
+            q4: "Correct! The Child Care Licensing System (CCLS) is the web-based system used.",
+            q5: "Correct! Menus must be kept for 30 days.",
+            q6: "Correct! Observation must happen before associating with others to detect ill health.",
+            q7: "Correct! The person with grounds to suspect must report directly and not rely on others.",
+            q8: "Correct! 12 sterile gauze pads are required.",
+            q9: "Correct! Standard First Aid and infant/child CPR are mandatory for staff in ratio.",
+            q10: "Correct! Offence declarations must be signed annually."
+        };
+
+        let score = 0;
+        const form = document.getElementById('quizForm');
+        const resultsDiv = document.getElementById('results');
+        let resultsHTML = "<h2>Your Results</h2>";
+
+        for (let i = 1; i <= 10; i++) {
+            const question = form['q' + i];
+            let userAnswer = "";
+            for (let j = 0; j < question.length; j++) {
+                if (question[j].checked) userAnswer = question[j].value;
+            }
+
+            if (userAnswer === answers['q' + i]) {
+                score++;
+                resultsHTML += `<p class="correct">Question ${i}: Correct!</p>`;
+            } else {
+                resultsHTML += `<p class="incorrect">Question ${i}: Incorrect.</p><p class="feedback">${feedbackText['q' + i]}</p>`;
+            }
+        }
+
+        resultsHTML += `<h3>Total Score: ${score} / 10</h3>`;
+        resultsHTML += `<button onclick="location.reload()">Retry Quiz</button>`;
+        
+        resultsDiv.innerHTML = resultsHTML;
+        resultsDiv.style.display = "block";
+        resultsDiv.style.backgroundColor = score >= 7 ? "#d4edda" : "#f8d7da";
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; color: #333; max-width: 700px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9; }
+        h2 { color: #2c3e50; text-align: center; }
+        .question { margin-bottom: 20px; background: #fff; padding: 15px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .options { list-style: none; padding: 0; }
+        .options li { margin: 10px 0; }
+        button { display: block; width: 100%; padding: 10px; background-color: #27ae60; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; margin-top: 20px; }
+        button:hover { background-color: #219150; }
+        #results { margin-top: 20px; padding: 15px; display: none; border-radius: 5px; }
+        .correct { color: #27ae60; font-weight: bold; }
+        .incorrect { color: #c0392b; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h2>Knowledge Check: Communication</h2>
+    <div id="quiz"></div>
+    <button onclick="submitQuiz()">Submit Answers</button>
+    <div id="results"></div>
+
+    <script>
+        const quizData = [
+            { q: "1. What forms the foundation for quality child care communication?", a: "b", options: { a: "Strict rules and regulations", b: "Mutual respect, support for the child, and confidentiality", c: "Daily written reports only", d: "High-tech communication apps" } },
+            { q: "2. How can job descriptions help create an effective staff team?", a: "b", options: { a: "By limiting staff to only one specific task", b: "By ensuring accountability while allowing for individual initiative", c: "By preventing staff from talking to one another", d: "By replacing the need for staff meetings" } },
+            { q: "3. What is a primary purpose of regular staff meetings?", a: "c", options: { a: "To hand out paychecks", b: "To socialise after hours", c: "To share info, plan for the future, and evaluate past plans", d: "To discipline staff members" } },
+            { q: "4. How should rules be established for children?", a: "c", options: { a: "They should be numerous and complex", b: "They should be set only by the supervisor", c: "They should be few, age-appropriate, and include child input", d: "They should be changed daily" } },
+            { q: "5. What is a recommended way to build a child’s self-esteem?", a: "a", options: { a: "Encouraging them to verbalize their feelings and thoughts", b: "Comparing their progress to others", c: "Correcting every mistake immediately", d: "Keeping them in large groups" } },
+            { q: "6. What is a frequent cause of conflict with parents?", a: "b", options: { a: "The cost of tuition", b: "Lack of regular communication", c: "The center's color scheme", d: "Too many newsletters" } },
+            { q: "7. What should be included in a newsletter to 'humanize' it?", a: "c", options: { a: "The center’s budget", b: "Staff birthdays", c: "Children’s work", d: "Local advertisements" } },
+            { q: "8. When should staff address a behavioral problem with a parent?", a: "c", options: { a: "After a month of observation", b: "Only if the parent asks first", c: "While the issue is still small", d: "At the end of the school year" } },
+            { q: "9. When dealing with an angry parent, what is a productive first step?", a: "b", options: { a: "Explaining why they are wrong", b: "Listening and paraphrasing what they have said", c: "Ignoring the anger", d: "Calling the police" } },
+            { q: "10. Why should staff network with community agencies?", a: "b", options: { a: "To get discounts", b: "To facilitate smooth referrals during a crisis", c: "To outsource teaching", d: "To find new jobs" } }
+        ];
+
+        const quizContainer = document.getElementById('quiz');
+        quizData.forEach((data, index) => {
+            let html = `<div class="question"><p><strong>${data.q}</strong></p><ul class="options">`;
+            for (let letter in data.options) {
+                html += `<li><input type="radio" name="q${index}" value="${letter}"> ${letter.toUpperCase()}) ${data.options[letter]}</li>`;
+            }
+            html += `</ul></div>`;
+            quizContainer.innerHTML += html;
+        });
+
+        function submitQuiz() {
+            let score = 0;
+            quizData.forEach((data, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                if (selected && selected.value === data.a) {
+                    score++;
+                }
+            });
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.style.display = 'block';
+            resultsDiv.innerHTML = `<h3>You scored ${score} out of 10</h3>`;
+            resultsDiv.innerHTML += `<p><strong>Correct Answers:</strong> 1:B, 2:B, 3:C, 4:C, 5:A, 6:B, 7:C, 8:C, 9:B, 10:B</p>`;
+            resultsDiv.style.backgroundColor = score > 7 ? "#d4edda" : "#f8d7da";
+        }
+    </script>
+</body>
+</html>

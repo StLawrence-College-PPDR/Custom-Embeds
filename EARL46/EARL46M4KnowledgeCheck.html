@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Matters Knowledge Check</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 20px auto; padding: 20px; background-color: #f4f4f9; }
+        .quiz-container { background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .question { margin-bottom: 20px; padding: 15px; border-bottom: 1px solid #eee; }
+        .question p { font-weight: bold; margin-bottom: 10px; }
+        .options label { display: block; margin-bottom: 8px; cursor: pointer; }
+        button { background: #3498db; color: #fff; border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 16px; margin-top: 20px; }
+        button:hover { background: #2980b9; }
+        #results { margin-top: 20px; padding: 20px; border-radius: 5px; display: none; }
+        .correct { color: #27ae60; font-weight: bold; }
+        .incorrect { color: #c0392b; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h2>Knowledge Check: Financial Matters</h2>
+    <form id="quizForm">
+        <div class="question">
+            <p>1. What should determine the budgetary priorities of a child care centre?</p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="a"> a) The local market rates</label>
+                <label><input type="radio" name="q1" value="b"> b) The program’s philosophy and goals</label>
+                <label><input type="radio" name="q1" value="c"> c) The previous year’s profit margins</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>2. What is the "simple rule" for successful budgeting?</p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="a"> a) Be conservative with expenses and generous with revenue</label>
+                <label><input type="radio" name="q2" value="b"> b) Be generous when projecting expenses and conservative when projecting revenue</label>
+                <label><input type="radio" name="q2" value="c"> c) Keep expenses and revenue exactly equal</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>3. Which of the following is considered a "Start-Up" budget expense?</p>
+            <div class="options">
+                <label><input type="radio" name="q3" value="a"> a) Name search fees and incorporation expenses</label>
+                <label><input type="radio" name="q3" value="b"> b) Food and supplies for daily preparation</label>
+                <label><input type="radio" name="q3" value="c"> c) Monthly utility bills</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>4. Salaries typically represent what percentage of a child care program's total operating budget?</p>
+            <div class="options">
+                <label><input type="radio" name="q4" value="a"> a) 50-60%</label>
+                <label><input type="radio" name="q4" value="b"> b) 75-85%</label>
+                <label><input type="radio" name="q4" value="c"> c) 90-95%</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>5. Which of the following is listed as a mandatory benefit for staff?</p>
+            <div class="options">
+                <label><input type="radio" name="q5" value="a"> a) Dental plans</label>
+                <label><input type="radio" name="q5" value="b"> b) Employment Insurance (EI) and CPP</label>
+                <label><input type="radio" name="q5" value="c"> c) Pension plans</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>6. How many signing officers should be designated to issue cheques?</p>
+            <div class="options">
+                <label><input type="radio" name="q6" value="a"> a) At least one</label>
+                <label><input type="radio" name="q6" value="b"> b) At least two</label>
+                <label><input type="radio" name="q6" value="c"> c) At least three</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>7. In an annual financial statement, "Accounts Receivable" (Fees Owing) is an:</p>
+            <div class="options">
+                <label><input type="radio" name="q7" value="a"> a) Liability</label>
+                <label><input type="radio" name="q7" value="b"> b) Asset</label>
+                <label><input type="radio" name="q7" value="c"> c) Expense</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>8. What is the standard number of days per year used for calculating fees (5 days/week)?</p>
+            <div class="options">
+                <label><input type="radio" name="q8" value="a"> a) 365</label>
+                <label><input type="radio" name="q8" value="b"> b) 260</label>
+                <label><input type="radio" name="q8" value="c"> c) 300</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>9. What is the first step in determining a daily fee?</p>
+            <div class="options">
+                <label><input type="radio" name="q9" value="a"> a) Estimate revenue from sources other than fees</label>
+                <label><input type="radio" name="q9" value="b"> b) Divide expenses by 365</label>
+                <label><input type="radio" name="q9" value="c"> c) Multiply staff by hours</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>10. Using past budgets helps predict:</p>
+            <div class="options">
+                <label><input type="radio" name="q10" value="a"> a) Future weather patterns</label>
+                <label><input type="radio" name="q10" value="b"> b) Enrollment fluctuations and increasing costs</label>
+                <label><input type="radio" name="q10" value="c"> c) Local government elections</label>
+            </div>
+        </div>
+
+        <button type="button" onclick="checkQuiz()">Submit Answers</button>
+    </form>
+
+    <div id="results"></div>
+</div>
+
+<script>
+    function checkQuiz() {
+        const answers = { q1: "b", q2: "b", q3: "a", q4: "b", q5: "b", q6: "b", q7: "b", q8: "b", q9: "a", q10: "b" };
+        let score = 0;
+        const form = document.getElementById('quizForm');
+        const resultsDiv = document.getElementById('results');
+        
+        for (let key in answers) {
+            const selected = form.querySelector(`input[name="${key}"]:checked`);
+            if (selected && selected.value === answers[key]) {
+                score++;
+            }
+        }
+
+        resultsDiv.style.display = 'block';
+        resultsDiv.innerHTML = `<h3>Your Score: ${score} / 10</h3>`;
+        resultsDiv.innerHTML += `<p><strong>Correct Answers:</strong> 1-b, 2-b, 3-a, 4-b, 5-b, 6-b, 7-b, 8-b, 9-a, 10-b</p>`;
+        resultsDiv.style.background = score >= 7 ? '#d4edda' : '#f8d7da';
+    }
+</script>
+
+</body>
+</html>

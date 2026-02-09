@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Knowledge Check</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 20px auto; padding: 20px; background-color: #f4f7f6; }
+        .quiz-container { background: white; padding: 30 swpx; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 30px; }
+        h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .question { font-weight: bold; margin-top: 25px; margin-bottom: 10px; display: block; }
+        .options { margin-bottom: 20px; }
+        .option { display: block; margin-bottom: 8px; cursor: pointer; }
+        button { background: #3498db; color: white; border: none; padding: 12px 24px; border-radius: 4px; cursor: pointer; font-size: 16px; margin-top: 20px; }
+        button:hover { background: #2980b9; }
+        .result { margin-top: 20px; padding: 15px; border-radius: 4px; display: none; }
+        .correct { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; margin-top: 5px; padding: 5px 10px; font-size: 0.9em; border-radius: 4px; }
+        .wrong { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; margin-top: 5px; padding: 5px 10px; font-size: 0.9em; border-radius: 4px; }
+        #score-display { font-size: 1.2em; font-weight: bold; margin-bottom: 20px; color: #2c3e50; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h2>Knowledge Check: Programming</h2>
+    <div id="quiz-form">
+        <!-- Q1 -->
+        <span class="question">1. Which of the following is NOT a factor that influences programming in a child care centre?</span>
+        <div class="options" data-correct="C">
+            <label class="option"><input type="radio" name="q1" value="A"> The budget</label>
+            <label class="option"><input type="radio" name="q1" value="B"> The physical environment</label>
+            <label class="option"><input type="radio" name="q1" value="C"> The staff’s personal hobbies</label>
+            <label class="option"><input type="radio" name="q1" value="D"> The ages of the children</label>
+        </div>
+
+        <!-- Q2 -->
+        <span class="question">2. In a "Child Centred" program structure, what is the teacher’s role?</span>
+        <div class="options" data-correct="B">
+            <label class="option"><input type="radio" name="q2" value="A"> The teacher implements and the child responds</label>
+            <label class="option"><input type="radio" name="q2" value="B"> The teacher guides while the child implements</label>
+            <label class="option"><input type="radio" name="q2" value="C"> The teacher focuses only on physical safety</label>
+            <label class="option"><input type="radio" name="q2" value="D"> The teacher initiates all activities</label>
+        </div>
+
+        <!-- Q3 -->
+        <span class="question">3. What is the primary purpose of a daily routine?</span>
+        <div class="options" data-correct="B">
+            <label class="option"><input type="radio" name="q3" value="A"> To ensure a rigid schedule that never changes</label>
+            <label class="option"><input type="radio" name="q3" value="B"> To ensure smooth transitions and achieve everyday tasks</label>
+            <label class="option"><input type="radio" name="q3" value="C"> To allow teachers to ignore child interests</label>
+            <label class="option"><input type="radio" name="q3" value="D"> To prioritize academic subjects</label>
+        </div>
+
+        <!-- Q4 -->
+        <span class="question">4. True or False: Routines should be treated as guidelines and allow for flexibility.</span>
+        <div class="options" data-correct="True">
+            <label class="option"><input type="radio" name="q4" value="True"> True</label>
+            <label class="option"><input type="radio" name="q4" value="False"> False</label>
+        </div>
+
+        <!-- Q5 -->
+        <span class="question">5. How much time should be allocated for routines like getting ready for outdoor play or lunch?</span>
+        <div class="options" data-correct="C">
+            <label class="option"><input type="radio" name="q5" value="A"> Less than 5 minutes</label>
+            <label class="option"><input type="radio" name="q5" value="B"> Exactly 10 minutes</label>
+            <label class="option"><input type="radio" name="q5" value="C"> More than 10 minutes</label>
+            <label class="option"><input type="radio" name="q5" value="D"> Rushing is encouraged for efficiency</label>
+        </div>
+
+        <!-- Q6 -->
+        <span class="question">6. Long-term goals are designed to help a centre meet its:</span>
+        <div class="options" data-correct="B">
+            <label class="option"><input type="radio" name="q6" value="A"> Daily snack requirements</label>
+            <label class="option"><input type="radio" name="q6" value="B"> Philosophical ideals and annual routines</label>
+            <label class="option"><input type="radio" name="q6" value="C"> Weekly cleaning schedules</label>
+            <label class="option"><input type="radio" name="q6" value="D"> Building maintenance needs</label>
+        </div>
+
+        <!-- Q7 -->
+        <span class="question">7. Short-term activity planning should be based on:</span>
+        <div class="options" data-correct="C">
+            <label class="option"><input type="radio" name="q7" value="A"> A pre-purchased generic calendar</label>
+            <label class="option"><input type="radio" name="q7" value="B"> The teacher's personal preference</label>
+            <label class="option"><input type="radio" name="q7" value="C"> Observing the children to determine their interests</label>
+            <label class="option"><input type="radio" name="q7" value="D"> The custodial needs only</label>
+        </div>
+
+        <!-- Q8 -->
+        <span class="question">8. Which of these is a component of a high-quality program?</span>
+        <div class="options" data-correct="B">
+            <label class="option"><input type="radio" name="q8" value="A"> High staff turnover</label>
+            <label class="option"><input type="radio" name="q8" value="B"> Staff trained in Early Childhood Education</label>
+            <label class="option"><input type="radio" name="q8" value="C"> Excluding parents from the program</label>
+            <label class="option"><input type="radio" name="q8" value="D"> Focusing only on a single developmental domain</label>
+        </div>
+
+        <!-- Q9 -->
+        <span class="question">9. Which program type is based on the studies of Piaget and features an informal atmosphere?</span>
+        <div class="options" data-correct="C">
+            <label class="option"><input type="radio" name="q9" value="A"> Behaviourist</label>
+            <label class="option"><input type="radio" name="q9" value="B"> Montessori</label>
+            <label class="option"><input type="radio" name="q9" value="C"> Developmental</label>
+            <label class="option"><input type="radio" name="q9" value="D"> Custodial</label>
+        </div>
+
+        <!-- Q10 -->
+        <span class="question">10. A "Custodial Program" places the most emphasis on:</span>
+        <div class="options" data-correct="C">
+            <label class="option"><input type="radio" name="q10" value="A"> Reading and academics</label>
+            <label class="option"><input type="radio" name="q10" value="B"> Intellectual development</label>
+            <label class="option"><input type="radio" name="q10" value="C"> Physical care and safety</label>
+            <label class="option"><input type="radio" name="q10" value="D"> Cultural traditions</label>
+        </div>
+
+        <button onclick="submitQuiz()">Submit Answers</button>
+    </div>
+
+    <div id="results" class="result">
+        <div id="score-display"></div>
+        <p>Review your answers below.</p>
+    </div>
+</div>
+
+<script>
+    function submitQuiz() {
+        const questions = document.querySelectorAll('.options');
+        let score = 0;
+        
+        questions.forEach((q, index) => {
+            const selected = q.querySelector('input:checked');
+            const correct = q.getAttribute('data-correct');
+            const feedback = document.createElement('div');
+            
+            // Remove old feedback if any
+            const oldFeedback = q.querySelector('.feedback');
+            if(oldFeedback) oldFeedback.remove();
+
+            if (selected && selected.value === correct) {
+                score++;
+                feedback.innerHTML = "✓ Correct!";
+                feedback.className = "feedback correct";
+            } else {
+                feedback.innerHTML = "✗ Incorrect. The correct answer was: " + correct;
+                feedback.className = "feedback wrong";
+            }
+            q.appendChild(feedback);
+        });
+
+        const resultsDiv = document.getElementById('results');
+        const scoreDisplay = document.getElementById('score-display');
+        resultsDiv.style.display = 'block';
+        scoreDisplay.innerHTML = "Your Score: " + score + "/10";
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+</script>
+
+</body>
+</html>

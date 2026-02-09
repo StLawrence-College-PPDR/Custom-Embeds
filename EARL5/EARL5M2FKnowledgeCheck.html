@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Check: Violence and Abuse</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f4f7f9;
+        }
+        .quiz-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h2 { margin-top: 0; color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .question { font-weight: bold; margin-bottom: 15px; font-size: 1.1em; }
+        .options { list-style: none; padding: 0; }
+        .option {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option:hover { background: #e9ecef; border-color: #ccc; }
+        .option.correct { background: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .option.incorrect { background: #f8d7da; border-color: #f5c6cb; color: #721c24; }
+        .feedback { margin-top: 15px; font-weight: bold; min-height: 24px; }
+        #next-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: none;
+            margin-top: 10px;
+        }
+        #next-btn:hover { background: #0056b3; }
+        .score-screen { text-align: center; }
+        .progress { font-size: 0.9em; color: #666; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container" id="quiz">
+    <div class="progress" id="progress">Question 1 of 10</div>
+    <div id="quiz-content">
+        <div class="question" id="question">Question text goes here?</div>
+        <div class="options" id="options">
+            <!-- Options will be injected here -->
+        </div>
+        <div class="feedback" id="feedback"></div>
+        <button id="next-btn">Next Question</button>
+    </div>
+</div>
+
+<script>
+    const quizData = [
+        {
+            q: "According to the text, which three groups are the most commonly abused in Canadian society?",
+            options: ["Teenagers, adults, and the elderly", "Children, women, and the elderly", "Men, women, and children", "Infants, toddlers, and teenagers"],
+            correct: 1
+        },
+        {
+            q: "What is one reason mentioned why a person might stay in an abusive relationship?",
+            options: ["Lack of transportation", "Feeling that the abuse is justified", "They enjoy the attention", "They are unaware it is happening"],
+            correct: 1
+        },
+        {
+            q: "Which category of abuse includes the deprivation of basic needs like adequate clothing, shelter, and medical needs?",
+            options: ["Emotional Abuse", "Physical Abuse", "Neglect", "Sexual Abuse"],
+            correct: 2
+        },
+        {
+            q: "True or False: 60% of reported sexual abuse cases are committed by a stranger.",
+            options: ["True", "False"],
+            correct: 1 // Index 1 is False
+        },
+        {
+            q: "Which of the following is listed in the text as a MYTH about sexual abuse?",
+            options: ["1 in 5 girls report a sexual experience with an older person", "Pornography is linked to sexual abuse", "Incest only happens in illiterate, poor minority families", "Serious injury occurs in over 50% of victims"],
+            correct: 2
+        },
+        {
+            q: "In the context of sexual abuse, how is 'interaction' defined?",
+            options: ["Forced physical intercourse", "Sexual invasion that does not involve physical touch", "Touching while clothed", "Roughhousing and games"],
+            correct: 1
+        },
+        {
+            q: "Which of these is considered a physical indication that sexual abuse may be occurring?",
+            options: ["Difficulty walking or sitting", "A 'has to win' attitude", "Persistent hunger", "Unexplained fractures"],
+            correct: 0
+        },
+        {
+            q: "What is typically the first stage in the pattern of abuse described in the text?",
+            options: ["Maintenance through threats", "Utilization of implements", "Development of intimacy and secrecy", "Enjoyment of physical touch"],
+            correct: 2
+        },
+        {
+            q: "Extreme aggressiveness or passivity when playing with other children is a sign of which type of abuse?",
+            options: ["Neglect", "Physical Abuse", "Emotional Abuse", "Interactional Abuse"],
+            correct: 2
+        },
+        {
+            q: "Which sign in a care provider (parent/guardian) may indicate a cause for concern?",
+            options: ["Providing inappropriate food", "Being extremely protective or jealous of the child", "Allowing too much social contact", "Frequent presence in the home"],
+            correct: 1
+        }
+    ];
+
+    let currentIdx = 0;
+    let score = 0;
+    let answered = false;
+
+    const questionEl = document.getElementById('question');
+    const optionsEl = document.getElementById('options');
+    const feedbackEl = document.getElementById('feedback');
+    const nextBtn = document.getElementById('next-btn');
+    const progressEl = document.getElementById('progress');
+
+    function loadQuestion() {
+        answered = false;
+        nextBtn.style.display = 'none';
+        feedbackEl.textContent = '';
+        const currentData = quizData[currentIdx];
+        questionEl.textContent = currentData.q;
+        progressEl.textContent = `Question ${currentIdx + 1} of ${quizData.length}`;
+        
+        optionsEl.innerHTML = '';
+        currentData.options.forEach((opt, i) => {
+            const div = document.createElement('div');
+            div.classList.add('option');
+            div.textContent = opt;
+            div.onclick = () => selectOption(i);
+            optionsEl.appendChild(div);
+        });
+    }
+
+    function selectOption(index) {
+        if (answered) return;
+        answered = true;
+        const correct = quizData[currentIdx].correct;
+        const options = document.querySelectorAll('.option');
+
+        if (index === correct) {
+            score++;
+            options[index].classList.add('correct');
+            feedbackEl.textContent = "Correct!";
+            feedbackEl.style.color = "#155724";
+        } else {
+            options[index].classList.add('incorrect');
+            options[correct].classList.add('correct');
+            feedbackEl.textContent = "Incorrect.";
+            feedbackEl.style.color = "#721c24";
+        }
+        nextBtn.style.display = 'block';
+    }
+
+    nextBtn.onclick = () => {
+        currentIdx++;
+        if (currentIdx < quizData.length) {
+            loadQuestion();
+        } else {
+            showResults();
+        }
+    };
+
+    function showResults() {
+        document.getElementById('quiz-content').innerHTML = `
+            <div class="score-screen">
+                <h3>Quiz Complete!</h3>
+                <p>Your Score: ${score} / ${quizData.length}</p>
+                <button onclick="location.reload()" id="next-btn" style="display:inline-block">Restart Quiz</button>
+            </div>
+        `;
+    }
+
+    loadQuestion();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Environments Knowledge Check</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 700px; margin: 20px auto; padding: 20px; background-color: #f4f7f6; }
+        .quiz-container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .question-block { margin-bottom: 25px; padding: 15px; border-radius: 5px; background: #fff; border: 1px solid #eee; transition: 0.3s; }
+        .options { margin-top: 10px; }
+        .option { display: block; margin-bottom: 8px; padding: 5px; border-radius: 4px; }
+        
+        /* Feedback Styles */
+        .feedback { display: none; margin-top: 10px; padding: 10px; border-radius: 4px; font-size: 0.9em; font-weight: 500; }
+        .correct-choice { background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724; }
+        .incorrect-choice { background-color: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; }
+        
+        button { background-color: #3498db; color: white; border: none; padding: 12px 24px; border-radius: 4px; cursor: pointer; font-size: 16px; width: 100%; }
+        button:hover { background-color: #2980b9; }
+        #final-score { margin-top: 20px; font-weight: bold; padding: 15px; border-radius: 5px; display: none; text-align: center; font-size: 1.2em; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h2>Knowledge Check: Learning Environments</h2>
+    
+    <div id="quiz">
+        <!-- Question 1 -->
+        <div class="question-block" id="q1-block">
+            <p><strong>1. Which strategy involves using index cards to identify values and then sketching how they look in the environment?</strong></p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q1" value="a"> Bring words to life</label>
+                <label class="option"><input type="radio" name="q1" value="b"> Explore values for your environment</label>
+                <label class="option"><input type="radio" name="q1" value="c"> Set goals and address barriers</label>
+            </div>
+            <div class="feedback" id="f1"></div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-block" id="q2-block">
+            <p><strong>2. When teachers feel limited by budgets or rules, the text suggests we should be ________ rather than consumers.</strong></p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q2" value="a"> Decorators</label>
+                <label class="option"><input type="radio" name="q2" value="b"> Critics</label>
+                <label class="option"><input type="radio" name="q2" value="c"> Creators</label>
+            </div>
+            <div class="feedback" id="f2"></div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-block" id="q3-block">
+            <p><strong>3. Which of the following is identified as a value for ADULTS?</strong></p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q3" value="a"> Being intellectually stimulated and engaged</label>
+                <label class="option"><input type="radio" name="q3" value="b"> Providing softness</label>
+                <label class="option"><input type="radio" name="q3" value="c"> Being a steward of the natural world</label>
+            </div>
+            <div class="feedback" id="f3"></div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-block" id="q4-block">
+            <p><strong>4. What is the main reason for the "Eliminate as well as supplement" strategy?</strong></p>
+            <div class="options">
+                <label class="option"><input type="radio" name="q4" value="a"> New furniture is too expensive.</label>
+                <label class="option"><input type="radio" name="q4" value="b"> Clutter may obscure the values you have in mind.</label>
+                <label class="option"><input type="radio" name="q4" value="c"> To make the room easier to clean.</label>
+            </div>
+            <div class="feedback" id="f4"></div>
+        </div>
+
+        <button onclick="checkAnswers()">Submit Answers & Show Results</button>
+    </div>
+
+    <div id="final-score"></div>
+</div>
+
+<script>
+    function checkAnswers() {
+        const answers = {
+            q1: { correct: "b", msg: "Correct! This strategy uses cards to move abstract ideas into practical sketches." },
+            q2: { correct: "c", msg: "Correct! The goal is to be creators of the environment, not just consumers of products." },
+            q3: { correct: "a", msg: "Correct! Intellectual stimulation is an adult value; 'softness' and 'stewardship' were listed for children." },
+            q4: { correct: "b", msg: "Correct! The text emphasizes that clutter can hide your intended environmental message." }
+        };
+
+        let score = 0;
+        let total = 4;
+
+        for (let i = 1; i <= total; i++) {
+            const selected = document.querySelector(`input[name="q${i}"]:checked`);
+            const feedbackDiv = document.getElementById(`f${i}`);
+            const block = document.getElementById(`q${i}-block`);
+            
+            feedbackDiv.style.display = 'block';
+
+            if (selected && selected.value === answers[`q${i}`].correct) {
+                score++;
+                feedbackDiv.className = 'feedback correct-choice';
+                feedbackDiv.innerHTML = "✓ " + answers[`q${i}`].msg;
+            } else {
+                feedbackDiv.className = 'feedback incorrect-choice';
+                const correctLabel = answers[`q${i}`].correct === 'a' ? "the first option" : (answers[`q${i}`].correct === 'b' ? "the second option" : "the third option");
+                feedbackDiv.innerHTML = "✗ Incorrect. The correct answer was " + correctLabel + ".";
+            }
+        }
+
+        const finalScoreDiv = document.getElementById('final-score');
+        finalScoreDiv.style.display = 'block';
+        finalScoreDiv.innerHTML = `You scored ${score} out of ${total}!`;
+        finalScoreDiv.style.backgroundColor = score === total ? "#d4edda" : "#eee";
+    }
+</script>
+
+</body>
+</html>

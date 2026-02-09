@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dramatic Play Knowledge Checker</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f4f7f6;
+        }
+        .quiz-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+        .question p {
+            font-weight: bold;
+            margin-top: 0;
+        }
+        .options {
+            list-style-type: none;
+            padding: 0;
+        }
+        .options li {
+            margin-bottom: 10px;
+        }
+        label {
+            cursor: pointer;
+            display: block;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        label:hover {
+            background-color: #e9ecef;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #results {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            display: none;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .correct {
+            background-color: #d4edda !important;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .incorrect {
+            background-color: #f8d7da !important;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .feedback {
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: none;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>Knowledge Checker: Dramatic Play</h1>
+    <form id="quizForm">
+        
+        <!-- Question 1 -->
+        <div class="question" id="q1">
+            <p>1. Why should you add items like play money, writing materials, or a clock to your dramatic play center?</p>
+            <ul class="options">
+                <li><label><input type="radio" name="q1" value="a"> To keep the children quiet</label></li>
+                <li><label><input type="radio" name="q1" value="b"> To promote literacy and math skills</label></li>
+                <li><label><input type="radio" name="q1" value="c"> To replace the need for toys</label></li>
+            </ul>
+            <div class="feedback">Correct! These items help children learn relevant topics like math and literacy while they role play.</div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question" id="q2">
+            <p>2. Which safety items are specifically recommended for the Carpentry area?</p>
+            <ul class="options">
+                <li><label><input type="radio" name="q2" value="a"> Hard hats and boots</label></li>
+                <li><label><input type="radio" name="q2" value="b"> Gloves and masks</label></li>
+                <li><label><input type="radio" name="q2" value="c"> Aprons and goggles</label></li>
+            </ul>
+            <div class="feedback">Correct! Safety should be emphasized by providing an apron and goggles for each child.</div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question" id="q3">
+            <p>3. What is recommended when selecting dolls for the learning center?</p>
+            <ul class="options">
+                <li><label><input type="radio" name="q3" value="a"> They should all look the same to avoid confusion</label></li>
+                <li><label><input type="radio" name="q3" value="b"> Only provide dolls that represent careers</label></li>
+                <li><label><input type="radio" name="q3" value="c"> Include multicultural dolls and inclusion equipment</label></li>
+            </ul>
+            <div class="feedback">Correct! Multicultural dolls and inclusion equipment are great additions to the area.</div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question" id="q4">
+            <p>4. According to the text, what often makes the "best" pretend food?</p>
+            <ul class="options">
+                <li><label><input type="radio" name="q4" value="a"> Plastic pre-made meals</label></li>
+                <li><label><input type="radio" name="q4" value="b"> Loose parts</label></li>
+                <li><label><input type="radio" name="q4" value="c"> Cardboard boxes</label></li>
+            </ul>
+            <div class="feedback">Correct! The text notes that loose parts often make the best food for imaginative play.</div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question" id="q5">
+            <p>5. What is the primary benefit of Housekeeping Play items like mops and vacuums?</p>
+            <ul class="options">
+                <li><label><input type="radio" name="q5" value="a"> It helps children practice being an adult and encourages cleaning up</label></li>
+                <li><label><input type="radio" name="q5" value="b"> It saves the teacher time on cleaning the classroom</label></li>
+                <li><label><input type="radio" name="q5" value="c"> It is used solely for motor skill development</label></li>
+            </ul>
+            <div class="feedback">Correct! Housekeeping play helps children practice adult roles and encourages them to clean up after themselves.</div>
+        </div>
+
+        <button type="button" onclick="submitQuiz()">Submit Answers</button>
+    </form>
+
+    <div id="results"></div>
+</div>
+
+<script>
+    function submitQuiz() {
+        const answers = {
+            q1: "b",
+            q2: "c",
+            q3: "c",
+            q4: "b",
+            q5: "a"
+        };
+
+        let score = 0;
+        let totalQuestions = 5;
+        const form = document.getElementById('quizForm');
+        const resultsDiv = document.getElementById('results');
+
+        for (let i = 1; i <= totalQuestions; i++) {
+            const questionDiv = document.getElementById('q' + i);
+            const selector = `input[name="q${i}"]:checked`;
+            const userAnswer = (document.querySelector(selector) || {}).value;
+
+            // Reset styles
+            const labels = questionDiv.querySelectorAll('label');
+            labels.forEach(label => label.classList.remove('correct', 'incorrect'));
+            
+            // Show feedback
+            const feedback = questionDiv.querySelector('.feedback');
+            feedback.style.display = 'block';
+
+            if (userAnswer === answers['q' + i]) {
+                score++;
+                // Highlight correct answer
+                const correctInput = questionDiv.querySelector(`input[value="${answers['q' + i]}"]`);
+                correctInput.parentElement.classList.add('correct');
+            } else {
+                // Highlight the user's wrong answer
+                if (userAnswer) {
+                    const wrongInput = questionDiv.querySelector(`input[value="${userAnswer}"]`);
+                    wrongInput.parentElement.classList.add('incorrect');
+                }
+                // Highlight the correct answer anyway
+                const correctInput = questionDiv.querySelector(`input[value="${answers['q' + i]}"]`);
+                correctInput.parentElement.classList.add('correct');
+            }
+        }
+
+        // Display Score
+        resultsDiv.style.display = 'block';
+        resultsDiv.innerHTML = `Your Score: ${score} out of ${totalQuestions}`;
+        resultsDiv.style.backgroundColor = score === totalQuestions ? '#d4edda' : '#fff3cd';
+        
+        // Scroll to results
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        
+        // Disable button after submission
+        document.querySelector('button').disabled = true;
+        document.querySelector('button').innerText = "Quiz Submitted";
+        document.querySelector('button').style.backgroundColor = "#95a5a6";
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<div id="quiz-wrapper" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 650px; margin: 20px auto; padding: 25px; border: 2px solid #e0e0e0; border-radius: 12px; background-color: #ffffff; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    
+    <h2 style="color: #2c3e50; text-align: center; margin-bottom: 5px;">Knowledge Check</h2>
+    <p style="text-align: center; color: #7f8c8d; margin-bottom: 25px;">Stages of Block Play</p>
+
+    <form id="blockQuiz">
+        <!-- Question 1 -->
+        <div class="question-block" style="margin-bottom: 20px; padding: 15px; border-radius: 8px; background-color: #f8f9fa;">
+            <p style="font-weight: 600; color: #34495e;">1. A child is using blocks to build a "garage" for their toy cars. This represents an enclosure for dramatic play. Which stage is this?</p>
+            <label style="display: block; margin: 8px 0; cursor: pointer;"><input type="radio" name="q1" value="Stage 3"> Stage 3: Walls and Bridges</label>
+            <label style="display: block; margin: 8px 0; cursor: pointer;"><input type="radio" name="q1" value="Stage 4"> Stage 4: Enclosures and Patterns</label>
+            <label style="display: block; margin: 8px 0; cursor: pointer;"><input type="radio" name="q1" value="Stage 5"> Stage 5: Representations and Reproducing</label>
+            <div id="feedback-q1" style="display:none; margin-top: 10px; font-size: 0.9em; font-weight: bold;"></div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-block" style="margin-bottom: 20px; padding: 15px; border-radius: 8px; background-color: #f8f9fa;">
+            <p style="font-weight: 600; color: #34495e;">2. Which stage is associated with the "transporting" and "trajectory" schemas?</p>
+            <label style="display: block; margin: 8px 0; cursor: pointer;"><input type="radio" name="q2" value="Stage 1"> Stage 1: Carrying and Stacking</label>
+            <label style="display: block; margin: 8px 0; cursor: pointer;"><input type="radio" name="q2" value="Stage 2"> Stage 2: Rows and Towers</label>
+            <label style="display: block; margin: 8px 0; cursor: pointer;"><input type="radio" name="q2" value="Stage 3"> Stage 3: Walls and Bridges</label>
+            <div id="feedback-q2" style="display:none; margin-top: 10px; font-size: 0.9em; font-weight: bold;"></div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-block" style="margin-bottom: 20px; padding: 15px; border-radius: 8px; background-color: #f8f9fa;">
+            <p style="font-weight: 600; color: #34495e;">3. At Stage 2 (Rows and Towers), children often enjoy:</p>
+            <label style="display: block; margin: 8px 0; cursor: pointer;"><input type="radio" name="q3" value="A"> Building complex representations of their house</label>
+            <label style="display: block; margin: 8px 0; cursor: pointer;"><input type="radio" name="q3" value="B"> Kicking or knocking down their constructions and rebuilding</label>
+            <label style="display: block; margin: 8px 0; cursor: pointer;"><input type="radio" name="q3" value="C"> Adding people and animals to interact with the blocks</label>
+            <div id="feedback-q3" style="display:none; margin-top: 10px; font-size: 0.9em; font-weight: bold;"></div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-block" style="margin-bottom: 20px; padding: 15px; border-radius: 8px; background-color: #f8f9fa;">
+            <p style="font-weight: 600; color: #34495e;">4. True or False: Stage 5 involves children using all previous skills to reproduce real-life structures.</p>
+            <label style="display: block; margin: 8px 0; cursor: pointer;"><input type="radio" name="q4" value="True"> True</label>
+            <label style="display: block; margin: 8px 0; cursor: pointer;"><input type="radio" name="q4" value="False"> False</label>
+            <div id="feedback-q4" style="display:none; margin-top: 10px; font-size: 0.9em; font-weight: bold;"></div>
+        </div>
+
+        <button type="button" onclick="submitQuiz()" style="width: 100%; padding: 12px; background-color: #27ae60; color: white; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.3s;">Submit Answers</button>
+    </form>
+
+    <div id="final-score" style="display:none; text-align: center; margin-top: 20px; padding: 15px; border-top: 2px solid #eee;">
+        <h3 id="score-text" style="color: #2c3e50;"></h3>
+        <button onclick="location.reload()" style="background: none; border: 1px solid #7f8c8d; color: #7f8c8d; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Reset Quiz</button>
+    </div>
+</div>
+
+<script>
+function submitQuiz() {
+    const answers = {
+        q1: "Stage 4",
+        q2: "Stage 1",
+        q3: "B",
+        q4: "True"
+    };
+
+    const feedbackText = {
+        q1: "Correct! Stage 4 is where children create enclosures (like fences/garages) for dramatic play.",
+        q2: "Correct! Stage 1 involves transporting (carrying) and trajectory (stacking).",
+        q3: "Correct! In Stage 2, children enjoy the physical action of knocking down and rebuilding.",
+        q4: "Correct! Stage 5 is the peak where they represent real structures using all learned skills."
+    };
+
+    let score = 0;
+    const form = document.getElementById('blockQuiz');
+    
+    for (let i = 1; i <= 4; i++) {
+        const questionName = 'q' + i;
+        const selected = form[questionName].value;
+        const feedbackDiv = document.getElementById('feedback-' + questionName);
+        
+        feedbackDiv.style.display = "block";
+        
+        if (selected === answers[questionName]) {
+            score++;
+            feedbackDiv.style.color = "#27ae60";
+            feedbackDiv.innerHTML = "✓ " + feedbackText[questionName];
+        } else {
+            feedbackDiv.style.color = "#c0392b";
+            feedbackDiv.innerHTML = "✗ Incorrect. The correct answer was: " + 
+                (i === 3 ? "Kicking/knocking down and rebuilding" : answers[questionName]);
+        }
+    }
+
+    document.getElementById('final-score').style.display = "block";
+    document.getElementById('score-text').innerHTML = "You scored " + score + " out of 4!";
+    window.scrollTo(0, document.body.scrollHeight);
+}
+</script>

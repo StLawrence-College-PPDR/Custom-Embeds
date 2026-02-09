@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math & Science Knowledge Checker</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 20px auto; padding: 20px; background-color: #f4f7f6; }
+        .quiz-container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .question { margin-bottom: 25px; padding: 15px; border-left: 5px solid #3498db; background: #fafafa; }
+        .options { margin-top: 10px; }
+        label { display: block; margin-bottom: 8px; cursor: pointer; }
+        button { background: #3498db; color: white; border: none; padding: 12px 24px; border-radius: 4px; cursor: pointer; font-size: 16px; margin-top: 20px; }
+        button:hover { background: #2980b9; }
+        #results { margin-top: 20px; padding: 20px; display: none; border-radius: 4px; }
+        .correct { color: #27ae60; font-weight: bold; }
+        .incorrect { color: #e74c3c; font-weight: bold; }
+        .feedback { font-size: 0.9em; margin-top: 5px; color: #666; font-style: italic; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>Knowledge Checker: Math, Science & Manipulatives</h1>
+    <form id="quizForm">
+        
+        <!-- Question 1 -->
+        <div class="question">
+            <p>1. Why is it often difficult to distinguish between a young child's mathematical reasoning and scientific reasoning?</p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="a"> Children are not yet interested in these subjects.</label>
+                <label><input type="radio" name="q1" value="b"> Young children's thinking is not yet differentiated into specific academic subjects.</label>
+                <label><input type="radio" name="q1" value="c"> The concepts are identical in every way.</label>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question">
+            <p>2. Where should math and science experiences take place for young learners?</p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="a"> Only in a designated indoor lab area.</label>
+                <label><input type="radio" name="q2" value="b"> Only during outdoor playtime.</label>
+                <label><input type="radio" name="q2" value="c"> Both indoors and outdoors.</label>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question">
+            <p>3. According to the text, which of these materials should be <strong>avoided</strong> for young children?</p>
+            <div class="options">
+                <label><input type="radio" name="q3" value="a"> Specific 'academic-type' puzzles and worksheets.</label>
+                <label><input type="radio" name="q3" value="b"> Natural materials and loose parts.</label>
+                <label><input type="radio" name="q3" value="c"> Sorting trays and bins with labels.</label>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question">
+            <p>4. Learning about time and seasonal changes helps children develop skills in which area?</p>
+            <div class="options">
+                <label><input type="radio" name="q4" value="a"> Fine motor control.</label>
+                <label><input type="radio" name="q4" value="b"> Math and science knowledge.</label>
+                <label><input type="radio" name="q4" value="c"> Alphabet recognition.</label>
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question">
+            <p>5. What is the ultimate goal of early childhood educators when providing math and science resources?</p>
+            <div class="options">
+                <label><input type="radio" name="q5" value="a"> To ensure children can pass standardized tests.</label>
+                <label><input type="radio" name="q5" value="b"> To build a foundation of joy for learning.</label>
+                <label><input type="radio" name="q5" value="c"> To memorize math vocabulary quickly.</label>
+            </div>
+        </div>
+
+        <button type="button" onclick="checkAnswers()">Submit Answers</button>
+    </form>
+
+    <div id="results"></div>
+</div>
+
+<script>
+    function checkAnswers() {
+        const answers = {
+            q1: "b",
+            q2: "c",
+            q3: "a",
+            q4: "b",
+            q5: "b"
+        };
+
+        const feedback = {
+            q1: "Correct! Miyakawa (2005) notes that children's thinking isn't yet separated into distinct subjects.",
+            q2: "Correct! Exploration and learning are essential in both environments.",
+            q3: "Correct! The text advises focusing on play and exploration rather than 'academic-type' worksheets.",
+            q4: "Correct! Time and seasons are listed as essential opportunities for math/science development.",
+            q5: "Correct! The goal is to build a foundation of joy for learning."
+        };
+
+        let score = 0;
+        let total = 5;
+        let resultHTML = "<h2>Your Results</h2>";
+
+        for (let i = 1; i <= total; i++) {
+            const selected = document.querySelector(`input[name="q${i}"]:checked`);
+            if (selected && selected.value === answers[`q${i}`]) {
+                score++;
+                resultHTML += `<p class="correct">Question ${i}: Correct!</p>`;
+            } else {
+                resultHTML += `<p class="incorrect">Question ${i}: Incorrect.</p>`;
+            }
+            resultHTML += `<p class="feedback">${feedback[`q${i}`]}</p><hr>`;
+        }
+
+        const resultDiv = document.getElementById('results');
+        resultDiv.style.display = 'block';
+        resultDiv.innerHTML = `<h3>You scored ${score} out of ${total}</h3>` + resultHTML;
+        resultDiv.style.background = score === total ? "#eafff2" : "#fff0f0";
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+</script>
+
+</body>
+</html>

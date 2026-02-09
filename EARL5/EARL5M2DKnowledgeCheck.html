@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .quiz-container { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 700px; margin: 20px auto; padding: 25px; border: 1px solid #e0e0e0; border-radius: 12px; background-color: #ffffff; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .question { font-weight: 600; margin-bottom: 12px; color: #2c3e50; }
+        .option-label { display: block; padding: 10px; margin: 5px 0; border: 1px solid #ecf0f1; border-radius: 6px; cursor: pointer; transition: background 0.2s; }
+        .option-label:hover { background-color: #f8f9fa; }
+        .correct-bg { background-color: #d4edda !important; border-color: #c3e6cb !important; font-weight: bold; }
+        .incorrect-bg { background-color: #f8d7da !important; border-color: #f5c6cb !important; }
+        .feedback { font-size: 0.9em; margin-top: 4px; display: none; font-weight: bold; }
+        button { background-color: #3498db; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-size: 16px; margin-top: 20px; width: 100%; }
+        button:hover { background-color: #2980b9; }
+        #score-display { display: none; margin-top: 20px; padding: 15px; text-align: center; font-size: 1.2em; font-weight: bold; border-radius: 6px; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container" id="quiz">
+    <h2>Knowledge Check: Families With Special Needs</h2>
+    <div id="questions-area"></div>
+    <button id="submit-btn" onclick="checkAnswers()">Submit and Show Answers</button>
+    <div id="score-display"></div>
+</div>
+
+<script>
+    const quizData = [
+        { q: "Which term is listed in the text as a synonym for 'special needs'?", a: 1, options: ["Average", "Exceptional", "Predictable", "Homogeneous"] },
+        { q: "According to Winzer (1993), what is required in a family when a child has a disability?", a: 2, options: ["Isolation from the community", "No change to previous family roles", "Modification in family structure and roles", "Reliance on medical professionals only"] },
+        { q: "The text classifies Autism under which category?", a: 2, options: ["Physical handicaps", "Emotional handicaps", "Developmental handicaps", "Chronic illnesses"] },
+        { q: "According to the text, parents of children with special needs are:", a: 2, options: ["Fundamentally different from other parents", "Less capable of loving their children", "More like other parents than they are different", "Immune to common parenting stresses"] },
+        { q: "When a special need is first recognized, many parents grieve for:", a: 1, options: ["The financial cost", "The lost expectations for the child", "Their lost social status", "The loss of their own hobbies"] },
+        { q: "Which of the following is listed as an initial reaction to discovery?", a: 1, options: ["Refashioning expectations", "Inappropriate guilt and projection of blame", "Maximizing the child's potential", "Interaction with others"] },
+        { q: "'Doctor shopping' is categorized by the text as what type of reaction?", a: 1, options: ["Adaptive", "Maladaptive", "Professional", "Helpful"] },
+        { q: "When a parent has a disability, children may:", a: 1, options: ["Be unable to learn responsibility", "Assume more responsibility/assist in chores at a younger age", "Require professional homecare for themselves", "Be excluded from family roles"] },
+        { q: "Often, the problems resulting from a special need have more to do with _______ than the actual handicap.", a: 2, options: ["Family genetics", "Financial income", "The attitudes of society", "Geography"] },
+        { q: "Which is an example of a stereotype mentioned in the text?", a: 0, options: ["'People with Down’s Syndrome are always so happy'", "'Children with special needs are more like other children'", "'Parenting is a difficult job for everyone'", "'Grieving is a natural process'"] }
+    ];
+
+    const questionsArea = document.getElementById('questions-area');
+
+    quizData.forEach((data, i) => {
+        let optionsHtml = data.options.map((opt, j) => `
+            <label class="option-label" id="label-${i}-${j}">
+                <input type="radio" name="q${i}" value="${j}"> ${opt}
+                <span class="feedback" id="feedback-${i}-${j}"></span>
+            </label>
+        `).join('');
+        
+        questionsArea.innerHTML += `
+            <div style="margin-bottom: 25px;">
+                <p class="question">${i + 1}. ${data.q}</p>
+                ${optionsHtml}
+            </div>
+        `;
+    });
+
+    function checkAnswers() {
+        let score = 0;
+        quizData.forEach((data, i) => {
+            const selected = document.querySelector(`input[name="q${i}"]:checked`);
+            const correctIndex = data.a;
+            
+            // Highlight correct answer
+            document.getElementById(`label-${i}-${correctIndex}`).classList.add('correct-bg');
+            document.getElementById(`feedback-${i}-${correctIndex}`).innerText = " (Correct Answer)";
+            document.getElementById(`feedback-${i}-${correctIndex}`).style.display = "inline";
+
+            if (selected) {
+                const userChoice = parseInt(selected.value);
+                if (userChoice === correctIndex) {
+                    score++;
+                } else {
+                    // Highlight incorrect choice
+                    document.getElementById(`label-${i}-${userChoice}`).classList.add('incorrect-bg');
+                    document.getElementById(`feedback-${i}-${userChoice}`).innerText = " (Your Choice)";
+                    document.getElementById(`feedback-${i}-${userChoice}`).style.display = "inline";
+                }
+            }
+        });
+
+        // Show Score
+        const scoreDisplay = document.getElementById('score-display');
+        scoreDisplay.style.display = 'block';
+        scoreDisplay.innerHTML = `You scored ${score} / ${quizData.length}`;
+        scoreDisplay.style.backgroundColor = score > 7 ? '#d4edda' : '#fff3cd';
+        
+        // Disable button
+        document.getElementById('submit-btn').disabled = true;
+        document.getElementById('submit-btn').innerText = "Quiz Submitted";
+        document.getElementById('submit-btn').style.backgroundColor = "#95a5a6";
+    }
+</script>
+
+</body>
+</html>

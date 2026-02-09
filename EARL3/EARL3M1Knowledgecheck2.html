@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 20px auto; padding: 20px; background-color: #f4f7f6; }
+        .quiz-container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; margin-top: 0; }
+        .question-block { margin-bottom: 25px; padding: 15px; border-radius: 8px; background: #fff; border: 1px solid #eee; }
+        .options { margin-top: 10px; }
+        .option-label { display: block; padding: 10px; margin: 5px 0; border-radius: 5px; cursor: pointer; border: 1px solid #ddd; transition: 0.2s; }
+        .option-label:hover { background-color: #f0f7ff; }
+        input[type="radio"] { margin-right: 10px; }
+        
+        /* Result Styles */
+        .correct-choice { background-color: #d4edda !important; border-color: #28a745 !important; font-weight: bold; }
+        .incorrect-choice { background-color: #f8d7da !important; border-color: #dc3545 !important; text-decoration: line-through; }
+        .feedback-text { display: none; margin-top: 10px; font-size: 0.95em; padding: 8px; border-radius: 4px; background: #eef2f3; color: #555; border-left: 4px solid #3498db; }
+        
+        button { background: #3498db; color: white; border: none; padding: 12px 24px; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold; width: 100%; margin-top: 10px; }
+        button:hover { background: #2980b9; }
+        #score-display { margin-top: 20px; font-size: 1.2em; font-weight: bold; text-align: center; display: none; padding: 15px; border-radius: 8px; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h2>Knowledge Check: Aesthetic Principles</h2>
+
+    <form id="quizForm">
+        <!-- Q1 -->
+        <div class="question-block" id="q1-block">
+            <p><strong>1. Which principle suggests using a neutral background with a few well-chosen accent colours to avoid over-stimulation?</strong></p>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="q1" value="Nature"> Nature Inspires Beauty</label>
+                <label class="option-label" id="q1-correct"><input type="radio" name="q1" value="Colour"> Colour Generates Interest</label>
+                <label class="option-label"><input type="radio" name="q1" value="Ambiance"> Elements Heighten Ambiance</label>
+            </div>
+            <div class="feedback-text"><strong>Correct Answer: Colour Generates Interest.</strong> Proper use of colour creates mood without being overpowering.</div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="question-block" id="q2-block">
+            <p><strong>2. By eliminating clutter and highlighting children’s work, the classroom becomes a backdrop to honour all who occupy the space. This is:</strong></p>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="q2" value="Furnishings"> Furnishings Define Space</label>
+                <label class="option-label" id="q2-correct"><input type="radio" name="q2" value="Displays"> Displays Enhance Environment</label>
+                <label class="option-label"><input type="radio" name="q2" value="Focal"> Focal Points Attract Attention</label>
+            </div>
+            <div class="feedback-text"><strong>Correct Answer: Displays Enhance Environment.</strong> This principle focuses on arranging storage and highlighting work to reduce clutter.</div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="question-block" id="q3-block">
+            <p><strong>3. "Multiple sources of light create an ambiance of relaxation and contemplation." This refers to:</strong></p>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="q3" value="Texture"> Texture Adds Depth</label>
+                <label class="option-label" id="q3-correct"><input type="radio" name="q3" value="Elements"> Elements Heighten Ambiance</label>
+                <label class="option-label"><input type="radio" name="q3" value="Nature"> Nature Inspires Beauty</label>
+            </div>
+            <div class="feedback-text"><strong>Correct Answer: Elements Heighten Ambiance.</strong> Supportive lighting allows children to interact creatively and calmly.</div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="question-block" id="q4-block">
+            <p><strong>4. The environment is often called the "3rd Teacher." This concept is a hallmark of which philosophy?</strong></p>
+            <div class="options">
+                <label class="option-label" id="q4-correct"><input type="radio" name="q4" value="Reggio"> Reggio Emilia</label>
+                <label class="option-label"><input type="radio" name="q4" value="Montessori"> Montessori</label>
+                <label class="option-label"><input type="radio" name="q4" value="Waldorf"> Waldorf</label>
+            </div>
+            <div class="feedback-text"><strong>Correct Answer: Reggio Emilia.</strong> This Italian town's philosophy heavily influenced the "How Does Learning Happen?" document.</div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="question-block" id="q5-block">
+            <p><strong>5. True or False: Aesthetic principles are the "bones" or structural foundation of a space.</strong></p>
+            <div class="options">
+                <label class="option-label"><input type="radio" name="q5" value="True"> True</label>
+                <label class="option-label" id="q5-correct"><input type="radio" name="q5" value="False"> False</label>
+            </div>
+            <div class="feedback-text"><strong>Correct Answer: False.</strong> The "bones" are the foundation set first; aesthetic principles are the "less tangible" elements like feel, smell, and sound.</div>
+        </div>
+
+        <button type="button" id="submitBtn" onclick="checkAnswers()">Submit Answers & Show Correct Keys</button>
+    </form>
+
+    <div id="score-display"></div>
+</div>
+
+<script>
+    function checkAnswers() {
+        const questions = [
+            { id: 'q1', correctId: 'q1-correct' },
+            { id: 'q2', correctId: 'q2-correct' },
+            { id: 'q3', correctId: 'q3-correct' },
+            { id: 'q4', correctId: 'q4-correct' },
+            { id: 'q5', correctId: 'q5-correct' }
+        ];
+
+        let score = 0;
+
+        questions.forEach((q) => {
+            const options = document.getElementsByName(q.id);
+            let userSelected = null;
+
+            // Highlight the correct answer label in green
+            document.getElementById(q.correctId).classList.add('correct-choice');
+
+            // Find what the user selected
+            for (let option of options) {
+                option.disabled = true; // Disable further clicking
+                if (option.checked) {
+                    userSelected = option;
+                    const parentLabel = option.parentElement;
+                    
+                    if (parentLabel.id === q.correctId) {
+                        score++;
+                    } else {
+                        // Highlight the user's wrong choice in red
+                        parentLabel.classList.add('incorrect-choice');
+                    }
+                }
+            }
+        });
+
+        // Show all feedback text boxes
+        const feedbacks = document.querySelectorAll('.feedback-text');
+        feedbacks.forEach(f => f.style.display = 'block');
+
+        // Display Score
+        const scoreDiv = document.getElementById('score-display');
+        scoreDiv.style.display = 'block';
+        scoreDiv.innerHTML = "Final Score: " + score + " / " + questions.length;
+        
+        if (score === questions.length) {
+            scoreDiv.style.backgroundColor = "#d4edda";
+            scoreDiv.style.color = "#155724";
+        } else {
+            scoreDiv.style.backgroundColor = "#fff3cd";
+            scoreDiv.style.color = "#856404";
+        }
+
+        // Hide submit button after click
+        document.getElementById('submitBtn').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>

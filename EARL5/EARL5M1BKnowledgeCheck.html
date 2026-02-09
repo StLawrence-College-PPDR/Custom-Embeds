@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Check: Models for Understanding Families</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 20px auto; padding: 20px; background-color: #f4f7f6; }
+        .quiz-container { background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .question-block { margin-bottom: 25px; padding: 15px; border-radius: 5px; border: 1px solid #eee; }
+        .question-text { font-weight: bold; margin-bottom: 10px; display: block; }
+        .option { display: block; margin-bottom: 8px; cursor: pointer; padding: 5px; border-radius: 4px; }
+        .option:hover { background-color: #f0f0f0; }
+        .feedback { display: none; margin-top: 10px; padding: 10px; border-radius: 4px; font-weight: bold; font-size: 0.9em; }
+        .correct-ans { color: #155724; background-color: #d4edda; border: 1px solid #c3e6cb; }
+        .wrong-ans { color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb; }
+        button { background-color: #3498db; color: white; padding: 12px 25px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: background 0.3s; }
+        button:hover { background-color: #2980b9; }
+        #final-score { margin-top: 20px; font-size: 1.2em; font-weight: bold; display: none; padding: 15px; background: #2c3e50; color: #fff; border-radius: 5px; text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h2>Knowledge Check: Models for Understanding Families</h2>
+    <form id="quizForm">
+        
+        <!-- Question 1 -->
+        <div class="question-block" id="q1-block">
+            <span class="question-text">1. What is the primary purpose of a "conceptual framework" in the context of family systems?</span>
+            <label class="option"><input type="radio" name="q1" value="wrong"> To fix family problems immediately</label>
+            <label class="option"><input type="radio" name="q1" value="correct"> To organize factors and thoughts around how a family functions</label>
+            <label class="option"><input type="radio" name="q1" value="wrong"> To determine which families are better than others</label>
+            <div class="feedback" id="f1">Correct Answer: To organize factors and thoughts around how a family functions</div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-block" id="q2-block">
+            <span class="question-text">2. Which family form includes stepparents, step-siblings, or half-siblings?</span>
+            <label class="option"><input type="radio" name="q2" value="wrong"> Extended family</label>
+            <label class="option"><input type="radio" name="q2" value="wrong"> Group home</label>
+            <label class="option"><input type="radio" name="q2" value="correct"> Blended family</label>
+            <div class="feedback" id="f2">Correct Answer: Blended family</div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-block" id="q3-block">
+            <span class="question-text">3. Socioeconomic Status (SES) is primarily determined by which three factors?</span>
+            <label class="option"><input type="radio" name="q3" value="correct"> Income, educational level, and occupations</label>
+            <label class="option"><input type="radio" name="q3" value="wrong"> Family size, location, and religion</label>
+            <label class="option"><input type="radio" name="q3" value="wrong"> Communication style, age, and health</label>
+            <div class="feedback" id="f3">Correct Answer: Income, educational level, and occupations</div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-block" id="q4-block">
+            <span class="question-text">4. A parent loses their job but chooses to see it as an opportunity to return to school. This is an example of:</span>
+            <label class="option"><input type="radio" name="q4" value="wrong"> Passive appraisal</label>
+            <label class="option"><input type="radio" name="q4" value="wrong"> Professional support</label>
+            <label class="option"><input type="radio" name="q4" value="correct"> Reframing</label>
+            <div class="feedback" id="f4">Correct Answer: Reframing</div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question-block" id="q5-block">
+            <span class="question-text">5. Which family subsystem focuses specifically on parent and child interactions?</span>
+            <label class="option"><input type="radio" name="q5" value="wrong"> Marital subsystem</label>
+            <label class="option"><input type="radio" name="q5" value="correct"> Parental subsystem</label>
+            <label class="option"><input type="radio" name="q5" value="wrong"> Extended family subsystem</label>
+            <div class="feedback" id="f5">Correct Answer: Parental subsystem</div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question-block" id="q6-block">
+            <span class="question-text">6. A child who is overprotected and has no emotional or physical privacy likely comes from a family experiencing:</span>
+            <label class="option"><input type="radio" name="q6" value="correct"> Enmeshment</label>
+            <label class="option"><input type="radio" name="q6" value="wrong"> Disengagement</label>
+            <label class="option"><input type="radio" name="q6" value="wrong"> Rigidity</label>
+            <div class="feedback" id="f6">Correct Answer: Enmeshment</div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question-block" id="q7-block">
+            <span class="question-text">7. In a family where roles are strictly defined and rules are unchangeable, the adaptability style is:</span>
+            <label class="option"><input type="radio" name="q7" value="correct"> Rigid</label>
+            <label class="option"><input type="radio" name="q7" value="wrong"> Chaotic</label>
+            <label class="option"><input type="radio" name="q7" value="wrong"> Disengaged</label>
+            <div class="feedback" id="f7">Correct Answer: Rigid</div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question-block" id="q8-block">
+            <span class="question-text">8. In Bronfenbrenner's Ecological Approach, the interactions *between* microsystems (like home and school) is called the:</span>
+            <label class="option"><input type="radio" name="q8" value="wrong"> Exosystem</label>
+            <label class="option"><input type="radio" name="q8" value="correct"> Mesosystem</label>
+            <label class="option"><input type="radio" name="q8" value="wrong"> Macrosystem</label>
+            <div class="feedback" id="f8">Correct Answer: Mesosystem</div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question-block" id="q9-block">
+            <span class="question-text">9. A government decision that affects a child's school program (even if the child never meets the government officials) is part of the:</span>
+            <label class="option"><input type="radio" name="q9" value="correct"> Exosystem</label>
+            <label class="option"><input type="radio" name="q9" value="wrong"> Microsystem</label>
+            <label class="option"><input type="radio" name="q9" value="wrong"> Parental subsystem</label>
+            <div class="feedback" id="f9">Correct Answer: Exosystem</div>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question-block" id="q10-block">
+            <span class="question-text">10. What is the recommended strategy for communicating with a family that has a "Chaotic" operating style?</span>
+            <label class="option"><input type="radio" name="q10" value="wrong"> Communicate only with the father</label>
+            <label class="option"><input type="radio" name="q10" value="correct"> Communicate clearly with each member (child and adult) verbally and in writing</label>
+            <label class="option"><input type="radio" name="q10" value="wrong"> Avoid sharing information so as not to add to the confusion</label>
+            <div class="feedback" id="f10">Correct Answer: Communicate clearly with each member (child and adult) verbally and in writing</div>
+        </div>
+
+        <button type="button" onclick="submitQuiz()">Submit Answers</button>
+    </form>
+
+    <div id="final-score"></div>
+</div>
+
+<script>
+    function submitQuiz() {
+        const form = document.getElementById('quizForm');
+        const questions = 10;
+        let score = 0;
+
+        for (let i = 1; i <= questions; i++) {
+            const selected = document.querySelector(`input[name="q${i}"]:checked`);
+            const feedback = document.getElementById(`f${i}`);
+            const block = document.getElementById(`q${i}-block`);
+            
+            feedback.style.display = 'block';
+            
+            if (selected && selected.value === "correct") {
+                score++;
+                feedback.className = "feedback correct-ans";
+                block.style.borderColor = "#2ecc71";
+            } else {
+                feedback.className = "feedback wrong-ans";
+                block.style.borderColor = "#e74c3c";
+            }
+        }
+
+        const resultDisplay = document.getElementById('final-score');
+        resultDisplay.style.display = 'block';
+        resultDisplay.innerHTML = `You scored ${score} out of ${questions}! Review the correct answers above.`;
+        window.scrollTo(0, document.body.scrollHeight);
+        
+        // Disable buttons after submission
+        const inputs = document.querySelectorAll('input[type="radio"]');
+        inputs.forEach(input => input.disabled = true);
+    }
+</script>
+
+</body>
+</html>

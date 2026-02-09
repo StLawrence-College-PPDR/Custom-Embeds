@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Check: Dissolution of Marriage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f4f7f6;
+        }
+        .quiz-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-left: 5px solid #3498db;
+            background: #fafafa;
+        }
+        .question p {
+            font-weight: bold;
+            margin-top: 0;
+        }
+        .options label {
+            display: block;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #results {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            display: none;
+        }
+        .correct-feedback {
+            color: #27ae60;
+            font-weight: bold;
+            margin-top: 10px;
+            display: none;
+        }
+        .score-display {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>Knowledge Check: Dissolution of Marriage</h1>
+    <form id="quizForm">
+        
+        <!-- Question 1 -->
+        <div class="question">
+            <p>1. Which of the following is a reason for a court to grant an Annulment based on situations existing before the marriage?</p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="a"> Adultery</label>
+                <label><input type="radio" name="q1" value="b"> A prohibited blood tie (e.g., brother and sister)</label>
+                <label><input type="radio" name="q1" value="c"> Excessive commitment to career</label>
+            </div>
+            <div class="correct-feedback" id="ans1">Correct Answer: A prohibited blood tie (e.g., brother and sister).</div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question">
+            <p>2. In terms of physical ability, which of the following is a valid reason for annulment?</p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="a"> Impotence</label>
+                <label><input type="radio" name="q2" value="b"> Sterility</label>
+                <label><input type="radio" name="q2" value="c"> Choosing not to have children</label>
+            </div>
+            <div class="correct-feedback" id="ans2">Correct Answer: Impotence.</div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question">
+            <p>3. What is meant by "marriage under duress"?</p>
+            <div class="options">
+                <label><input type="radio" name="q3" value="a"> Marriage for financial gain</label>
+                <label><input type="radio" name="q3" value="b"> Marriage where one party felt forced against their will</label>
+                <label><input type="radio" name="q3" value="c"> Marriage between people of different religions</label>
+            </div>
+            <div class="correct-feedback" id="ans3">Correct Answer: Marriage where one party felt forced against their will.</div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question">
+            <p>4. Which term has been referred to as the "poor man's divorce"?</p>
+            <div class="options">
+                <label><input type="radio" name="q4" value="a"> Separation</label>
+                <label><input type="radio" name="q4" value="b"> Annulment</label>
+                <label><input type="radio" name="q4" value="c"> Desertion</label>
+            </div>
+            <div class="correct-feedback" id="ans4">Correct Answer: Desertion.</div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question">
+            <p>5. What is the main characteristic of "Separation"?</p>
+            <div class="options">
+                <label><input type="radio" name="q5" value="a"> The marriage is declared legally invalid</label>
+                <label><input type="radio" name="q5" value="b"> The couple is legally married but does not cohabit</label>
+                <label><input type="radio" name="q5" value="c"> One partner leaves without justification or notice</label>
+            </div>
+            <div class="correct-feedback" id="ans5">Correct Answer: The couple is legally married but does not cohabit.</div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question">
+            <p>6. According to the text, "Individualism and hedonism" are classified as what type of reasons for divorce?</p>
+            <div class="options">
+                <label><input type="radio" name="q6" value="a"> Personal reasons</label>
+                <label><input type="radio" name="q6" value="b"> Physical reasons</label>
+                <label><input type="radio" name="q6" value="c"> Societal reasons</label>
+            </div>
+            <div class="correct-feedback" id="ans6">Correct Answer: Societal reasons.</div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question">
+            <p>7. Which of the following is listed as a PERSONAL reason for divorce?</p>
+            <div class="options">
+                <label><input type="radio" name="q7" value="a"> Liberalization of divorce laws</label>
+                <label><input type="radio" name="q7" value="b"> Emotional immaturity and emotional problems</label>
+                <label><input type="radio" name="q7" value="c"> Increasing emancipation of women</label>
+            </div>
+            <div class="correct-feedback" id="ans7">Correct Answer: Emotional immaturity and emotional problems.</div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question">
+            <p>8. How does the text describe "patriarchal expectations" in the context of divorce?</p>
+            <div class="options">
+                <label><input type="radio" name="q8" value="a"> The man should be the head of household and hold economic power</label>
+                <label><input type="radio" name="q8" value="b"> Both partners share decision-making equally</label>
+                <label><input type="radio" name="q8" value="c"> Expectations that children will live with the mother</label>
+            </div>
+            <div class="correct-feedback" id="ans8">Correct Answer: The man should be the head of household and hold economic power.</div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question">
+            <p>9. According to the Vanier Institute of the Family (2011), what has happened to the divorce rate in Canada since the 1990s?</p>
+            <div class="options">
+                <label><input type="radio" name="q9" value="a"> It has continued to rise sharply</label>
+                <label><input type="radio" name="q9" value="b"> It has stabilized</label>
+                <label><input type="radio" name="q9" value="c"> It has dropped to near zero</label>
+            </div>
+            <div class="correct-feedback" id="ans9">Correct Answer: It has stabilized.</div>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question">
+            <p>10. Why is annulment considered uncommon today?</p>
+            <div class="options">
+                <label><input type="radio" name="q10" value="a"> It is now illegal in Canada</label>
+                <label><input type="radio" name="q10" value="b"> Because divorce is easier and simpler to obtain</label>
+                <label><input type="radio" name="q10" value="c"> Because most people do not know what it is</label>
+            </div>
+            <div class="correct-feedback" id="ans10">Correct Answer: Because divorce is easier and simpler to obtain.</div>
+        </div>
+
+        <button type="button" onclick="checkAnswers()">Submit Answers</button>
+    </form>
+
+    <div id="results">
+        <div class="score-display" id="scoreText"></div>
+        <p>Review the correct answers highlighted in green above.</p>
+        <button type="button" onclick="location.reload()">Reset Quiz</button>
+    </div>
+</div>
+
+<script>
+    function checkAnswers() {
+        const answers = {
+            q1: "b",
+            q2: "a",
+            q3: "b",
+            q4: "c",
+            q5: "b",
+            q6: "c",
+            q7: "b",
+            q8: "a",
+            q9: "b",
+            q10: "b"
+        };
+
+        let score = 0;
+        const form = document.getElementById('quizForm');
+        const formData = new FormData(form);
+
+        for (let [question, correctAnswer] of Object.entries(answers)) {
+            const userAnswer = formData.get(question);
+            if (userAnswer === correctAnswer) {
+                score++;
+            }
+            // Show all correct answers
+            document.getElementById('ans' + question.substring(1)).style.display = 'block';
+        }
+
+        // Display results summary
+        const resultsDiv = document.getElementById('results');
+        const scoreText = document.getElementById('scoreText');
+        resultsDiv.style.display = 'block';
+        resultsDiv.style.backgroundColor = score >= 7 ? '#d4edda' : '#f8d7da';
+        scoreText.innerHTML = `You scored ${score} out of 10!`;
+        
+        // Scroll to results
+        resultsDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>

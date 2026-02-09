@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Zone Knowledge Checker</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; padding: 20px; line-height: 1.6; }
+        .quiz-container { max-width: 700px; margin: auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .question-block { margin-bottom: 25px; padding: 15px; border-radius: 8px; border: 1px solid #eee; }
+        .question-text { font-weight: 600; margin-bottom: 10px; display: block; }
+        .option { display: block; margin-bottom: 8px; cursor: pointer; padding: 8px; border-radius: 4px; transition: 0.2s; }
+        .option:hover { background-color: #f8f9fa; }
+        input[type="radio"] { margin-right: 10px; }
+        button { background-color: #3498db; color: white; border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 16px; width: 100%; transition: background 0.3s; }
+        button:hover { background-color: #2980b9; }
+        #results { margin-top: 20px; padding: 20px; border-radius: 8px; display: none; }
+        .correct-feedback { color: #27ae60; font-size: 0.9em; font-weight: bold; margin-top: 5px; display: none; }
+        .wrong-answer { background-color: #fdeaea; border: 1px solid #f5b7b1; }
+        .right-answer { background-color: #eafaf1; border: 1px solid #abebc6; }
+        .score-display { font-size: 1.2em; text-align: center; font-weight: bold; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h2>Knowledge Checker: Art & Sensory Zones</h2>
+    <div id="quiz-form">
+        
+        <!-- Q1 -->
+        <div class="question-block" id="q1-block">
+            <span class="question-text">1. How do children primarily benefit from a rich variety of art materials?</span>
+            <label class="option"><input type="radio" name="q1" value="a"> It keeps the classroom quiet.</label>
+            <label class="option"><input type="radio" name="q1" value="b"> It helps them work through emotions and communicate.</label>
+            <label class="option"><input type="radio" name="q1" value="c"> It prepares them specifically for handwriting.</label>
+            <div class="correct-feedback" id="f1">Correct! Art is a key tool for emotional expression and communication.</div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="question-block" id="q2-block">
+            <span class="question-text">2. What is the ideal way to provide accessible art materials?</span>
+            <label class="option"><input type="radio" name="q2" value="a"> A "help yourself shelf" available at all times.</label>
+            <label class="option"><input type="radio" name="q2" value="b"> Keeping items in locked cupboards for safety.</label>
+            <label class="option"><input type="radio" name="q2" value="c"> Handing out materials only during scheduled art time.</label>
+            <div class="correct-feedback" id="f2">Correct! Children should be able to help themselves whenever they feel creative.</div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="question-block" id="q3-block">
+            <span class="question-text">3. Which of these items does the guide specifically say "Please don't hide them"?</span>
+            <label class="option"><input type="radio" name="q3" value="a"> Permanent Markers</label>
+            <label class="option"><input type="radio" name="q3" value="b"> Staplers</label>
+            <label class="option"><input type="radio" name="q3" value="c"> Scissors</label>
+            <div class="correct-feedback" id="f3">Correct! Scissors should be accessible, not hidden.</div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="question-block" id="q4-block">
+            <span class="question-text">4. How often should water and/or sand play be available in the sensory area?</span>
+            <label class="option"><input type="radio" name="q4" value="a"> Every day.</label>
+            <label class="option"><input type="radio" name="q4" value="b"> Once a week.</label>
+            <label class="option"><input type="radio" name="q4" value="c"> Only on Fridays as a reward.</label>
+            <div class="correct-feedback" id="f4">Correct! Sand and water are daily essentials for sensory learning.</div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="question-block" id="q5-block">
+            <span class="question-text">5. Sensory play supports learning in which two specific academic areas?</span>
+            <label class="option"><input type="radio" name="q5" value="a"> History and Social Studies</label>
+            <label class="option"><input type="radio" name="q5" value="b"> Science and Math</label>
+            <label class="option"><input type="radio" name="q5" value="c"> Music and Drama</label>
+            <div class="correct-feedback" id="f5">Correct! Measuring, pouring, and exploring materials are foundational for Science and Math.</div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="question-block" id="q6-block">
+            <span class="question-text">6. Why might some programs prohibit the use of food items (like rice or beans) for play?</span>
+            <label class="option"><input type="radio" name="q6" value="a"> Because they are too messy.</label>
+            <label class="option"><input type="radio" name="q6" value="b"> Because they attract insects.</label>
+            <label class="option"><input type="radio" name="q6" value="c"> Due to food insecurity concerns.</label>
+            <div class="correct-feedback" id="f6">Correct! Always check program policy regarding food items and food insecurity.</div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="question-block" id="q7-block">
+            <span class="question-text">7. What is the standard requirement for sensory area flooring?</span>
+            <label class="option"><input type="radio" name="q7" value="a"> Carpet for comfort.</label>
+            <label class="option"><input type="radio" name="q7" value="b"> Tile with mats and towels for easy clean up.</label>
+            <label class="option"><input type="radio" name="q7" value="c"> Hardwood floors.</label>
+            <div class="correct-feedback" id="f7">Correct! Tile, mats, and towels are necessary for messy sensory play.</div>
+        </div>
+
+        <button onclick="checkQuiz()">Submit Answers</button>
+    </div>
+
+    <div id="results">
+        <div class="score-display" id="score-text"></div>
+        <button onclick="window.location.reload()">Reset Quiz</button>
+    </div>
+</div>
+
+<script>
+    function checkQuiz() {
+        const answers = { q1: "b", q2: "a", q3: "c", q4: "a", q5: "b", q6: "c", q7: "b" };
+        let score = 0;
+        let total = 7;
+
+        for (let key in answers) {
+            const questionBlock = document.getElementById(key + '-block');
+            const feedback = document.getElementById('f' + key.slice(1));
+            const selected = document.querySelector(`input[name="${key}"]:checked`);
+
+            // Reset styles
+            questionBlock.classList.remove('right-answer', 'wrong-answer');
+            feedback.style.display = "none";
+
+            if (selected) {
+                if (selected.value === answers[key]) {
+                    score++;
+                    questionBlock.classList.add('right-answer');
+                } else {
+                    questionBlock.classList.add('wrong-answer');
+                    feedback.style.display = "block";
+                    feedback.style.color = "#c0392b";
+                    feedback.innerHTML = "Incorrect. The correct answer was: " + 
+                        (key === 'q1' ? "It helps them work through emotions and communicate." : 
+                         key === 'q2' ? "A help yourself shelf available at all times." :
+                         key === 'q3' ? "Scissors." :
+                         key === 'q4' ? "Every day." :
+                         key === 'q5' ? "Science and Math." :
+                         key === 'q6' ? "Due to food insecurity concerns." : 
+                         "Tile with mats and towels.");
+                }
+            } else {
+                questionBlock.classList.add('wrong-answer');
+            }
+        }
+
+        // Show results
+        document.getElementById('quiz-form').style.opacity = "0.7";
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.style.display = "block";
+        document.getElementById('score-text').innerHTML = `You scored ${score} out of ${total}!`;
+        resultsDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>

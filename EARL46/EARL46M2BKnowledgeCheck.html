@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Child Care Governance Quiz</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 20px auto; padding: 20px; }
+        .quiz-container { background: #f9f9f9; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .question { font-weight: bold; margin-bottom: 10px; margin-top: 20px; }
+        .option { display: block; margin-bottom: 8px; cursor: pointer; }
+        button { background: #2c3e50; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; margin-top: 20px; }
+        button:hover { background: #34495e; }
+        #result { margin-top: 20px; font-weight: bold; padding: 15px; border-radius: 5px; display: none; }
+        .correct { background: #d4edda; color: #155724; }
+        .incorrect { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h2>Knowledge Check: Non-Profit Child Care Governance</h2>
+    
+    <form id="quizForm">
+        <div class="question">1. Which legislation rules incorporated businesses, including non-profits?</div>
+        <label class="option"><input type="radio" name="q1" value="wrong"> The Child Care Act</label>
+        <label class="option"><input type="radio" name="q1" value="correct"> The Business Corporations Act</label>
+        <label class="option"><input type="radio" name="q1" value="wrong"> The Volunteer Act</label>
+
+        <div class="question">2. Surplus profit in a non-profit child care center must be:</div>
+        <label class="option"><input type="radio" name="q2" value="wrong"> Paid to the Board</label>
+        <label class="option"><input type="radio" name="q2" value="correct"> Reinvested into improving the service</label>
+        <label class="option"><input type="radio" name="q2" value="wrong"> Returned to the government</label>
+
+        <div class="question">3. Who is responsible for the "group ownership" of the corporation?</div>
+        <label class="option"><input type="radio" name="q3" value="wrong"> The Parents only</label>
+        <label class="option"><input type="radio" name="q3" value="correct"> The Board of Directors</label>
+        <label class="option"><input type="radio" name="q3" value="wrong"> The Ministry</label>
+
+        <div class="question">4. The Secretary's duties include:</div>
+        <label class="option"><input type="radio" name="q4" value="wrong"> Signing loan applications</label>
+        <label class="option"><input type="radio" name="q4" value="correct"> Maintaining minutes and the corporate seal</label>
+        <label class="option"><input type="radio" name="q4" value="wrong"> Preparing financial reports</label>
+
+        <div class="question">5. The Board must hire a qualified ____ to ensure day-to-day operations are managed.</div>
+        <label class="option"><input type="radio" name="q5" value="wrong"> Accountant</label>
+        <label class="option"><input type="radio" name="q5" value="correct"> RECE Supervisor</label>
+        <label class="option"><input type="radio" name="q5" value="wrong"> Lawyer</label>
+
+        <button type="button" onclick="checkQuiz()">Submit Answers</button>
+    </form>
+
+    <div id="result"></div>
+</div>
+
+<script>
+    function checkQuiz() {
+        const form = document.getElementById('quizForm');
+        const questions = ['q1', 'q2', 'q3', 'q4', 'q5'];
+        let score = 0;
+
+        questions.forEach(q => {
+            const selected = form.querySelector(`input[name="${q}"]:checked`);
+            if (selected && selected.value === 'correct') {
+                score++;
+            }
+        });
+
+        const resultDiv = document.getElementById('result');
+        resultDiv.style.display = 'block';
+        resultDiv.innerHTML = `You scored ${score} out of ${questions.length}.`;
+        
+        if (score === questions.length) {
+            resultDiv.className = 'correct';
+            resultDiv.innerHTML += " Perfect! You have a solid understanding of governance.";
+        } else {
+            resultDiv.className = 'incorrect';
+            resultDiv.innerHTML += " Please review the material and try again.";
+        }
+    }
+</script>
+
+</body>
+</html>

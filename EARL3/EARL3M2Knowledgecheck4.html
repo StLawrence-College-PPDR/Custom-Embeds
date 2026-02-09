@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Zone: Woodworking Knowledge Checker</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f4f1ea;
+        }
+        .quiz-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-top: 10px solid #8b5a2b;
+        }
+        h1 {
+            color: #5d3a1a;
+            text-align: center;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .question p {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 4px;
+        }
+        .options label:hover {
+            background-color: #f9f9f9;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #8b5a2b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #6d4621;
+        }
+        #results {
+            margin-top: 30px;
+            display: none;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .correct-feedback {
+            color: #2e7d32;
+            font-weight: bold;
+            display: block;
+            margin-top: 5px;
+        }
+        .incorrect-feedback {
+            color: #d32f2f;
+            font-weight: bold;
+            display: block;
+            margin-top: 5px;
+        }
+        .explanation {
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        .score-display {
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>Woodworking Knowledge Checker</h1>
+    <form id="quizForm">
+        
+        <!-- Question 1 -->
+        <div class="question">
+            <p>1. According to the text, how do many educators view the risks of woodworking compared to its benefits?</p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="a"> The risks are too high for a standard learning environment.</label>
+                <label><input type="radio" name="q1" value="b"> The benefits far outweigh any possible risks that may occur.</label>
+                <label><input type="radio" name="q1" value="c"> Woodworking should only be introduced after age 10.</label>
+            </div>
+            <div id="feedback1"></div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question">
+            <p>2. Which of the following is NOT listed as a skill children develop through woodworking?</p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="a"> Hand/Eye coordination</label>
+                <label><input type="radio" name="q2" value="b"> Palmar and Pincer grasps</label>
+                <label><input type="radio" name="q2" value="c"> Advanced blueprint reading</label>
+                <label><input type="radio" name="q2" value="d"> Glueing and clamping</label>
+            </div>
+            <div id="feedback2"></div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question">
+            <p>3. Where is the ideal location to set up a woodworking area?</p>
+            <div class="options">
+                <label><input type="radio" name="q3" value="a"> In a quiet zone near the library.</label>
+                <label><input type="radio" name="q3" value="b"> Outdoors only, regardless of weather.</label>
+                <label><input type="radio" name="q3" value="c"> Away from quiet zones, preferably near the creative arts area.</label>
+            </div>
+            <div id="feedback3"></div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question">
+            <p>4. What is the recommended supervision and limit for the woodworking area?</p>
+            <div class="options">
+                <label><input type="radio" name="q4" value="a"> Up to 5 children with occasional check-ins.</label>
+                <label><input type="radio" name="q4" value="b"> Limit to 2 children at a time with an educator supervising at all times.</label>
+                <label><input type="radio" name="q4" value="c"> 1 child at a time, working independently to build confidence.</label>
+            </div>
+            <div id="feedback4"></div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question">
+            <p>5. How should tools and materials be managed in the woodworking area?</p>
+            <div class="options">
+                <label><input type="radio" name="q5" value="a"> Stored in a locked educator-only cabinet.</label>
+                <label><input type="radio" name="q5" value="b"> Kept in a pile so children can practice sorting.</label>
+                <label><input type="radio" name="q5" value="c"> Accessible to children but stored securely and labelled.</label>
+            </div>
+            <div id="feedback5"></div>
+        </div>
+
+        <button type="button" onclick="checkAnswers()">Submit Answers</button>
+    </form>
+
+    <div id="results">
+        <div id="scoreArea" class="score-display"></div>
+        <button type="button" onclick="resetQuiz()">Restart Quiz</button>
+    </div>
+</div>
+
+<script>
+    function checkAnswers() {
+        const answers = {
+            q1: "b",
+            q2: "c",
+            q3: "c",
+            q4: "b",
+            q5: "c"
+        };
+
+        const explanations = {
+            q1: "Correct! The text states many believe benefits far outweigh possible risks as 'risky play' becomes more accepted.",
+            q2: "Correct! Blueprint reading was not mentioned; the text focuses on physical skills like coordination and grasping.",
+            q3: "Correct! To manage noise and workflow, it should be away from quiet zones and near creative arts.",
+            q4: "Correct! The guidelines specify a limit of 2 children and constant educator supervision.",
+            q5: "Correct! Accessibility combined with secure storage and labelling is key for safety and independence."
+        };
+
+        let score = 0;
+        let total = 5;
+        const form = document.getElementById('quizForm');
+        
+        for (let i = 1; i <= total; i++) {
+            const selected = form.querySelector(`input[name="q${i}"]:checked`);
+            const feedbackDiv = document.getElementById(`feedback${i}`);
+            
+            if (selected && selected.value === answers[`q${i}`]) {
+                score++;
+                feedbackDiv.innerHTML = `<span class="correct-feedback">✓ Correct!</span><p class="explanation">${explanations['q'+i]}</p>`;
+            } else {
+                feedbackDiv.innerHTML = `<span class="incorrect-feedback">✗ Incorrect.</span><p class="explanation">The correct answer was: ${getCorrectText(i, answers[`q${i}`])}. ${explanations['q'+i]}</p>`;
+            }
+        }
+
+        const resultsDiv = document.getElementById('results');
+        const scoreArea = document.getElementById('scoreArea');
+        resultsDiv.style.display = 'block';
+        scoreArea.innerHTML = `Your Score: ${score} / ${total}`;
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function getCorrectText(qNum, val) {
+        // Helper to get the text of the correct radio option
+        const labels = document.querySelectorAll(`input[name="q${qNum}"]`);
+        for (let label of labels) {
+            if (label.value === val) {
+                return label.parentElement.textContent.trim();
+            }
+        }
+        return "";
+    }
+
+    function resetQuiz() {
+        document.getElementById('quizForm').reset();
+        document.getElementById('results').style.display = 'none';
+        for (let i = 1; i <= 5; i++) {
+            document.getElementById(`feedback${i}`).innerHTML = '';
+        }
+        window.scrollTo(0, 0);
+    }
+</script>
+
+</body>
+</html>

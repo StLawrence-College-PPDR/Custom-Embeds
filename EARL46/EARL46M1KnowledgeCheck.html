@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Child Care Knowledge Check</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f0f2f5;
+        }
+        .quiz-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        h1 {
+            color: #1a5c96;
+            border-bottom: 3px solid #1a5c96;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .question-block {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #e1e4e8;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+        .question-text {
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .options label {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        .options label:hover {
+            background: #e9ecef;
+        }
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 6px;
+            display: none; /* Hidden by default */
+            font-size: 0.95em;
+        }
+        .feedback.correct-style {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .feedback.incorrect-style {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        button {
+            background-color: #1a5c96;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #134571;
+        }
+        #final-score {
+            margin-top: 20px;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            display: none;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>Module: Policies & Procedures Knowledge Check</h1>
+    <p>Select the best answer for each question. Correct answers and explanations will be revealed upon submission.</p>
+
+    <form id="quizForm">
+        <!-- Q1 -->
+        <div class="question-block" id="q1-block">
+            <span class="question-text">1. How often must the licensee review the Program Statement?</span>
+            <div class="options">
+                <label><input type="radio" name="q1" value="A"> Every 6 months</label>
+                <label><input type="radio" name="q1" value="B"> At least annually</label>
+                <label><input type="radio" name="q1" value="C"> Only when the Ministry updates their policy</label>
+            </div>
+            <div class="feedback" id="f1"></div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="question-block" id="q2-block">
+            <span class="question-text">2. Which of the following is a mandatory view of children required in the Program Statement?</span>
+            <div class="options">
+                <label><input type="radio" name="q2" value="A"> Children are fragile and need protection</label>
+                <label><input type="radio" name="q2" value="B"> Children are learners who require strict discipline</label>
+                <label><input type="radio" name="q2" value="C"> Children are competent and capable</label>
+            </div>
+            <div class="feedback" id="f2"></div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="question-block" id="q3-block">
+            <span class="question-text">3. Which of these must be included in the Parent Handbook?</span>
+            <div class="options">
+                <label><input type="radio" name="q3" value="A"> A list of prohibited practices</label>
+                <label><input type="radio" name="q3" value="B"> Home addresses of all employees</label>
+                <label><input type="radio" name="q3" value="C"> The personal medical records of the Supervisor</label>
+            </div>
+            <div class="feedback" id="f3"></div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="question-block" id="q4-block">
+            <span class="question-text">4. What is the minimum required height for a playground fence?</span>
+            <div class="options">
+                <label><input type="radio" name="q4" value="A"> 3 feet (0.9 metres)</label>
+                <label><input type="radio" name="q4" value="B"> 4 feet (1.2 metres)</label>
+                <label><input type="radio" name="q4" value="C"> 5 feet (1.5 metres)</label>
+            </div>
+            <div class="feedback" id="f4"></div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="question-block" id="q5-block">
+            <span class="question-text">5. For infants under 12 months, how should they be placed to sleep?</span>
+            <div class="options">
+                <label><input type="radio" name="q5" value="A"> On their sides to prevent choking</label>
+                <label><input type="radio" name="q5" value="B"> On their backs</label>
+                <label><input type="radio" name="q5" value="C"> However the parent specifies in writing, even if it contradicts safe sleep guidelines</label>
+            </div>
+            <div class="feedback" id="f5"></div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="question-block" id="q6-block">
+            <span class="question-text">6. Within what timeframe must a Serious Occurrence be reported to the Ministry Program Advisor?</span>
+            <div class="options">
+                <label><input type="radio" name="q6" value="A"> Immediately (within 1 hour)</label>
+                <label><input type="radio" name="q6" value="B"> Within 24 hours of the supervisor becoming aware</label>
+                <label><input type="radio" name="q6" value="C"> Within 3 business days</label>
+            </div>
+            <div class="feedback" id="f6"></div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="question-block" id="q7-block">
+            <span class="question-text">7. Which statement regarding volunteers and students is TRUE?</span>
+            <div class="options">
+                <label><input type="radio" name="q7" value="A"> They can be left alone with children if they have a clear VSC</label>
+                <label><input type="radio" name="q7" value="B"> They can be counted in staff-child ratios during nap time</label>
+                <label><input type="radio" name="q7" value="C"> They are not permitted to be alone with a child and cannot be counted in ratios</label>
+            </div>
+            <div class="feedback" id="f7"></div>
+        </div>
+
+        <!-- Q8 -->
+        <div class="question-block" id="q8-block">
+            <span class="question-text">8. How often must fire drills be conducted?</span>
+            <div class="options">
+                <label><input type="radio" name="q8" value="A"> At least once per month</label>
+                <label><input type="radio" name="q8" value="B"> Once every three months</label>
+                <label><input type="radio" name="q8" value="C"> Twice per year</label>
+            </div>
+            <div class="feedback" id="f8"></div>
+        </div>
+
+        <!-- Q9 -->
+        <div class="question-block" id="q9-block">
+            <span class="question-text">9. Regarding waiting lists, which of the following is prohibited?</span>
+            <div class="options">
+                <label><input type="radio" name="q9" value="A"> Keeping the list confidential</label>
+                <label><input type="radio" name="q9" value="B"> Charging a fee to place a child's name on a waiting list for an unsecured spot</label>
+                <label><input type="radio" name="q9" value="C"> Telling a parent their position on the list</label>
+            </div>
+            <div class="feedback" id="f9"></div>
+        </div>
+
+        <!-- Q10 -->
+        <div class="question-block" id="q10-block">
+            <span class="question-text">10. What must happen after an emergency according to the Emergency Management policy?</span>
+            <div class="options">
+                <label><input type="radio" name="q10" value="A"> The center must close for 24 hours</label>
+                <label><input type="radio" name="q10" value="B"> Staff, children, and parents must be debriefed</label>
+                <label><input type="radio" name="q10" value="C"> All toys must be sanitized</label>
+            </div>
+            <div class="feedback" id="f10"></div>
+        </div>
+
+        <button type="button" onclick="evaluateQuiz()">Submit and View Correct Answers</button>
+    </form>
+
+    <div id="final-score"></div>
+</div>
+
+<script>
+    function evaluateQuiz() {
+        const answers = {
+            q1: { ans: "B", note: "Correct. Licensees must review the program statement at least annually." },
+            q2: { ans: "C", note: "Correct. The program statement must reflect the view of children being competent and capable." },
+            q3: { ans: "A", note: "Correct. A list of prohibited practices must be included in the Parent Handbook." },
+            q4: { ans: "B", note: "Correct. Fences must be a minimum of 4 feet or 1.2 metres." },
+            q5: { ans: "B", note: "Correct. Children under 12 months must be placed on their backs to sleep as per safe sleep guidelines." },
+            q6: { ans: "B", note: "Correct. Reports must be provided to a Program Advisor within 24 hours." },
+            q7: { ans: "C", note: "Correct. Volunteers and students are never permitted to be alone with children or counted in ratios." },
+            q8: { ans: "A", note: "Correct. Fire drills must be conducted at least once per month." },
+            q9: { ans: "B", note: "Correct. Fees cannot be charged to parents for the opportunity to place their child's name on a waiting list." },
+            q10: { ans: "B", note: "Correct. Recovery includes debriefing staff, children, and parents after the emergency." }
+        };
+
+        let score = 0;
+        let total = 10;
+        const form = document.getElementById('quizForm');
+        
+        for (let i = 1; i <= total; i++) {
+            const qName = 'q' + i;
+            const selected = form.elements[qName].value;
+            const feedbackDiv = document.getElementById('f' + i);
+            const questionBlock = document.getElementById(qName + '-block');
+            
+            feedbackDiv.style.display = 'block';
+            
+            if (selected === answers[qName].ans) {
+                score++;
+                feedbackDiv.innerHTML = "<strong>Correct!</strong> " + answers[qName].note;
+                feedbackDiv.className = "feedback correct-style";
+            } else {
+                feedbackDiv.innerHTML = "<strong>Incorrect.</strong> The correct answer was " + answers[qName].ans + ". " + answers[qName].note;
+                feedbackDiv.className = "feedback incorrect-style";
+            }
+        }
+
+        const scoreDiv = document.getElementById('final-score');
+        scoreDiv.style.display = 'block';
+        scoreDiv.innerHTML = "Final Score: " + score + " / " + total;
+        
+        if (score >= 8) {
+            scoreDiv.style.backgroundColor = "#d4edda";
+            scoreDiv.style.color = "#155724";
+        } else {
+            scoreDiv.style.backgroundColor = "#f8d7da";
+            scoreDiv.style.color = "#721c24";
+        }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Child Care Legalities Knowledge Check</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 20px auto; padding: 20px; background-color: #f0f2f5; }
+        .quiz-container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .question-block { margin-bottom: 25px; padding: 15px; border-radius: 8px; transition: 0.3s; }
+        .question-text { font-weight: bold; margin-bottom: 10px; display: block; }
+        .options { list-style: none; padding: 0; }
+        .options li { margin-bottom: 10px; padding: 8px; border-radius: 4px; border: 1px solid #ddd; cursor: pointer; }
+        .options li:hover { background-color: #f9f9f9; }
+        input[type="radio"] { margin-right: 10px; cursor: pointer; }
+        
+        button { background: #3498db; color: white; border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold; transition: background 0.3s; width: 100%; }
+        button:hover { background: #2980b9; }
+        
+        #results-summary { margin-top: 25px; padding: 20px; border-radius: 8px; display: none; text-align: center; font-size: 1.2em; font-weight: bold; }
+        .feedback { display: none; margin-top: 10px; font-size: 0.9em; font-style: italic; color: #555; border-left: 3px solid #3498db; padding-left: 10px; }
+        
+        /* Correct/Incorrect Classes */
+        .correct-row { background-color: #d4edda !important; border-color: #c3e6cb !important; }
+        .incorrect-row { background-color: #f8d7da !important; border-color: #f5c6cb !important; }
+        .answer-highlight { font-weight: bold; color: #155724; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h2>Knowledge Check: Legalities in Child Care</h2>
+    <form id="quizForm">
+        
+        <!-- Question 1 -->
+        <div class="question-block" id="q1-block">
+            <span class="question-text">1. Which Act defines the regulations and requirements for a safe child care environment in Ontario?</span>
+            <ul class="options">
+                <li><input type="radio" name="q1" value="correct"> The Child Care and Early Years Act (CCEYA)</li>
+                <li><input type="radio" name="q1" value="wrong"> The Ontario Health and Safety Act</li>
+                <li><input type="radio" name="q1" value="wrong"> The Child Day Care Privacy Act</li>
+            </ul>
+            <div class="feedback"><strong>Answer:</strong> The CCEYA specifies program requirements including space, ratios, and health/safety.</div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-block" id="q2-block">
+            <span class="question-text">2. If a parent signs a permission form for a field trip, is the caregiver released from all liability?</span>
+            <ul class="options">
+                <li><input type="radio" name="q2" value="wrong"> Yes, the form acts as a total legal waiver.</li>
+                <li><input type="radio" name="q2" value="correct"> No, if negligence can be proven, the caregiver is still liable.</li>
+            </ul>
+            <div class="feedback"><strong>Answer:</strong> Permission forms only demonstrate recognition of risk; they do not excuse negligence.</div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-block" id="q3-block">
+            <span class="question-text">3. What is the legal obligation for reporting suspected child abuse?</span>
+            <ul class="options">
+                <li><input type="radio" name="q3" value="wrong"> Report it after consulting with the child's parents.</li>
+                <li><input type="radio" name="q3" value="wrong"> Report it only if you have physical evidence.</li>
+                <li><input type="radio" name="q3" value="correct"> Report the suspicion and info to CAS promptly/immediately.</li>
+            </ul>
+            <div class="feedback"><strong>Answer:</strong> You must report "forthwith" if you have reasonable grounds to suspect harm or risk.</div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-block" id="q4-block">
+            <span class="question-text">4. What are "reasonable grounds" for a suspicion of abuse?</span>
+            <ul class="options">
+                <li><input type="radio" name="q4" value="wrong"> Being 100% certain that abuse occurred.</li>
+                <li><input type="radio" name="q4" value="correct"> What an average person with your training would suspect using honest judgment.</li>
+                <li><input type="radio" name="q4" value="wrong"> Hearing a rumor from another parent.</li>
+            </ul>
+            <div class="feedback"><strong>Answer:</strong> You do not need to be sure; you just need to exercise normal and honest judgment.</div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question-block" id="q5-block">
+            <span class="question-text">5. Under CFSA s.72(3), can you rely on a supervisor to report a suspicion on your behalf?</span>
+            <ul class="options">
+                <li><input type="radio" name="q5" value="wrong"> Yes, reporting through a chain of command is required.</li>
+                <li><input type="radio" name="q5" value="correct"> No, the person who has the suspicion must report directly to CAS.</li>
+            </ul>
+            <div class="feedback"><strong>Answer:</strong> The duty to report is personal; you must not rely on anyone else to report for you.</div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question-block" id="q6-block">
+            <span class="question-text">6. What is the maximum fine for a professional who fails to report a suspicion of abuse?</span>
+            <ul class="options">
+                <li><input type="radio" name="q6" value="wrong"> $5,000</li>
+                <li><input type="radio" name="q6" value="correct"> $50,000</li>
+                <li><input type="radio" name="q6" value="wrong"> $10,000</li>
+            </ul>
+            <div class="feedback"><strong>Answer:</strong> Professionals can be fined up to $50,000 and/or face two years in prison.</div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question-block" id="q7-block">
+            <span class="question-text">7. When is a professional's duty to report abuse NOT required due to confidentiality?</span>
+            <ul class="options">
+                <li><input type="radio" name="q7" value="wrong"> If the child asks you to keep a secret.</li>
+                <li><input type="radio" name="q7" value="correct"> Only in a solicitor-client (lawyer) relationship.</li>
+                <li><input type="radio" name="q7" value="wrong"> If the information was shared during a private counseling session.</li>
+            </ul>
+            <div class="feedback"><strong>Answer:</strong> The duty to report overrides all provincial statutes except solicitor-client privilege.</div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question-block" id="q8-block">
+            <span class="question-text">8. A caregiver can only deny a parent access to a child if:</span>
+            <ul class="options">
+                <li><input type="radio" name="q8" value="wrong"> The parent is more than an hour late.</li>
+                <li><input type="radio" name="q8" value="correct"> There is a written legal document (custody order, peace bond, etc.) on file.</li>
+                <li><input type="radio" name="q8" value="wrong"> The other parent says the visiting parent is dangerous.</li>
+            </ul>
+            <div class="feedback"><strong>Answer:</strong> You must see written legal documentation before denying a parent their custody rights.</div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question-block" id="q9-block">
+            <span class="question-text">9. If an impaired parent insists on driving away with their child, you should:</span>
+            <ul class="options">
+                <li><input type="radio" name="q9" value="wrong"> Physically block the car from leaving.</li>
+                <li><input type="radio" name="q9" value="correct"> Release the child but call the police with the vehicle description and plate number.</li>
+                <li><input type="radio" name="q9" value="wrong"> Wait until the next day to report it to CAS.</li>
+            </ul>
+            <div class="feedback"><strong>Answer:</strong> Only a Court/CAS can withhold a child, but you should contact police to report an impaired driver.</div>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question-block" id="q10-block">
+            <span class="question-text">10. What is "Vicarious Liability"?</span>
+            <ul class="options">
+                <li><input type="radio" name="q10" value="wrong"> The child's responsibility for their own injuries.</li>
+                <li><input type="radio" name="q10" value="correct"> The employer's responsibility for the actions/torts of the employee.</li>
+                <li><input type="radio" name="q10" value="wrong"> The parent's responsibility to pay for daycare insurance.</li>
+            </ul>
+            <div class="feedback"><strong>Answer:</strong> Employers are responsible for employee actions because they control hiring and monitoring.</div>
+        </div>
+
+        <button type="button" onclick="checkQuiz()">Submit Answers</button>
+    </form>
+
+    <div id="results-summary"></div>
+</div>
+
+<script>
+    function checkQuiz() {
+        const form = document.getElementById('quizForm');
+        const questions = 10;
+        let score = 0;
+
+        for (let i = 1; i <= questions; i++) {
+            const block = document.getElementById('q' + i + '-block');
+            const options = block.querySelectorAll('input[type="radio"]');
+            const feedback = block.querySelector('.feedback');
+            let answered = false;
+
+            options.forEach(option => {
+                const parentLi = option.parentElement;
+                
+                // Reset styles
+                parentLi.classList.remove('correct-row', 'incorrect-row');
+                
+                if (option.checked) {
+                    answered = true;
+                    if (option.value === 'correct') {
+                        score++;
+                        parentLi.classList.add('correct-row');
+                    } else {
+                        parentLi.classList.add('incorrect-row');
+                    }
+                }
+                
+                // Highlight the actual correct answer regardless of choice
+                if (option.value === 'correct') {
+                    parentLi.style.fontWeight = 'bold';
+                    parentLi.style.border = '2px solid #27ae60';
+                }
+            });
+
+            feedback.style.display = 'block';
+        }
+
+        const summary = document.getElementById('results-summary');
+        summary.style.display = 'block';
+        summary.innerHTML = "You scored " + score + " out of " + questions + "!";
+        
+        if (score >= 8) {
+            summary.style.backgroundColor = "#d4edda";
+            summary.style.color = "#155724";
+        } else {
+            summary.style.backgroundColor = "#f8d7da";
+            summary.style.color = "#721c24";
+        }
+
+        window.scrollTo(0, 0);
+        // Disable button after submit
+        document.querySelector('button').disabled = true;
+        document.querySelector('button').innerText = "Quiz Submitted";
+        document.querySelector('button').style.background = "#ccc";
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Check: Families Who Live in Poverty</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 20px auto; padding: 20px; background-color: #f4f7f6; }
+        .quiz-container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .question { margin-bottom: 25px; display: none; }
+        .question.active { display: block; }
+        .question-text { font-weight: bold; font-size: 1.1em; margin-bottom: 15px; }
+        .options { list-style: none; padding: 0; }
+        .options li { margin-bottom: 10px; }
+        label { display: block; padding: 10px; background: #ebf5fb; border-radius: 4px; cursor: pointer; transition: background 0.2s; }
+        label:hover { background: #d6eaf8; }
+        input[type="radio"] { margin-right: 10px; }
+        .btn-container { margin-top: 20px; display: flex; gap: 10px; }
+        button { background: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 1em; }
+        button:hover { background: #2980b9; }
+        button:disabled { background: #ccc; cursor: not-allowed; }
+        #result-area { margin-top: 20px; padding: 20px; border-radius: 8px; display: none; }
+        .correct { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .incorrect { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .summary { font-weight: bold; font-size: 1.2em; text-align: center; }
+        .progress { margin-bottom: 20px; font-size: 0.9em; color: #666; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>Knowledge Check: Families in Poverty</h1>
+    <div id="quiz-content">
+        <div class="progress">Question <span id="current-q-num">1</span> of 10</div>
+        
+        <form id="quiz-form">
+            <!-- Questions will be injected here by JS -->
+            <div id="questions-wrapper"></div>
+            
+            <div class="btn-container">
+                <button type="button" id="next-btn">Next Question</button>
+                <button type="button" id="submit-btn" style="display:none;">Submit Quiz</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="result-area"></div>
+</div>
+
+<script>
+    const quizData = [
+        {
+            q: "In industrialized countries like Canada, how is poverty most often defined?",
+            a: ["Having a family income below the average standard of living", "Complete starvation and lack of any shelter", "Living without access to any technology", "Being unemployed for more than five years"],
+            correct: 0
+        },
+        {
+            q: "What is often part of the 'culture of poverty' regarding a person's emotional state?",
+            a: ["A high sense of competitive drive", "Feeling empowered to change the environment", "Feeling depressed and powerless to control one's destiny", "A lack of concern for the future of their children"],
+            correct: 2
+        },
+        {
+            q: "Which group heads the majority of families living in poverty?",
+            a: ["Two-parent working families", "Single parents, specifically mothers", "Elderly retired couples", "Recent university graduates"],
+            correct: 1
+        },
+        {
+            q: "What factor increases the likelihood of a family living in poverty in Canada?",
+            a: ["Being a third-generation Canadian", "Living in a rural area", "Being a new immigrant family", "Having more than one vehicle"],
+            correct: 2
+        },
+        {
+            q: "Statistics Canada uses 'low-income lines' primarily to estimate what?",
+            a: ["The maximum tax bracket for wealthy citizens", "Income levels where families cannot afford adequate food, shelter, and clothing compared to peers", "The cost of luxury goods in urban centers", "The average salary of government employees"],
+            correct: 1
+        },
+        {
+            q: "In 1989, the Canadian government resolved to eliminate child poverty by what year?",
+            a: ["1995", "2010", "2000", "2020"],
+            correct: 2
+        },
+        {
+            q: "According to 2013 data from Campaign 2000, how many Canadian children live in poverty?",
+            a: ["One in fifty", "One in ten", "One in twenty", "Five in ten"],
+            correct: 1
+        },
+        {
+            q: "What percentage of people served by Canada's food banks are children?",
+            a: ["10%", "25%", "40%", "60%"],
+            correct: 2
+        },
+        {
+            q: "How does the death rate for children in poor families compare to those in non-poor families?",
+            a: ["It is roughly the same", "It is twice as high", "It is four times as high", "It is slightly lower due to social programs"],
+            correct: 1
+        },
+        {
+            q: "What is the school drop-out rate for children living in poverty?",
+            a: ["27%", "15%", "70%", "45%"],
+            correct: 3
+        }
+    ];
+
+    let currentQuestion = 0;
+    const userAnswers = [];
+
+    const wrapper = document.getElementById('questions-wrapper');
+    const nextBtn = document.getElementById('next-btn');
+    const submitBtn = document.getElementById('submit-btn');
+    const currentQNumSpan = document.getElementById('current-q-num');
+    const resultArea = document.getElementById('result-area');
+
+    function loadQuestion() {
+        wrapper.innerHTML = '';
+        const data = quizData[currentQuestion];
+        const qDiv = document.createElement('div');
+        qDiv.className = 'question active';
+        
+        let optionsHTML = '';
+        data.a.forEach((opt, index) => {
+            optionsHTML += `
+                <li>
+                    <label>
+                        <input type="radio" name="q${currentQuestion}" value="${index}" required>
+                        ${opt}
+                    </label>
+                </li>
+            `;
+        });
+
+        qDiv.innerHTML = `
+            <div class="question-text">${data.q}</div>
+            <ul class="options">${optionsHTML}</ul>
+        `;
+        wrapper.appendChild(qDiv);
+        currentQNumSpan.innerText = currentQuestion + 1;
+    }
+
+    nextBtn.addEventListener('click', () => {
+        const selected = document.querySelector(`input[name="q${currentQuestion}"]:checked`);
+        if (!selected) {
+            alert("Please select an answer.");
+            return;
+        }
+        userAnswers.push(parseInt(selected.value));
+        currentQuestion++;
+
+        if (currentQuestion < quizData.length) {
+            loadQuestion();
+            if (currentQuestion === quizData.length - 1) {
+                nextBtn.style.display = 'none';
+                submitBtn.style.display = 'inline-block';
+            }
+        }
+    });
+
+    submitBtn.addEventListener('click', () => {
+        const selected = document.querySelector(`input[name="q${currentQuestion}"]:checked`);
+        if (!selected) {
+            alert("Please select an answer.");
+            return;
+        }
+        userAnswers.push(parseInt(selected.value));
+        showResults();
+    });
+
+    function showResults() {
+        document.getElementById('quiz-content').style.display = 'none';
+        let score = 0;
+        let summaryHTML = '<h2>Results</h2>';
+        
+        quizData.forEach((data, index) => {
+            const isCorrect = userAnswers[index] === data.correct;
+            if (isCorrect) score++;
+            
+            summaryHTML += `
+                <div style="margin-bottom: 15px; padding: 10px; border-bottom: 1px solid #eee;">
+                    <p><strong>Q${index + 1}: ${data.q}</strong></p>
+                    <p style="color: ${isCorrect ? 'green' : 'red'}">
+                        Your answer: ${data.a[userAnswers[index]]} ${isCorrect ? '✓' : '✗'}
+                    </p>
+                    ${!isCorrect ? `<p style="color: green">Correct answer: ${data.a[data.correct]}</p>` : ''}
+                </div>
+            `;
+        });
+
+        const percent = (score / quizData.length) * 100;
+        resultArea.style.display = 'block';
+        resultArea.className = percent >= 70 ? 'correct' : 'incorrect';
+        resultArea.innerHTML = `
+            <div class="summary">You scored ${score} out of 10 (${percent}%)</div>
+            <hr>
+            ${summaryHTML}
+            <button onclick="location.reload()" style="margin-top:20px; background:#2c3e50;">Retake Quiz</button>
+        `;
+    }
+
+    loadQuestion();
+</script>
+
+</body>
+</html>
