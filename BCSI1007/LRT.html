@@ -96,71 +96,77 @@
   <script>
     const stations = [
     {
-      "name": "Tunney's Pasture",
-     "coords": [45.40389, -75.735], "title": "Tunney's Pasture \u2014 Western Terminus",
-     "desc": "Western end of Line 1 serving the federal Tunney's Pasture campus.",
-     "link_text": "Station details (Wikipedia)",
-     "href": "https://en.wikipedia.org/wiki/Tunney%27s_Pasture_station"
+      "name": "article1",
+        "coords": [45.40389, -75.735],
+        "title": "Government of Ontario",
+        "desc": "The Ottawa Light Rail Transit (LRT) system has experienced several issues that have raised concerns about the project, including safety concerns.",
+       "link_text": "Read Article",
+       "href": "https://www.ontario.ca/page/ottawa-light-rail-transit-commission"
+      },
+    {"name": "article2",
+      "coords": [45.40944, -75.72194],
+      "title": "City of Ottawa Independent Review",
+      "desc": "This Report has been prepared solely for use by the party which commissioned it (the 'Client') in connection with the captioned project...",
+     "link_text": "Read Article",
+     "href": "https://documents.ottawa.ca/sites/default/files/Mott%20MacDonald%20Canada%20Ltd%20-%20Ottawa%20LRT%20Independent%20Review.pdf"
     },
-    {"name": "Bayview",
-     "coords": [45.40944, -75.72194], "title": "Bayview \u2014 Transfer to Line 2",
-     "desc": "Major interchange linking Line 1 and Line 2, near Hintonburg/Little Italy.",
-     "link_text": "Station details (Wikipedia)",
-     "href": "https://en.wikipedia.org/wiki/Bayview_station_(Ottawa)"
+    {"name": "article3",
+      "coords": [45.41389, -75.71333],
+      "title": "Transportation Safety Board of Canada",
+      "desc": "On 8 August 2021 at about 2034, an eastbound Ottawa Light Rail Transit (OLRT) train was proceeding from the north track to the south track at a speed of...",
+     "link_text": "Read Article",
+     "href": "https://www.tsb.gc.ca/eng/enquetes-investigations/rail/2021/r21h0099/r21h0099.html"
     },
-    {"name": "Pimisi",
-     "coords": [45.41389, -75.71333], "title": "Pimisi \u2014 LeBreton Flats",
-     "desc": "Gateway to LeBreton Flats and Canadian War Museum; Algonquin-inspired art.",
-     "link_text": "Station details (Wikipedia)",
-     "href": "https://en.wikipedia.org/wiki/Pimisi_station"
+    {"name": "article4",
+      "coords": [45.41944, -75.70444],
+      "title": "Public Inquiry Recommendations",
+      "desc": "On December 16, 2021, the Province of Ontario called for a public inquiry to review the ongoing operational issues...",
+     "link_text": "Read Article",
+     "href": "https://pub-ottawa.escribemeetings.com/filestream.ashx?DocumentId=154996"
     },
-    {"name": "Lyon",
-     "coords": [45.41944, -75.70444], "title": "Lyon \u2014 Downtown West",
-     "desc": "Underground station with entrances into Place de Ville complex.",
-     "link_text": "Station details (Wikipedia)",
-     "href": "https://en.wikipedia.org/wiki/Lyon_station"
+    {"name": "video1",
+      "coords": [45.42139, -75.69889],
+      "title": "Technical Briefing: Ottawa LRT Public Inquiry",
+      "desc": "",
+     "link_text": "Watch Video",
+     "href": "https://www.youtube.com/watch?v=Qy_-ogrKZbI"
     },
-    {"name": "Parliament",
-     "coords": [45.42139, -75.69889], "title": "Parliament \u2014 Business District",
-     "desc": "High\u2011usage downtown stop with access to Parliament Hill and Sparks Street.",
-     "link_text": "Station details (Wikipedia)",
-     "href": "https://en.wikipedia.org/wiki/Parliament_station"
+    {"name": "video2",
+      "coords": [45.42611, -75.69194],
+      "title": "LRT Inquiry Findings",
+      "desc": "",
+     "link_text": "Watch Video",
+     "href": "https://www.youtube.com/watch?v=z2hB7ecLOzU"
     },
-    {"name": "Rideau",
-     "coords": [45.42611, -75.69194], "title": "Rideau \u2014 ByWard Market",
-     "desc": "Deepest station on the network; direct access to Rideau Centre and Market.",
-     "link_text": "Station details (Wikipedia)",
-     "href": "https://en.wikipedia.org/wiki/Rideau_station"
+    {"name": "video3",
+      "coords": [45.42056, -75.68222],
+      "title": "Transit Committee playlist",
+      "desc": "",
+     "link_text": "Watch Video(s)",
+     "href": "https://www.youtube.com/playlist?list=PLfItBIIh0Dr4rQbjhMOyoIsDdk0GMWQ4r"
     },
-    {"name": "uOttawa",
-     "coords": [45.42056, -75.68222], "title": "uOttawa \u2014 Campus Station",
-     "desc": "At\u2011grade stop serving the University of Ottawa and Corktown Footbridge.",
-     "link_text": "Station details (Wikipedia)",
-     "href": "https://en.wikipedia.org/wiki/UOttawa_station"
+    {"name": "podcast1",
+      "coords": [45.41639, -75.67028],
+      "title": "The frustrating, darkly funny story of Ottawa’s LRT mess",
+      "desc": "",
+     "link_text": "Listen",
+     "href": "https://toronto.citynews.ca/2022/06/28/ottawa-lrt-big-story-podcast/"
     },
-    {"name": "Lees",
-     "coords": [45.41639, -75.67028], "title": "Lees \u2014 Sandy Hill Heights",
-     "desc": "Serves Lees Ave area; side\u2011platform station in a trench.",
-     "link_text": "Station details (Wikipedia)",
-     "href": "https://en.wikipedia.org/wiki/Lees_station"
+    {"name": "podcast2",
+      "coords": [45.41222, -75.66278],
+      "title": "Why does (most of) Canada suck at building transit?",
+      "desc": "",
+     "link_text": "Listen",
+     "href": "https://ottawa.citynews.ca/2023/08/16/canada-building-transit-big-story/"
     },
-    {"name": "Hurdman",
-     "coords": [45.41222, -75.66278], "title": "Hurdman \u2014 Major Hub",
-     "desc": "Key transfer point between LRT and Transitway routes near Rideau River.",
-     "link_text": "Station details (Wikipedia)",
-     "href": "https://en.wikipedia.org/wiki/Hurdman_station"
-    },
-    {"name": "Tremblay",
-     "coords": [45.41667, -75.65333], "title": "Tremblay \u2014 VIA Rail Link",
-     "desc": "Short walk to Ottawa (VIA Rail) intercity station via Tremblay Road plaza.",
-     "link_text": "Station details (Wikipedia)",
-     "href": "https://en.wikipedia.org/wiki/Tremblay_station"
-    },
-    {"name": "Blair",
-     "coords": [45.43111, -75.60833], "title": "Blair \u2014 Eastern Terminus",
-     "desc": "Eastern end of Line 1; transfers to buses for Gloucester and Orl\u00e9ans.",
-     "link_text": "Station details (Wikipedia)",
-     "href": "https://en.wikipedia.org/wiki/Blair_station"}];
+    {"name": "podcast3",
+      "coords": [45.41667, -75.65333],
+      "title": "Canadian Council for Public-Private Partnerships Statement",
+      "desc": "The Council thanks the Honourable Justice William Hourigan and the entire commission team for its work investigating the commercial and technical circumstances...",
+     "link_text": "Listen and Read Article",
+     "href": "https://www.pppcouncil.ca/news/ccppp-releases-statement-on-ottawa-light-rail-transit-public-inquiry-report"
+    }
+    ];
 
     const map = L.map('map');
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
