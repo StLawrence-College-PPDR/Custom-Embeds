@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preventing Child Maltreatment Knowledge Check</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 20px auto; padding: 20px; background-color: #f4f7f6; }
+        .quiz-container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; margin-top: 0; }
+        
+        .question { margin-bottom: 30px; padding: 20px; border-radius: 8px; background: #fff; border: 1px solid #e1e8ed; border-left: 5px solid #3498db; }
+        .question p { font-weight: bold; margin-top: 0; margin-bottom: 15px; font-size: 1.1em; }
+        
+        /* Layout fix for alignment */
+        .options { list-style: none; padding: 0; margin: 0; }
+        .options li { 
+            display: flex; 
+            align-items: flex-start; /* Aligns radio with the top line of text */
+            margin-bottom: 12px; 
+        }
+        
+        .options input[type="radio"] {
+            margin-top: 5px; /* Fine-tune vertical position */
+            margin-right: 12px;
+            cursor: pointer;
+            min-width: 18px; /* Prevents shrinking */
+            min-height: 18px;
+        }
+
+        .options label { 
+            cursor: pointer; 
+            display: inline-block;
+            line-height: 1.4;
+        }
+
+        button { background: #3498db; color: white; border: none; padding: 15px 30px; font-size: 16px; border-radius: 4px; cursor: pointer; transition: background 0.3s; margin-top: 20px; width: 100%; font-weight: bold; }
+        button:hover { background: #2980b9; }
+
+        .feedback { margin-top: 15px; padding: 12px; border-radius: 4px; display: none; font-size: 0.95em; line-height: 1.4; }
+        .correct { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .incorrect { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        #result-summary { margin-top: 30px; font-size: 1.3em; font-weight: bold; text-align: center; color: #2c3e50; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>Knowledge Check: Preventing Child Maltreatment</h1>
+    
+    <div id="quiz-form">
+        <!-- Question 1 -->
+        <div class="question" id="q1">
+            <p>1. According to the text, what is the legal obligation of a caregiver regarding child abuse?</p>
+            <ul class="options">
+                <li><input type="radio" name="q1" value="a" id="q1a"> <label for="q1a">Only report if they have physical proof</label></li>
+                <li><input type="radio" name="q1" value="b" id="q1b"> <label for="q1b">Mandated by provincial and territorial law to report suspicions of abuse</label></li>
+                <li><input type="radio" name="q1" value="c" id="q1c"> <label for="q1c">Wait for the director to make the report</label></li>
+            </ul>
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question" id="q2">
+            <p>2. Supporting each child in developing positive self-esteem falls under which level of prevention?</p>
+            <ul class="options">
+                <li><input type="radio" name="q2" value="a" id="q2a"> <label for="q2a">Primary Prevention</label></li>
+                <li><input type="radio" name="q2" value="b" id="q2b"> <label for="q2b">Secondary Prevention</label></li>
+                <li><input type="radio" name="q2" value="c" id="q2c"> <label for="q2c">Tertiary Prevention</label></li>
+            </ul>
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question" id="q3">
+            <p>3. Documenting observations and reporting to a child protection agency are parts of which role?</p>
+            <ul class="options">
+                <li><input type="radio" name="q3" value="a" id="q3a"> <label for="q3a">Primary Level of Prevention</label></li>
+                <li><input type="radio" name="q3" value="b" id="q3b"> <label for="q3b">Secondary Level of Prevention</label></li>
+                <li><input type="radio" name="q3" value="c" id="q3c"> <label for="q3c">Tertiary Level of Prevention</label></li>
+            </ul>
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question" id="q4">
+            <p>4. "Child maltreatment/abuse is a measure of ____________."</p>
+            <ul class="options">
+                <li><input type="radio" name="q4" value="a" id="q4a"> <label for="q4a">Anger</label></li>
+                <li><input type="radio" name="q4" value="b" id="q4b"> <label for="q4b">Stress</label></li>
+                <li><input type="radio" name="q4" value="c" id="q4c"> <label for="q4c">Power</label></li>
+            </ul>
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question" id="q5">
+            <p>5. What is the primary purpose of documentation in an investigation?</p>
+            <ul class="options">
+                <li><input type="radio" name="q5" value="a" id="q5a"> <label for="q5a">A guide for caregivers/directors and a tool for child protection agencies/police</label></li>
+                <li><input type="radio" name="q5" value="b" id="q5b"> <label for="q5b">To fulfill a basic administrative requirement only</label></li>
+                <li><input type="radio" name="q5" value="c" id="q5c"> <label for="q5c">To inform the parents of the caregiver's opinion</label></li>
+            </ul>
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question" id="q6">
+            <p>6. According to the text, what is child abuse defined as?</p>
+            <ul class="options">
+                <li><input type="radio" name="q6" value="a" id="q6a"> <label for="q6a">The failure to provide for physical and/or emotional needs</label></li>
+                <li><input type="radio" name="q6" value="b" id="q6b"> <label for="q6b">Strict discipline methods used in the home</label></li>
+                <li><input type="radio" name="q6" value="c" id="q6c"> <label for="q6c">Unintentional accidents that happen under supervision</label></li>
+            </ul>
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question" id="q7">
+            <p>7. What is considered one of the best ways for a caregiver to encourage a healthy lifestyle?</p>
+            <ul class="options">
+                <li><input type="radio" name="q7" value="a" id="q7a"> <label for="q7a">Providing worksheets on hygiene</label></li>
+                <li><input type="radio" name="q7" value="b" id="q7b"> <label for="q7b">Being a positive role model ("practicing what we preach")</label></li>
+                <li><input type="radio" name="q7" value="c" id="q7c"> <label for="q7c">Strictly following a textbook curriculum without variation</label></li>
+            </ul>
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Question 8 -->
+        <div class="question" id="q8">
+            <p>8. What is a key strategy for developing self-regulation in a child care setting?</p>
+            <ul class="options">
+                <li><input type="radio" name="q8" value="a" id="q8a"> <label for="q8a">Organizing large group activities as much as possible</label></li>
+                <li><input type="radio" name="q8" value="b" id="q8b"> <label for="q8b">Limiting the number of transitions and ensuring they are smooth</label></li>
+                <li><input type="radio" name="q8" value="c" id="q8c"> <label for="q8c">Increasing the speed of the daily schedule</label></li>
+            </ul>
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Question 9 -->
+        <div class="question" id="q9">
+            <p>9. A "stimulus shelter" is a place created by caregivers to provide:</p>
+            <ul class="options">
+                <li><input type="radio" name="q9" value="a" id="q9a"> <label for="q9a">Intense intellectual stimulation</label></li>
+                <li><input type="radio" name="q9" value="b" id="q9b"> <label for="q9b">Physical exercise and movement</label></li>
+                <li><input type="radio" name="q9" value="c" id="q9c"> <label for="q9c">A place to go for calm</label></li>
+            </ul>
+            <div class="feedback"></div>
+        </div>
+
+        <!-- Question 10 -->
+        <div class="question" id="q10">
+            <p>10. When children ask questions about sex, what is the first suggested step?</p>
+            <ul class="options">
+                <li><input type="radio" name="q10" value="a" id="q10a"> <label for="q10a">Clarify what the child really wants to know</label></li>
+                <li><input type="radio" name="q10" value="b" id="q10b"> <label for="q10b">Give a scientific lecture on biology</label></li>
+                <li><input type="radio" name="q10" value="c" id="q10c"> <label for="q10c">Avoid the question to protect their innocence</label></li>
+            </ul>
+            <div class="feedback"></div>
+        </div>
+
+        <button onclick="checkAnswers()">Submit Answers</button>
+        <div id="result-summary"></div>
+    </div>
+</div>
+
+<script>
+    function checkAnswers() {
+        const correctAnswers = {
+            q1: "b", q2: "a", q3: "b", q4: "c", q5: "a",
+            q6: "a", q7: "b", q8: "b", q9: "c", q10: "a"
+        };
+
+        const explanations = {
+            q1: "Correct. Caregivers are mandated by provincial/territorial law to report suspicions.",
+            q2: "Correct. Primary prevention includes supporting self-esteem and providing role models.",
+            q3: "Correct. Secondary prevention involves identifying victims and documenting suspicions.",
+            q4: "Correct. The text states child maltreatment/abuse is a measure of power.",
+            q5: "Correct. Documentation serves as a guide for the center and an investigation tool for agencies.",
+            q6: "Correct. It is the failure to provide for physical and/or emotional needs.",
+            q7: "Correct. 'Practicing what we preach' is an effective form of health promotion.",
+            q8: "Correct. Smooth, limited transitions help support self-regulation.",
+            q9: "Correct. Stimulus shelters provide a necessary place for calm.",
+            q10: "Correct. Always clarify what the child really wants to know first."
+        };
+
+        let score = 0;
+        const total = 10;
+
+        for (let i = 1; i <= total; i++) {
+            const qSelector = `input[name="q${i}"]:checked`;
+            const selectedOption = document.querySelector(qSelector);
+            const feedbackDiv = document.querySelector(`#q${i} .feedback`);
+            
+            feedbackDiv.style.display = "block";
+
+            if (selectedOption && selectedOption.value === correctAnswers[`q${i}`]) {
+                score++;
+                feedbackDiv.innerHTML = "<strong>✅ " + explanations[`q${i}`] + "</strong>";
+                feedbackDiv.className = "feedback correct";
+            } else {
+                feedbackDiv.innerHTML = "<strong>❌ Incorrect.</strong> The correct answer was " + correctAnswers[`q${i}`].toUpperCase() + ".";
+                feedbackDiv.className = "feedback incorrect";
+            }
+        }
+
+        const resultDiv = document.getElementById('result-summary');
+        resultDiv.innerHTML = "Final Score: " + score + " / " + total;
+        
+        // Scroll to the score summary
+        resultDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>

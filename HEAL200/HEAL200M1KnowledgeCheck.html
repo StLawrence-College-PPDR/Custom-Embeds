@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+        .question { margin-bottom: 20px; padding: 15px; border-bottom: 1px solid #eee; }
+        .options { list-style: none; padding: 0; }
+        .result { margin-top: 20px; font-weight: bold; padding: 15px; display: none; border-radius: 5px; }
+        button { background: #2c3e50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #34495e; }
+        .correct { color: #27ae60; }
+        .incorrect { color: #c0392b; }
+    </style>
+</head>
+<body>
+    <h2>Knowledge Check: Health Promotion</h2>
+    <form id="quizForm">
+        <!-- Q1 -->
+        <div class="question">
+            <p>1. True or False: While parents have the ultimate responsibility for a child’s care, ECEs must share that responsibility as professionals.</p>
+            <input type="radio" name="q1" value="True"> True<br>
+            <input type="radio" name="q1" value="False"> False
+        </div>
+
+        <!-- Q2 -->
+        <div class="question">
+            <p>2. According to Maslow, which needs must be met first to sustain life and promote health?</p>
+            <input type="radio" name="q2" value="A"> A) Esteem Needs<br>
+            <input type="radio" name="q2" value="B"> B) Self-Actualization<br>
+            <input type="radio" name="q2" value="C"> C) Biological and Physiological Needs<br>
+            <input type="radio" name="q2" value="D"> D) Belongingness and Love Needs
+        </div>
+
+        <!-- Q3 -->
+        <div class="question">
+            <p>3. The WHO defines health as a state of complete physical, mental and social well-being and not merely the absence of disease.</p>
+            <input type="radio" name="q3" value="A"> True<br>
+            <input type="radio" name="q3" value="B"> False
+        </div>
+
+        <!-- Q4 -->
+        <div class="question">
+            <p>4. Which of the following is NOT listed as a common health determinant?</p>
+            <input type="radio" name="q4" value="A"> A) Adequate income<br>
+            <input type="radio" name="q4" value="B"> B) Communication skills<br>
+            <input type="radio" name="q4" value="C"> C) Genetic predisposition<br>
+            <input type="radio" name="q4" value="D"> D) Freedom from discrimination
+        </div>
+
+        <!-- Q5 -->
+        <div class="question">
+            <p>5. Occupational Health is vital in ECE because child care is a _____ occupation.</p>
+            <input type="radio" name="q5" value="A"> A) Physically and emotionally stressful<br>
+            <input type="radio" name="q5" value="B"> B) High-paying and low-risk<br>
+            <input type="radio" name="q5" value="C"> C) Primarily administrative<br>
+            <input type="radio" name="q5" value="D"> D) Solitary
+        </div>
+
+        <!-- Q6 -->
+        <div class="question">
+            <p>6. In the Chain of Transmission, "the air" or "food" are examples of:</p>
+            <input type="radio" name="q6" value="A"> A) The Host<br>
+            <input type="radio" name="q6" value="B"> B) The Germ<br>
+            <input type="radio" name="q6" value="C"> C) Vehicles of Transmission<br>
+            <input type="radio" name="q6" value="D"> D) The New Host
+        </div>
+
+        <!-- Q7 -->
+        <div class="question">
+            <p>7. A child should be excluded from care if:</p>
+            <input type="radio" name="q7" value="A"> A) They require more individual care than caregivers can provide<br>
+            <input type="radio" name="q7" value="B"> B) They are wearing a cloth diaper<br>
+            <input type="radio" name="q7" value="C"> C) They haven't napped yet<br>
+            <input type="radio" name="q7" value="D"> D) It is a Monday
+        </div>
+
+        <!-- Q8 -->
+        <div class="question">
+            <p>8. What are the "Five Rights" of medication?</p>
+            <input type="radio" name="q8" value="A"> A) Child, Med, Dose, Time, Route<br>
+            <input type="radio" name="q8" value="B"> B) Age, Weight, Time, Parent, Med<br>
+            <input type="radio" name="q8" value="C"> C) Child, Parent, Time, Route, Center<br>
+            <input type="radio" name="q8" value="D"> D) Med, Dose, Label, Date, Signature
+        </div>
+
+        <!-- Q9 -->
+        <div class="question">
+            <p>9. After diapering, hands must be washed for at least:</p>
+            <input type="radio" name="q9" value="A"> A) 5 seconds<br>
+            <input type="radio" name="q9" value="B"> B) 10 seconds<br>
+            <input type="radio" name="q9" value="C"> C) 15 seconds<br>
+            <input type="radio" name="q9" value="D"> D) 30 seconds
+        </div>
+
+        <!-- Q10 -->
+        <div class="question">
+            <p>10. Which level of Maslow's hierarchy is associated with personal growth and fulfilment?</p>
+            <input type="radio" name="q10" value="A"> A) Safety Needs<br>
+            <input type="radio" name="q10" value="B"> B) Self-Actualization<br>
+            <input type="radio" name="q10" value="C"> C) Esteem Needs<br>
+            <input type="radio" name="q10" value="D"> D) Biological Needs
+        </div>
+
+        <button type="button" onclick="checkQuiz()">Submit Answers</button>
+    </form>
+
+    <div id="resultArea" class="result"></div>
+
+    <script>
+        function checkQuiz() {
+            const answers = {
+                q1: "True", q2: "C", q3: "A", q4: "C", q5: "A",
+                q6: "C", q7: "A", q8: "A", q9: "C", q10: "B"
+            };
+            let score = 0;
+            const form = document.getElementById('quizForm');
+            const resultArea = document.getElementById('resultArea');
+            
+            for (let i = 1; i <= 10; i++) {
+                const response = form['q' + i].value;
+                if (response === answers['q' + i]) {
+                    score++;
+                }
+            }
+
+            resultArea.style.display = 'block';
+            resultArea.innerHTML = `You scored ${score} out of 10.<br><br>` +
+                `<b>Correct Answers:</b><br>` +
+                `1. True | 2. C | 3. True | 4. C (Genetic predisposition not mentioned) | 5. A | ` +
+                `6. C | 7. A | 8. A | 9. C (15 Seconds) | 10. B (Self-Actualization)`;
+            resultArea.style.backgroundColor = score > 7 ? '#d4edda' : '#f8d7da';
+        }
+    </script>
+</body>
+</html>

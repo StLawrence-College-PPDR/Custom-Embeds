@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrition Knowledge Check</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 20px auto; padding: 20px; background-color: #f4f7f6; }
+        .quiz-container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .question { margin-bottom: 25px; display: none; }
+        .question.active { display: block; }
+        .question-text { font-size: 1.2rem; font-weight: 600; margin-bottom: 15px; color: #2c3e50; }
+        .option { display: block; padding: 12px; margin: 8px 0; background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+        .option:hover { background: #e2e6ea; border-color: #dee2e6; }
+        .option.selected { border-color: #3498db; background: #e3f2fd; }
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 8px; display: none; }
+        .feedback.correct { display: block; background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .feedback.incorrect { display: block; background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .controls { margin-top: 20px; display: flex; justify-content: space-between; align-items: center; }
+        button { background: #3498db; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-size: 1rem; transition: background 0.2s; }
+        button:hover { background: #2980b9; }
+        button:disabled { background: #ccc; cursor: not-allowed; }
+        #progress { font-weight: bold; color: #7f8c8d; }
+        .result-screen { text-align: center; display: none; }
+        .score { font-size: 2rem; font-weight: bold; color: #3498db; margin: 20px 0; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h1>Nutrition Knowledge Check</h1>
+    
+    <div id="quiz-area">
+        <!-- Questions will be injected here -->
+    </div>
+
+    <div id="result-area" class="result-screen">
+        <h2>Quiz Complete!</h2>
+        <div class="score" id="final-score"></div>
+        <p id="result-text"></p>
+        <button onclick="location.reload()">Restart Quiz</button>
+    </div>
+
+    <div class="controls" id="quiz-controls">
+        <span id="progress">Question 1 of 10</span>
+        <button id="submit-btn" onclick="checkAnswer()">Submit Answer</button>
+        <button id="next-btn" onclick="nextQuestion()" style="display:none;">Next Question</button>
+    </div>
+</div>
+
+<script>
+    const quizData = [
+        {
+            q: "According to the text, what are the three basic physiological reasons we need to eat?",
+            options: [
+                "To grow tall, stay thin, and improve eyesight",
+                "To build/repair tissue, control body processes, and provide heat/energy",
+                "To satisfy hunger, enjoy flavors, and socialize",
+                "To improve memory, strengthen bones, and prevent allergies"
+            ],
+            correct: 1,
+            why: "The text identifies three basic physiological reasons: building and repairing body tissue, controlling body processes, and providing heat and energy."
+        },
+        {
+            q: "Which nutrient category is primarily responsible for helping the body regulate its functions?",
+            options: [
+                "Carbohydrates, Proteins, and Fats",
+                "Sugar and Sodium",
+                "Vitamins, Minerals, Fiber, and Water",
+                "Meat and Alternatives"
+            ],
+            correct: 2,
+            why: "The nutrient table specifies that vitamins, minerals, fiber, and water are essential for helping the body regulate its functions."
+        },
+        {
+            q: "At what age range should the introduction of semi-solids (like infant cereals and pureed vegetables) typically begin?",
+            options: [
+                "Birth to 2 months",
+                "4 to 6 months",
+                "8 to 10 months",
+                "After 12 months"
+            ],
+            correct: 1,
+            why: "The Infant Nutrition table suggests introducing semi-solids between 4 to 6 months."
+        },
+        {
+            q: "What is the typical portion size for a toddler (1.5–2.5 years) compared to an adult portion?",
+            options: [
+                "The same as an adult portion",
+                "1/2 of an adult portion",
+                "1/10 of an adult portion",
+                "1/4 of an adult portion"
+            ],
+            correct: 3,
+            why: "The text states: 'Typically, a portion for a toddler (1.5-2.5 years) is about 1/4 of an adult portion.'"
+        },
+        {
+            q: "In the 'Division of Responsibility,' what is the primary role of the child?",
+            options: [
+                "Selecting which nutritious foods to buy at the store",
+                "Setting the routine times for snacks and meals",
+                "Deciding what and how much they will eat from what is presented",
+                "Cleaning the cooking equipment and surfaces"
+            ],
+            correct: 2,
+            why: "The child has direct control of eating—deciding what and how much they will eat."
+        },
+        {
+            q: "Which developmental stage is described as an 'opportune time to integrate cooking and learning about other cultures' food'?",
+            options: [
+                "Infant",
+                "Toddler",
+                "Preschool",
+                "School-Age"
+            ],
+            correct: 2,
+            why: "The Preschool Nutrition table identifies this stage as the time to integrate cooking and cultural food learning."
+        },
+        {
+            q: "Which of these is NOT one of the six factors listed that shape eating habits?",
+            options: [
+                "Economics",
+                "Heredity",
+                "Body Image",
+                "Cultural"
+            ],
+            correct: 1,
+            why: "The six factors are Physical, Emotional, Social, Cultural, Body Image, and Economics. Heredity is listed as a factor influencing health, but not specifically one of the six shaping eating habits."
+        },
+        {
+            q: "When introducing a new food to a child, what does the text recommend?",
+            options: [
+                "Hide it inside a familiar food so they don't notice",
+                "Introduce it when children are hungry",
+                "Force the child to finish the new food to build discipline",
+                "Wait at least six months before offering it a second time"
+            ],
+            correct: 1,
+            why: "Tips for new foods include introducing them when children are hungry and offering small amounts."
+        },
+        {
+            q: "Under the new Canada's Food Guide mentioned in the text, where are dairy products now categorized?",
+            options: [
+                "In their own separate category called 'Dairy'",
+                "Within the 'Carbohydrates' group",
+                "Within the 'Protein foods' group",
+                "They have been removed from the guide entirely"
+            ],
+            correct: 2,
+            why: "The text notes: 'A key aspect of this guide is that dairy products are now included in the group names \"protein foods\" and do not have a category of their own.'"
+        },
+        {
+            q: "Which of the following is a recommended food safety practice from the text?",
+            options: [
+                "Wash vegetables with soap",
+                "Store all foods at room temperature",
+                "Clean and sanitize cooking equipment and surfaces",
+                "Introduce three new foods at a time"
+            ],
+            correct: 2,
+            why: "Food safety tips include maintaining hygiene, sanitizing surfaces, avoiding spoiled food, and controlling pests."
+        }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let selectedOption = null;
+
+    const quizArea = document.getElementById('quiz-area');
+    const submitBtn = document.getElementById('submit-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const progressText = document.getElementById('progress');
+
+    function loadQuestion() {
+        const q = quizData[currentQuestion];
+        let html = `
+            <div class="question active">
+                <div class="question-text">${q.q}</div>
+                <div class="options">
+                    ${q.options.map((opt, i) => `
+                        <div class="option" onclick="selectOption(${i})" id="opt-${i}">${opt}</div>
+                    `).join('')}
+                </div>
+                <div id="feedback" class="feedback"></div>
+            </div>
+        `;
+        quizArea.innerHTML = html;
+        submitBtn.disabled = true;
+        submitBtn.style.display = 'block';
+        nextBtn.style.display = 'none';
+        progressText.innerText = `Question ${currentQuestion + 1} of ${quizData.length}`;
+    }
+
+    window.selectOption = function(index) {
+        selectedOption = index;
+        document.querySelectorAll('.option').forEach(el => el.classList.remove('selected'));
+        document.getElementById(`opt-${index}`).classList.add('selected');
+        submitBtn.disabled = false;
+    };
+
+    window.checkAnswer = function() {
+        const q = quizData[currentQuestion];
+        const feedback = document.getElementById('feedback');
+        submitBtn.style.display = 'none';
+        
+        if (selectedOption === q.correct) {
+            score++;
+            feedback.innerText = "Correct! " + q.why;
+            feedback.className = "feedback correct";
+        } else {
+            feedback.innerText = "Incorrect. " + q.why;
+            feedback.className = "feedback incorrect";
+        }
+        
+        nextBtn.style.display = 'block';
+        if (currentQuestion === quizData.length - 1) {
+            nextBtn.innerText = "See Results";
+        }
+    };
+
+    window.nextQuestion = function() {
+        currentQuestion++;
+        if (currentQuestion < quizData.length) {
+            selectedOption = null;
+            loadQuestion();
+        } else {
+            showResults();
+        }
+    };
+
+    function showResults() {
+        document.getElementById('quiz-area').style.display = 'none';
+        document.getElementById('quiz-controls').style.display = 'none';
+        const resultArea = document.getElementById('result-area');
+        resultArea.style.display = 'block';
+        document.getElementById('final-score').innerText = `${score} / ${quizData.length}`;
+        
+        let message = "";
+        if (score === 10) message = "Perfect! You have a strong grasp of nutrition fundamentals.";
+        else if (score >= 7) message = "Great job! You have a good understanding of child nutrition.";
+        else message = "Review the nutrition notes and try again to improve your score.";
+        
+        document.getElementById('result-text').innerText = message;
+    }
+
+    loadQuestion();
+</script>
+
+</body>
+</html>
