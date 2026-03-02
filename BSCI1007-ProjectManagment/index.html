@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Interactive map of British Columbia 2021 Floods</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Leaflet CSS & JS (no key needed) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  
+
+  <style>
+    html, body { height: 500px; margin: 0; }
+    #map { position: absolute; inset: 0; }
+
+    /* Optional: subtle tooltip styling (for permanent labels if you enable them) */
+    .marker-label {
+      background: rgba(255,255,255,0.9);
+      color: #222;
+      border: 1px solid #ccc;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 12px;
+    }
+
+    .popup-wrap { max-width: 320px; font: 13px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+    .popup-wrap h3 { margin: 0 0 .35rem; font-size: 15px; }
+    .popup-wrap .note { color:#666; font-size:12px; margin-top:.35rem; }
+
+    /* ─────────────────────────────────────────────────────────────
+       Marker state styles (using CSS filters on default Leaflet pin)
+       - visited: softer, persistent tint (after first open)
+       - active : brighter tint while popup is open
+       Adjust hue/saturation/brightness to taste.
+       ───────────────────────────────────────────────────────────── */
+    .leaflet-marker-icon.visited {
+      filter: hue-rotate(150deg) saturate(1.3) brightness(1.05);
+    }
+    .leaflet-marker-icon.active {
+      filter: hue-rotate(150deg) saturate(1.6) brightness(1.15) drop-shadow(0 1px 2px rgba(0,0,0,.35));
+    }
+    ul.map-button {
+      list-style-type: none;
+      padding: 0;
+
+    }
+    .popup-wrap {
+          padding: 20px;
+    }
+    ul.map-button li a {
+          display: block;
+          background: #d84738;
+          padding: 0.5rem;
+          border-radius: 3px;
+          color: #FFF;
+          text-decoration: none;
+          font-weight: 500;
+          text-align: center;
+    }
+    ul.map-button li a:hover {
+          background: rgb(197 86 75);
+          transition: cubic-bezier(x1, y1, x2, y2);
+    }
+  </style>
+</head>
+<body>
+
+<div id="map" aria-label="Interactive map of British Columbia (2021 floods)"></div>
+
+<script>
+  // ---------------- Base map (Leaflet + OSM tiles) ----------------
+  const map = L.map('map', {
+    center: [49.5, -124.8], // BC center
+    zoom: 6.7,
+    scrollWheelZoom: true
+  });
+
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    // Keep attribution visible to comply with OSM policy
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  // ---------------- Marker data (original 12 + source pins) ----------------
+  // NOTE (Rebecca): Add your own links/embeds inside each popup's HTML below
+  // (look for the <!-- YOUR CONTENT HERE --> comments).
+  const points = [
+  
+
+    // Article #1
+    {
+      id: 'src-pmi-coquihalla',
+      name: 'PMI Official Case Study — Reconnecting Roads After Massive Flooding',
+      coords: [49.750, -121.200], // Juliet area on Hwy 5
+      note: 'The primary, authoritative case document you want students to read and analyze.',
+      links: [
+        { text: 'Read Article', href: 'https://www.pmi.org/business-solutions/case-studies/reconnecting-roads-after-massive-flooding' }
+      ]
+    },
+
+    // Article #2
+    {
+      id: 'src-bc-recovery-portal',
+      name: 'Government of British Columbia — Highway Flood Recovery Background',
+      coords: [50.2310, -121.5820], // Lytton area (Fraser–Thompson)
+      note: 'Official government description of the 2021 flood impact and highway reconnection work — excellent context for scope and stakeholder impact.',
+      links: [
+        { text: 'Read Article', href: 'https://www2.gov.bc.ca/gov/content/transportation-projects/bc-highway-flood-recovery' }
+      ]
+    },
+
+    // Article #3/Podcast #1
+    {
+      id: 'src-bigstory-jan0726',
+      name: 'The Big Story — More Than Rain: Why Flooding Is Getting Worse in B.C.',
+      coords: [49.0500, -122.3000], // Abbotsford
+      note: 'Audio + written analysis of the scientific and social dimensions of the 2021 floods.',
+      links: [
+        { text: 'Listen', href: 'https://toronto.citynews.ca/2026/01/07/bc-flooding-big-story-podcast/' }
+      ]
+    },
+
+    // Video #1
+    {
+      id: 'src-yt-3CW9rTnkYOc',
+      name: 'BC Flood Recovery: Reopening the Coquihalla After 2021 Rainstorms',
+      coords: [49.630, -121.050], // Coquihalla – Jessica Bridge area (representative site)
+      note: 'Short video explaining what happened and restoration efforts — supports understanding of scope & sequencing.',
+      links: [
+        { text: 'Watch Video', href: 'https://www.youtube.com/watch?v=3CW9rTnkYOc' }
+      ]
+    },
+
+    // Podcast #4/3
+    {
+      id: 'src-cbc-almanac-fraservalley',
+      name: 'Fraser Valley floods caused by atmospheric river over region',
+      coords: [49.0500, -122.2000], // Abbotsford
+      note: 'This podcast episode discusses recent flooding in the Fraser Valley caused by an atmospheric river system, the impacts on communities and infrastructure, and ongoing risk monitoring by officials. It’s Canadian, topical, and directly tied to the meteorological events that underpinned the 2021 floods, helping students connect risk, environmental drivers, and management responses.',
+      links: [
+        { text: 'Listen', href: 'https://www.ivoox.com/en/fraser-valley-floods-caused-by-atmospheric-river-over-audios-mp3_rf_164172908_1.html' }
+      ]
+    }
+  ];
+
+  // ---------------- Visited-state helpers (persist to localStorage) ----------------
+  const VISITED_KEY = 'bcflood-visited-ids';
+  function getVisited() {
+    try { return new Set(JSON.parse(localStorage.getItem(VISITED_KEY) || '[]')); }
+    catch { return new Set(); }
+  }
+  function saveVisited(set) {
+    localStorage.setItem(VISITED_KEY, JSON.stringify(Array.from(set)));
+  }
+  const visitedIds = getVisited();
+
+  // ---------------- Create markers & popups ----------------
+  const markersById = {};
+
+  points.forEach(pt => {
+    const marker = L.marker(pt.coords).addTo(map);
+
+    // If you want always-visible labels, uncomment:
+    // marker.bindTooltip(pt.name, { permanent: true, direction: 'right', className: 'marker-label', offset: [10, 0] });
+
+    const popupHTML = `
+      <div class="popup-wrap">
+        <h3>${pt.name}</h3>
+        <p>${pt.note}</p>
+
+        <!-- YOUR CONTENT HERE: add links, images, or YouTube/Vimeo iframes -->
+        <!-- Example:
+        <p><a href="https://example.com/report">Example report</a></p>
+        <div style="position:relative;padding-bottom:56.25%;height:0;">
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen
+                  style="position:absolute;inset:0;width:100%;height:100%;border:0;"></iframe>
+        </div>
+        -->
+
+        ${pt.links && pt.links.length
+          ? `<ul class="map-button">` + pt.links.map(l => `<li><a href="${l.href}" target="_blank" rel="noopener noreferrer">${l.text}</a></li>`).join('') + `</ul>`
+          : ``}
+        <!-- <div class="note">ID: <code>${pt.id}</code></div> -->
+      </div>
+    `;
+
+    marker.bindPopup(popupHTML, { maxWidth: 340 });
+
+    // When the marker element is added to the map, apply 'visited' class if needed
+    marker.on('add', () => {
+      const el = marker.getElement();
+      if (el && visitedIds.has(pt.id)) el.classList.add('visited');
+    });
+
+    // When popup opens: active + visited (and persist)
+    marker.on('popupopen', () => {
+      const el = marker.getElement();
+      if (!el) return;
+      el.classList.add('active');
+      if (!visitedIds.has(pt.id)) {
+        visitedIds.add(pt.id);
+        saveVisited(visitedIds);
+      }
+      el.classList.add('visited');
+    });
+
+    // When popup closes: remove only "active" (keep "visited")
+    marker.on('popupclose', () => {
+      const el = marker.getElement();
+      if (el) el.classList.remove('active');
+    });
+
+    markersById[pt.id] = marker;
+  });
+
+  // ---------------- Deep-linking: open a marker via #id ----------------
+  function openFromHash() {
+    const id = (location.hash || '').replace('#', '');
+    if (!id) return;
+    const marker = markersById[id];
+    if (marker) {
+      map.flyTo(marker.getLatLng(), 9, { duration: 0.6 });
+      setTimeout(() => marker.openPopup(), 650);
+    }
+  }
+  window.addEventListener('hashchange', openFromHash);
+  openFromHash();
+</script>
+</body>
+</html>
