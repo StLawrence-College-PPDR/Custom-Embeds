@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  .quiz-container {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  .question {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+  }
+  .question h3 {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  .options label {
+    display: block;
+    margin-bottom: 8px;
+    cursor: pointer;
+  }
+  .submit-btn {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .submit-btn:hover {
+    background-color: #0056b3;
+  }
+  .result {
+    margin-top: 20px;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 5px;
+    display: none;
+  }
+  .correct {
+    color: green;
+  }
+  .incorrect {
+    color: red;
+  }
+  .feedback {
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 5px;
+    display: none; 
+  }
+</style>
+</head>
+<body>
+
+<div class="quiz-container">
+  <h2>Unit #3 Social Development Knowledge Check</h2>
+  
+  <div id="quiz">
+    <!-- Questions will be injected here via JavaScript -->
+  </div>
+
+  <button class="submit-btn" onclick="submitQuiz()">Submit Answers</button>
+  <div id="final-score" class="result"></div>
+</div>
+
+<script>
+  const quizData = [
+    {
+      question: "What is the term for the strong emotional attachment that parents develop for their children, often immediately after birth?",
+      options: ["Attachment", "Temperament", "Bonding", "Subjective Self"],
+      correct: 2 // Index of correct answer
+    },
+    {
+      question: "According to John Bowlby, what is the main motivation for attachment?",
+      options: ["Food", "Safety", "Play", "Language"],
+      correct: 1
+    },
+    {
+      question: "At approximately what age does Separation Anxiety become apparent, coinciding with the development of object permanence?",
+      options: ["2-3 months", "6 months", "8 months", "18 months"],
+      correct: 2
+    },
+    {
+      question: "Which type of play involves children engaging with similar toys in close proximity, but without interacting beyond observation?",
+      options: ["Non-social play", "Parallel play", "Simple social play", "Co-operative play"],
+      correct: 1
+    },
+    {
+      question: "Researchers Thomas and Chess identified three main categories of temperament: Easy, Difficult, and...",
+      options: ["Energetic", "Slow to warm", "Anxious", "Social"],
+      correct: 1
+    },
+    {
+      question: "When does the 'Objective Self' (recognizing oneself as separate and unique) typically develop?",
+      options: ["2-3 months", "8-12 months", "13-19 months", "6 months"],
+      correct: 2
+    },
+    {
+      question: "True or False: Longitudinal studies have proven that temperament is generally consistent from birth to adolescence.",
+      options: ["True", "False"],
+      correct: 0
+    },
+    {
+      question: "Which type of play includes organizing play with others, taking turns, and creating rules or themes?",
+      options: ["Non-social play", "Parallel play", "Simple social play", "Co-operative play"],
+      correct: 3
+    }
+  ];
+
+  const quizContainer = document.getElementById('quiz');
+
+  function loadQuiz() {
+    quizData.forEach((item, index) => {
+      const qDiv = document.createElement('div');
+      qDiv.classList.add('question');
+      
+      let optionsHtml = '';
+      item.options.forEach((opt, optIndex) => {
+        optionsHtml += `
+          <label>
+            <input type="radio" name="q${index}" value="${optIndex}">
+            ${opt}
+          </label>
+        `;
+      });
+
+      qDiv.innerHTML = `
+        <h3>${index + 1}. ${item.question}</h3>
+        <div class="options">${optionsHtml}</div>
+        <div class="feedback" id="feedback-${index}"></div>
+      `;
+      quizContainer.appendChild(qDiv);
+    });
+  }
+
+  function submitQuiz() {
+    let score = 0;
+    quizData.forEach((item, index) => {
+      const selected = document.querySelector(`input[name="q${index}"]:checked`);
+      const feedbackDiv = document.getElementById(`feedback-${index}`);
+      
+      feedbackDiv.style.display = "block";
+      
+      if (selected) {
+        const answer = parseInt(selected.value);
+        if (answer === item.correct) {
+          score++;
+          feedbackDiv.innerHTML = "<span class='correct'>Correct!</span>";
+        } else {
+          feedbackDiv.innerHTML = `<span class='incorrect'>Incorrect. The correct answer was: ${item.options[item.correct]}</span>`;
+        }
+      } else {
+        feedbackDiv.innerHTML = `<span class='incorrect'>Incorrect. The correct answer was: ${item.options[item.correct]}</span>`;
+      }
+    });
+
+    const resultDiv = document.getElementById('final-score');
+    resultDiv.style.display = "block";
+    resultDiv.style.backgroundColor = score === quizData.length ? "#d4edda" : "#fff3cd";
+    resultDiv.innerHTML = `You scored ${score} out of ${quizData.length}`;
+  }
+
+  loadQuiz();
+</script>
+
+</body>
+</html>

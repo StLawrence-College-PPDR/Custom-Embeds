@@ -1,0 +1,98 @@
+<div id="quiz-wrapper" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 650px; margin: 20px auto; border: 2px solid #2c3e50; padding: 25px; border-radius: 12px; background-color: #ffffff; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <h2 style="text-align: center; color: #2c3e50; margin-bottom: 10px;">Genetics Knowledge Check</h2>
+    <p style="text-align: center; font-style: italic; color: #7f8c8d;">Test your understanding of genetic transmission and disorders.</p>
+    <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+    
+    <div id="quiz-content">
+        <p id="q-text" style="font-size: 1.15em; font-weight: 600; color: #34495e; min-height: 50px;"></p>
+        <div id="opt-list"></div>
+    </div>
+
+    <div id="feedback" style="margin-top: 20px; padding: 10px; border-radius: 5px; text-align: center; font-weight: bold; min-height: 24px;"></div>
+    
+    <button id="action-btn" onclick="nextAction()" style="display: block; width: 100%; margin-top: 20px; padding: 12px; background-color: #2c3e50; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 1em; transition: background 0.3s;">Start Quiz</button>
+</div>
+
+<script>
+    const quizData = [
+        { q: "Meiosis is the process of shuffling chromosomes to ensure that:", a: ["Every child is identical", "Each sperm or ovum has a unique combination", "Cells repair themselves", "Twins are always produced"], c: 1 },
+        { q: "Observable traits like eye color are called a person's:", a: ["Genotype", "Zygote", "Phenotype", "Autosome"], c: 2 },
+        { q: "Who share the exact same genotype?", a: ["All siblings", "Fraternal twins", "Identical (monozygotic) twins", "Mothers and daughters"], c: 2 },
+        { q: "A recessive gene is expressed only if:", a: ["A dominant gene is present", "No dominant gene is present", "It is on the Y chromosome", "The person is female"], c: 1 },
+        { q: "Which is an example of a RECESSIVE autosomal disorder?", a: ["Huntington’s chorea", "Migraine headaches", "Tay-Sachs", "Retinoblastoma"], c: 2 },
+        { q: "How can brown-eyed parents have a blue-eyed child?", a: ["Blue is dominant", "Both carry the recessive 'b' gene", "Environmental changes", "It is not possible"], c: 1 },
+        { q: "Why are sex-linked disorders more common in boys?", a: ["They have two X chromosomes", "They lack a second X to mask recessive genes", "They have more dominant genes", "The Y chromosome is larger"], c: 1 },
+        { q: "Down syndrome involves an extra chromosome at pair:", a: ["1st", "21st", "23rd", "Sex pair"], c: 1 },
+        { q: "The XXY pattern in boys is known as:", a: ["Turner’s syndrome", "Down syndrome", "Klinefelter’s syndrome", "Sickle cell anemia"], c: 2 },
+        { q: "Nutrition affecting 'tall' genes shows the interaction of:", a: ["Dominant/Recessive", "Meiosis/Mitosis", "Heredity/Environment", "Genotype/Phenotype"], c: 2 }
+    ];
+
+    let currentIdx = -1;
+    let userScore = 0;
+    let answered = false;
+
+    function nextAction() {
+        if (currentIdx === -1) {
+            currentIdx = 0;
+            displayQuestion();
+            document.getElementById("action-btn").style.display = "none";
+        } else if (answered) {
+            currentIdx++;
+            if (currentIdx < quizData.length) {
+                displayQuestion();
+            } else {
+                showResults();
+            }
+        }
+    }
+
+    function displayQuestion() {
+        answered = false;
+        const data = quizData[currentIdx];
+        document.getElementById("q-text").innerText = (currentIdx + 1) + ". " + data.q;
+        const list = document.getElementById("opt-list");
+        list.innerHTML = "";
+        document.getElementById("feedback").innerText = "";
+        document.getElementById("feedback").style.backgroundColor = "transparent";
+        
+        data.a.forEach((opt, i) => {
+            const b = document.createElement("button");
+            b.innerText = opt;
+            b.style = "display: block; width: 100%; margin: 8px 0; padding: 10px; cursor: pointer; border: 1px solid #dcdde1; border-radius: 5px; background: #f5f6fa; text-align: left; transition: 0.2s;";
+            b.onmouseover = () => { if(!answered) b.style.background = "#dcdde1"; };
+            b.onmouseout = () => { if(!answered) b.style.background = "#f5f6fa"; };
+            b.onclick = () => validate(i, b);
+            list.appendChild(b);
+        });
+    }
+
+    function validate(idx, btn) {
+        if (answered) return;
+        answered = true;
+        const correctIdx = quizData[currentIdx].c;
+        const feedback = document.getElementById("feedback");
+        
+        if (idx === correctIdx) {
+            userScore++;
+            btn.style.background = "#2ecc71";
+            btn.style.color = "white";
+            feedback.innerText = "Correct!";
+            feedback.style.color = "#27ae60";
+        } else {
+            btn.style.background = "#e74c3c";
+            btn.style.color = "white";
+            feedback.innerText = "Incorrect. Correct answer: " + quizData[currentIdx].a[correctIdx];
+            feedback.style.color = "#c0392b";
+        }
+        
+        document.getElementById("action-btn").innerText = (currentIdx === quizData.length - 1) ? "See Final Score" : "Next Question";
+        document.getElementById("action-btn").style.display = "block";
+    }
+
+    function showResults() {
+        const container = document.getElementById("quiz-wrapper");
+        container.innerHTML = `<h2 style='text-align:center;'>Quiz Complete!</h2>
+        <p style='text-align:center; font-size:1.5em;'>You scored ${userScore} out of ${quizData.length}</p>
+        <button onclick='location.reload()' style='display:block; width:100%; padding:12px; background:#2c3e50; color:white; border:none; border-radius:6px; cursor:pointer;'>Restart Quiz</button>`;
+    }
+</script>

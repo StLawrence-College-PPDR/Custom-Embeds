@@ -1,0 +1,85 @@
+<div style="font-family: sans-serif; border: 1px solid #ccc; padding: 20px; max-width: 600px; background-color: #f9f9f9; border-radius: 8px; margin: 40px auto; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+  <h2 style="margin-top:0; text-align: center;">Emotional Development Knowledge Check</h2>
+  
+  <div id="quiz-container">
+    <!-- Question 1 -->
+    <div class="question" style="margin-bottom: 20px;">
+      <p><strong>1. What are the three universal elements that identify Basic Emotions?</strong></p>
+      <label><input type="radio" name="q1" value="incorrect"> A. Happiness, Sadness, and Fear</label><br>
+      <label><input type="radio" name="q1" value="correct"> B. Subjectivity, Physiological, and Behavioural</label><br>
+      <label><input type="radio" name="q1" value="incorrect"> C. Expectations, Outcomes, and Actions</label><br>
+      <label><input type="radio" name="q1" value="incorrect"> D. Heart rate, Brain activity, and Facial expressions</label>
+    </div>
+
+    <!-- Question 2 -->
+    <div class="question" style="margin-bottom: 20px;">
+      <p><strong>2. When do Complex Emotions typically develop?</strong></p>
+      <label><input type="radio" name="q2" value="incorrect"> A. Immediately at birth</label><br>
+      <label><input type="radio" name="q2" value="incorrect"> B. Between 6-9 weeks</label><br>
+      <label><input type="radio" name="q2" value="correct"> C. After moving into the toddler stage (18 – 30 months)</label><br>
+      <label><input type="radio" name="q2" value="incorrect"> D. Before the infant can smile</label>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="question" style="margin-bottom: 20px;">
+      <p><strong>3. A smile directed at another person between 6-9 weeks is known as a:</strong></p>
+      <label><input type="radio" name="q3" value="incorrect"> A. Physiological response</label><br>
+      <label><input type="radio" name="q3" value="incorrect"> B. Complex emotion</label><br>
+      <label><input type="radio" name="q3" value="correct"> C. Social smile</label><br>
+      <label><input type="radio" name="q3" value="incorrect"> D. Subjective experience</label>
+    </div>
+
+    <!-- Question 4 -->
+    <div class="question" style="margin-bottom: 20px;">
+      <p><strong>4. True or False: An extroverted toddler hugging and kissing other children is always considered a positive social interaction.</strong></p>
+      <label><input type="radio" name="q4" value="incorrect"> A. True</label><br>
+      <label><input type="radio" name="q4" value="correct"> B. False</label>
+    </div>
+
+    <!-- Question 5 -->
+    <div class="question" style="margin-bottom: 20px;">
+      <p><strong>5. What is the result when toddlers learn to express feelings without offending others?</strong></p>
+      <label><input type="radio" name="q5" value="correct"> A. Social opportunities are created</label><br>
+      <label><input type="radio" name="q5" value="incorrect"> B. Physiological changes stop occurring</label><br>
+      <label><input type="radio" name="q5" value="incorrect"> C. They revert to basic emotions</label><br>
+      <label><input type="radio" name="q5" value="incorrect"> D. They bottle up their emotions</label>
+    </div>
+
+    <div style="text-align: center;">
+      <button onclick="checkAnswers()" style="background-color: #007BFF; color: white; padding: 10px 30px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">Submit Answers</button>
+    </div>
+  </div>
+
+  <div id="result" style="display: none; margin-top: 20px; padding: 15px; border: 1px solid #4CAF50; background-color: #dff0d8; color: #3c763d; border-radius: 5px; text-align: center;"></div>
+
+  <script>
+    function checkAnswers() {
+      var score = 0;
+      var total = 5;
+      var results = document.getElementById('result');
+      
+      // Reset score logic
+      score = 0;
+
+      // Check each question
+      for (var i = 1; i <= total; i++) {
+        var radios = document.getElementsByName('q' + i);
+        for (var j = 0; j < radios.length; j++) {
+          if (radios[j].checked && radios[j].value === 'correct') {
+            score++;
+          }
+        }
+      }
+
+      // Display result
+      results.style.display = 'block';
+      results.innerHTML = '<strong>You scored ' + score + ' out of ' + total + '.</strong>';
+      
+      if (score === total) {
+        results.innerHTML += '<br>Excellent job! You mastered the material.';
+      } else {
+        results.innerHTML += '<br>Review the text above and try again.';
+      }
+    }
+  </script>
+</div>

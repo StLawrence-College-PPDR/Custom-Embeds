@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Childbirth Knowledge Check</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9; }
+        h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        .question { margin-bottom: 20px; padding: 15px; background: #fff; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .options label { display: block; margin: 8px 0; cursor: pointer; }
+        button { background-color: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        button:hover { background-color: #2980b9; }
+        #results { margin-top: 20px; padding: 15px; display: none; border-radius: 5px; }
+        .correct { color: #27ae60; font-weight: bold; }
+        .incorrect { color: #c0392b; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h2>Knowledge Check: Stages of Childbirth</h2>
+    
+    <div id="quiz-container">
+        <!-- Question 1 -->
+        <div class="question">
+            <p><strong>1. During Stage 1 (Labour), what two things must occur to the cervix?</strong></p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="a"> Expansion and Contraction</label>
+                <label><input type="radio" name="q1" value="b"> Dilation and Effacement</label>
+                <label><input type="radio" name="q1" value="c"> Delivery and Afterbirth</label>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question">
+            <p><strong>2. Which phase occurs immediately before delivery?</strong></p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="a"> Latent</label>
+                <label><input type="radio" name="q2" value="b"> Active</label>
+                <label><input type="radio" name="q2" value="c"> Transitional</label>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question">
+            <p><strong>3. True or False: Stage 3 (Afterbirth) usually takes a long period of intense pushing.</strong></p>
+            <div class="options">
+                <label><input type="radio" name="q3" value="a"> True</label>
+                <label><input type="radio" name="q3" value="b"> False</label>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question">
+            <p><strong>4. In Canada, what is the most common place to deliver a baby?</strong></p>
+            <div class="options">
+                <label><input type="radio" name="q4" value="a"> At home with a midwife</label>
+                <label><input type="radio" name="q4" value="b"> In a hospital (maternity unit or birthing room)</label>
+                <label><input type="radio" name="q4" value="c"> In a private community clinic</label>
+            </div>
+        </div>
+
+        <button onclick="checkAnswers()">Submit Answers</button>
+    </div>
+
+    <div id="results"></div>
+
+    <script>
+        function checkAnswers() {
+            let score = 0;
+            const total = 4;
+            
+            const q1 = document.querySelector('input[name="q1"]:checked');
+            const q2 = document.querySelector('input[name="q2"]:checked');
+            const q3 = document.querySelector('input[name="q3"]:checked');
+            const q4 = document.querySelector('input[name="q4"]:checked');
+
+            if (!q1 || !q2 || !q3 || !q4) {
+                alert("Please answer all questions before submitting.");
+                return;
+            }
+
+            let feedback = "<h3>Your Results:</h3>";
+
+            // Logic Check
+            if (q1.value === "b") { score++; feedback += "<p>1. Correct! Dilation (opening) and Effacement (flattening) are required.</p>"; }
+            else { feedback += "<p class='incorrect'>1. Incorrect. The correct answer is Dilation and Effacement.</p>"; }
+
+            if (q2.value === "c") { score++; feedback += "<p>2. Correct! Transitional is the final phase of Stage 1.</p>"; }
+            else { feedback += "<p class='incorrect'>2. Incorrect. The correct answer is Transitional.</p>"; }
+
+            if (q3.value === "b") { score++; feedback += "<p>3. Correct! Stage 3 usually takes only a couple of pushes.</p>"; }
+            else { feedback += "<p class='incorrect'>3. Incorrect. It only takes a couple of pushes.</p>"; }
+
+            if (q4.value === "b") { score++; feedback += "<p>4. Correct! The hospital is the most common site in Canada.</p>"; }
+            else { feedback += "<p class='incorrect'>4. Incorrect. The hospital is the most common site.</p>"; }
+
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.style.display = "block";
+            resultsDiv.innerHTML = feedback + "<strong>Final Score: " + score + "/" + total + "</strong>";
+            resultsDiv.style.backgroundColor = score === total ? "#d4edda" : "#f8d7da";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biological Beginnings Knowledge Check</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 20px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9; }
+        h2 { color: #2c3e50; text-align: center; }
+        .word-bank { background: #eef2f3; padding: 15px; border: 2px dashed #95a5a6; border-radius: 5px; margin-bottom: 20px; text-align: center; }
+        .word-bank span { display: inline-block; background: #fff; margin: 5px; padding: 5px 10px; border-radius: 4px; border: 1px solid #ccc; font-weight: bold; }
+        .content { margin-bottom: 20px; }
+        input { border: none; border-bottom: 2px solid #3498db; background: transparent; padding: 2px 5px; font-size: 16px; width: 120px; text-align: center; outline: none; }
+        input:focus { border-bottom: 2px solid #2ecc71; background: #fff; }
+        .correct { background-color: #d4edda !important; border-bottom: 2px solid #28a745 !important; color: #155724; }
+        .incorrect { background-color: #f8d7da !important; border-bottom: 2px solid #dc3545 !important; color: #721c24; }
+        .controls { text-align: center; margin-top: 20px; }
+        button { padding: 10px 20px; font-size: 16px; cursor: pointer; border: none; border-radius: 5px; background: #3498db; color: white; transition: 0.3s; }
+        button:hover { background: #2980b9; }
+        #result { margin-top: 15px; font-weight: bold; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <h2>Knowledge Check: Bert’s Beginnings</h2>
+    
+    <div class="word-bank">
+        <strong>Word List:</strong><br>
+        <span>Blue</span> <span>Body</span> <span>Cell</span> <span>Chromosomes</span> 
+        <span>Conception</span> <span>Cross over</span> <span>Divide</span> <span>Genes</span> 
+        <span>Germ</span> <span>Inheritance</span> <span>Nucleus</span> <span>Ovum</span> 
+        <span>Sperm</span> <span>Trillions</span> <span>Two</span> <span>46</span>
+    </div>
+
+    <div class="content">
+        Bert began life with the union of an <strong>(1)</strong> <input type="text" id="ans1" placeholder="..."> from his mother and a 
+        <strong>(2)</strong> <input type="text" id="ans2" placeholder="..."> from his father. This beginning is called 
+        <strong>(3)</strong> <input type="text" id="ans3" placeholder="...">. At that time, Bert was just one 
+        <strong>(4)</strong> <input type="text" id="ans4" placeholder="...">. But his 
+        <strong>(5)</strong> <input type="text" id="ans5" placeholder="..."> contained a hereditary blueprint that determined how Bert would look later in life. 
+        This set of instructions for building Bert was carried in rod-shaped chemicals called 
+        <strong>(6)</strong> <input type="text" id="ans6" placeholder="...">. Bert was given 
+        <strong>(7)</strong> <input type="text" id="ans7" placeholder="..."> of these when he was born. They contained about one million 
+        <strong>(8)</strong> <input type="text" id="ans8" placeholder="..."> that determined his traits.<br><br>
+
+        Bert is tall for his age and has light brown hair like his father. Like his mother, he has Rh negative, type B blood. Bert inherited 
+        <strong>(9)</strong> <input type="text" id="ans9" placeholder="..."> eyes because his mother’s eyes are blue and his father’s eyes are blue.<br><br>
+
+        Bert has 46 chromosomes in his <strong>(10)</strong> <input type="text" id="ans10" placeholder="..."> cells. He has 23 chromosomes in his 
+        <strong>(11)</strong> <input type="text" id="ans11" placeholder="..."> cells. These cells have half the chromosomes of other cells because they 
+        <strong>(12)</strong> <input type="text" id="ans12" placeholder="..."> differently. When this happens, some genes change positions with the chromosome. 
+        Other genes may <strong>(13)</strong> <input type="text" id="ans13" placeholder="..."> to the chromosome with which they are paired. 
+        Because of this, no two ova or sperm carry the same 
+        <strong>(14)</strong> <input type="text" id="ans14" placeholder="...">. The genes in sperm and ova can be arranged in 
+        <strong>(15)</strong> <input type="text" id="ans15" placeholder="..."> of combinations. Out of all the sperm and ova, only 
+        <strong>(16)</strong> <input type="text" id="ans16" placeholder="..."> unite to make Bert. This makes Bert one in trillions.
+    </div>
+
+    <div class="controls">
+        <button onclick="checkAnswers()">Check Answers</button>
+        <button onclick="resetQuiz()" style="background:#95a5a6;">Reset</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const answers = {
+            ans1: "ovum",
+            ans2: "sperm",
+            ans3: "conception",
+            ans4: "cell",
+            ans5: "nucleus",
+            ans6: "chromosomes",
+            ans7: "46",
+            ans8: "genes",
+            ans9: "blue",
+            ans10: "body",
+            ans11: "germ",
+            ans12: "divide",
+            ans13: "cross over",
+            ans14: "inheritance",
+            ans15: "trillions",
+            ans16: "two"
+        };
+
+        function checkAnswers() {
+            let score = 0;
+            let total = Object.keys(answers).length;
+
+            for (let id in answers) {
+                let input = document.getElementById(id);
+                let userAns = input.value.trim().toLowerCase();
+                
+                if (userAns === answers[id].toLowerCase()) {
+                    input.classList.add("correct");
+                    input.classList.remove("incorrect");
+                    score++;
+                } else {
+                    input.classList.add("incorrect");
+                    input.classList.remove("correct");
+                }
+            }
+
+            document.getElementById("result").innerText = "You got " + score + " out of " + total + " correct!";
+        }
+
+        function resetQuiz() {
+            for (let id in answers) {
+                let input = document.getElementById(id);
+                input.value = "";
+                input.classList.remove("correct", "incorrect");
+            }
+            document.getElementById("result").innerText = "";
+        }
+    </script>
+</body>
+</html>

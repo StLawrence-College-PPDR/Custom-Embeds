@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  .quiz-container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  .quiz-header {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  .question-block {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+  }
+  .question-text {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #2c3e50;
+  }
+  .options label {
+    display: block;
+    margin-bottom: 8px;
+    cursor: pointer;
+  }
+  .btn-submit {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .btn-submit:hover {
+    background-color: #0056b3;
+  }
+  .feedback {
+    margin-top: 10px;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 4px;
+  }
+  .correct { color: #155724; background-color: #d4edda; }
+  .incorrect { color: #721c24; background-color: #f8d7da; }
+  .hidden { display: none; }
+  #score-display {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #333;
+  }
+</style>
+</head>
+<body>
+
+<div class="quiz-container">
+  <h2 class="quiz-header">Language Development Knowledge Check</h2>
+  <div id="quiz-form">
+    <!-- Questions will be injected here by JS -->
+  </div>
+  <button class="btn-submit" onclick="submitQuiz()">Submit Answers</button>
+  <div id="score-display" class="hidden"></div>
+</div>
+
+<script>
+  const questions = [
+    {
+      q: "Language development is a combination of which two types of development?",
+      options: ["Emotional and Physical", "Cognitive and Physical", "Social and Emotional", "Cognitive and Social"],
+      answer: 1 // Index of correct answer (B)
+    },
+    {
+      q: "A child understands 'Where is your ball?' but cannot say the word 'ball'. This is an example of:",
+      options: ["Productive Language", "Telegraphic Speech", "Receptive Language", "Holophrastic Speech"],
+      answer: 2 // (C)
+    },
+    {
+      q: "Which stage is characterized by consonant and vowel sounds (e.g., 'ba-ba') around 5-6 months?",
+      options: ["Cooing", "Babbling", "Intonation", "Telegraphic Speech"],
+      answer: 1 // (B)
+    },
+    {
+      q: "What is 'Holophrastic speech'?",
+      options: ["Telegraphic sentences", "Pitch changes imitating speech", "Writing one's name", "Using one word to convey a whole sentence"],
+      answer: 3 // (D)
+    },
+    {
+      q: "At what age does the 'naming explosion' typically occur?",
+      options: ["6 months", "12 months", "18 months", "3 years"],
+      answer: 2 // (C)
+    },
+    {
+      q: "Which is TRUE regarding Sign Language acquisition?",
+      options: ["No 'babbling' phase occurs", "It delays verbal speech", "It starts with 'hand babbling' similar to verbal development", "It always follows verbal development"],
+      answer: 2 // (C)
+    },
+    {
+      q: "Telegraphic speech is defined as:",
+      options: ["Using important words and omitting insignificant ones", "Using gestures only", "Physical mouth movements", "Written symbols"],
+      answer: 0 // (A)
+    }
+  ];
+
+  const quizForm = document.getElementById('quiz-form');
+
+  // Render Questions
+  questions.forEach((item, index) => {
+    const block = document.createElement('div');
+    block.className = 'question-block';
+    
+    let optionsHtml = '';
+    item.options.forEach((opt, optIndex) => {
+      optionsHtml += `
+        <label>
+          <input type="radio" name="q${index}" value="${optIndex}">
+          ${opt}
+        </label>
+      `;
+    });
+
+    block.innerHTML = `
+      <div class="question-text">${index + 1}. ${item.q}</div>
+      <div class="options">${optionsHtml}</div>
+      <div id="feedback-${index}" class="feedback hidden"></div>
+    `;
+    quizForm.appendChild(block);
+  });
+
+  function submitQuiz() {
+    let score = 0;
+    
+    questions.forEach((item, index) => {
+      const selected = document.querySelector(`input[name="q${index}"]:checked`);
+      const feedback = document.getElementById(`feedback-${index}`);
+      feedback.classList.remove('hidden');
+
+      if (selected && parseInt(selected.value) === item.answer) {
+        score++;
+        feedback.textContent = "Correct!";
+        feedback.className = "feedback correct";
+      } else {
+        feedback.textContent = `Incorrect. The correct answer was: ${item.options[item.answer]}`;
+        feedback.className = "feedback incorrect";
+      }
+    });
+
+    const scoreDisplay = document.getElementById('score-display');
+    scoreDisplay.textContent = `You scored ${score} out of ${questions.length}`;
+    scoreDisplay.classList.remove('hidden');
+    
+    // Disable inputs after submit
+    const inputs = document.querySelectorAll('input[type="radio"]');
+    inputs.forEach(input => input.disabled = true);
+    document.querySelector('.btn-submit').style.display = 'none';
+  }
+</script>
+
+</body>
+</html>

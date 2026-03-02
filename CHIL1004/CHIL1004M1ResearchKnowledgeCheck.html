@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Child Development Research Knowledge Check</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 20px auto; padding: 20px; background-color: #f4f4f9; }
+        .quiz-container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .question { font-weight: bold; margin-bottom: 10px; margin-top: 25px; }
+        .options { list-style: none; padding: 0; }
+        .options li { margin-bottom: 8px; }
+        button { background: #2c3e50; color: white; border: none; padding: 12px 20px; border-radius: 4px; cursor: pointer; font-size: 16px; margin-top: 20px; }
+        button:hover { background: #34495e; }
+        #results { margin-top: 20px; padding: 20px; display: none; border-radius: 4px; }
+        .correct { color: #27ae60; font-weight: bold; }
+        .incorrect { color: #c0392b; font-weight: bold; }
+        .feedback { font-size: 0.9em; margin-top: 4px; display: block; color: #666; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h2>Knowledge Check: Research in Child Development</h2>
+    <p>Answer the following questions to test your understanding of the research materials.</p>
+    
+    <form id="quizForm">
+        <!-- Q1 -->
+        <div class="question">1. If research results are proven consistent when the study is repeated over time, the research is:</div>
+        <ul class="options">
+            <li><input type="radio" name="q1" value="a"> A) Valid</li>
+            <li><input type="radio" name="q1" value="b"> B) Reliable</li>
+            <li><input type="radio" name="q1" value="c"> C) Qualitative</li>
+        </ul>
+
+        <!-- Q2 -->
+        <div class="question">2. Which approach uses theories from disciplines such as psychology, pediatrics, and sociology?</div>
+        <ul class="options">
+            <li><input type="radio" name="q2" value="a"> A) Topical</li>
+            <li><input type="radio" name="q2" value="b"> B) Lifespan</li>
+            <li><input type="radio" name="q2" value="c"> C) Multidisciplinary</li>
+        </ul>
+
+        <!-- Q3 -->
+        <div class="question">3. What is a disadvantage of the "Topical" approach?</div>
+        <ul class="options">
+            <li><input type="radio" name="q3" value="a"> A) It doesn't focus on the process.</li>
+            <li><input type="radio" name="q3" value="b"> B) It's hard to see the interrelatedness between developmental processes.</li>
+            <li><input type="radio" name="q3" value="c"> C) Development stops at age 21 in this model.</li>
+        </ul>
+
+        <!-- Q4 -->
+        <div class="question">4. The "Age-Stage" approach suggests development is:</div>
+        <ul class="options">
+            <li><input type="radio" name="q4" value="a"> A) Continuous and quantitative.</li>
+            <li><input type="radio" name="q4" value="b"> B) Discontinuous and qualitative.</li>
+            <li><input type="radio" name="q4" value="c"> C) Hard to see on a daily basis.</li>
+        </ul>
+
+        <!-- Q5 -->
+        <div class="question">5. Studying the same group of children at ages 2, 4, and 7 is which method?</div>
+        <ul class="options">
+            <li><input type="radio" name="q5" value="a"> A) Longitudinal</li>
+            <li><input type="radio" name="q5" value="b"> B) Cross-Sectional</li>
+            <li><input type="radio" name="q5" value="c"> C) Sequential</li>
+        </ul>
+
+        <!-- Q6 -->
+        <div class="question">6. In a ______ observation, the researcher manipulates the environment to elicit a specific behavior.</div>
+        <ul class="options">
+            <li><input type="radio" name="q6" value="a"> A) Naturalistic</li>
+            <li><input type="radio" name="q6" value="b"> B) Structured</li>
+            <li><input type="radio" name="q6" value="c"> C) Case Study</li>
+        </ul>
+
+        <!-- Q7 -->
+        <div class="question">7. Why can't conclusions from a "Case Study" be applied to the general population?</div>
+        <ul class="options">
+            <li><input type="radio" name="q7" value="a"> A) They lack ecological validity.</li>
+            <li><input type="radio" name="q7" value="b"> B) They are based on self-reports only.</li>
+            <li><input type="radio" name="q7" value="c"> C) They only apply to the specific individual studied.</li>
+        </ul>
+
+        <!-- Q8 -->
+        <div class="question">8. In an experiment, the factor being manipulated (the hypothesized cause) is the:</div>
+        <ul class="options">
+            <li><input type="radio" name="q8" value="a"> A) Dependent variable</li>
+            <li><input type="radio" name="q8" value="b"> B) Independent variable</li>
+            <li><input type="radio" name="q8" value="c"> C) Control group</li>
+        </ul>
+
+        <!-- Q9 -->
+        <div class="question">9. According to ethics, do children have the right to refuse to participate if parents have said yes?</div>
+        <ul class="options">
+            <li><input type="radio" name="q9" value="a"> A) No, parents have legal authority.</li>
+            <li><input type="radio" name="q9" value="b"> B) Yes, children have the right to refuse.</li>
+            <li><input type="radio" name="q9" value="c"> C) Only in medical experiments.</li>
+        </ul>
+
+        <!-- Q10 -->
+        <div class="question">10. Studies that show relationships between variables but do NOT prove cause and effect are:</div>
+        <ul class="options">
+            <li><input type="radio" name="q10" value="a"> A) Experimental Studies</li>
+            <li><input type="radio" name="q10" value="b"> B) Correlational Studies</li>
+            <li><input type="radio" name="q10" value="c"> C) Systematic Observations</li>
+        </ul>
+
+        <button type="button" onclick="checkQuiz()">Submit Answers</button>
+    </form>
+
+    <div id="results"></div>
+</div>
+
+<script>
+    function checkQuiz() {
+        const answers = {
+            q1: 'b', q2: 'c', q3: 'b', q4: 'b', q5: 'a',
+            q6: 'b', q7: 'c', q8: 'b', q9: 'b', q10: 'b'
+        };
+        
+        let score = 0;
+        const form = document.getElementById('quizForm');
+        const resultsDiv = document.getElementById('results');
+        let report = "<h3>Your Results</h3>";
+
+        for(let i=1; i<=10; i++) {
+            const questionName = 'q' + i;
+            const selected = form.querySelector(`input[name="${questionName}"]:checked`);
+            
+            if(selected && selected.value === answers[questionName]) {
+                score++;
+                report += `<p>Question ${i}: <span class="correct">Correct!</span></p>`;
+            } else {
+                report += `<p>Question ${i}: <span class="incorrect">Incorrect.</span> (The correct answer was ${answers[questionName].toUpperCase()})</p>`;
+            }
+        }
+
+        resultsDiv.style.display = 'block';
+        resultsDiv.style.backgroundColor = score > 7 ? '#d4edda' : '#f8d7da';
+        resultsDiv.innerHTML = report + `<h4>Final Score: ${score}/10</h4>`;
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+</script>
+
+</body>
+</html>

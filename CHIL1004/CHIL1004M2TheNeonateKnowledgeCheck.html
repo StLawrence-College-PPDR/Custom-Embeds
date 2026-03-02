@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment of Newborns Knowledge Check</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 20px auto; padding: 20px; background-color: #f4f4f9; }
+        .quiz-container { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .question { font-weight: bold; margin-bottom: 15px; color: #2c3e50; }
+        .options { margin-bottom: 20px; }
+        .option { display: block; background: #ebedef; margin: 5px 0; padding: 10px; border-radius: 4px; cursor: pointer; transition: 0.3s; }
+        .option:hover { background: #d5d8dc; }
+        .selected { background: #3498db !important; color: white; }
+        #submit-btn { background: #27ae60; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        #result { margin-top: 20px; font-weight: bold; display: none; padding: 15px; border-radius: 5px; }
+        .correct { color: #27ae60; background: #e8f5e9; border: 1px solid #27ae60; margin-top: 10px; padding: 10px; border-radius: 5px; }
+        .incorrect { color: #c0392b; background: #f9ebea; border: 1px solid #c0392b; margin-top: 10px; padding: 10px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <h2>Knowledge Check: Assessment of Newborns</h2>
+    <div id="quiz"></div>
+    <button id="submit-btn" onclick="calculateScore()">Submit Answers</button>
+    <div id="result"></div>
+</div>
+
+<script>
+    const quizData = [
+        {
+            q: "1. At what intervals is the Apgar Scoring System usually administered?",
+            options: ["Immediately and at 10 minutes", "1 minute and 5 minutes after delivery", "Every hour for the first 5 hours", "Only at the moment of birth"],
+            answer: 1
+        },
+        {
+            q: "2. Which bones are most commonly broken due to a hard delivery?",
+            options: ["Ribs and skull", "Femur and pelvis", "Collar bone and upper arm", "Ankle and wrist"],
+            answer: 2
+        },
+        {
+            q: "3. What percentage of live births involve the presence of Meconium (bowel material) in the amniotic fluid?",
+            options: ["1%", "5%", "10%", "25%"],
+            answer: 2
+        },
+        {
+            q: "4. What is the Brazelton Neonatal Behavioural Assessment Scale primarily used for?",
+            options: ["Immediate survival reflexes", "Long-term neurological assessment", "Calculating birth weight", "Determining eye color"],
+            answer: 1
+        },
+        {
+            q: "5. What is the average weight and length of a full-term newborn?",
+            options: ["5 lbs and 15 inches", "7.5 lbs and 20 inches", "9 lbs and 24 inches", "6.5 lbs and 18 inches"],
+            answer: 1
+        },
+        {
+            q: "6. Why might a newborn lose up to 10% of their body weight in the first few days?",
+            options: ["Lack of sleep", "Primary fluid loss while adjusting to life", "Infection", "Excessive crying"],
+            answer: 1
+        },
+        {
+            q: "7. Why does a newborn's skin often look yellow (jaundice) around the third day?",
+            options: ["Reaction to antiseptic soap", "The immature liver is breaking down extra red blood cells", "Lack of Vitamin K", "A reaction to vernix"],
+            answer: 1
+        },
+        {
+            q: "8. Newborn reflexes are involuntary movements controlled by which parts of the body?",
+            options: ["The frontal lobe", "The heart and lungs", "The spinal cord and midbrain", "The cerebellum only"],
+            answer: 2
+        },
+        {
+            q: "9. How far away can a newborn typically focus on objects?",
+            options: ["2 to 4 inches", "8 to 10 inches", "20 to 30 inches", "They cannot focus at all"],
+            answer: 1
+        },
+        {
+            q: "10. What is 'Habituation' in the context of a neonate?",
+            options: ["Learning to crawl", "The process of becoming accustomed to stimuli and no longer responding to it", "The baby's attachment to the father", "The inability to hear loud noises"],
+            answer: 1
+        }
+    ];
+
+    function loadQuiz() {
+        const quizContainer = document.getElementById('quiz');
+        let output = '';
+        quizData.forEach((data, index) => {
+            output += `<div class="question">${data.q}</div>
+                       <div class="options" id="q${index}">`;
+            data.options.forEach((option, i) => {
+                output += `<div class="option" onclick="selectOption(${index}, ${i})">${option}</div>`;
+            });
+            output += `</div><div id="feedback${index}"></div><br>`;
+        });
+        quizContainer.innerHTML = output;
+    }
+
+    const userAnswers = {};
+
+    function selectOption(qIndex, oIndex) {
+        userAnswers[qIndex] = oIndex;
+        const options = document.getElementById(`q${qIndex}`).children;
+        for (let i = 0; i < options.length; i++) {
+            options[i].classList.remove('selected');
+        }
+        options[oIndex].classList.add('selected');
+    }
+
+    function calculateScore() {
+        let score = 0;
+        quizData.forEach((data, index) => {
+            const feedbackDiv = document.getElementById(`feedback${index}`);
+            if (userAnswers[index] === data.answer) {
+                score++;
+                feedbackDiv.innerHTML = `<div class="correct">Correct!</div>`;
+            } else {
+                feedbackDiv.innerHTML = `<div class="incorrect">Incorrect. The correct answer is: ${data.options[data.answer]}</div>`;
+            }
+        });
+
+        const resultDiv = document.getElementById('result');
+        resultDiv.style.display = 'block';
+        resultDiv.innerHTML = `You scored ${score} out of ${quizData.length}!`;
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    loadQuiz();
+</script>
+
+</body>
+</html>

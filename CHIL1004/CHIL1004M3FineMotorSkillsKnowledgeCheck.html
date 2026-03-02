@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  .quiz-container {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  .question-block {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+  }
+  .question-text {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .options label {
+    display: block;
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
+  .feedback {
+    margin-top: 10px;
+    font-size: 0.9em;
+    display: none;
+  }
+  .correct {
+    color: green;
+    font-weight: bold;
+  }
+  .incorrect {
+    color: red;
+  }
+  #submit-btn {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  #submit-btn:hover {
+    background-color: #0056b3;
+  }
+  #score-display {
+    margin-top: 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="quiz-container">
+  <h2>Fine Motor Milestones Knowledge Check</h2>
+  
+  <!-- Question 1 -->
+  <div class="question-block" id="q1-block">
+    <span class="question-text">1. At what age do babies typically keep their hands in a fist with thumbs tucked in?</span>
+    <div class="options">
+      <label><input type="radio" name="q1" value="a"> 3-6 months</label>
+      <label><input type="radio" name="q1" value="b"> Birth to 3 months</label>
+      <label><input type="radio" name="q1" value="c"> 6-9 months</label>
+    </div>
+    <div class="feedback" id="q1-feedback"></div>
+  </div>
+
+  <!-- Question 2 -->
+  <div class="question-block" id="q2-block">
+    <span class="question-text">2. If a child is transferring objects from one hand to another, they are likely in which age range?</span>
+    <div class="options">
+      <label><input type="radio" name="q2" value="a"> Birth to 3 months</label>
+      <label><input type="radio" name="q2" value="b"> 3-6 months</label>
+      <label><input type="radio" name="q2" value="c"> 9-12 months</label>
+    </div>
+    <div class="feedback" id="q2-feedback"></div>
+  </div>
+
+  <!-- Question 3 -->
+  <div class="question-block" id="q3-block">
+    <span class="question-text">3. "Raking" tiny objects with fingers is a milestone characteristic of which stage?</span>
+    <div class="options">
+      <label><input type="radio" name="q3" value="a"> 6-9 months</label>
+      <label><input type="radio" name="q3" value="b"> 3-6 months</label>
+      <label><input type="radio" name="q3" value="c"> 12-18 months</label>
+    </div>
+    <div class="feedback" id="q3-feedback"></div>
+  </div>
+
+  <!-- Question 4 -->
+  <div class="question-block" id="q4-block">
+    <span class="question-text">4. At 9-12 months, how does a child typically interact with book pages?</span>
+    <div class="options">
+      <label><input type="radio" name="q4" value="a"> Turns pages one at a time</label>
+      <label><input type="radio" name="q4" value="b"> Turns pages a few at a time</label>
+      <label><input type="radio" name="q4" value="c"> Tears the pages out</label>
+    </div>
+    <div class="feedback" id="q4-feedback"></div>
+  </div>
+
+  <!-- Question 5 -->
+  <div class="question-block" id="q5-block">
+    <span class="question-text">5. According to the text, when does a child begin to show a preference for one hand?</span>
+    <div class="options">
+      <label><input type="radio" name="q5" value="a"> 6-9 months</label>
+      <label><input type="radio" name="q5" value="b"> 12-18 months</label>
+      <label><input type="radio" name="q5" value="c"> 9-12 months</label>
+    </div>
+    <div class="feedback" id="q5-feedback"></div>
+  </div>
+
+  <!-- Question 6 -->
+  <div class="question-block" id="q6-block">
+    <span class="question-text">6. Building a tower of 2 or more blocks typically occurs during which timeframe?</span>
+    <div class="options">
+      <label><input type="radio" name="q6" value="a"> 9-12 months</label>
+      <label><input type="radio" name="q6" value="b"> 12-18 months</label>
+      <label><input type="radio" name="q6" value="c"> 18-24 months</label>
+    </div>
+    <div class="feedback" id="q6-feedback"></div>
+  </div>
+
+  <!-- Question 7 -->
+  <div class="question-block" id="q7-block">
+    <span class="question-text">7. Which fine motor skill regarding books is developed by 18-24 months?</span>
+    <div class="options">
+      <label><input type="radio" name="q7" value="a"> Turns pages one at a time</label>
+      <label><input type="radio" name="q7" value="b"> Turns pages a few at a time</label>
+      <label><input type="radio" name="q7" value="c"> Reads simple words</label>
+    </div>
+    <div class="feedback" id="q7-feedback"></div>
+  </div>
+
+  <!-- Question 8 -->
+  <div class="question-block" id="q8-block">
+    <span class="question-text">8. At which age is a child expected to draw or copy a complete circle?</span>
+    <div class="options">
+      <label><input type="radio" name="q8" value="a"> 18-24 months</label>
+      <label><input type="radio" name="q8" value="b"> 4-5 years</label>
+      <label><input type="radio" name="q8" value="c"> 3-4 years</label>
+    </div>
+    <div class="feedback" id="q8-feedback"></div>
+  </div>
+
+  <!-- Question 9 -->
+  <div class="question-block" id="q9-block">
+    <span class="question-text">9. Printing a first name (four letters) is a milestone for which age group?</span>
+    <div class="options">
+      <label><input type="radio" name="q9" value="a"> 3-4 years</label>
+      <label><input type="radio" name="q9" value="b"> 4-5 years</label>
+      <label><input type="radio" name="q9" value="c"> 5-6 years</label>
+    </div>
+    <div class="feedback" id="q9-feedback"></div>
+  </div>
+
+  <!-- Question 10 -->
+  <div class="question-block" id="q10-block">
+    <span class="question-text">10. Drawing a person that has at least 3 parts (head, eyes, nose, etc.) occurs at:</span>
+    <div class="options">
+      <label><input type="radio" name="q10" value="a"> 4-5 years</label>
+      <label><input type="radio" name="q10" value="b"> 3-4 years</label>
+      <label><input type="radio" name="q10" value="c"> 18-24 months</label>
+    </div>
+    <div class="feedback" id="q10-feedback"></div>
+  </div>
+
+  <button id="submit-btn" onclick="checkAnswers()">Submit Answers</button>
+  <div id="score-display"></div>
+</div>
+
+<script>
+function checkAnswers() {
+  var score = 0;
+  var totalQuestions = 10;
+  
+  // Key: Question Number -> Correct Value
+  var answers = {
+    q1: 'b', // Birth-3 months
+    q2: 'b', // 3-6 months
+    q3: 'a', // 6-9 months
+    q4: 'b', // Few at a time
+    q5: 'c', // 9-12 months
+    q6: 'b', // 12-18 months
+    q7: 'a', // One at a time
+    q8: 'c', // 3-4 years
+    q9: 'b', // 4-5 years
+    q10: 'a' // 4-5 years
+  };
+
+  // Clear previous feedback
+  var feedbacks = document.getElementsByClassName('feedback');
+  for (var i = 0; i < feedbacks.length; i++) {
+    feedbacks[i].style.display = 'none';
+    feedbacks[i].innerHTML = '';
+  }
+
+  // Loop through answers
+  for (var i = 1; i <= totalQuestions; i++) {
+    var qName = 'q' + i;
+    var selected = document.querySelector('input[name="' + qName + '"]:checked');
+    var feedbackDiv = document.getElementById(qName + '-feedback');
+    
+    if (selected) {
+      if (selected.value === answers[qName]) {
+        score++;
+        feedbackDiv.innerHTML = '<span class="correct">Correct!</span>';
+      } else {
+        feedbackDiv.innerHTML = '<span class="incorrect">Incorrect.</span>';
+      }
+    } else {
+      feedbackDiv.innerHTML = '<span class="incorrect">Please select an answer.</span>';
+    }
+    feedbackDiv.style.display = 'block';
+  }
+
+  // Display Score
+  var resultDiv = document.getElementById('score-display');
+  resultDiv.innerHTML = 'You scored ' + score + ' out of ' + totalQuestions;
+  
+  if (score === totalQuestions) {
+    resultDiv.style.color = 'green';
+  } else {
+    resultDiv.style.color = 'black';
+  }
+}
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

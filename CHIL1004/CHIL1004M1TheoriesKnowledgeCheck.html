@@ -1,0 +1,97 @@
+<div id="quiz-wrapper" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 700px; margin: 20px auto; padding: 30px; border: 1px solid #e0e0e0; border-radius: 12px; background-color: #ffffff; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    <h2 style="text-align: center; color: #2c3e50; margin-bottom: 10px;">Knowledge Check: Developmental Theories</h2>
+    <p style="text-align: center; color: #7f8c8d; margin-bottom: 30px;">Select the best answer for each question.</p>
+    
+    <div id="quiz-content"></div>
+    
+    <button id="submit-quiz" style="display: block; width: 100%; padding: 15px; background-color: #3498db; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 18px; font-weight: bold; transition: background-color 0.3s;">Submit and Show Answers</button>
+    
+    <div id="quiz-results" style="margin-top: 25px; display: none; padding: 20px; border-radius: 8px; text-align: center;">
+        <h3 id="score-display" style="margin: 0; font-size: 24px;"></h3>
+        <p style="color: #666;">See below for correct answers highlighted in green.</p>
+    </div>
+</div>
+
+<script>
+const questions = [
+    { q: "According to the text, what is the 'Nurture' side of the developmental debate?", a: 2, options: ["Heredity and genetics", "Biological schedules", "Environmental experience", "Internal thought processes"] },
+    { q: "Arnold Gesell’s Maturational Theory proposes that development occurs because of:", a: 1, options: ["Social interactions", "A predetermined biological schedule", "Rewards and punishments", "Academic training"] },
+    { q: "In Freud’s theory, which component incorporates concepts of right and wrong?", a: 2, options: ["Id", "Ego", "Superego", "Ego-defense"] },
+    { q: "A toddler who is stressed about potty training and pretends not to hear a caregiver is using:", a: 2, options: ["Regression", "Denial", "Withdrawal", "Projection"] },
+    { q: "What is a noted weakness of Erik Erikson’s Psychosocial Theory?", a: 2, options: ["It doesn't cover the whole lifespan", "It ignores the role of society", "It is seen as oversimplified (one conflict per stage)", "It relies too much on animal research"] },
+    { q: "In B.F. Skinner's Operant Conditioning, what is 'Shaping'?", a: 2, options: ["Learning by watching others", "Pairing a bell with food", "Breaking a task into smaller steps and reinforcing each success", "Ignoring bad behavior"] },
+    { q: "Albert Bandura’s Social Cognitive Theory suggests that 'Self-efficacy' is:", a: 1, options: ["The ability to memorize facts", "A child’s confidence about their own abilities", "A biological stage of growth", "An external reward"] },
+    { q: "When a child creates a NEW category for information because it is different, Piaget calls this:", a: 1, options: ["Assimilation", "Accommodation", "Equilibration", "Scaffolding"] },
+    { q: "In Information-processing, what does 'Encoding' refer to?", a: 0, options: ["How memory is organized for storage", "How information is pulled from memory", "How and where information is kept", "The muscle response"] },
+    { q: "In Vygotsky’s theory, 'Scaffolding' is best described as:", a: 2, options: ["Letting a child discover everything alone", "A biological 'critical period'", "Guiding a child through a task based on their level", "The laws and customs of a culture"] }
+];
+
+const container = document.getElementById('quiz-content');
+
+questions.forEach((item, i) => {
+    let qDiv = document.createElement('div');
+    qDiv.style.marginBottom = "25px";
+    qDiv.style.paddingBottom = "15px";
+    qDiv.style.borderBottom = "1px solid #eee";
+    
+    let qText = document.createElement('p');
+    qText.innerHTML = `<strong>${i + 1}. ${item.q}</strong>`;
+    qDiv.appendChild(qText);
+    
+    item.options.forEach((opt, j) => {
+        let label = document.createElement('label');
+        label.style.display = "block";
+        label.style.margin = "8px 0";
+        label.style.padding = "8px";
+        label.style.borderRadius = "5px";
+        label.id = `label-${i}-${j}`;
+        
+        let radio = document.createElement('input');
+        radio.type = "radio";
+        radio.name = "q" + i;
+        radio.value = j;
+        radio.style.marginRight = "10px";
+        
+        label.appendChild(radio);
+        label.appendChild(document.createTextNode(opt));
+        qDiv.appendChild(label);
+    });
+    container.appendChild(qDiv);
+});
+
+document.getElementById('submit-quiz').addEventListener('click', function() {
+    let score = 0;
+    questions.forEach((item, i) => {
+        let selected = document.querySelector(`input[name="q${i}"]:checked`);
+        let correctIndex = item.a;
+        
+        // Highlight correct answer
+        document.getElementById(`label-${i}-${correctIndex}`).style.backgroundColor = "#d4edda";
+        document.getElementById(`label-${i}-${correctIndex}`).style.border = "1px solid #c3e6cb";
+        document.getElementById(`label-${i}-${correctIndex}`).style.fontWeight = "bold";
+
+        if (selected) {
+            if (parseInt(selected.value) === correctIndex) {
+                score++;
+            } else {
+                // Highlight incorrect choice
+                let wrongLabel = document.getElementById(`label-${i}-${selected.value}`);
+                wrongLabel.style.backgroundColor = "#f8d7da";
+                wrongLabel.style.border = "1px solid #f5c6cb";
+                wrongLabel.style.textDecoration = "line-through";
+            }
+        }
+        
+        // Disable all inputs
+        let inputs = document.getElementsByName("q" + i);
+        inputs.forEach(input => input.disabled = true);
+    });
+
+    const resultsDiv = document.getElementById('quiz-results');
+    resultsDiv.style.display = "block";
+    resultsDiv.style.backgroundColor = score > 7 ? "#d4edda" : "#fff3cd";
+    document.getElementById('score-display').innerText = `Your Score: ${score} / ${questions.length}`;
+    this.style.display = "none";
+    window.scrollTo(0, 0);
+});
+</script>
