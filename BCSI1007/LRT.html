@@ -1,15 +1,11 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="utf-8" />
-  <title>Interactive map of British Columbia 2021 Floods</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <!-- Leaflet CSS & JS (no key needed) -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  
-
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>Ottawa LRT Line 1 — Custom Popup Map</title>
+  <link rel='stylesheet' href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css' />
   <style>
     html, body { height: 500px; margin: 0px; }
     #map { position: absolute; inset: 0; margin: 0 auto; z-index: 1;}
@@ -63,6 +59,7 @@
           background: rgb(197 86 75);
           transition: cubic-bezier(x1, y1, x2, y2);
     }
+
     /* Base pin */
     .pin {
       width: 25px;
@@ -94,73 +91,100 @@
   </style>
 </head>
 <body>
+  <div id='map'></div>
+  <script src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'></script>
+  <script>
+    const stations = [
+    {
+      "name": "Tunney's Pasture",
+     "coords": [45.40389, -75.735], "title": "Tunney's Pasture \u2014 Western Terminus",
+     "desc": "Western end of Line 1 serving the federal Tunney's Pasture campus.",
+     "link_text": "Station details (Wikipedia)",
+     "href": "https://en.wikipedia.org/wiki/Tunney%27s_Pasture_station"
+    },
+    {"name": "Bayview",
+     "coords": [45.40944, -75.72194], "title": "Bayview \u2014 Transfer to Line 2",
+     "desc": "Major interchange linking Line 1 and Line 2, near Hintonburg/Little Italy.",
+     "link_text": "Station details (Wikipedia)",
+     "href": "https://en.wikipedia.org/wiki/Bayview_station_(Ottawa)"
+    },
+    {"name": "Pimisi",
+     "coords": [45.41389, -75.71333], "title": "Pimisi \u2014 LeBreton Flats",
+     "desc": "Gateway to LeBreton Flats and Canadian War Museum; Algonquin-inspired art.",
+     "link_text": "Station details (Wikipedia)",
+     "href": "https://en.wikipedia.org/wiki/Pimisi_station"
+    },
+    {"name": "Lyon",
+     "coords": [45.41944, -75.70444], "title": "Lyon \u2014 Downtown West",
+     "desc": "Underground station with entrances into Place de Ville complex.",
+     "link_text": "Station details (Wikipedia)",
+     "href": "https://en.wikipedia.org/wiki/Lyon_station"
+    },
+    {"name": "Parliament",
+     "coords": [45.42139, -75.69889], "title": "Parliament \u2014 Business District",
+     "desc": "High\u2011usage downtown stop with access to Parliament Hill and Sparks Street.",
+     "link_text": "Station details (Wikipedia)",
+     "href": "https://en.wikipedia.org/wiki/Parliament_station"
+    },
+    {"name": "Rideau",
+     "coords": [45.42611, -75.69194], "title": "Rideau \u2014 ByWard Market",
+     "desc": "Deepest station on the network; direct access to Rideau Centre and Market.",
+     "link_text": "Station details (Wikipedia)",
+     "href": "https://en.wikipedia.org/wiki/Rideau_station"
+    },
+    {"name": "uOttawa",
+     "coords": [45.42056, -75.68222], "title": "uOttawa \u2014 Campus Station",
+     "desc": "At\u2011grade stop serving the University of Ottawa and Corktown Footbridge.",
+     "link_text": "Station details (Wikipedia)",
+     "href": "https://en.wikipedia.org/wiki/UOttawa_station"
+    },
+    {"name": "Lees",
+     "coords": [45.41639, -75.67028], "title": "Lees \u2014 Sandy Hill Heights",
+     "desc": "Serves Lees Ave area; side\u2011platform station in a trench.",
+     "link_text": "Station details (Wikipedia)",
+     "href": "https://en.wikipedia.org/wiki/Lees_station"
+    },
+    {"name": "Hurdman",
+     "coords": [45.41222, -75.66278], "title": "Hurdman \u2014 Major Hub",
+     "desc": "Key transfer point between LRT and Transitway routes near Rideau River.",
+     "link_text": "Station details (Wikipedia)",
+     "href": "https://en.wikipedia.org/wiki/Hurdman_station"
+    },
+    {"name": "Tremblay",
+     "coords": [45.41667, -75.65333], "title": "Tremblay \u2014 VIA Rail Link",
+     "desc": "Short walk to Ottawa (VIA Rail) intercity station via Tremblay Road plaza.",
+     "link_text": "Station details (Wikipedia)",
+     "href": "https://en.wikipedia.org/wiki/Tremblay_station"
+    },
+    {"name": "Blair",
+     "coords": [45.43111, -75.60833], "title": "Blair \u2014 Eastern Terminus",
+     "desc": "Eastern end of Line 1; transfers to buses for Gloucester and Orl\u00e9ans.",
+     "link_text": "Station details (Wikipedia)",
+     "href": "https://en.wikipedia.org/wiki/Blair_station"}];
 
-<div id="map" aria-label="Interactive map of British Columbia (2021 floods)"></div>
-
-
-<script>
-  // ---------------- Base map (Leaflet + OSM tiles) ----------------
-  const map = L.map('map', {
-    center: [49.5, -124.8], // BC center
-    zoom: 6.7,
-    scrollWheelZoom: true
-  });
-
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    const map = L.map('map');
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
     subdomains: 'abcd',
     maxZoom: 20
 }).addTo(map);
 
-  // ---------------- Marker data (original 12 + source pins) ----------------
-  // NOTE (Rebecca): Add your own links/embeds inside each popup's HTML below
-  // (look for the <!-- YOUR CONTENT HERE --> comments).
-  const stations = [
+    const coords = stations.map(s => s.coords);
+    L.polyline(coords, { 
 
-    {
-      "name": "article1",
-     "coords": [49.750, -121.200], 
-     "title": "PMI Official Case Study — Reconnecting Roads After Massive Flooding",
-     "desc": "The primary, authoritative case document you want students to read and analyze.",
-     "link_text": "Read Article",
-     "href": "https://www.pmi.org/business-solutions/case-studies/reconnecting-roads-after-massive-flooding"
-    },
-    {
-      "name": "article2",
-     "coords": [50.2310, -121.5820],
-     "title": "Government of British Columbia — Highway Flood Recovery Background",
-     "desc": "Official government description of the 2021 flood impact and highway reconnection work — excellent context for scope and stakeholder impact.",
-     "link_text": "Read Article",
-     "href": "https://www2.gov.bc.ca/gov/content/transportation-projects/bc-highway-flood-recovery"
-    },
-    {
-      "name": "article3podcast1",
-     "coords": [49.0500, -122.3000],
-     "title": "The Big Story — More Than Rain: Why Flooding Is Getting Worse in B.C.",
-     "desc": "Analysis of the scientific and social dimensions of the 2021 floods.",
-     "link_text": "Listen and Read Article",
-     "href": "https://toronto.citynews.ca/2026/01/07/bc-flooding-big-story-podcast/"
-    },
-    {
-      "name": "video1",
-     "coords": [49.630, -121.050],
-     "title": "BC Flood Recovery: Reopening the Coquihalla After 2021 Rainstorms",
-     "desc": "Short video explaining what happened and restoration efforts — supports understanding of scope & sequencing.",
-     "link_text": "Watch Video",
-     "href": "https://www.youtube.com/watch?v=3CW9rTnkYOc"
-    },
-    {
-      "name": "podcast34",
-     "coords": [49.0500, -122.2000],
-     "title": "Fraser Valley floods caused by atmospheric river over region",
-     "desc": "This podcast episode discusses recent flooding in the Fraser Valley caused by an atmospheric river system, the impacts on communities and infrastructure, and ongoing risk monitoring by officials. It’s Canadian, topical, and directly tied to the meteorological events that underpinned the 2021 floods, helping students connect risk, environmental drivers, and management responses.",
-     "link_text": "Listen",
-     "href": "https://www.ivoox.com/en/fraser-valley-floods-caused-by-atmospheric-river-over-audios-mp3_rf_164172908_1.html"
-    }
-  ];
+color: '#333333',
+  weight: 5,
+  opacity: 0.9,
+  dashArray: '8 6',    // 8px dash, 6px gap
+  dashOffset: '0',     // (optional) shift the pattern along the path
+  lineCap: 'butt'      // (optional) 'butt' = squared off dashes (looks cleaner)
 
-  // Restore visited station ids from localStorage
-const VISITED_KEY = 'bc-media-visited';
+    }).addTo(map);
+
+    map.fitBounds(L.latLngBounds(coords).pad(0.08));
+
+    // Restore visited station ids from localStorage
+const VISITED_KEY = 'ottawa_lrt_line1_visited';
 const visitedSet = new Set(JSON.parse(localStorage.getItem(VISITED_KEY) || '[]'));
 
 function saveVisited() {
@@ -216,7 +240,8 @@ stations.forEach((s, i) => {
     }
   });
 });
-</script>
+
+  </script>
 </body>
 </html>
 
