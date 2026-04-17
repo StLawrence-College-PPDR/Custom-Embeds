@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cached Description with Word Minimum</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      padding: 2rem;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 240px;
+      padding: 1rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      background: #f9fafb;
+      resize: vertical;
+    }
+
+    .message {
+      margin-top: 1rem;
+      padding: 1rem 1.6rem;
+      background: #d3473c21;
+      border: 1px solid #d3473c;
+      border-radius: 8px;
+      display: none;
+      font-weight: 600;
+    }
+
+    .counter {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <textarea
+    id="description"
+    placeholder="Your response should contain at least 20 words..."
+  ></textarea>
+
+  <div id="wordCounter" class="counter">
+    Your 0 / 20 words have been saved/cached to your summary.
+  </div>
+
+  <div id="feedbackMessage" class="message">
+    <p><strong> Minimum Requirement Met</strong> — Expected Answers:</p>
+    <ul>
+<li>Initiation, Planning, Execution, Monitoring & Controlling, Closing.</li>
+<li>Initiation defines scope and project purpose.</li>
+<li>Example provided.</li>
+    </ul>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "cached_description_min_20_words";
+    const textarea = document.getElementById("description");
+    const counter = document.getElementById("wordCounter");
+    const message = document.getElementById("feedbackMessage");
+    const MIN_WORDS = 20;
+
+    function countWords(text) {
+      return text
+        .trim()
+        .split(/\s+/)
+        .filter(word => word.length > 0)
+        .length;
+    }
+
+    // Restore cached value
+    const cachedValue = localStorage.getItem(STORAGE_KEY);
+    if (cachedValue) {
+      textarea.value = cachedValue;
+    }
+
+    function updateState() {
+      const wordCount = countWords(textarea.value);
+
+      counter.textContent = `Your ${wordCount} / ${MIN_WORDS} words have been saved/cached to your summary.`;
+      message.style.display = wordCount >= MIN_WORDS ? "block" : "none";
+
+      // Cache the value
+      localStorage.setItem(STORAGE_KEY, textarea.value);
+    }
+
+    // Initial update (important when restoring cache)
+    updateState();
+
+    textarea.addEventListener("input", updateState);
+  </script>
+
+</body>
+</html>
+
+cached_description_min_20_words16
