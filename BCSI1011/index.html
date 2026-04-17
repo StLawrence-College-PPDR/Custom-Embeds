@@ -12,9 +12,11 @@
     body { background:#fff; color:#000; font-family: "Open Sans", sans-serif; overflow-y: scroll; height: 500px;}
     .chart { width: 100%; height: 250px; margin: 40px 0;}
     h2 { margin-top: 60px; text-align: center;}
+    .container {position: relative; height: 3000px;}
   </style>
 </head>
 <body>
+  <div class="container">
 <h2>Age Range</h2>
 <div id="ageChart" class="chart"></div>
 
@@ -38,7 +40,7 @@
 
 <h2>Values: Sustainability Influence</h2>
 <div id="valuesChart" class="chart"></div>
-
+</div>
 <script>
 // Shared color palette (black, white + approved hex values)
 const palette = [
