@@ -3,21 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <title>Upgraded Dynamic Poll</title>
+ <title>Realtime Multi‑User Poll</title>
   <style>
- body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; padding: 24px; max-width: 760px; margin: auto; }
- h1 { font-size: 1.6rem; margin-bottom: 8px; }
+ body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; padding: 24px; max-width: 800px; margin: auto; }
+ h1 { font-size: 1.6rem; margin-bottom: 6px; }
  .meta { color: #666; margin-bottom: 16px; }
-
 
  .poll-input { display: flex; gap: 8px; margin-bottom: 20px; }
  input[type=text] { flex: 1; padding: 10px; font-size: 1rem; }
  button { padding: 10px 14px; font-size: 1rem; cursor: pointer; }
 
-
  .chart { display: flex; flex-direction: column; gap: 12px; }
  .bar-row { display: flex; align-items: center; gap: 12px; }
- .label { width: 160px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+ .label { width: 180px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .bar-container { flex: 1; background: #eee; border-radius: 6px; overflow: hidden; }
  .bar {
  height: 26px;
@@ -29,36 +27,64 @@
  color: #fff;
  padding-right: 8px;
  box-sizing: border-box;
- transition: width 0.3s ease;
+ transition: width 0.25s ease;
  }
-
 
  .footer { margin-top: 24px; font-size: 0.9rem; color: #666; }
   </style>
 </head>
 <body>
- <h1>Live Poll (Upgraded)</h1>
- <div id="meta" class="meta"></div>
-
-
+ <h1>Live Poll (Realtime)</h1>
+ <div id="meta" class="meta">Connecting…</div>
   <div class="poll-input">
     <input id="answerInput" type="text" placeholder="Type your answer…" />
     <button id="submitBtn">Submit</button>
   </div>
 
-
   <div id="chart" class="chart"></div>
 
+
  <div class="footer">
- Votes are stored locally in this browser. Matching is case-insensitive and typo-tolerant.
+ Real‑time voting across devices. One vote per browser session.
  </div>
+
+
+ <!-- Firebase SDKs (CDN) -->
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database-compat.js"></script>
+
+
+
  <script>
+ /* ===================================================
+ 🔥 FIREBASE SETUP (REQUIRED)
+ 1. Create a Firebase project
+ 2. Enable Realtime Database
+ 3. Replace config below
+ =================================================== */
+
+
+ const firebaseConfig = {
+apiKey: "AIzaSyCRp38VMYdb07rudTKwcCCLZy2u9b9HVMk",
+    authDomain: "bcsi1001-hackathon-database.firebaseapp.com",
+    databaseURL: "https://bcsi1001-hackathon-database-default-rtdb.firebaseio.com",
+    projectId: "bcsi1001-hackathon-database",
+    storageBucket: "bcsi1001-hackathon-database.firebasestorage.app",
+    messagingSenderId: "458743236902",
+    appId: "1:458743236902:web:a7c03dbb0b2e161228d9e7",
+    measurementId: "G-C17HTW8KRD"
+ };
+
+
+ firebase.initializeApp(firebaseConfig);
+ const db = firebase.database();
+ const pollRef = db.ref('poll');
+
+
  /* =========================
- CONFIGURABLE UPGRADES
+ CONFIG
  ========================= */
 
-
- // Simple synonym mapping (extend as needed)
  const SYNONYMS = {
  'nyc': 'new york',
  'new york city': 'new york',
@@ -66,34 +92,27 @@
  'us': 'united states'
  };
 
-
- const MAX_EDIT_DISTANCE = 1; // fuzzy matching tolerance
-
-
+ const MAX_EDIT_DISTANCE = 1;
  /* =========================
- STATE + PERSISTENCE
+ STATE
  ========================= */
 
-
- let counts = JSON.parse(localStorage.getItem('pollCounts') || '{}');
  let hasVoted = sessionStorage.getItem('hasVoted') === 'true';
-
 
     const input = document.getElementById('answerInput');
     const submitBtn = document.getElementById('submitBtn');
     const chart = document.getElementById('chart');
  const meta = document.getElementById('meta');
 
-
  /* =========================
- NORMALIZATION & MATCHING
+ UTILITIES
  ========================= */
-
 
     function normalize(text) {
  const base = text.trim().toLowerCase();
  return SYNONYMS[base] || base;
     }
+
 
  function levenshtein(a, b) {
  const dp = Array.from({ length: a.length + 1 }, () => []);
@@ -111,63 +130,56 @@
  return dp[a.length][b.length];
  }
 
-
- function findExistingKey(candidate) {
- for (const key of Object.keys(counts)) {
- if (levenshtein(key, candidate) <= MAX_EDIT_DISTANCE) {
- return key;
- }
+ function findExistingKey(candidate, data) {
+ for (const key of Object.keys(data)) {
+ if (levenshtein(key, candidate) <= MAX_EDIT_DISTANCE) return key;
  }
  return null;
  }
 
 
  /* =========================
- SUBMISSION LOGIC
+ SUBMISSION
  ========================= */
 
 
-    function submitAnswer() {
+ submitBtn.addEventListener('click', async () => {
  if (hasVoted) return;
-
 
       const raw = input.value;
       if (!raw.trim()) return;
 
+
  const normalized = normalize(raw);
- const existingKey = findExistingKey(normalized) || normalized;
 
-
- if (!counts[existingKey]) {
- counts[existingKey] = { label: raw.trim(), count: 0 };
-      }
-
- counts[existingKey].count += 1;
+ await pollRef.transaction(data => {
+ data = data || {};
+ const key = findExistingKey(normalized, data) || normalized;
+ if (!data[key]) data[key] = { label: raw.trim(), count: 0 };
+ data[key].count += 1;
+ return data;
+ });
  hasVoted = true;
  sessionStorage.setItem('hasVoted', 'true');
- localStorage.setItem('pollCounts', JSON.stringify(counts));
       input.value = '';
-      renderChart();
-    }
-
-
+ });
+ input.addEventListener('keydown', e => {
+ if (e.key === 'Enter') submitBtn.click();
+ });
  /* =========================
- RENDERING
+ REAL‑TIME LISTENER
  ========================= */
 
-
-    function renderChart() {
+ pollRef.on('value', snapshot => {
+ const data = snapshot.val() || {};
+ renderChart(data);
+ });
+ function renderChart(data) {
       chart.innerHTML = '';
-      const values = Object.values(counts);
- const totalVotes = values.reduce((sum, v) => sum + v.count, 0);
-
-
- meta.textContent = `Total votes: ${totalVotes}${hasVoted ? ' (you have voted)' : ''}`;
-
-
+ const values = Object.values(data);
+ const totalVotes = values.reduce((s, v) => s + v.count, 0);
+ meta.textContent = `Total votes: ${totalVotes}${hasVoted ? ' (you voted)' : ''}`;
       if (values.length === 0) return;
-
-
       const max = Math.max(...values.map(v => v.count));
 
       values
@@ -193,25 +205,13 @@
           bar.className = 'bar';
           bar.style.width = `${(count / max) * 100}%`;
  bar.textContent = `${count} (${percent}%)`;
+
+
  barContainer.appendChild(bar);
           row.appendChild(labelEl);
           row.appendChild(barContainer);
           chart.appendChild(row);
         });
     }
-
-
- /* =========================
- EVENTS + INIT
- ========================= */
-
-
-    submitBtn.addEventListener('click', submitAnswer);
-    input.addEventListener('keydown', e => {
-      if (e.key === 'Enter') submitAnswer();
-    });
-
-
- renderChart();
   </script>
 </body>
