@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Upgraded Dynamic Poll</title>
+  <style>
+ body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; padding: 24px; max-width: 760px; margin: auto; }
+ h1 { font-size: 1.6rem; margin-bottom: 8px; }
+ .meta { color: #666; margin-bottom: 16px; }
+
+
+ .poll-input { display: flex; gap: 8px; margin-bottom: 20px; }
+ input[type=text] { flex: 1; padding: 10px; font-size: 1rem; }
+ button { padding: 10px 14px; font-size: 1rem; cursor: pointer; }
+
+
+ .chart { display: flex; flex-direction: column; gap: 12px; }
+ .bar-row { display: flex; align-items: center; gap: 12px; }
+ .label { width: 160px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar-container { flex: 1; background: #eee; border-radius: 6px; overflow: hidden; }
+ .bar {
+ height: 26px;
+ background: linear-gradient(90deg, #4f87ff, #7aa2ff);
+ width: 0%;
+ display: flex;
+ align-items: center;
+ justify-content: flex-end;
+ color: #fff;
+ padding-right: 8px;
+ box-sizing: border-box;
+ transition: width 0.3s ease;
+ }
+
+
+ .footer { margin-top: 24px; font-size: 0.9rem; color: #666; }
+  </style>
+</head>
+<body>
+ <h1>Live Poll (Upgraded)</h1>
+ <div id="meta" class="meta"></div>
+
+
+  <div class="poll-input">
+    <input id="answerInput" type="text" placeholder="Type your answer…" />
+    <button id="submitBtn">Submit</button>
+  </div>
+
+
+  <div id="chart" class="chart"></div>
+
+ <div class="footer">
+ Votes are stored locally in this browser. Matching is case-insensitive and typo-tolerant.
+ </div>
+ <script>
+ /* =========================
+ CONFIGURABLE UPGRADES
+ ========================= */
+
+
+ // Simple synonym mapping (extend as needed)
+ const SYNONYMS = {
+ 'nyc': 'new york',
+ 'new york city': 'new york',
+ 'usa': 'united states',
+ 'us': 'united states'
+ };
+
+
+ const MAX_EDIT_DISTANCE = 1; // fuzzy matching tolerance
+
+
+ /* =========================
+ STATE + PERSISTENCE
+ ========================= */
+
+
+ let counts = JSON.parse(localStorage.getItem('pollCounts') || '{}');
+ let hasVoted = sessionStorage.getItem('hasVoted') === 'true';
+
+
+    const input = document.getElementById('answerInput');
+    const submitBtn = document.getElementById('submitBtn');
+    const chart = document.getElementById('chart');
+ const meta = document.getElementById('meta');
+
+
+ /* =========================
+ NORMALIZATION & MATCHING
+ ========================= */
+
+
+    function normalize(text) {
+ const base = text.trim().toLowerCase();
+ return SYNONYMS[base] || base;
+    }
+
+ function levenshtein(a, b) {
+ const dp = Array.from({ length: a.length + 1 }, () => []);
+ for (let i = 0; i <= a.length; i++) dp[i][0] = i;
+ for (let j = 0; j <= b.length; j++) dp[0][j] = j;
+ for (let i = 1; i <= a.length; i++) {
+ for (let j = 1; j <= b.length; j++) {
+ dp[i][j] = Math.min(
+ dp[i - 1][j] + 1,
+ dp[i][j - 1] + 1,
+ dp[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)
+ );
+ }
+ }
+ return dp[a.length][b.length];
+ }
+
+
+ function findExistingKey(candidate) {
+ for (const key of Object.keys(counts)) {
+ if (levenshtein(key, candidate) <= MAX_EDIT_DISTANCE) {
+ return key;
+ }
+ }
+ return null;
+ }
+
+
+ /* =========================
+ SUBMISSION LOGIC
+ ========================= */
+
+
+    function submitAnswer() {
+ if (hasVoted) return;
+
+
+      const raw = input.value;
+      if (!raw.trim()) return;
+
+ const normalized = normalize(raw);
+ const existingKey = findExistingKey(normalized) || normalized;
+
+
+ if (!counts[existingKey]) {
+ counts[existingKey] = { label: raw.trim(), count: 0 };
+      }
+
+ counts[existingKey].count += 1;
+ hasVoted = true;
+ sessionStorage.setItem('hasVoted', 'true');
+ localStorage.setItem('pollCounts', JSON.stringify(counts));
+      input.value = '';
+      renderChart();
+    }
+
+
+ /* =========================
+ RENDERING
+ ========================= */
+
+
+    function renderChart() {
+      chart.innerHTML = '';
+      const values = Object.values(counts);
+ const totalVotes = values.reduce((sum, v) => sum + v.count, 0);
+
+
+ meta.textContent = `Total votes: ${totalVotes}${hasVoted ? ' (you have voted)' : ''}`;
+
+
+      if (values.length === 0) return;
+
+
+      const max = Math.max(...values.map(v => v.count));
+
+      values
+        .sort((a, b) => b.count - a.count)
+        .forEach(({ label, count }) => {
+ const percent = Math.round((count / totalVotes) * 100);
+
+
+          const row = document.createElement('div');
+          row.className = 'bar-row';
+
+
+          const labelEl = document.createElement('div');
+          labelEl.className = 'label';
+          labelEl.textContent = label;
+
+
+          const barContainer = document.createElement('div');
+          barContainer.className = 'bar-container';
+
+
+          const bar = document.createElement('div');
+          bar.className = 'bar';
+          bar.style.width = `${(count / max) * 100}%`;
+ bar.textContent = `${count} (${percent}%)`;
+ barContainer.appendChild(bar);
+          row.appendChild(labelEl);
+          row.appendChild(barContainer);
+          chart.appendChild(row);
+        });
+    }
+
+
+ /* =========================
+ EVENTS + INIT
+ ========================= */
+
+
+    submitBtn.addEventListener('click', submitAnswer);
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') submitAnswer();
+    });
+
+
+ renderChart();
+  </script>
+</body>
