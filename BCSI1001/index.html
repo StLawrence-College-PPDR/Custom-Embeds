@@ -6,23 +6,27 @@
    <!-- Firebase SDKs (CDN) -->
 <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database-compat.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
  <title>Realtime Multi‑User Poll</title>
   <style>
- body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; padding: 24px; max-width: 800px; margin: auto; }
- h1 { font-size: 1.6rem; margin-bottom: 6px; }
+ body { font-family: "Montserrat", sans-serif; padding: 24px; max-width: 1400px; margin: auto; background: #f3f3f3;}
+ h1 { font-size: 1.6rem; margin-bottom: 6px; font-weight: 300; font-size: 3.5rem;}
  .meta { color: #666; margin-bottom: 16px; }
 
  .poll-input { display: flex; gap: 8px; margin-bottom: 20px; }
- input[type=text] { flex: 1; padding: 10px; font-size: 1rem; }
- button { padding: 10px 14px; font-size: 1rem; cursor: pointer; }
+ input[type=text] { flex: 1; padding: 15px; font-size: 1rem; border: 0; border-radius: 3px;}
+ button { padding: 10px 14px; font-size: 1rem; cursor: pointer;  border: 0; background: #dfdfdf;}
 
  .chart { display: flex; flex-direction: column; gap: 12px; }
- .bar-row { display: flex; align-items: center; gap: 12px; }
+ .bar-row { display: flex; align-items: center; gap: 30px; }
  .label { width: 180px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .bar-container { flex: 1; background: #eee; border-radius: 6px; overflow: hidden; }
+    .bar-container { flex: 1; background: #dfdfdf; border-radius: 3px; overflow: hidden; }
  .bar {
- height: 26px;
- background: linear-gradient(90deg, #4f87ff, #7aa2ff);
+ height: 40px;
+ background: linear-gradient(90deg, #f35e53, #d3473c);
  width: 0%;
  display: flex;
  align-items: center;
@@ -33,23 +37,150 @@
  transition: width 0.25s ease;
  }
 
+
+
+ button#resetBtn {
+    margin-top: 30px;
+
+ }
+
+ .flex-collection {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: space-between;
+    margin-top: 50px;
+
+ }
+
+ .callout-collection {
+    background: #FFFFFF;
+    border-radius: 5px;
+    font-weight: 600;
+ }
+
+ .callout {
+    text-align: center;
+    padding-bottom: 30px;
+ }
+
+ .callout-label {
+    color: #d3473c;
+    font-weight: 800;
+    font-size: 2rem;
+}
+
+ @media (min-width: 1300px) {
+    .flex-3 {
+        width: 32%;
+    }
+    
+    .flex-2 {
+        width: 48%;
+    }
+    
+    .flex-4 {
+        width: 23%;
+    }
+    
+    .flex-5 {
+        width: 18%;
+    }
+    
+    .flex-6 {
+        width: 15%;
+    }
+    
+    .flex-7 {
+        width: 13%;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1300px) {
+    .flex-3 {
+        width: 48%;
+    }
+    
+    .flex-2 {
+        width: 48%;
+    }
+    
+    .flex-4 {
+        width: 23%;
+    }
+    
+    .flex-5 {
+        width: 48%;
+    }
+    
+    .flex-6 {
+        width: 100%;
+    }
+    
+    .flex-7 {
+        width: 100%;
+    }
+}
+
+@media (max-width: 992px) {
+    .flex-3 {
+        width: 100%;
+    }
+    
+    .flex-2 {
+        width: 100%;
+    }
+    
+    .flex-4 {
+        width: 100%;
+    }
+    
+    .flex-5 {
+        width: 100%;
+    }
+    
+    .flex-6 {
+        width: 100%;
+    }
+    
+    .flex-7 {
+        width: 100%;
+    }
+}
+
+
  .footer { margin-top: 24px; font-size: 0.9rem; color: #666; }
   </style>
 </head>
 <body>
- <h1>Live Poll (Realtime)</h1>
- <div id="meta" class="meta">Connecting…</div>
-  <div class="poll-input">
-    <input id="answerInput" type="text" placeholder="Type your answer…" />
-    <button id="submitBtn">Submit</button>
-  </div>
+    <div class="flex-collection">
+        <div class="flex-2">
+            <h1>Team Voting</h1>
+             <div id="meta" class="meta">Connecting…</div>
+              <div class="poll-input">
+                <input id="answerInput" type="text" placeholder="Enter your team vote…" />
+                <button id="submitBtn">Vote</button>
+              </div>
 
-  <div id="chart" class="chart"></div>
+              <div id="chart" class="chart"></div>
+
+               <div class="footer">
+                        Real‑time anonymous voting across devices. One vote per browser session. Your team votes must have a unique name. Typos are forgiven, make sure team names are different.
+                 </div>
 
 
- <div class="footer">
- Real‑time voting across devices. One vote per browser session.
- </div>
+                <button id="resetBtn">Reset Poll (Passcode Required)</button>
+        </div>
+
+        <div class="flex-2">
+            <div class="callout-collection">
+                <img src="animation.svg" width="100%"/>
+                <div id="callout" class="callout" hidden></div>
+            </div>
+        </div>
+    </div>
+
+
 
 
 
@@ -60,6 +191,8 @@
  2. Enable Realtime Database
  3. Replace config below
  =================================================== */
+
+const ADMIN_PASSCODE = 'BCSIRESET2026';
 
 
  const firebaseConfig = {
@@ -186,6 +319,16 @@ apiKey: "AIzaSyCRp38VMYdb07rudTKwcCCLZy2u9b9HVMk",
  const percent = Math.round((count / totalVotes) * 100);
 
 
+const top = values.reduce((a, b) => (b.count > a.count ? b : a));
+const topPercent = Math.round((top.count / totalVotes) * 100);
+
+callout.hidden = false;
+callout.innerHTML = `
+  <div class="callout-label">${top.label}</div>
+  <div class="callout-meta">${topPercent}% of Votes</div>
+`;
+
+
           const row = document.createElement('div');
           row.className = 'bar-row';
 
@@ -211,5 +354,18 @@ apiKey: "AIzaSyCRp38VMYdb07rudTKwcCCLZy2u9b9HVMk",
           chart.appendChild(row);
         });
     }
+
+
+resetBtn.addEventListener('click', async () => {
+  const entered = prompt('Enter admin passcode to reset poll:');
+  if (entered === ADMIN_PASSCODE) {
+    await pollRef.remove();
+    sessionStorage.clear();
+    alert('Poll has been reset.');
+  }
+});
+
+
+
   </script>
 </body>
