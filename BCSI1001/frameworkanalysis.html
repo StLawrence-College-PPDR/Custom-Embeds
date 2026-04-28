@@ -1,0 +1,617 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Real-Time Text Submission</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <style>
+     body { font-family: "Montserrat", sans-serif; padding: 24px; background: #f3f3f3; margin: 0; padding: 0;}
+ h1 { font-size: 1.6rem; margin-bottom: 6px; font-weight: 300; font-size: 3.5rem;}
+ .meta { color: #666; margin-bottom: 16px; }
+
+ .poll-input { display: flex; gap: 8px; margin-bottom: 20px; }
+ input[type=text] { flex: 1; padding: 15px; font-size: 1rem; border: 0; border-radius: 3px;}
+ button { padding: 10px 14px; font-size: 1rem; cursor: pointer;  border: 0; background: #dfdfdf;}
+
+  .flex-collection {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: space-between;
+    margin-top: 50px;
+
+ }
+
+  @media (min-width: 1300px) {
+    .flex-3 {
+        width: 32%;
+    }
+    
+    .flex-2 {
+        width: 48%;
+    }
+    
+    .flex-4 {
+        width: 23%;
+    }
+    
+    .flex-5 {
+        width: 18%;
+    }
+    
+    .flex-6 {
+        width: 15%;
+    }
+    
+    .flex-7 {
+        width: 13%;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1300px) {
+    .flex-3 {
+        width: 48%;
+    }
+    
+    .flex-2 {
+        width: 48%;
+    }
+    
+    .flex-4 {
+        width: 23%;
+    }
+    
+    .flex-5 {
+        width: 48%;
+    }
+    
+    .flex-6 {
+        width: 100%;
+    }
+    
+    .flex-7 {
+        width: 100%;
+    }
+}
+
+@media (max-width: 992px) {
+    .flex-3 {
+        width: 100%;
+    }
+    
+    .flex-2 {
+        width: 100%;
+    }
+    
+    .flex-4 {
+        width: 100%;
+    }
+    
+    .flex-5 {
+        width: 100%;
+    }
+    
+    .flex-6 {
+        width: 100%;
+    }
+    
+    .flex-7 {
+        width: 100%;
+    }
+}
+
+.grouping {
+  margin-left: 30%;
+}
+
+#group {
+      width: 100%;
+    font-size: 1rem;
+    padding: 10px;
+    background: #444444;
+    color: #FFF;
+    border: #333333;
+}
+
+#response {
+  width: 100%;
+    height: 400px;
+    background: #333;
+    color: #FFF;
+}
+
+.group {
+  background: #FFF;
+  padding: 30px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  text-align: right;
+  position: relative;
+
+}
+
+.group1 {background: #3ca95c; color: #FFF;}
+.group2 {background: #553684; color: #FFF;}
+.group3 {background: #2467b2; color: #FFF;}
+.group4 {background: #d3473c; color: #FFF;}
+.group1 .info-btn {border: #FFF solid 2px; color: #FFF;}
+.group2 .info-btn2 {border: #FFF solid 2px; color: #FFF;}
+.group3 .info-btn3 {border: #FFF solid 2px; color: #FFF;}
+.group4 .info-btn4 {border: #FFF solid 2px; color: #FFF;}
+.group1 .live-preview {color: #FFF; background: #33333355}
+.group2 .live-preview {color: #FFF; background: #33333355}
+.group3 .live-preview {color: #FFF; background: #33333355}
+.group4 .live-preview {color: #FFF; background: #33333355}
+.group1 .live-preview::after {border-top-color: #33333355}
+.group2 .live-preview::after {border-top-color: #33333355}
+.group3 .live-preview::after {border-top-color: #33333355}
+.group4 .live-preview::after {border-top-color: #33333355}
+
+.group.strength-category:after { content: "S"; top: 50%; transform: translateY(-50%); left: 20px; position: absolute; font-size: 8rem; opacity: 0.08; font-weight: 900; text-align: right;}
+.group.weaknesses-category:after { content: "W"; top: 50%; transform: translateY(-50%); left: 20px; position: absolute; font-size: 8rem; opacity: 0.08; font-weight: 900; text-align: right;}
+.group.opportunities-category:after { content: "O"; top: 50%; transform: translateY(-50%); left: 20px; position: absolute; font-size: 8rem; opacity: 0.08; font-weight: 900; text-align: right;}
+.group.threats-category:after { content: "T"; top: 50%; transform: translateY(-50%); left: 20px; position: absolute; font-size: 8rem; opacity: 0.08; font-weight: 900; text-align: right;}
+
+.live-preview {
+  position: relative;
+  background: #33333335;
+  color: #444444;
+  padding: 10px 15px;
+  border-radius: 20px;
+  width: 80%;
+  font-family: sans-serif;
+  text-align: right;
+  margin: 10px 10px 10px auto;
+}
+
+/* The tail */
+.live-preview::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 20px; /* Position tail on the left */
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
+  border-top-color: #33333335;
+  border-bottom: 0;
+  margin-bottom: -10px;
+}
+
+.message-center {
+  background: #444444;
+  color: #FFFFFF;
+  padding: 30px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  width: 25%;
+  border-right: 1px solid #333333;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 5px; /* optional rounding */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+@media (max-width: 850px) {
+  .grouping {margin: 0;}
+  .message-center {
+    width: 90vw;
+    position: relative;
+    overflow-y: auto;
+  }
+
+  #response {
+    height: 100px;
+  }
+}
+
+.send-button {
+  width: 100%;
+  background: #333333;
+  color: #FFFFFF;
+  font-weight: 800;
+}
+
+.info-btn, .info-btn2, .info-btn3, .info-btn4 {
+  border-radius: 50%;
+  border: none;
+  border: #444444 solid 2px;
+  color: #444444;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  font-size: 0.7rem;
+  background: none;
+}
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background: white;
+  padding: 40px;
+  max-width: 400px;
+  border-radius: 8px;
+  position: relative;
+  z-index: 10000 !important;
+  color: #333333 !important;
+  text-align: left !important;
+}
+
+.close-btn, .close-btn2, .close-btn3, .close-btn4 {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+  </style>
+
+ 
+<!-- Firebase SDKs (v9 modular) -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+    import { getFirestore, collection, addDoc, query, where, orderBy, onSnapshot, serverTimestamp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js';
+const firebaseConfig = {
+  apiKey: "AIzaSyB7KISFL6bS1qMcdt39WGsqgVOPhHAGNeE",
+  authDomain: "swot-aaace.firebaseapp.com",
+  projectId: "swot-aaace",
+  storageBucket: "swot-aaace.firebasestorage.app",
+  messagingSenderId: "994177725007",
+  appId: "1:994177725007:web:7e31235d97f0fcb3d2303a",
+  measurementId: "G-H8JXHDRFQW"
+};
+
+// Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const responsesCol = collection(db, 'responses');
+
+    const form = document.getElementById('responseForm');
+    const textarea = document.getElementById('response');
+    const groupSelect = document.getElementById('group');
+    const livePreview = document.getElementById('livePreview');
+
+    const groupContainers = {
+      group1: document.getElementById('group1'),
+      group2: document.getElementById('group2'),
+      group3: document.getElementById('group3'),
+      group4: document.getElementById('group4')
+    };
+
+
+    textarea.addEventListener('input', (e) => {
+      livePreview.textContent = e.target.value || 'Start typing to see real-time updates…';
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!textarea.value.trim()) return;
+
+
+      await addDoc(responsesCol, {
+        text: textarea.value,
+        group: groupSelect.value,
+        createdAt: serverTimestamp()
+      });
+
+
+      textarea.value = '';
+      livePreview.textContent = 'Start typing to see real-time updates…';
+    });
+
+    Object.keys(groupContainers).forEach(groupId => {
+      const q = query(
+        responsesCol,
+        where('group', '==', groupId),
+        orderBy('createdAt', 'desc')
+      );
+
+
+      onSnapshot(q, snapshot => {
+        groupContainers[groupId].innerHTML = '';
+        snapshot.forEach(doc => {
+          const p = document.createElement('p');
+          p.className = 'live-preview';
+          p.textContent = doc.data().text;
+          groupContainers[groupId].appendChild(p);
+        });
+      });
+    });
+ 
+
+  const infoBtn = document.querySelector('.info-btn');
+  const modal = document.getElementById('info-modal');
+  const closeBtn = modal.querySelector('.close-btn');
+
+  infoBtn.addEventListener('click', () => {
+    modal.style.display = 'flex';
+  });
+
+  closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+
+  const infoBtn2 = document.querySelector('.info-btn2');
+  const modal2 = document.getElementById('info-modal2');
+  const closeBtn2 = modal2.querySelector('.close-btn2');
+
+  infoBtn2.addEventListener('click', () => {
+    modal2.style.display = 'flex';
+  });
+
+  closeBtn2.addEventListener('click', () => {
+    modal2.style.display = 'none';
+  });
+
+  modal2.addEventListener('click', (e) => {
+    if (e.target === modal2) {
+      modal2.style.display = 'none';
+    }
+  });
+
+  const infoBtn3 = document.querySelector('.info-btn3');
+  const modal3 = document.getElementById('info-modal3');
+  const closeBtn3 = modal3.querySelector('.close-btn3');
+
+  infoBtn3.addEventListener('click', () => {
+    modal3.style.display = 'flex';
+  });
+
+  closeBtn3.addEventListener('click', () => {
+    modal3.style.display = 'none';
+  });
+
+  modal3.addEventListener('click', (e) => {
+    if (e.target === modal3) {
+      modal3.style.display = 'none';
+    }
+  });
+
+  const infoBtn4 = document.querySelector('.info-btn4');
+  const modal4 = document.getElementById('info-modal4');
+  const closeBtn4 = modal4.querySelector('.close-btn4');
+
+  infoBtn4.addEventListener('click', () => {
+    modal4.style.display = 'flex';
+  });
+
+  closeBtn4.addEventListener('click', () => {
+    modal4.style.display = 'none';
+  });
+
+  modal4.addEventListener('click', (e) => {
+    if (e.target === modal4) {
+      modal4.style.display = 'none';
+    }
+  });
+  </script>
+</head>
+
+<body class="">
+  <div class="side-bar">
+
+    <div class="message-center">
+      <form id="responseForm">
+
+        <h1 class="">SWOT Analysis</h1>
+
+        <p style="opacity: 0.8;">Collect your ideas for each SWOT category based on the provided Business from your instructor. Choose the category from the drop down and enter you response before selecting send.</p>
+
+        <select id="group">
+          <option value="">Choose a category...</option>
+          <option value="group1">Strengths</option>
+          <option value="group2">Weaknesses</option>
+          <option value="group3">Opportunities</option>
+          <option value="group4">Threats</option>
+        </select>
+
+        <textarea
+          id="response"
+          class="w-full rounded-xl border p-3 min-h-[120px] focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Type your response here..."
+        ></textarea>
+
+          
+          <p id="livePreview" class="live-preview" style="display: none;">
+            Start typing to see real-time updates…
+          </p>
+
+          <button class="send-button" tabindex="0" type="submit">Send</button>
+
+      </form>
+    </div>
+  </div>
+    <div class="grouping">
+      <div id="category1" class="group strength-category">
+          <button class="info-btn" aria-haspopup="dialog" aria-controls="info-modal">i</button>
+          <h2 class="font-semibold">Strengths</h2>
+          <div id="group1" class="space-y-2"></div>
+      </div>
+
+      <div id="category2" class="group weaknesses-category">
+        <button class="info-btn2" aria-haspopup="dialog" aria-controls="info-modal2">i</button>
+        <h2 class="font-semibold">Weaknesses</h2>
+        <div id="group2" class="space-y-2"></div>
+      </div>
+
+      <div id="category3" class="group opportunities-category">
+        <button class="info-btn3" aria-haspopup="dialog" aria-controls="info-modal3">i</button>
+        <h2 class="font-semibold">Opportunities</h2>
+        <div id="group3" class="space-y-2"></div>
+      </div>
+
+      <div id="category4" class="group threats-category">
+        <button class="info-btn4" aria-haspopup="dialog" aria-controls="info-modal4">i</button>
+        <h2 class="font-semibold">Threats</h2>
+        <div id="group4" class="space-y-2"></div>
+      </div>
+
+      <div class="modal-overlay" id="info-modal" role="dialog" aria-modal="true">
+            <div class="modal">
+              <button class="close-btn" aria-label="Close information">&times;</button>
+              <p>Strengths are what your company does particularly well, or the resources and assets it owns that distinguish it from your competitors. You need to know your company’s strengths; they’re what make it thrive.</p>
+
+              <p><strong>Examples of strengths:</strong></p>
+
+              <ul>
+                <li>Solid financing </li>
+
+                <li>A positive reputation </li>
+
+                <li>Valuable intellectual property </li>
+
+                <li>An innovative mindset </li>
+
+                <li>Low production costs </li>
+
+                <li>Product variety </li>
+
+                <li>A healthy company culture </li>
+
+                <li>A strong online presence and following </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="modal-overlay" id="info-modal2" role="dialog" aria-modal="true">
+          <div class="modal">
+                <button class="close-btn2" aria-label="Close information">&times;</button>
+                <p>Weaknesses are internal attributes and resources that your company lacks. You need to know your weaknesses because they make your business vulnerable. To identify the underlying cause of your company’s weaknesses (or its strengths), Michelle Feder suggests using root cause analysis, a structured way to identify underlying reasons for a business issue and a key tool of operational efficiency and lean thinking. </p>
+
+                <p><strong>Examples of weaknesses:</strong></p>
+
+                <ul>
+                  <li>High levels of debt </li>
+
+                  <li>Low customer satisfaction  </li>
+
+                  <li>Long delivery times  </li>
+
+                  <li>Outdated equipment and/or machinery  </li>
+
+                  <li>Gaps in expertise  </li>
+
+                  <li>Poor employee engagement and retention  </li>
+
+                  <li>Products slow to get to market  </li>
+
+                  <li>Rigid structures and a lack of agility  </li>
+                </ul>
+          </div>
+        </div>
+
+          <div class="modal-overlay" id="info-modal3" role="dialog" aria-modal="true">
+          <div class="modal">
+                <button class="close-btn3" aria-label="Close information">&times;</button>
+                <p>Opportunities are a set of external circumstances that, with the right decisions, can grow your company or put you in a favourable strategic position.</p>
+                <p><strong>Examples of opportunities—and some possibilities for your business:</strong></p>
+                <ul>
+                  <li>New trade agreement—export possibilities </li>
+
+                  <li>New environmental, social and corporate governance (ESG) reporting requirements—can showcase your track record  </li>
+
+                  <li>Buy-local trend—favours your locally made products  </li>
+
+                  <li>Work-from-home trend—can promote your communication app  </li>
+
+                  <li>Expanding industry  </li>
+
+                  <li>New government support programs  </li>
+                </ul>
+          </div>
+        </div>
+
+          <div class="modal-overlay" id="info-modal4" role="dialog" aria-modal="true">
+          <div class="modal">
+                <button class="close-btn4" aria-label="Close information">&times;</button>
+                <p>Threats are external forces that constitute a risk to your business. Your company should be on the outlook for external obstacles; it will have to overcome them if it is to flourish. </p>
+            <p>To analyze the threats (and opportunities) facing your business, Feder suggests one of the tools be a PESTEL analysis, which takes in the political, economic, sociological, technological, legal and environmental factors that influence an organization. </p>
+            <p>PESTEL analysis focuses on the external environment of an organization. More widely, it can be applied to strategic planning, but it can also be used in the context of smaller projects. For instance, an entrepreneur may use a PESTEL analysis when launching a new product line. </p>
+            <p><strong>Examples of threats: </strong></p>
+            <ul>
+              <li>New trade agreement or increased tariffs—which can bring increased competition or shut you out of a market </li>
+
+              <li>New ESG reporting requirements—with possible heavier paperwork </li>
+
+              <li>Supply-chain problems </li>
+
+              <li>Shortage of recruits </li>
+
+              <li>Aging customer base </li>
+
+              <li>Changing product standards </li>
+            </ul>
+          </div>
+        </div>
+
+    </div>
+  </div>
+  <script>
+  const select = document.getElementById("group");
+const box1 = document.getElementById("category1");
+const box2 = document.getElementById("category2");
+const box3 = document.getElementById("category3");
+const box4 = document.getElementById("category4");
+
+select.addEventListener("change", () => {
+  // Remove previous theme classes
+  box1.classList.remove("group1", "group2", "group3", "group4");
+  box2.classList.remove("group1", "group2", "group3", "group4");
+  box3.classList.remove("group1", "group2", "group3", "group4");
+  box4.classList.remove("group1", "group2", "group3", "group4");
+
+  // Add selected value as a class
+  
+  if (select.value === "group1") {
+    box1.classList.add(select.value);
+  } else if (select.value === "group2") {
+    box2.classList.add(select.value);
+  } else if (select.value === "group3") {
+    box3.classList.add(select.value);
+  } else if (select.value === "group4") {
+    box4.classList.add(select.value);
+  }
+
+});
+
+  </script>
+</body>
