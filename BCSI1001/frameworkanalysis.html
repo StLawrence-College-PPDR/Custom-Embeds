@@ -296,7 +296,7 @@
 <!-- Firebase SDKs (v9 modular) -->
   <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
-    import { getFirestore, collection, addDoc, query, where, orderBy, onSnapshot, serverTimestamp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js';
+    import { getFirestore, collection, addDoc, getDocs, deleteDoc, query, where, orderBy, onSnapshot, serverTimestamp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js';
 const firebaseConfig = {
   apiKey: "AIzaSyB7KISFL6bS1qMcdt39WGsqgVOPhHAGNeE",
   authDomain: "swot-aaace.firebaseapp.com",
@@ -323,6 +323,31 @@ const firebaseConfig = {
       group3: document.getElementById('group3'),
       group4: document.getElementById('group4')
     };
+
+    const ADMIN_PASSCODE = 'BCSIRESETSWOT';
+
+resetButton.addEventListener('click', async () => {
+  const entered = prompt('Enter admin passcode to reset responses:');
+  if (entered !== ADMIN_PASSCODE) {
+    alert('Incorrect passcode.');
+    return;
+  }
+
+  try {
+    const snapshot = await getDocs(responsesCol);
+    console.log('Docs found:', snapshot.size);
+
+    for (const docSnap of snapshot.docs) {
+      console.log('Deleting doc:', docSnap.id);
+      await deleteDoc(docSnap.ref);
+    }
+
+    alert('✅ Responses have been reset.');
+  } catch (err) {
+    console.error('❌ Reset failed:', err);
+    alert('❌ Reset failed. Check console for details.');
+  }
+});
 
 
     textarea.addEventListener('input', (e) => {
@@ -657,27 +682,6 @@ select.addEventListener("change", () => {
     box4.classList.add(select.value);
   }
 
-});
-
-const ADMIN_PASSCODE = 'BCSIRESETSWOT';
-
-resetButton.addEventListener('click', async () => {
-  const entered = prompt('Enter admin passcode to reset responses:');
-  if (entered !== ADMIN_PASSCODE) {
-    alert('Incorrect passcode.');
-    return;
-  }
-
-  const confirmReset = confirm(
-    'Are you sure you want to delete ALL responses?'
-  );
-  if (!confirmReset) return;
-
-  const snapshot = await getDocs(responsesCol);
-  const deletes = snapshot.docs.map(doc => deleteDoc(doc.ref));
-  await Promise.all(deletes);
-
-  alert('Responses have been reset.');
 });
 
 
