@@ -248,6 +248,19 @@
   background: none;
 }
 
+
+.info-btn5 {
+  border-radius: 50%;
+  border: none;
+  border: #FFFFFF solid 2px;
+  color: #FFFFFF;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  font-size: 0.7rem;
+  background: none;
+}
+
 .modal-overlay {
   display: none;
   position: fixed;
@@ -268,7 +281,7 @@
   text-align: left !important;
 }
 
-.close-btn, .close-btn2, .close-btn3, .close-btn4 {
+.close-btn, .close-btn2, .close-btn3, .close-btn4, .close-btn5 {
   position: absolute;
   top: 8px;
   right: 10px;
@@ -423,6 +436,25 @@ const firebaseConfig = {
       modal4.style.display = 'none';
     }
   });
+
+
+    const infoBtn5 = document.querySelector('.info-btn5');
+  const modal5 = document.getElementById('info-modal5');
+  const closeBtn5 = modal5.querySelector('.close-btn5');
+
+  infoBtn5.addEventListener('click', () => {
+    modal5.style.display = 'flex';
+  });
+
+  closeBtn5.addEventListener('click', () => {
+    modal5.style.display = 'none';
+  });
+
+  modal5.addEventListener('click', (e) => {
+    if (e.target === modal5) {
+      modal5.style.display = 'none';
+    }
+  });
   </script>
 </head>
 
@@ -431,10 +463,9 @@ const firebaseConfig = {
 
     <div class="message-center">
       <form id="responseForm">
+        <button class="info-btn5" aria-haspopup="dialog" aria-controls="info-modal5">?</button>
 
         <h1 class="">SWOT Analysis</h1>
-
-        <p style="opacity: 0.8;">Collect your ideas for each SWOT category based on the provided Business from your instructor. Choose the category from the drop down and enter you response before selecting send.</p>
 
         <select id="group">
           <option value="">Choose a category...</option>
@@ -461,6 +492,7 @@ const firebaseConfig = {
     </div>
   </div>
     <div class="grouping">
+
       <div id="category1" class="group strength-category">
           <button class="info-btn" aria-haspopup="dialog" aria-controls="info-modal">i</button>
           <h2 class="font-semibold">Strengths</h2>
@@ -583,6 +615,20 @@ const firebaseConfig = {
           </div>
         </div>
 
+        <div class="modal-overlay" id="info-modal5" role="dialog" aria-modal="true">
+          <div class="modal">
+                <button class="close-btn5" aria-label="Close information">&times;</button>
+
+                  <p><strong>SWOT analysis is a framework used to identify and analyze internal and external factors affecting a company (or can focus on a specific division/product line/etc.). It is used as a framework in strategic planning to identify where a business is strong, not so strong, and exploring the external environment that the business operates in. </strong></p>
+
+                <p>Collect your ideas for each SWOT category based on the provided Business from your instructor. Choose the category from the drop down and enter you response before selecting send.</p>
+
+                <p>From: <a style="color: #d3473c;" href="https://www.bdc.ca/en/articles-tools/business-strategy-planning/define-strategy/swot-analysis-easy-tool-strategic-planning" target="_blank">SWOT Analysis from BDC </a></p>
+
+                <button id="resetButton">Reset Submissions (Passcode Required)</button>
+          </div>
+        </div>
+
     </div>
   </div>
   <script>
@@ -612,6 +658,28 @@ select.addEventListener("change", () => {
   }
 
 });
+
+const ADMIN_PASSCODE = 'BCSIRESETSWOT';
+
+resetButton.addEventListener('click', async () => {
+  const entered = prompt('Enter admin passcode to reset responses:');
+  if (entered !== ADMIN_PASSCODE) {
+    alert('Incorrect passcode.');
+    return;
+  }
+
+  const confirmReset = confirm(
+    'Are you sure you want to delete ALL responses?'
+  );
+  if (!confirmReset) return;
+
+  const snapshot = await getDocs(responsesCol);
+  const deletes = snapshot.docs.map(doc => deleteDoc(doc.ref));
+  await Promise.all(deletes);
+
+  alert('Responses have been reset.');
+});
+
 
   </script>
 </body>
