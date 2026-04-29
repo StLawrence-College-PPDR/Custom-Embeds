@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Real-Time Text Submission</title>
+  <title>Real-Time SWOT</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -363,38 +363,7 @@ resetButton.addEventListener('click', async () => {
 });
 
 
-
 const warningDiv = document.getElementById('groupWarning');
-
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  // ✅ Group validation
-  if (groupSelect.value === 'choose') {
-    warningDiv.classList.remove('hidden');
-    return;
-  }
-
-  // ✅ Hide warning once valid
-  warningDiv.classList.add('hidden');
-
-  if (!textarea.value.trim()) return;
-
-  await addDoc(responsesCol, {
-    text: textarea.value,
-    group: groupSelect.value,
-    createdAt: serverTimestamp()
-  });
-});
-
-
-groupSelect.addEventListener('change', () => {
-  if (groupSelect.value !== 'choose') {
-    warningDiv.classList.add('hidden');
-  }
-});
-
-
 
     textarea.addEventListener('input', (e) => {
       livePreview.textContent = e.target.value || 'Start typing to see real-time updates…';
@@ -405,11 +374,29 @@ groupSelect.addEventListener('change', () => {
       if (!textarea.value.trim()) return;
 
 
+      // ✅ Group validation
+      if (groupSelect.value === 'choose') {
+        warningDiv.classList.remove('hidden');
+        return;
+      }
+
+      // ✅ Hide warning once valid
+      warningDiv.classList.add('hidden');
+
+      if (!textarea.value.trim()) return;
+
       await addDoc(responsesCol, {
         text: textarea.value,
         group: groupSelect.value,
         createdAt: serverTimestamp()
       });
+    });
+
+
+    groupSelect.addEventListener('change', () => {
+      if (groupSelect.value !== 'choose') {
+        warningDiv.classList.add('hidden');
+      }
 
 
       textarea.value = '';
@@ -533,10 +520,10 @@ groupSelect.addEventListener('change', () => {
   <div class="side-bar">
 
     <div class="message-center">
-      <form id="responseForm">
-        <button class="info-btn5" aria-haspopup="dialog" aria-controls="info-modal5">?</button>
+      <button class="info-btn5" aria-haspopup="dialog" aria-controls="info-modal5">?</button>
 
         <h1 class="">SWOT Analysis</h1>
+      <form id="responseForm">
 
         <select id="group">
           <option value="choose">Choose a category...</option>

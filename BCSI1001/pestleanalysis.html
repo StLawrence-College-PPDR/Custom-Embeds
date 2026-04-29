@@ -140,14 +140,14 @@
 .group2 {background: #553684; color: #FFF;}
 .group3 {background: #2467b2; color: #FFF;}
 .group4 {background: #d3473c; color: #FFF;}
-.group5 {background: #d3473c; color: #FFF;}
-.group6 {background: #d3473c; color: #FFF;}
+.group5 {background: #00a984; color: #FFF;}
+.group6 {background: #FC9A0A; color: #FFF;}
 .group1 .info-btn {border: #FFF solid 2px; color: #FFF;}
 .group2 .info-btn2 {border: #FFF solid 2px; color: #FFF;}
 .group3 .info-btn3 {border: #FFF solid 2px; color: #FFF;}
 .group4 .info-btn4 {border: #FFF solid 2px; color: #FFF;}
-.group5 .info-btn6 {border: #FFF solid 2px; color: #FFF;}
-.group6 .info-btn7 {border: #FFF solid 2px; color: #FFF;}
+.group5 .info-btn5 {border: #FFF solid 2px; color: #FFF;}
+.group6 .info-btn6 {border: #FFF solid 2px; color: #FFF;}
 .group1 .live-preview {color: #FFF; background: #33333355}
 .group2 .live-preview {color: #FFF; background: #33333355}
 .group3 .live-preview {color: #FFF; background: #33333355}
@@ -344,7 +344,9 @@ const firebaseConfig = {
       group1: document.getElementById('group1'),
       group2: document.getElementById('group2'),
       group3: document.getElementById('group3'),
-      group4: document.getElementById('group4')
+      group4: document.getElementById('group4'),
+      group5: document.getElementById('group5'),
+      group6: document.getElementById('group6')
     };
 
     const ADMIN_PASSCODE = 'BCSIRESETPESTLE';
@@ -376,35 +378,6 @@ resetButton.addEventListener('click', async () => {
 
 const warningDiv = document.getElementById('groupWarning');
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  // ✅ Group validation
-  if (groupSelect.value === 'choose') {
-    warningDiv.classList.remove('hidden');
-    return;
-  }
-
-  // ✅ Hide warning once valid
-  warningDiv.classList.add('hidden');
-
-  if (!textarea.value.trim()) return;
-
-  await addDoc(responsesCol, {
-    text: textarea.value,
-    group: groupSelect.value,
-    createdAt: serverTimestamp()
-  });
-});
-
-
-groupSelect.addEventListener('change', () => {
-  if (groupSelect.value !== 'choose') {
-    warningDiv.classList.add('hidden');
-  }
-});
-
-
 
     textarea.addEventListener('input', (e) => {
       livePreview.textContent = e.target.value || 'Start typing to see real-time updates…';
@@ -415,11 +388,29 @@ groupSelect.addEventListener('change', () => {
       if (!textarea.value.trim()) return;
 
 
+      // ✅ Group validation
+      if (groupSelect.value === 'choose') {
+        warningDiv.classList.remove('hidden');
+        return;
+      }
+
+      // ✅ Hide warning once valid
+      warningDiv.classList.add('hidden');
+
+      if (!textarea.value.trim()) return;
+
       await addDoc(responsesCol, {
         text: textarea.value,
         group: groupSelect.value,
         createdAt: serverTimestamp()
       });
+    });
+
+
+    groupSelect.addEventListener('change', () => {
+      if (groupSelect.value !== 'choose') {
+        warningDiv.classList.add('hidden');
+      }
 
 
       textarea.value = '';
@@ -581,19 +572,18 @@ const infoBtn7 = document.querySelector('.info-btn7');
   <div class="side-bar">
 
     <div class="message-center">
-      <form id="responseForm">
-        <button class="info-btn7" aria-haspopup="dialog" aria-controls="info-modal7">?</button>
+      <button class="info-btn7" aria-haspopup="dialog" aria-controls="info-modal7">?</button>
 
         <h1 class="">PESTLE Analysis</h1>
-
+      <form id="responseForm">
         <select id="group">
           <option value="choose">Choose a category...</option>
           <option value="group1">Political</option>
           <option value="group2">Economical</option>
           <option value="group3">Social</option>
           <option value="group4">Technology</option>
-          <option value="group4">Legal</option>
-          <option value="group4">Environmental</option>
+          <option value="group5">Legal</option>
+          <option value="group6">Environmental</option>
         </select>
 
         <textarea
