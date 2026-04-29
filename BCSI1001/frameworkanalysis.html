@@ -115,7 +115,6 @@
     padding: 10px;
     background: #444444;
     color: #FFF;
-    border: #333333;
 }
 
 #response {
@@ -123,6 +122,7 @@
     height: 400px;
     background: #333;
     color: #FFF;
+    font-size: 1.4rem;
 }
 
 .group {
@@ -290,7 +290,20 @@
   font-size: 1.25rem;
   cursor: pointer;
 }
-  </style>
+
+.hidden {
+  display: none;
+}
+
+.warning {
+  background: #d3473c65;
+  border: 1px solid #d3473c;
+  padding: 15px;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+</style>
 
  
 <!-- Firebase SDKs (v9 modular) -->
@@ -348,6 +361,39 @@ resetButton.addEventListener('click', async () => {
     alert('❌ Reset failed. Check console for details.');
   }
 });
+
+
+
+const warningDiv = document.getElementById('groupWarning');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  // ✅ Group validation
+  if (groupSelect.value === 'choose') {
+    warningDiv.classList.remove('hidden');
+    return;
+  }
+
+  // ✅ Hide warning once valid
+  warningDiv.classList.add('hidden');
+
+  if (!textarea.value.trim()) return;
+
+  await addDoc(responsesCol, {
+    text: textarea.value,
+    group: groupSelect.value,
+    createdAt: serverTimestamp()
+  });
+});
+
+
+groupSelect.addEventListener('change', () => {
+  if (groupSelect.value !== 'choose') {
+    warningDiv.classList.add('hidden');
+  }
+});
+
 
 
     textarea.addEventListener('input', (e) => {
@@ -493,7 +539,7 @@ resetButton.addEventListener('click', async () => {
         <h1 class="">SWOT Analysis</h1>
 
         <select id="group">
-          <option value="">Choose a category...</option>
+          <option value="choose">Choose a category...</option>
           <option value="group1">Strengths</option>
           <option value="group2">Weaknesses</option>
           <option value="group3">Opportunities</option>
@@ -506,7 +552,11 @@ resetButton.addEventListener('click', async () => {
           placeholder="Type your response here..."
         ></textarea>
 
-          
+
+          <div id="groupWarning" class="hidden warning">
+            Please select a group before submitting.
+          </div>
+
           <p id="livePreview" class="live-preview" style="display: none;">
             Start typing to see real-time updates…
           </p>
