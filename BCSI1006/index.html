@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Wheel of Power – Sunburst Chart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- amCharts libraries -->
+  <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+  <script src="https://cdn.amcharts.com/lib/5/hierarchy.js"></script>
+<!-- <script src="//cdn.amcharts.com/lib/5/themes/Material.js"></script> -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: "Montserrat", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f8f8f8;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 2rem 0 0.5rem;
+      color: #333333;
+    }
+
+    a {
+      color: #333333;
+      text-decoration: none;
+    }
+
+    a:hover, a:visited {
+      color: #553684;
+    }
+
+    #chartdiv {
+      width: 100%;
+      height: 1050px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Wheel of Power and Privilage <a href="#section" onclick="location.reload()">↻</a></h1>
+  <p style="text-align: center; margin-bottom: 50px">Hover on sections to reveal labels. Select sections to drill down on information.</p>
+  <div id="chartdiv"></div>
+
+  <script>
+    am5.ready(function() {
+
+      // Root
+      var root = am5.Root.new("chartdiv");
+
+      // Theme
+      // root.setThemes([
+      //   am5themes_Material.new(root)
+      // ]);
+
+
+      // Data (derived from the Wheel of Power image)
+      var data = {
+        name: "Power",
+        children: [
+          {
+            name: "White",
+            children: [{
+                name: "Different Shades",
+                children: [{ 
+                  name: "Dark", 
+                  children: [{
+                    name: "Skin Colour", value: 1, fill: am5.color(0x095256), 
+                  }]
+                }]
+              }]
+          },
+          {
+            name: "Post-Secondary",
+            children: [{
+                name: "High School Education",
+                children: [{ 
+                  name: "Elementary Education", 
+                  children: [{
+                    name: "Formal Education", value: 1 
+                  }]
+                }]
+              }]
+          },
+          {
+            name: "Able-Bodied",
+            children: [{
+                name: "Some Disability",
+                children: [{ 
+                  name: "Significantly Disability", 
+                  children: [{
+                    name: "Ability", value: 1 
+                  }]
+                }]
+              }]
+          },
+          {
+            name: "Heterosexual",
+            children: [{
+                name: "Gay Men",
+                children: [{ 
+                  name: "Lesbian, Bi, Pam, and A-Sexual", 
+                  children: [{
+                    name: "Sexuality", value: 1 
+                  }]
+                }]
+              }]
+          },
+          {
+            name: "Neurotypical",
+            children: [{
+                name: "Neuro-a-typical",
+                children: [{ 
+                  name: "Significant Neuro-Divergence", 
+                  children: [{
+                    name: "Homeless", value: 1 
+                  }]
+                }]
+              }]
+          },
+          {
+            name: "Robust",
+            children: [{
+                name: "Mostly Stable",
+                children: [{ 
+                  name: "Vulnerable", 
+                  children: [{
+                    name: "Mental Health", value: 1 
+                  }]
+                }]
+              }]
+          },
+          {
+            name: "Slim",
+            children: [{
+                name: "Average",
+                children: [{ 
+                  name: "Large", 
+                  children: [{
+                    name: "Body Size", value: 1 
+                  }]
+                }]
+              }]
+          },
+          {
+            name: "Owns Property",
+            children: [{
+                name: "Sheltered/Renting",
+                children: [{ 
+                  name: "Homeless", 
+                  children: [{
+                    name: "Housing", value: 1 
+                  }]
+                }]
+              }]
+          },
+          {
+            name: "Rich",
+            children: [{
+                name: "Middle Class",
+                children: [{ 
+                  name: "Poor", 
+                  children: [{
+                    name: "Wealth", value: 1 
+                  }]
+                }]
+              }]
+          },
+          {
+            name: "English",
+            children: [{
+                name: "Learned English",
+                children: [{ 
+                  name: "Non-English Monolingual", 
+                  children: [{
+                    name: "Language", value: 1 
+                  }]
+                }]
+              }]
+          },
+          {
+            name: "Cisgender Man",
+            children: [{
+                name: "Cisgender Women",
+                children: [{ 
+                  name: "Trans, Intersex, Non-Binary", 
+                  children: [{
+                    name: "Gender", value: 1 
+                  }]
+                }]
+              }]
+          },
+          {
+            name: "Citizen",
+            children: [{
+                name: "Documented",
+                children: [{ 
+                  name: "Undocumented", 
+                  children: [{
+                    name: "Citizenship", value: 1 
+                  }]
+                }]
+              }]
+          }
+        ]
+      };
+
+      // Sunburst series
+      var series = root.container.children.push(
+        am5hierarchy.Sunburst.new(root, {
+          valueField: "value",
+          categoryField: "name",
+          childDataField: "children",
+          innerRadius: am5.percent(10)
+        })
+      );
+
+      // Assign data
+      series.data.setAll([data]);
+
+
+      series.labels.template.setAll({
+  fill: am5.color(0x333333), // any hex color
+  fontFamily: "Montserrat",
+  fontSize: 12,
+  fontWeight: 800
+});
+
+      // Optional: zoom on click
+      series.slices.template.set("toggleKey", "active");
+
+      // Animate
+      series.appear(1000, 100);
+
+
+
+    });
+  </script>
+</body>
+</html>
