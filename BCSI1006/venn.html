@@ -1,75 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Intersectionality Venn Diagram</title>
+  <meta charset="UTF-8" />
+  <title>D3 Flower Plot with Labels & Tooltips</title>
 
-  <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-  <script src="https://cdn.amcharts.com/lib/5/venn.js"></script>
-  <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+  <!-- D3 -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
   <style>
-    html, body {
+    body {
       margin: 0;
-      width: 100%;
-      height: 100%;
+      background: #f3f3f3;
+      font-family: "Montserrat", sans-serif;
     }
-    #chartdiv {
-      width: 100%;
-      height: 100%;
+
+    svg {
+      display: block;
+      margin: auto;
+    }
+
+    .petal {
+      stroke: #444;
+      stroke-width: 1.5;
+      fill-opacity: 0.6;
+      mix-blend-mode: multiply;
+      cursor: pointer;
+    }
+
+    .label {
+      font-size: 14px;
+      fill: #000;
+      pointer-events: none;
+      text-anchor: middle;
+      dominant-baseline: middle;
+      font-weight: 500;
+    }
+
+    .tooltip {
+      position: absolute;
+      padding: 8px 10px;
+      background: rgba(0, 0, 0, 0.85);
+      color: white;
+      border-radius: 4px;
+      font-size: 13px;
+      pointer-events: none;
+      opacity: 0;
+      white-space: nowrap;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 2rem 0 0.5rem;
+      color: #333333;
+    }
+
+    a {
+      color: #333333;
+      text-decoration: none;
+    }
+
+    a:hover, a:visited {
+      color: #553684;
     }
   </style>
 </head>
-
 <body>
-<div id="chartdiv"></div>
+
+  <h1>Intersectionality</h1>
+  <p style="text-align: center; margin-bottom: 30px">Hover on sections to reveal labels.</p>
+
+<div id="tooltip" class="tooltip"></div>
+
+<svg id="chart" width="800" height="800"></svg>
 
 <script>
-am5.ready(function () {
+const width = 800;
+const height = 800;
+const cx = width / 2;
+const cy = height / 2;
 
-  const root = am5.Root.new("chartdiv");
-  root.setThemes([am5themes_Animated.new(root)]);
+const petalCount = 12;
+const rx = 260; // length of petal
+const ry = 120; // width of petal
 
-  const chart = root.container.children.push(
-    am5venn.Venn.new(root, {})
-  );
+const labels = [
+  "Race",
+  "Ethnicity",
+  "Gender identity",
+  "Class",
+  "Language",
+  "Religion",
+  "Ability",
+  "Sexuality",
+  "Mental health",
+  "Age",
+  "Education",
+  "Body size"
+];
 
-  const series = chart.series.push(
-    am5venn.VennSeries.new(root, {
-      categoryField: "name",
-      valueField: "value"
-    })
-  );
+const colors = [
+  "#d3473c", "#553684", "#d3473c", "#FC9A0A",
+  "#2467b2", "#00a984", "#3ca95c", "#90caf9",
+  "#d3473c", "#d3473c", "#d3473c", "#bcaaa4"
+];
 
-  // ✅ DATA MUST INCLUDE INTERSECTIONS
-  series.data.setAll([
-    { name: "Race", value: 10 },
-    { name: "Gender identity", value: 10 },
-    { name: "Class", value: 10 },
+const data = d3.range(petalCount).map(i => ({
+  label: labels[i],
+  angle: (360 / petalCount) * i,
+  color: colors[i]
+}));
 
-    {
-      name: "Race ∩ Gender",
-      sets: ["Race", "Gender identity"],
-      value: 5
-    },
-    {
-      name: "Race ∩ Class",
-      sets: ["Race", "Class"],
-      value: 5
-    },
-    {
-      name: "Gender ∩ Class",
-      sets: ["Gender identity", "Class"],
-      value: 5
-    },
-    {
-      name: "All three",
-      sets: ["Race", "Gender identity", "Class"],
-      value: 3
-    }
-  ]);
+const svg = d3.select("#chart");
+const tooltip = d3.select("#tooltip");
 
-});
+const g = svg.append("g")
+  .attr("transform", `translate(${cx}, ${cy})`);
+
+g.selectAll("ellipse")
+  .data(data)
+  .join("ellipse")
+  .attr("class", "petal")
+  .attr("cx", 0)
+  .attr("cy", 0)
+  .attr("rx", rx)
+  .attr("ry", ry)
+  .attr("fill", d => d.color)
+  .attr("transform", d => `rotate(${d.angle})`)
+  .on("mouseenter", (event, d) => {
+    tooltip
+      .style("opacity", 1)
+      .html(`<strong>${d.label}</strong>`);
+  })
+  .on("mousemove", (event) => {
+    tooltip
+      .style("left", (event.pageX + 12) + "px")
+      .style("top", (event.pageY + 12) + "px");
+  })
+  .on("mouseleave", () => {
+    tooltip.style("opacity", 0);
+  });
+
+// Visible text labels (replaces numbers)
+g.selectAll("text")
+  .data(data)
+  .join("text")
+  .attr("class", "label")
+  .attr("x", d => Math.cos(d.angle * Math.PI / 180) * (rx + 34))
+  .attr("y", d => Math.sin(d.angle * Math.PI / 180) * (rx + 34))
+  .text(d => d.label);
 </script>
+
 </body>
 </html>
