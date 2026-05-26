@@ -33,6 +33,10 @@
     .flex-2 {
         width: 48%;
     }
+
+    .cell-content {
+      padding: 100px 0px 50px 100px;
+    }
     
 }
 
@@ -41,12 +45,13 @@
     .flex-2 {
         width: 100%;
     }
+
+    .cell-content {
+      padding: 60px 5%;
+    }
     
 }
 
-.cell-content {
-  padding: 100px 0px 50px 100px;
-}
 
 
 svg {
