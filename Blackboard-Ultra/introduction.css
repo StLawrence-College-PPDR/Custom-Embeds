@@ -57,10 +57,12 @@ h2 {
   font-size: 4rem;
   margin-bottom: 0;
   font-weight: 200;
+  line-height: 1.2;
 }
 
 p {
   font-size: 1.4rem;
+  line-height: 1.2;
 }
 
 .module-number {
