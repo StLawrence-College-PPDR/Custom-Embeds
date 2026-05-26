@@ -38,10 +38,6 @@
       padding: 100px 0px 50px 100px;
     }
 
-    svg {
-        transform: translateY(50%);
-    }
-    
     
 }
 
@@ -53,10 +49,6 @@
 
     .cell-content {
       padding: 60px 5%;
-    }
-
-    svg {
-        transform: translateY(0);
     }
     
 }
