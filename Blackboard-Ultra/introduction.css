@@ -21,6 +21,15 @@
   border-radius: 30px !important;
 }
 
+@media print {
+svg {
+     overflow: visible; 
+    margin: auto;
+    height: 540px;
+}
+
+}
+
  @media (min-width: 1300px) {
 
     .flex-2 {
