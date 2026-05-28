@@ -23,17 +23,17 @@
 
 @media print {
 svg {
-     overflow: visible; 
-    margin: auto;
-    height: 540px;
+     overflow: visible !important; 
+    margin: auto !important;
+    height: 540px !important;
 }
 
 .flex-2 {
-        width: 100%;
+        width: 100% !important;
     }
 
     .cell-content {
-      padding: 60px 5%;
+      padding: 60px 5% !important;
     }
 
 }
