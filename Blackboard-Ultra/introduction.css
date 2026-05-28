@@ -28,6 +28,14 @@ svg {
     height: 540px;
 }
 
+.flex-2 {
+        width: 100%;
+    }
+
+    .cell-content {
+      padding: 60px 5%;
+    }
+
 }
 
  @media (min-width: 1300px) {
