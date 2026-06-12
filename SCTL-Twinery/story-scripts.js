@@ -1,0 +1,9 @@
+importScripts("https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js");
+importScripts("https://player.vimeo.com/api/player.js");
+importScripts("https://cdn.plyr.io/3.7.3/plyr.js");
+importScripts("https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js");
+importStyles("https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css");
+importStyles("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css");
+importStyles("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/fontawesome.min.css");
+importStyles("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.css");
+importStyles("https://cdn.plyr.io/3.7.3/plyr.css");

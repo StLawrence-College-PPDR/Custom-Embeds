@@ -1,0 +1,70 @@
+<script>
+  var iframe = document.querySelector('iframe');
+  var player = new Vimeo.Player(iframe);
+    
+    player.on('loaded', function() {
+        $("#pausebutton").show();
+        $("#mutebutton").show();
+    });
+    
+    $("#unmutebutton").hide();
+    $("#playbutton").hide();
+    
+    player.on('play', function() {
+      console.log('Video Playing');
+      player.setVolume(1);
+    });
+    
+    player.on('ended', function() {
+      console.log('video over');
+      $('.pass2').fadeIn('slow');
+    });
+    
+    $("#playbutton").click(function() {
+     $("#pausebutton").show();
+     $("#playbutton").hide();
+     player.play();
+   });
+    
+   $("#pausebutton").click(function() {
+      $("#playbutton").show();
+      $("#pausebutton").hide();
+      player.pause();
+   });
+   
+   $("#mutebutton").click(function() {
+      $("#unmutebutton").show();
+      $("#mutebutton").hide();
+      player.setVolume(0);
+   });
+   
+   $("#unmutebutton").click(function() {
+      $("#mutebutton").show();
+      $("#unmutebutton").hide();
+      player.setVolume(1);
+   });
+</script>
+
+<div id="loading"></div>
+
+<div class="controls">
+<div class="playcontrols">
+  <button id="playbutton"><i class="fa-solid fa-play"></i></button>
+  <button id="pausebutton"><i class="fa-solid fa-pause"></i></button>
+</div>
+<div class="volumecontrols">
+  <button id="mutebutton"><i class="fa-solid fa-volume-xmark"></i></button>
+  <button id="unmutebutton"><i class="fa-solid fa-volume-high"></i></button>
+</div>
+</div>
+
+<div id="video2" class="vimeo-wrapper"><iframe src="https://player.vimeo.com/video/389960243?background=1&autoplay=1&loop=0&byline=0&title=0" frameborder="0" allow="autoplay" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+                      
+<div id="pass" class="pass2" style="display: none;">
+  <p id="question" class="q2">We have three salads on the menu, which would you like?</p>
+  <div id="answers" class="flex-collection">
+    [[House Italian Salad->Bread]]
+    [[Olive Greek Salad->Bread]]
+    [[Caesar Salad->Bread]]
+  </div>
+</div>

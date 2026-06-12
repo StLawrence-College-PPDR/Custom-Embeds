@@ -1,0 +1,40 @@
+<script>
+    const player3 = new Plyr("#player3", {
+        muted: 'true',
+        autoplay: 'true'
+    });
+
+    player3.on('playing', (event) => {
+        console.log('playing');
+        player3.volume = 0.5;
+        $('.load-window').fadeOut('slow');
+    });
+
+    player3.on('ended', (event) => {
+        console.log('video over');
+        $('#pass').fadeIn('slow');
+        $('.plyr__controls').fadeOut('fast');
+        $('.load-window').fadeIn('slow');
+        $('#loading').css('display', 'none');
+    });
+
+    window.player3 = player3;
+</script>
+<div class="load-window">        
+    <div id="loading"></div>
+</div>
+<div class="plyr__video-embed" id="player3">
+    <iframe
+        src="https://www.youtube.com/embed/hS5CfP8n_js?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1&amp;"
+        allowfullscreen
+        allowtransparency
+        allow="autoplay"
+    ></iframe>
+</div>
+<div id="pass" style="display: none;">
+    <p id="question">This is where a question will go...</p>
+    <div id="answers" class="flex-collection">
+        [[Finish->End]] 
+        [[Go to the end->End]]
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<script>
+    const player1 = new Plyr("#player1", {
+        muted: 'true',
+        autoplay: 'true'
+    });
+
+    player1.on('playing', (event) => {
+        console.log('playing');
+        player1.volume = 0.5;
+        $('.load-window').fadeOut('slow');
+    });
+
+    player1.on('ended', (event) => {
+        console.log('video over');
+        $('#pass').fadeIn('slow');
+        $('.plyr__controls').fadeOut('fast');
+        $('.load-window').fadeIn('slow');
+        $('#loading').css('display', 'none');
+    });
+
+    window.player1 = player1;
+</script>
+<div class="load-window">        
+    <div id="loading"></div>
+</div>
+<div class="plyr__video-embed" id="player1">
+    <iframe src="https://player.vimeo.com/video/76979871?loop=false&amp;byline=false&amp;portrait=false&amp;title=false&amp;speed=true&amp;transparent=0&amp;gesture=media" allowfullscreen allowtransparency allow="autoplay"></iframe>
+</div>
+
+<div id="pass" style="display: none;">
+    <p id="question">This is where a quesion will go...</p>
+    <div id="answers" class="flex-collection">
+        [[Finish->End]] 
+        [[Go to the end->End]]
+    </div>
+</div>
