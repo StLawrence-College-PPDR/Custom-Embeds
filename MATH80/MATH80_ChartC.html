@@ -1,0 +1,231 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head> 
+		<title>Business Fundamentals - Chart C</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=400, height=600, initial-scale=0.8, maximum-scale=1">
+		<style>
+        @keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}
+        .chartjs-render-monitor{animation:chartjs-render-animation 1ms}
+        .chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}
+        .chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}
+        .chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}
+        </style>
+	</head>
+	<body>
+		<header id="header" class="landing">
+			<div class="container">
+			</div>
+		</header>
+		<div class="chartjs-size-monitor">
+			<div class="chartjs-size-monitor-expand">
+				<div class=""></div>
+			</div>
+			<div class="chartjs-size-monitor-shrink">
+				<div class=""></div>
+			</div>
+		</div>
+            <canvas id="canvas" style="display: block; width: 1379px; height: 689px;" width="1379" height="689" class="chartjs-render-monitor"></canvas>
+            <script src="https://cdn2.hubspot.net/hubfs/476360/Chart.js" crossorigin="anonymous"></script>
+            <script src="https://cdn2.hubspot.net/hubfs/476360/utils.js" crossorigin="anonymous"></script>
+        <script>
+            var config = {
+                type: 'line',
+                data: {
+                    labels: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'],
+                    datasets: [{
+                        label: 'Yearly',
+                        backgroundColor: '#d84738',
+                        borderColor: '#d84738',
+                        fill: false,
+                        data: [
+                            100,
+                            112.00,
+                            125.44,
+                            140.49,
+                            176.23,
+                            197.38,
+                            247.60,
+                            261.13,
+                            277.31,
+                            310.58,
+                            347.85,
+                            389.60,
+                            436.45,
+                            488.71,
+                            547.36,
+                            613.04,
+                            686.60,
+                            769.00,
+                            964.63
+                        ],
+                    },
+                    {
+                        label: 'Semi-Yearly',
+                        backgroundColor: '#673ab7',
+                        borderColor: '#673ab7',
+                        fill: false,
+                        data: [
+                            100,
+                            112.36,
+                            126.25,
+                            141.85,
+                            159.38,
+                            179.89,
+                            201.22,
+                            226.09,
+                            285.43,
+                            320.71,
+                            360.35,
+                            404.89,
+                            454.94,
+                            511.17,
+                            574.35,
+                            645.34,
+                            725.10,
+                            814.73,
+                            915.43,
+                            1028.57
+                        ],
+                    },
+                    {
+                        label: 'Quarterly',
+                        backgroundColor: '#8bc34a',
+                        borderColor: '#8bc34a',
+                        fill: false,
+                        data: [
+                            100,
+                            112.55,
+                            126.68,
+                            142.58,
+                            160.47,
+                            180.61,
+                            203.28,
+                            228.79,
+                            257.51,
+                            289.83,
+                            326.20,
+                            367.15,
+                            413.23,
+                            465.09,
+                            543.26,
+                            523.46,
+                            589.16,
+                            663.11,
+                            746.33,
+                            840.00,
+                            945.43,
+                            1064.09
+                        ],
+                    },
+                    {
+                        label: 'Monthly',
+                        backgroundColor: '#03a9f4',
+                        borderColor: '#03a9f4',
+                        fill: false,
+                        data: [
+                            100,
+                            112.68,
+                            126.97,
+                            143.08,
+                            161.22,
+                            181.67,
+                            204.71,
+                            230.67,
+                            259.93,
+                            292.89,
+                            310.58,
+                            371.90,
+                            419.06,
+                            472.21,
+                            532.10,
+                            599.58,
+                            675.62,
+                            761.31,
+                            857.86,
+                            966.66,
+                            1089.26
+                        ],
+                    },
+                    {
+                        label: 'Daily',
+                        backgroundColor: '#ff9800',
+                        borderColor: '#ff9800',
+                        fill: false,
+                        data: [
+                            100,
+                            112.75,
+                            127.12,
+                            143.32,
+                            161.59,
+                            205.42,
+                            231.60,
+                            261.13,
+                            294.42,
+                            331.95,
+                            374.26,
+                            421.97,
+                            475.76,
+                            536.41,
+                            604.79,
+                            681.88,
+                            768.80,
+                            866.81,
+                            977.30,
+                            1101.88
+                        ],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Comparison of Compounding Frequencies ($100 investment at 12% compound interest)'
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                  scaleLabel: {
+                    display: true,
+                    labelString: 'Years Invested'
+                  },
+
+                        }],
+                        yAxes: [{
+                            display: true,
+                            //type: 'logarithmic',
+                  scaleLabel: {
+                                    display: true,
+                                    labelString: 'Future Value ($)'
+                                },
+                                ticks: {
+                                    min: 0,
+                                    max: 1200,
+
+                                    // forces step size to be 5 units
+                                    stepSize: 200
+                                }
+                        }]
+                    }
+                }
+            };
+
+            window.onload = function() {
+                var ctx = document.getElementById('canvas').getContext('2d');
+                window.myLine = new Chart(ctx, config);
+            };
+
+            document.getElementById('randomizeData').addEventListener('click', function() {
+                config.data.datasets.forEach(function(dataset) {
+                    dataset.data = dataset.data.map(function() {
+                        return randomScalingFactor();
+                    });
+
+                });
+
+                window.myLine.update();
+            });
+        </script>
+	</body>
+</html>
