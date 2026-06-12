@@ -1,0 +1,11 @@
+Model Information:
+* title:	lock
+* source:	https://sketchfab.com/3d-models/lock-2d135b5c67e040be8df317ed7b86d2b1
+* author:	black7cat (https://sketchfab.com/black7cat)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "lock" (https://sketchfab.com/3d-models/lock-2d135b5c67e040be8df317ed7b86d2b1) by black7cat (https://sketchfab.com/black7cat) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

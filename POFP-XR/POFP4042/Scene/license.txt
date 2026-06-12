@@ -1,0 +1,11 @@
+Model Information:
+* title:	Office of a Crane Operator
+* source:	https://sketchfab.com/3d-models/office-of-a-crane-operator-3215974b309a41358da525379090b075
+* author:	SwissCH (https://sketchfab.com/swissch)
+
+Model License:
+* license type:	CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+* requirements:	Author must be credited. No commercial use.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Office of a Crane Operator" (https://sketchfab.com/3d-models/office-of-a-crane-operator-3215974b309a41358da525379090b075) by SwissCH (https://sketchfab.com/swissch) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
