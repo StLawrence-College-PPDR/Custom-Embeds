@@ -1,0 +1,651 @@
+<!-- 
+Each annotation will need the following...
+    1. Navbar: Number using bootstap icon and click function. 
+    2. Modal/Bubble: Annotation description, picture, zoom picture, numberical identifier, video, title, etc.
+    3. Annotated Marker: Positioned numberical marker on the 3D model.
+    4. Script: Click functions for navbar and 3D model.
+    
+    *Only edit the position and rotation of annotated markers on the parent entity. 
+    
+Position (x,y,z) by Colours in aframe inspector (ctrl + alt + i)...
+    x (Red) = Left to right
+    y (Green) = Up and down
+    z (Blue) = Front to back
+
+Editing the model for the scene will need the following...
+    1. If model is not centered upon uploading, edit in blender to be a the center point of the 3D area.
+    2. Rotate the first view point of the model by editing the y (x,y,x) cooridinates. Example 90 degress (0,90,0);
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Egyptian Template 3D</title>
+    <meta name="description" content="WebXR Markers">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="courses-style.css">
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://supereggbert.github.io/aframe-htmlembed-component/dist/build.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.5.1/dist/aframe-look-at-component.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v5.0.1/dist/aframe-extras.min.js"></script>
+    <script src="https://cdn.rawgit.com/tizzle/aframe-orbit-controls-component/v0.1.14/dist/aframe-orbit-controls-component.min.js">
+      </script>
+    <script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script>
+    <script src="https://rawgit.com/Ctrl-Alt-Zen/aframe-mobile-controls/master/components/twoway-motion/twoway-motion.js"></script>
+
+    <script>
+        AFRAME.registerComponent('change-color-on-hover',{
+            init:function(){
+                var data = this.data;
+                var el = this.el;
+                var defaultColor = el.getAttribute('material').color;
+                var defaultOpacity = el.getAttribute('material').opacity;
+                
+                this.el.addEventListener('mouseleave',function(){
+                    el.setAttribute('color', defaultColor);
+                    el.setAttribute('opacity', defaultOpacity);
+                });
+                
+                this.el.addEventListener('mouseenter', function() {
+                    el.setAttribute('color', data.color);
+                    el.setAttribute('opacity', data.opacity);
+                });
+            }
+          });
+    
+    </script>
+  </head>
+  <body>
+    <div id="shield" class="embed-wrapper">
+<!--Navbar-->
+        <div class="navigation-scene">
+            <ul class="nav navbar nav-pills">
+              <li class="nav-item">
+                  <a id="showModal" class="nav-link" onclick="modal()"><i class="bi bi-badge-3d"></i><span class="nav-link-text"> Model</span></a>
+              </li>
+              <li class="nav-item">
+                  <a id="showMarkers" class="nav-link" onclick="markers()"><i class="bi bi-1-circle"></i><span class="nav-link-text"> Markers</span></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#" target="_blank"><i class="bi bi-zoom-in"></i><span class="nav-link-text"> Fullscreen</span></a>
+              </li>
+              <li class="nav-item">
+                  <a id="showHelp" class="nav-link active" onclick="help()"><i class="bi bi-info-circle"></i><span class="nav-link-text"> Help</span></a>
+              </li>
+            </ul>
+        </div>
+        <div id="markers" class="markers-bar">
+            <ul>
+                <li><a id="annotation1" onclick="bubble1()">Hieroglyphic Inscriptions</a></li>
+                <li><a id="annotation2" onclick="bubble2()">Animal Symbolism</a></li>
+                <li><a id="annotation3" onclick="bubble3()">Pylons and Gateways</a></li>
+                <li><a id="annotation4" onclick="bubble4()">Sanctuaries</a></li>
+                <li><a id="annotation5" onclick="bubble5()">Courtyards</a></li>
+                <li><a id="annotation6" onclick="bubble6()">Hypostyle Halls</a></li>
+                <li><a id="annotation7" onclick="bubble7()">Alignment and Orientation</a></li>
+            </ul>
+            <div class="markers-content">
+                <hr>
+                <a class="text-align: center; margin-bottom: 0;" onclick="modal()"><i class="bi bi-x-circle"></i> Close</a>
+            </div>
+        </div>
+        
+<!--Help Window-->
+        <div id="helpWindow" class="help-window">
+            <div class="help-content flex-collection">
+               <div class="help-item flex-3">
+                    <p><strong><i class="bi bi-dpad"></i></strong></p>
+                    <p><strong>Move</strong></p>
+                    <p class="op4">Use the WASD keys on your keyboard to move in different directions. Press and hold on the ground for touch devices.</p>
+                </div>
+                <div class="help-item flex-3">
+                    <p><strong><i class="bi bi-arrows-move"></i></strong></p>
+                    <p><strong>Orbit</strong></p>
+                    <p class="op4">Left-click and drag to move the 3D object around.</p>
+                </div>
+                <div class="help-item flex-3">
+                    <p><strong><i class="bi bi-1-circle"></i></strong></p>
+                    <p><strong>Annotation</strong></p>
+                    <p class="op4">Click on numberical values to reveal information.</p>
+                </div>
+                <div class="flex-1" style="width: 100%; text-align: center;">
+                    <hr>
+                    <a class="begin-button" onclick="modal()"><i class="bi bi-badge-3d"></i> View 3D Model</a>
+                </div>
+            </div>
+        </div>
+  
+<!--Modal 1-->
+        <div id="modal1" class="bubble">
+            <div class="bubble-body">
+                <div class="bubble-title">Hieroglyphic Inscriptions</div>
+                <div class="bubble-content">
+                    <p>Walls and pillars were adorned with hieroglyphic inscriptions depicting religious texts, mythological stories, and hymns dedicated to the deities.</p>
+                </div>
+                <div class="bubble-zoom" style="background: url('image1.png');"></div>
+                <hr>
+                <a class="text-align: center; margin-bottom: 0;" onclick="modal()"><i class="bi bi-x-circle"></i> Close</a>
+            </div>
+        </div>
+<!--Modal 2-->
+        <div id="modal2" class="bubble">
+            <div class="bubble-body">
+                <div class="bubble-title">Animal Symbolism</div>
+                <div class="bubble-content">
+                    <p>Sculptures and reliefs often featured symbolic animals associated with specific deities, such as the falcon representing Horus or the lion representing Sekhmet.</p>
+                </div>
+                <div class="bubble-zoom" style="background: url('image2.png');"></div>
+                <hr>
+                <a class="text-align: center; margin-bottom: 0;" onclick="modal()"><i class="bi bi-x-circle"></i> Close</a>
+            </div>
+        </div>
+<!--Modal 3-->
+        <div id="modal3" class="bubble">
+            <div class="bubble-body">
+                <div class="bubble-title">Pylons and Gateways</div>
+                <div class="bubble-content">
+                    <p>Egyptian temples typically had massive entrance gateways called pylons, adorned with towering structures and monumental gateways. </p>
+                </div>
+                <div class="bubble-zoom" style="background: url('image3.png');"></div>
+                <hr>
+                <a class="text-align: center; margin-bottom: 0;" onclick="modal()"><i class="bi bi-x-circle"></i> Close</a>
+            </div>
+        </div>
+<!--Modal 4-->
+        <div id="modal4" class="bubble">
+            <div class="bubble-body">
+                <div class="bubble-title">Sanctuaries</div>
+                <div class="bubble-content">
+                    <p>At the heart of the temple lay the innermost sanctuary, housing the statue of the deity. This sanctuary was the most sacred space within the temple.</p>
+                </div>
+                <div class="bubble-zoom" style="background: url('image4.png');"></div>
+                <hr>
+                <a class="text-align: center; margin-bottom: 0;" onclick="modal()"><i class="bi bi-x-circle"></i> Close</a>
+            </div>
+        </div>
+<!--Modal 5-->
+        <div id="modal5" class="bubble">
+            <div class="bubble-body">
+                <div class="bubble-title">Courtyards</div>
+                <div class="bubble-content">
+                    <p>Beyond the pylons, temples featured expansive courtyards surrounded by colonnades, providing open spaces for rituals and gatherings.</p>
+                </div>
+                <div class="bubble-zoom" style="background: url('image5.png');"></div>
+                <hr>
+                <a class="text-align: center; margin-bottom: 0;" onclick="modal()"><i class="bi bi-x-circle"></i> Close</a>
+            </div>
+        </div>
+<!--Modal 6-->
+        <div id="modal6" class="bubble">
+            <div class="bubble-body">
+                <div class="bubble-title">Hypostyle Halls</div>
+                <div class="bubble-content">
+                    <p>Many temples had hypostyle halls with numerous columns, creating a forest-like atmosphere and representing the primeval marsh from Egyptian cosmogony.</p>
+                </div>
+                <div class="bubble-zoom" style="background: url('image6.png');"></div>
+                <hr>
+                <a class="text-align: center; margin-bottom: 0;" onclick="modal()"><i class="bi bi-x-circle"></i> Close</a>
+            </div>
+        </div>
+<!--Modal 7-->
+        <div id="modal7" class="bubble">
+            <div class="bubble-body">
+                <div class="bubble-title">Alignment and Orientation</div>
+                <div class="bubble-content">
+                    <p>Temples were often aligned with celestial bodies or geographic features, emphasizing a connection between the divine and earthly realms.</p>
+                </div>
+                <div class="bubble-zoom" style="background: url('image7.png');"></div>
+                <hr>
+                <a class="text-align: center; margin-bottom: 0;" onclick="modal()"><i class="bi bi-x-circle"></i> Close</a>
+            </div>
+        </div>
+    </div>
+    
+<!-- 3D Model Scene: rayOrigin allows a computer-based mouse be the cursor instead of the aframe cursor. -->    
+    <a-scene id="aScene" html-markers vr-mode-ui="enabled: false" cursor="rayOrigin: mouse">
+    
+    <a-sky id="#sky" color="#f3f3f3"></a-sky>
+    
+<!-- Camera: Using orbit controls component to create a single axis area. -->
+<!--
+        <a-entity
+            id="camera"
+            camera="fov: 80; zoom: 1.5;"
+            position="0 2 5"
+            orbit-controls="
+              autoRotate: false;
+              target: #target;
+              enableDamping: true;
+              dampingFactor: 0.125;
+              rotateSpeed:0.25;
+              minDistance:3;
+              maxDistance:100;
+              "
+            camera look-controls mouse-cursor>
+            <a-entity geometry="primitive:cone; radius-bottom:1; radius-top:0" scale=".33 1 .33" position="0 0 0" rotation="90 0 0" material="color: #0099ff; transparent: true; opacity:0.5"></a-entity>
+        </a-entity>
+-->
+       <a-camera position="0.000 3.2 0.000" wasd-controls="acceleration: 100" twoway-motion="speed: 35">
+      </a-camera>
+        
+<!-- Assets: Path to 3D model here. -->
+        <a-assets>
+            <a-asset-item
+              id="model"
+              response-type="arraybuffer"
+              src="Model/scene.gltf"
+            ></a-asset-item>
+        </a-assets>
+
+<!-- Target: All annotations and gltf model need to be inside the target ID to orbit on the same axis.-->  
+        <a-entity id="target" position="0 0 0">
+           
+<!-- Model: a-asset will place the model here. Control attributes from this tag.--> 
+            <a-entity gltf-model="#model" position="-4.24 -8.23 1.955" scale="0.1 0.1 0.1" rotation="0 0 0" cube-env-map="path: HDR/; extension: jpg; reflectivity: 0.5;" renderer="colorManagement: true; physicallyCorrectLights: true;"></a-entity>
+            
+<!-- Annotations: Reveal associated modal/bubble to reveal on click. -->
+
+<!-- Annotation 1 -->            
+            <a-entity id="bubble1" onclick="bubble1()" class="moveTarget" position="17.71 8.949 -62.35" scale="8 8 8">
+               <a-entity text="value: +; align: center;" position="-0.317 0.639 0.495" scale="1.5 1.5 1.5"></a-entity>
+                <a-ring position="-0.310 0.639 0.495" geometry="radius: 1.25; radiusInner: 1.070;" color="#FFFFFF" scale="0.070 0.070 0.070"></a-ring>
+                <a-circle position="-0.310 0.639 0.494" radius="1.25" material="color: #000000; opacity: 0.4;" scale="0.070 0.070 0.070" change-color-on-hover="color: #d84738; opacity: 1;" ></a-circle>
+            </a-entity>
+            
+<!-- Annotation 2 -->              
+            <a-entity id="bubble2" onclick="bubble2()" class="moveTarget" position="12.63 1.527 -10.04" rotation="0 0 0" scale="8 8 8">
+               <a-entity text="value: +; align: center;" position="-0.311 0.269 0.495" scale="1.5 1.5 1.5" material="color: #FFFFFF;"></a-entity>
+                <a-ring position="-0.310 0.269 0.495" geometry="radius: 1.25; radiusInner: 1.070;" material="color: #FFFFFF;" scale="0.070 0.070 0.070"></a-ring>
+                <a-circle position="-0.310 0.269 0.494" radius="1.25" material="color: #000000; opacity: 0.4;" change-color-on-hover="color: #d84738; opacity: 1;" scale="0.070 0.070 0.070"></a-circle>
+            </a-entity>
+            
+<!-- Annotation 3 -->              
+            <a-entity id="bubble3" onclick="bubble3()" class="moveTarget" position="7.054 1.527 -60.87" rotation="0 0 0" scale="8 8 8">
+               <a-entity text="value: +; align: center;" position="-0.311 0.269 0.495" scale="1.5 1.5 1.5" material="color: #FFFFFF;"></a-entity>
+                <a-ring position="-0.310 0.269 0.495" geometry="radius: 1.25; radiusInner: 1.070;" material="color: #FFFFFF;" scale="0.070 0.070 0.070"></a-ring>
+                <a-circle position="-0.310 0.269 0.494" radius="1.25" material="color: #000000; opacity: 0.4;" change-color-on-hover="color: #d84738; opacity: 1;" scale="0.070 0.070 0.070"></a-circle>
+            </a-entity>
+            
+<!-- Annotation 4 -->              
+            <a-entity id="bubble4" onclick="bubble4()" class="moveTarget" position="-3.33 8.255 -130.9" rotation="0 0 0" scale="8 8 8">
+               <a-entity text="value: +; align: center;" position="-0.311 0.269 0.495" scale="1.5 1.5 1.5" material="color: #FFFFFF;"></a-entity>
+                <a-ring position="-0.310 0.269 0.495" geometry="radius: 1.25; radiusInner: 1.070;" material="color: #FFFFFF;" scale="0.070 0.070 0.070"></a-ring>
+                <a-circle position="-0.310 0.269 0.494" radius="1.25" material="color: #000000; opacity: 0.4;" change-color-on-hover="color: #d84738; opacity: 1;" scale="0.070 0.070 0.070"></a-circle>
+            </a-entity>
+            
+<!-- Annotation 5 -->              
+            <a-entity id="bubble5" onclick="bubble5()" class="moveTarget" position="32.98 1.527 -93.63" rotation="0 0 0" scale="8 8 8">
+               <a-entity text="value: +; align: center;" position="-0.311 0.269 0.495" scale="1.5 1.5 1.5" material="color: #FFFFFF;"></a-entity>
+                <a-ring position="-0.310 0.269 0.495" geometry="radius: 1.25; radiusInner: 1.070;" material="color: #FFFFFF;" scale="0.070 0.070 0.070"></a-ring>
+                <a-circle position="-0.310 0.269 0.494" radius="1.25" material="color: #000000; opacity: 0.4;" change-color-on-hover="color: #d84738; opacity: 1;" scale="0.070 0.070 0.070"></a-circle>
+            </a-entity>
+        
+<!-- Annotation 6 -->              
+            <a-entity id="bubble6" onclick="bubble6()" class="moveTarget" position="12.85 3.027 -146.0" rotation="0 0 0" scale="8 8 8">
+               <a-entity text="value: +; align: center;" position="-0.311 0.269 0.495" scale="1.5 1.5 1.5" material="color: #FFFFFF;"></a-entity>
+                <a-ring position="-0.310 0.269 0.495" geometry="radius: 1.25; radiusInner: 1.070;" material="color: #FFFFFF;" scale="0.070 0.070 0.070"></a-ring>
+                <a-circle position="-0.310 0.269 0.494" radius="1.25" material="color: #000000; opacity: 0.4;" change-color-on-hover="color: #d84738; opacity: 1;" scale="0.070 0.070 0.070"></a-circle>
+            </a-entity>
+            
+<!-- Annotation 7 -->              
+            <a-entity id="bubble7" onclick="bubble7()" class="moveTarget" position="-3.25 23.96 -60.77" rotation="0 0 0" scale="8 8 8">
+               <a-entity text="value: +; align: center;" position="-0.311 0.269 0.495" scale="1.5 1.5 1.5" material="color: #FFFFFF;"></a-entity>
+                <a-ring position="-0.310 0.269 0.495" geometry="radius: 1.25; radiusInner: 1.070;" material="color: #FFFFFF;" scale="0.070 0.070 0.070"></a-ring>
+                <a-circle position="-0.310 0.269 0.494" radius="1.25" material="color: #000000; opacity: 0.4;" change-color-on-hover="color: #d84738; opacity: 1;" scale="0.070 0.070 0.070"></a-circle>
+            </a-entity>
+        </a-entity>
+    </a-scene>    
+  </body>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js" integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+    <script type="text/javascript">
+        $('#modal1').hide();
+        $('#modal2').hide();
+        $('#modal3').hide();
+        $('#modal4').hide();
+        $('#modal5').hide();
+        $('#modal6').hide();
+        $('#modal7').hide();
+        $('#markers').hide();
+      
+        function bubble1() {
+            document.getElementById('modal1').style.display = 'block';
+            document.getElementById('modal7').style.display = 'none';
+            document.getElementById('modal6').style.display = 'none';
+            document.getElementById('modal5').style.display = 'none';
+            document.getElementById('modal4').style.display = 'none';
+            document.getElementById('modal3').style.display = 'none';
+            document.getElementById('modal2').style.display = 'none';
+            
+            document.getElementById('annotation7').classList.remove("active");
+            document.getElementById('annotation6').classList.remove("active");
+            document.getElementById('annotation5').classList.remove("active");
+            document.getElementById('annotation4').classList.remove("active");
+            document.getElementById('annotation3').classList.remove("active");
+            document.getElementById('annotation2').classList.remove("active");
+            document.getElementById('annotation1').classList.add("active");
+            
+            document.getElementById('shield').classList.add("active");
+            
+            document.getElementById('helpWindow').style.display = 'none';
+            document.getElementById('markers').style.display = 'none';
+            
+            document.getElementById('showHelp').classList.remove("active");
+            document.getElementById('showModal').classList.remove("active");
+            document.getElementById('showMarkers').classList.remove("active");
+        }
+      
+        function bubble2() {
+            document.getElementById('modal2').style.display = 'block';
+            document.getElementById('modal1').style.display = 'none';
+            document.getElementById('modal7').style.display = 'none';
+            document.getElementById('modal6').style.display = 'none';
+            document.getElementById('modal5').style.display = 'none';
+            document.getElementById('modal4').style.display = 'none';
+            document.getElementById('modal3').style.display = 'none';
+            
+            document.getElementById('annotation1').classList.remove("active");
+            document.getElementById('annotation3').classList.remove("active");
+            document.getElementById('annotation4').classList.remove("active");
+            document.getElementById('annotation5').classList.remove("active");
+            document.getElementById('annotation6').classList.remove("active");
+            document.getElementById('annotation7').classList.remove("active");
+            document.getElementById('annotation2').classList.add("active");
+            
+            document.getElementById('shield').classList.add("active");
+            
+            document.getElementById('helpWindow').style.display = 'none';
+            document.getElementById('markers').style.display = 'none';
+            
+            document.getElementById('showHelp').classList.remove("active");
+            document.getElementById('showModal').classList.remove("active");
+            document.getElementById('showMarkers').classList.remove("active");
+        }
+        
+        function bubble3() {
+            document.getElementById('modal3').style.display = 'block';
+            document.getElementById('modal1').style.display = 'none';
+            document.getElementById('modal2').style.display = 'none';
+            document.getElementById('modal4').style.display = 'none';
+            document.getElementById('modal5').style.display = 'none';
+            document.getElementById('modal6').style.display = 'none';
+            document.getElementById('modal7').style.display = 'none';
+            
+            document.getElementById('annotation1').classList.remove("active");
+            document.getElementById('annotation2').classList.remove("active");
+            document.getElementById('annotation4').classList.remove("active");
+            document.getElementById('annotation5').classList.remove("active");
+            document.getElementById('annotation6').classList.remove("active");
+            document.getElementById('annotation7').classList.remove("active");
+            document.getElementById('annotation3').classList.add("active");
+            
+            document.getElementById('shield').classList.add("active");
+            
+            document.getElementById('helpWindow').style.display = 'none';
+            document.getElementById('markers').style.display = 'none';
+            
+            document.getElementById('showHelp').classList.remove("active");
+            document.getElementById('showModal').classList.remove("active");
+            document.getElementById('showMarkers').classList.remove("active");
+        }
+        
+        function bubble4() {
+            document.getElementById('modal4').style.display = 'block';
+            document.getElementById('modal1').style.display = 'none';
+            document.getElementById('modal2').style.display = 'none';
+            document.getElementById('modal3').style.display = 'none';
+            document.getElementById('modal5').style.display = 'none';
+            document.getElementById('modal6').style.display = 'none';
+            document.getElementById('modal7').style.display = 'none';
+            
+            document.getElementById('annotation1').classList.remove("active");
+            document.getElementById('annotation2').classList.remove("active");
+            document.getElementById('annotation3').classList.remove("active");
+            document.getElementById('annotation5').classList.remove("active");
+            document.getElementById('annotation6').classList.remove("active");
+            document.getElementById('annotation7').classList.remove("active");
+            document.getElementById('annotation4').classList.add("active");
+            
+            document.getElementById('shield').classList.add("active");
+            
+            document.getElementById('helpWindow').style.display = 'none';
+            document.getElementById('markers').style.display = 'none';
+            
+            document.getElementById('showHelp').classList.remove("active");
+            document.getElementById('showModal').classList.remove("active");
+            document.getElementById('showMarkers').classList.remove("active");
+        }
+        
+        function bubble5() {
+            document.getElementById('modal5').style.display = 'block';
+            document.getElementById('modal1').style.display = 'none';
+            document.getElementById('modal2').style.display = 'none';
+            document.getElementById('modal4').style.display = 'none';
+            document.getElementById('modal3').style.display = 'none';
+            document.getElementById('modal6').style.display = 'none';
+            document.getElementById('modal7').style.display = 'none';
+            
+            document.getElementById('annotation1').classList.remove("active");
+            document.getElementById('annotation2').classList.remove("active");
+            document.getElementById('annotation4').classList.remove("active");
+            document.getElementById('annotation3').classList.remove("active");
+            document.getElementById('annotation6').classList.remove("active");
+            document.getElementById('annotation7').classList.remove("active");
+            document.getElementById('annotation5').classList.add("active");
+            
+            document.getElementById('shield').classList.add("active");
+            
+            document.getElementById('helpWindow').style.display = 'none';
+            document.getElementById('markers').style.display = 'none';
+            
+            document.getElementById('showHelp').classList.remove("active");
+            document.getElementById('showModal').classList.remove("active");
+            document.getElementById('showMarkers').classList.remove("active");
+        }
+        
+        function bubble6() {
+            document.getElementById('modal6').style.display = 'block';
+            document.getElementById('modal1').style.display = 'none';
+            document.getElementById('modal2').style.display = 'none';
+            document.getElementById('modal4').style.display = 'none';
+            document.getElementById('modal5').style.display = 'none';
+            document.getElementById('modal3').style.display = 'none';
+            document.getElementById('modal7').style.display = 'none';
+            
+            document.getElementById('annotation1').classList.remove("active");
+            document.getElementById('annotation2').classList.remove("active");
+            document.getElementById('annotation4').classList.remove("active");
+            document.getElementById('annotation5').classList.remove("active");
+            document.getElementById('annotation3').classList.remove("active");
+            document.getElementById('annotation7').classList.remove("active");
+            document.getElementById('annotation6').classList.add("active");
+            
+            document.getElementById('shield').classList.add("active");
+            
+            document.getElementById('helpWindow').style.display = 'none';
+            document.getElementById('markers').style.display = 'none';
+            
+            document.getElementById('showHelp').classList.remove("active");
+            document.getElementById('showModal').classList.remove("active");
+            document.getElementById('showMarkers').classList.remove("active");
+        }
+        
+        function bubble7() {
+            document.getElementById('modal7').style.display = 'block';
+            document.getElementById('modal1').style.display = 'none';
+            document.getElementById('modal2').style.display = 'none';
+            document.getElementById('modal4').style.display = 'none';
+            document.getElementById('modal5').style.display = 'none';
+            document.getElementById('modal6').style.display = 'none';
+            document.getElementById('modal3').style.display = 'none';
+            
+            document.getElementById('annotation1').classList.remove("active");
+            document.getElementById('annotation2').classList.remove("active");
+            document.getElementById('annotation4').classList.remove("active");
+            document.getElementById('annotation5').classList.remove("active");
+            document.getElementById('annotation6').classList.remove("active");
+            document.getElementById('annotation3').classList.remove("active");
+            document.getElementById('annotation7').classList.add("active");
+            
+            document.getElementById('shield').classList.add("active");
+            
+            document.getElementById('helpWindow').style.display = 'none';
+            document.getElementById('markers').style.display = 'none';
+            
+            document.getElementById('showHelp').classList.remove("active");
+            document.getElementById('showModal').classList.remove("active");
+            document.getElementById('showMarkers').classList.remove("active");
+        }
+      
+        function help() {
+            document.getElementById('helpWindow').style.display = 'block';
+            
+            document.getElementById('showHelp').classList.add("active");
+            document.getElementById('showModal').classList.remove("active");
+            document.getElementById('annotation1').classList.remove("active");
+            document.getElementById('annotation2').classList.remove("active");
+            document.getElementById('annotation3').classList.remove("active");
+            document.getElementById('annotation4').classList.remove("active");
+            document.getElementById('annotation5').classList.remove("active");
+            document.getElementById('annotation6').classList.remove("active");
+            document.getElementById('annotation7').classList.remove("active");
+            document.getElementById('shield').classList.remove("active");
+            document.getElementById('showMarkers').classList.remove("active");
+            document.getElementById('markers').style.display = 'none';
+        }
+      
+        function modal() {
+            document.getElementById('helpWindow').style.display = 'none';
+            document.getElementById('modal1').style.display = 'none';
+            document.getElementById('modal2').style.display = 'none';
+            document.getElementById('modal3').style.display = 'none';
+            document.getElementById('modal4').style.display = 'none';
+            document.getElementById('modal5').style.display = 'none';
+            document.getElementById('modal6').style.display = 'none';
+            document.getElementById('modal7').style.display = 'none';
+            
+            document.getElementById('showHelp').classList.remove("active");
+            document.getElementById('showModal').classList.add("active");
+            document.getElementById('annotation1').classList.remove("active");
+            document.getElementById('annotation2').classList.remove("active");
+            document.getElementById('annotation3').classList.remove("active");
+            document.getElementById('annotation4').classList.remove("active");
+            document.getElementById('annotation5').classList.remove("active");
+            document.getElementById('annotation6').classList.remove("active");
+            document.getElementById('annotation7').classList.remove("active");
+            document.getElementById('shield').classList.remove("active");
+            document.getElementById('showMarkers').classList.remove("active");
+            document.getElementById('markers').style.display = 'none';
+        }
+      
+        function markers() {
+            document.getElementById('helpWindow').style.display = 'none';
+            document.getElementById('markers').style.display = 'block';
+            document.getElementById('modal1').style.display = 'none';
+            document.getElementById('modal2').style.display = 'none';
+            document.getElementById('modal3').style.display = 'none';
+            document.getElementById('modal4').style.display = 'none';
+            document.getElementById('modal5').style.display = 'none';
+            document.getElementById('modal6').style.display = 'none';
+            document.getElementById('modal7').style.display = 'none';
+            
+            document.getElementById('showHelp').classList.remove("active");
+            document.getElementById('showModal').classList.remove("active");
+            document.getElementById('showMarkers').classList.add("active");
+            document.getElementById('annotation1').classList.remove("active");
+            document.getElementById('annotation2').classList.remove("active");
+            document.getElementById('annotation3').classList.remove("active");
+            document.getElementById('annotation4').classList.remove("active");
+            document.getElementById('annotation5').classList.remove("active");
+            document.getElementById('annotation6').classList.remove("active");
+            document.getElementById('annotation7').classList.remove("active");
+            document.getElementById('shield').classList.add("active");
+        } 
+        
+        function resources() {
+            document.getElementById('helpWindow').style.display = 'none';
+            document.getElementById('markers').style.display = 'none';
+            document.getElementById('modal1').style.display = 'none';
+            document.getElementById('modal2').style.display = 'none';
+            document.getElementById('modal3').style.display = 'none';
+            document.getElementById('modal4').style.display = 'none';
+            document.getElementById('modal5').style.display = 'none';
+            document.getElementById('modal6').style.display = 'none';
+            document.getElementById('modal7').style.display = 'none';
+            
+            document.getElementById('showHelp').classList.remove("active");
+            document.getElementById('showModal').classList.remove("active");
+            document.getElementById('showMarkers').classList.remove("active");
+            document.getElementById('annotation1').classList.remove("active");
+            document.getElementById('annotation2').classList.remove("active");
+            document.getElementById('annotation3').classList.remove("active");
+            document.getElementById('annotation4').classList.remove("active");
+            document.getElementById('annotation5').classList.remove("active");
+            document.getElementById('annotation6').classList.remove("active");
+            document.getElementById('annotation7').classList.remove("active");
+            document.getElementById('shield').classList.add("active");
+        } 
+      
+        function hideBubbles() {
+            document.getElementById('modal1').style.display = 'none';
+            document.getElementById('modal2').style.display = 'none';
+            document.getElementById('modal3').style.display = 'none';
+            document.getElementById('modal4').style.display = 'none';
+            document.getElementById('modal5').style.display = 'none';
+            document.getElementById('modal6').style.display = 'none';
+            document.getElementById('modal7').style.display = 'none';
+            
+            document.getElementById('showHelp').classList.remove("active");
+            document.getElementById('showModal').classList.add("active");
+            document.getElementById('showMarkers').classList.remove("active");
+            document.getElementById('annotation1').classList.remove("active");
+            document.getElementById('annotation2').classList.remove("active");
+            document.getElementById('annotation3').classList.remove("active");
+            document.getElementById('annotation4').classList.remove("active");
+            document.getElementById('annotation5').classList.remove("active");
+            document.getElementById('annotation6').classList.remove("active");
+            document.getElementById('annotation7').classList.remove("active");
+            document.getElementById('shield').classList.remove("active");
+            document.getElementById('markers').style.display = 'none';
+        }
+
+		document.addEventListener("DOMContentLoaded", function(event) {
+			var scene = document.querySelector('aScene');
+
+			if (scene.hasLoaded) addEventListeners();
+			else scene.addEventListener('loaded', handleSceneLoaded);
+		});
+
+		function handleSceneLoaded() {
+			console.log('scene loaded');
+
+      // IF YOU NEED TO CHANGE ATTRIBUTES OF THE CAMERA, I RECOMMEND DISABLING BEFORE DOING IT.
+      // THIS WAY THE NEW ATTRIBUTES WILL BE PASSED TO THE ORBIT-CONTROLS VIA UPDATE()
+      // document.querySelector('#camera').setAttribute( 'orbit-controls', 'enabled', false);
+      // document.querySelector('#camera').setAttribute( 'position', '0 2 10');
+      // document.querySelector('#camera').setAttribute( 'orbit-controls', 'enabled', true);
+
+			// ORBIT CAMERA DRAG START / END EVENT LISTENERS
+			document.querySelector('#camera').addEventListener('start-drag-orbit-controls', handleDragStart);
+			document.querySelector('#camera').addEventListener('end-drag-orbit-controls', handleDragEnd);
+
+			// TOGGLE ORBIT AND STATIC CAMERA
+			document.querySelector('#changeCamera').addEventListener('click', handleSwitchCamera);
+		}
+
+		function handleDragStart(event) {
+			console.log("drag start");
+		}
+
+		function handleDragEnd(event) {
+			console.log("drag end");
+
+			// var cam1 = document.querySelector('#camera');
+			// console.log(cam1.getAttribute('position'));
+			// console.log(cam1.getAttribute('rotation'));
+		}
+
+	</script>
+</html>
