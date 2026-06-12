@@ -1,0 +1,547 @@
+﻿<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+  <p>Drag and drop.</p>
+  
+  <style>
+    body {
+    
+        background-image: url('images/background.png');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: right;
+    }
+</style>
+
+ <!--   <img src="https://en.js.cx/clipart/ball.svg" id="ball"> -->
+
+  <img src="images/objects/Beanbag.png" id="Obj1">
+  <img src="images/objects/Blocks.png" id="Obj2">
+  <img src="images/objects/Bookcase-2L.png" id="Obj3">
+  <img src="images/objects/Bookcase-3R.png" id="Obj4">
+  <br><br>
+  <img src="images/objects/Carpet.png" id="Obj5">
+  <img src="images/objects/Chair.png" id="Obj6">
+  <img src="images/objects/Pillows.png" id="Obj7">
+  <img src="images/objects/Table.png" id="Obj8">
+  <br><br>
+  <img src="images/objects/ToyBin-R.png" id="Obj9">
+  <img src="images/objects/train.png" id="Obj10">
+
+  <!--<img src="images/objects/empty.png" id="gate" class="droppable"> This is the red highlight of the area to drop-->
+
+  <script>
+    let currentDroppable = null;
+
+   
+        Obj1.onmousedown = function(event) {
+
+      let shiftX = event.clientX - Obj1.getBoundingClientRect().left;
+      let shiftY = event.clientY - Obj1.getBoundingClientRect().top;
+
+      Obj1.style.position = 'absolute';
+      Obj1.style.zIndex = 1000;
+      document.body.append(Obj1);
+
+      moveAt(event.pageX, event.pageY);
+
+      function moveAt(pageX, pageY) {
+        Obj1.style.left = pageX - shiftX + 'px';
+        Obj1.style.top = pageY - shiftY + 'px';
+      }
+
+      function onMouseMove(event) {
+        moveAt(event.pageX, event.pageY);
+
+        Obj1.hidden = true;
+        let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+        Obj1.hidden = false;
+
+        if (!elemBelow) return;
+
+        let droppableBelow = elemBelow.closest('.droppable');
+        if (currentDroppable != droppableBelow) {
+          if (currentDroppable) { // null when we were not over a droppable before this event
+            leaveDroppable(currentDroppable);
+          }
+          currentDroppable = droppableBelow;
+          if (currentDroppable) { // null if we're not coming over a droppable now
+            // (maybe just left the droppable)
+            enterDroppable(currentDroppable);
+          }
+        }
+      }
+
+      document.addEventListener('mousemove', onMouseMove);
+
+      Obj1.onmouseup = function() {
+        document.removeEventListener('mousemove', onMouseMove);
+        Obj1.onmouseup = null;
+      };
+    };
+        Obj2.onmousedown = function(event) {
+
+      let shiftX = event.clientX - Obj2.getBoundingClientRect().left;
+      let shiftY = event.clientY - Obj2.getBoundingClientRect().top;
+
+      Obj2.style.position = 'absolute';
+      Obj2.style.zIndex = 1000;
+      document.body.append(Obj2);
+
+      moveAt(event.pageX, event.pageY);
+
+      function moveAt(pageX, pageY) {
+        Obj2.style.left = pageX - shiftX + 'px';
+        Obj2.style.top = pageY - shiftY + 'px';
+      }
+
+      function onMouseMove(event) {
+        moveAt(event.pageX, event.pageY);
+
+        Obj2.hidden = true;
+        let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+        Obj2.hidden = false;
+
+        if (!elemBelow) return;
+
+        let droppableBelow = elemBelow.closest('.droppable');
+        if (currentDroppable != droppableBelow) {
+          if (currentDroppable) { // null when we were not over a droppable before this event
+            leaveDroppable(currentDroppable);
+          }
+          currentDroppable = droppableBelow;
+          if (currentDroppable) { // null if we're not coming over a droppable now
+            // (maybe just left the droppable)
+            enterDroppable(currentDroppable);
+          }
+        }
+      }
+
+      document.addEventListener('mousemove', onMouseMove);
+
+      Obj2.onmouseup = function() {
+        document.removeEventListener('mousemove', onMouseMove);
+        Obj2.onmouseup = null;
+      };
+    };
+        Obj3.onmousedown = function(event) {
+
+      let shiftX = event.clientX - Obj3.getBoundingClientRect().left;
+      let shiftY = event.clientY - Obj3.getBoundingClientRect().top;
+
+      Obj3.style.position = 'absolute';
+      Obj3.style.zIndex = 1000;
+      document.body.append(Obj3);
+
+      moveAt(event.pageX, event.pageY);
+
+      function moveAt(pageX, pageY) {
+        Obj3.style.left = pageX - shiftX + 'px';
+        Obj3.style.top = pageY - shiftY + 'px';
+      }
+
+      function onMouseMove(event) {
+        moveAt(event.pageX, event.pageY);
+
+        Obj3.hidden = true;
+        let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+        Obj3.hidden = false;
+
+        if (!elemBelow) return;
+
+        let droppableBelow = elemBelow.closest('.droppable');
+        if (currentDroppable != droppableBelow) {
+          if (currentDroppable) { // null when we were not over a droppable before this event
+            leaveDroppable(currentDroppable);
+          }
+          currentDroppable = droppableBelow;
+          if (currentDroppable) { // null if we're not coming over a droppable now
+            // (maybe just left the droppable)
+            enterDroppable(currentDroppable);
+          }
+        }
+      }
+
+      document.addEventListener('mousemove', onMouseMove);
+
+      Obj3.onmouseup = function() {
+        document.removeEventListener('mousemove', onMouseMove);
+        Obj3.onmouseup = null;
+      };
+    };
+        Obj4.onmousedown = function(event) {
+
+      let shiftX = event.clientX - Obj4.getBoundingClientRect().left;
+      let shiftY = event.clientY - Obj4.getBoundingClientRect().top;
+
+      Obj4.style.position = 'absolute';
+      Obj4.style.zIndex = 1000;
+      document.body.append(Obj4);
+
+      moveAt(event.pageX, event.pageY);
+
+      function moveAt(pageX, pageY) {
+        Obj4.style.left = pageX - shiftX + 'px';
+        Obj4.style.top = pageY - shiftY + 'px';
+      }
+
+      function onMouseMove(event) {
+        moveAt(event.pageX, event.pageY);
+
+        Obj4.hidden = true;
+        let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+        Obj4.hidden = false;
+
+        if (!elemBelow) return;
+
+        let droppableBelow = elemBelow.closest('.droppable');
+        if (currentDroppable != droppableBelow) {
+          if (currentDroppable) { // null when we were not over a droppable before this event
+            leaveDroppable(currentDroppable);
+          }
+          currentDroppable = droppableBelow;
+          if (currentDroppable) { // null if we're not coming over a droppable now
+            // (maybe just left the droppable)
+            enterDroppable(currentDroppable);
+          }
+        }
+      }
+
+      document.addEventListener('mousemove', onMouseMove);
+
+      Obj4.onmouseup = function() {
+        document.removeEventListener('mousemove', onMouseMove);
+        Obj4.onmouseup = null;
+      };
+    };
+     Obj5.onmousedown = function(event) {
+
+      let shiftX = event.clientX - Obj5.getBoundingClientRect().left;
+      let shiftY = event.clientY - Obj5.getBoundingClientRect().top;
+
+      Obj5.style.position = 'absolute';
+      Obj5.style.zIndex = 1000;
+      document.body.append(Obj5);
+
+      moveAt(event.pageX, event.pageY);
+
+      function moveAt(pageX, pageY) {
+        Obj5.style.left = pageX - shiftX + 'px';
+        Obj5.style.top = pageY - shiftY + 'px';
+      }
+
+      function onMouseMove(event) {
+        moveAt(event.pageX, event.pageY);
+
+        Obj5.hidden = true;
+        let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+        Obj5.hidden = false;
+
+        if (!elemBelow) return;
+
+        let droppableBelow = elemBelow.closest('.droppable');
+        if (currentDroppable != droppableBelow) {
+          if (currentDroppable) { // null when we were not over a droppable before this event
+            leaveDroppable(currentDroppable);
+          }
+          currentDroppable = droppableBelow;
+          if (currentDroppable) { // null if we're not coming over a droppable now
+            // (maybe just left the droppable)
+            enterDroppable(currentDroppable);
+          }
+        }
+      }
+
+      document.addEventListener('mousemove', onMouseMove);
+
+      Obj5.onmouseup = function() {
+        document.removeEventListener('mousemove', onMouseMove);
+        Obj5.onmouseup = null;
+      };
+    };
+ Obj6.onmousedown = function(event) {
+
+      let shiftX = event.clientX - Obj6.getBoundingClientRect().left;
+      let shiftY = event.clientY - Obj6.getBoundingClientRect().top;
+
+      Obj6.style.position = 'absolute';
+      Obj6.style.zIndex = 1000;
+      document.body.append(Obj6);
+
+      moveAt(event.pageX, event.pageY);
+
+      function moveAt(pageX, pageY) {
+        Obj6.style.left = pageX - shiftX + 'px';
+        Obj6.style.top = pageY - shiftY + 'px';
+      }
+
+      function onMouseMove(event) {
+        moveAt(event.pageX, event.pageY);
+
+        Obj6.hidden = true;
+        let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+        Obj6.hidden = false;
+
+        if (!elemBelow) return;
+
+        let droppableBelow = elemBelow.closest('.droppable');
+        if (currentDroppable != droppableBelow) {
+          if (currentDroppable) { // null when we were not over a droppable before this event
+            leaveDroppable(currentDroppable);
+          }
+          currentDroppable = droppableBelow;
+          if (currentDroppable) { // null if we're not coming over a droppable now
+            // (maybe just left the droppable)
+            enterDroppable(currentDroppable);
+          }
+        }
+      }
+
+      document.addEventListener('mousemove', onMouseMove);
+
+      Obj6.onmouseup = function() {
+        document.removeEventListener('mousemove', onMouseMove);
+        Obj6.onmouseup = null;
+      };
+    };
+
+
+ Obj7.onmousedown = function(event) {
+
+      let shiftX = event.clientX - Obj7.getBoundingClientRect().left;
+      let shiftY = event.clientY - Obj7.getBoundingClientRect().top;
+
+      Obj7.style.position = 'absolute';
+      Obj7.style.zIndex = 1000;
+      document.body.append(Obj7);
+
+      moveAt(event.pageX, event.pageY);
+
+      function moveAt(pageX, pageY) {
+        Obj7.style.left = pageX - shiftX + 'px';
+        Obj7.style.top = pageY - shiftY + 'px';
+      }
+
+      function onMouseMove(event) {
+        moveAt(event.pageX, event.pageY);
+
+        Obj7.hidden = true;
+        let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+        Obj7.hidden = false;
+
+        if (!elemBelow) return;
+
+        let droppableBelow = elemBelow.closest('.droppable');
+        if (currentDroppable != droppableBelow) {
+          if (currentDroppable) { // null when we were not over a droppable before this event
+            leaveDroppable(currentDroppable);
+          }
+          currentDroppable = droppableBelow;
+          if (currentDroppable) { // null if we're not coming over a droppable now
+            // (maybe just left the droppable)
+            enterDroppable(currentDroppable);
+          }
+        }
+      }
+
+      document.addEventListener('mousemove', onMouseMove);
+
+      Obj7.onmouseup = function() {
+        document.removeEventListener('mousemove', onMouseMove);
+        Obj7.onmouseup = null;
+      };
+    };
+    
+ Obj8.onmousedown = function(event) {
+
+      let shiftX = event.clientX - Obj8.getBoundingClientRect().left;
+      let shiftY = event.clientY - Obj8.getBoundingClientRect().top;
+
+      Obj8.style.position = 'absolute';
+      Obj8.style.zIndex = 1000;
+      document.body.append(Obj8);
+
+      moveAt(event.pageX, event.pageY);
+
+      function moveAt(pageX, pageY) {
+        Obj8.style.left = pageX - shiftX + 'px';
+        Obj8.style.top = pageY - shiftY + 'px';
+      }
+
+      function onMouseMove(event) {
+        moveAt(event.pageX, event.pageY);
+
+        Obj8.hidden = true;
+        let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+        Obj8.hidden = false;
+
+        if (!elemBelow) return;
+
+        let droppableBelow = elemBelow.closest('.droppable');
+        if (currentDroppable != droppableBelow) {
+          if (currentDroppable) { // null when we were not over a droppable before this event
+            leaveDroppable(currentDroppable);
+          }
+          currentDroppable = droppableBelow;
+          if (currentDroppable) { // null if we're not coming over a droppable now
+            // (maybe just left the droppable)
+            enterDroppable(currentDroppable);
+          }
+        }
+      }
+
+      document.addEventListener('mousemove', onMouseMove);
+
+      Obj8.onmouseup = function() {
+        document.removeEventListener('mousemove', onMouseMove);
+        Obj8.onmouseup = null;
+      };
+    };
+
+    
+ Obj9.onmousedown = function(event) {
+
+      let shiftX = event.clientX - Obj9.getBoundingClientRect().left;
+      let shiftY = event.clientY - Obj9.getBoundingClientRect().top;
+
+      Obj9.style.position = 'absolute';
+      Obj9.style.zIndex = 1000;
+      document.body.append(Obj9);
+
+      moveAt(event.pageX, event.pageY);
+
+      function moveAt(pageX, pageY) {
+        Obj9.style.left = pageX - shiftX + 'px';
+        Obj9.style.top = pageY - shiftY + 'px';
+      }
+
+      function onMouseMove(event) {
+        moveAt(event.pageX, event.pageY);
+
+        Obj9.hidden = true;
+        let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+        Obj9.hidden = false;
+
+        if (!elemBelow) return;
+
+        let droppableBelow = elemBelow.closest('.droppable');
+        if (currentDroppable != droppableBelow) {
+          if (currentDroppable) { // null when we were not over a droppable before this event
+            leaveDroppable(currentDroppable);
+          }
+          currentDroppable = droppableBelow;
+          if (currentDroppable) { // null if we're not coming over a droppable now
+            // (maybe just left the droppable)
+            enterDroppable(currentDroppable);
+          }
+        }
+      }
+
+      document.addEventListener('mousemove', onMouseMove);
+
+      Obj9.onmouseup = function() {
+        document.removeEventListener('mousemove', onMouseMove);
+        Obj9.onmouseup = null;
+      };
+    };
+
+    
+        Obj10.onmousedown = function(event) {
+
+      let shiftX = event.clientX - Obj10.getBoundingClientRect().left;
+      let shiftY = event.clientY - Obj10.getBoundingClientRect().top;
+
+      Obj10.style.position = 'absolute';
+      Obj10.style.zIndex = 1000;
+      document.body.append(Obj10);
+
+      moveAt(event.pageX, event.pageY);
+
+      function moveAt(pageX, pageY) {
+        Obj10.style.left = pageX - shiftX + 'px';
+        Obj10.style.top = pageY - shiftY + 'px';
+      }
+
+      function onMouseMove(event) {
+        moveAt(event.pageX, event.pageY);
+
+        Obj10.hidden = true;
+        let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+        Obj10.hidden = false;
+
+        if (!elemBelow) return;
+
+        let droppableBelow = elemBelow.closest('.droppable');
+        if (currentDroppable != droppableBelow) {
+          if (currentDroppable) { // null when we were not over a droppable before this event
+            leaveDroppable(currentDroppable);
+          }
+          currentDroppable = droppableBelow;
+          if (currentDroppable) { // null if we're not coming over a droppable now
+            // (maybe just left the droppable)
+            enterDroppable(currentDroppable);
+          }
+        }
+      }
+
+      document.addEventListener('mousemove', onMouseMove);
+
+      Obj10.onmouseup = function() {
+        document.removeEventListener('mousemove', onMouseMove);
+        Obj10.onmouseup = null;
+      };
+    };
+
+
+
+    function enterDroppable(elem) {
+      elem.style.background = 'pink';
+    }
+
+    function leaveDroppable(elem) {
+      elem.style.background = '';
+    }
+
+    Obj1.ondragstart = function() {
+      return false;
+    };
+    Obj2.ondragstart = function() {
+      return false;
+    };
+    Obj3.ondragstart = function() {
+      return false;
+    };
+    Obj4.ondragstart = function() {
+      return false;
+    };
+    Obj5.ondragstart = function() {
+      return false;
+    };
+    Obj6.ondragstart = function() {
+      return false;
+    };
+    Obj7.ondragstart = function() {
+      return false;
+    };
+    Obj8.ondragstart = function() {
+      return false;
+    };    
+    Obj9.ondragstart = function() {
+      return false;
+    };
+    Obj10.ondragstart = function() {
+      return false;
+    };
+
+
+  </script>
+
+</body>
+</html>

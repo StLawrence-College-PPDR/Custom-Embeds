@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+</head>
+<!--HTML:-->
+<body>
+
+<div id="app">
+    <div id="capture" v-bind:style="{backgroundColor:color}" class="w-1/2 bg-red rounded text-center py-8">
+        <h4>{{ message }}</h4>
+    </div>
+        <input type="text" v-model="message">
+        <input type="color" v-model="color">
+        <button class="bg-black px-4 py2 text-white rounded-full"
+                @click="saveCanvas()">
+                Save Canvas
+        </button>
+</div>
+
+<!--JavaScript:-->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="html2canvas.min.js"> </script>
+<script>
+
+var app = new Vue({
+    el: '#app',
+    data: {
+    message: 'Hello Vue!',
+    color: 'yellow'
+	}, 
+    methods:{
+        saveCanvas(){
+            html2canvas(document.querySelector("#capture")).then(canvas => {
+            //document.body.appendChild(canvas)
+            var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+            console.log(image);
+            window.location.href=image;
+            });
+		}
+	}
+})
+
+</script>
+</body>
+</html>

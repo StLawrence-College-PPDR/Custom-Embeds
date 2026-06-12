@@ -1,0 +1,569 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Arts-Based Curriculum </title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="js/ie/html5shiv.js"></script><![endif]-->
+		
+         <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous"> 
+		
+		<link rel="stylesheet" href="../assets/css/custom.css">
+		<link rel="stylesheet" href="../assets/css/common.css" />
+		<link rel="stylesheet" href="../assets/css/typography.css" />
+
+		<link rel="stylesheet" media="print" href="../assets/css/print.css" />
+
+		<!--[if lte IE 9]><link rel="stylesheet" href="../assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../assets/css/ie8.css" /><![endif]-->
+		
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+	</head>
+	<body class="fade-in modal-light dark" ng-app="CombineModule">
+       <div class="notification"></div> 
+       
+        <header id="header">
+            <a href="../activities.html" class="borderless primary-text back-button"><i class="fas fa-arrow-left"></i> Back to Activities</a>
+        </header>
+        
+        <section class="internal-content">
+            <div class="container">
+                <div class="progress">
+                  <div class="progress-bar past-bar" role="progressbar" style="width: 33.3%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Activities</div>
+                  <div class="progress-bar past-bar" role="progressbar" style="width: 33.3%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Design</div>
+                  <div class="progress-bar" role="progressbar" style="width: 33.3%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Setup</div>
+                  <div class="progress-bar negative-bar" role="progressbar" style="width: 33.3%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Implement</div>
+                </div>
+               
+                <h3 class="mb0 text-center white-text">Setup Your Space</h3>
+                
+                <p class="text-center mb0"><button  class="clean-button" data-toggle="modal" data-target="#instructions"><i class="fas fa-info-circle"></i> instructions</button>
+                <button  onClick="window.location.href=window.location.href" class="clean-button"><i class="fas fa-redo"></i> Clean Room</button></p>
+                
+                
+            </div>
+        </section>
+        
+        <div class="environment-setup">
+            <div class="instructions">Hover to Open</div>
+            <div class="pull-out">
+                <div class="pull-lever"><i class="fas fa-chevron-left"></i></div>
+                <div id="objects" class="pull-content">
+                        
+                    <!-- Populates with Clones from JSON script -->
+                    
+=                </div>
+            </div>
+            <div  class="drop-field" style="background: url('../images/environment/base-roomA.svg');"></div>
+        </div>
+        
+        <div id="cloneObject" style="display: none;">
+            <div class="pull-item"><img draggable="true" class="drag-item"><span class="label"></span></div>
+        </div>
+        
+        <section id="why" class="internal-content">
+            <div class="container"> 
+                <hr>
+            
+                <h5 class="mb30 text-white">Justify your Environment Setup</h5>
+        
+                <div ng-controller="pdfControllerA">
+                    <form name="form" novalidate>
+                        <div>
+                            <div style="display: inline-block"></div>
+                            <button name="submit" class="button primary save-button" ng-click="saveA()" ng-disabled="disableSubmit">Create PDF</button>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="teacher" name="labelC">Teacher</label>
+                            <input type="text" name="teacher" id="teacher" ng-model="titleName" class="form-control" placeholder="Your Name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject" name="labelA">Subject</label>
+                            <input type="text" name="subject" id="subject" ng-model="titleSubject" class="form-control" placeholder="Subject">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description" name="labelB">Response</label>
+                            <textarea id="description" name="description" ng-model="area" ng-disabled="limit" cols="30" rows="10" placeholder="Response"></textarea>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+        </section>
+        
+        <div class="modal fade-in" id="instructions" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body"> 
+                        <button type="button" class="modal-button primary-text mb30" data-dismiss="modal"><i class="fas fa-times"></i></button>
+                        
+                        <h5 class="mb30">How to Use</h5>
+                        
+                        <p>Setup your space for your designed activity. Then fill out the text fields below the environment setup to tell us your reasoning. You can practice designing your space as many times as desired. Your practice will not be stored. Your instructor will let you know if you need to save your design for the purpose of grading. If you need to save your work follow the steps below.</p>
+                        
+                        <h5 class="mb30 mt50">Save Your Work</h5>
+                        
+                        <strong>Step 1</strong>
+                        
+                        <p>Hover your mouse on the right-hand panel to view the assets you currently have at this virtual centre. You can design your center by dragging any of theses objects from the storage area on the into your room. All objects must reside within the space. Move objects forward and backwards by selecting them on the screen.</p>
+                        
+                        <div class="flex-collection mb30">
+                            <div class="flex-2 mb30 notification-area">
+                                <p class="mb0"><strong>Mac</strong></p>
+                                <p>Take a screenshot by holding these three keys together; Shift, Command, and 3. Your image will save to your desktop.</p>
+
+                                <img src="../images/mac-keys.png" width="300px" style="margin: 0 auto;" alt="Mac Keys">
+                            </div>
+                            <div class="flex-2 mb30 notification-area">
+                                <p class="mb0"><strong>PC</strong></p>
+                                <p>Take a screenshot by pressing PrtScn and the Windows key together. Your image will save to your 'Pictures > Screenshots' folder.</p>
+
+                                <img src="../images/pc-keys.png" width="130px" alt="PC Key" style="margin: 0 auto;">
+                            </div>
+                        </div>
+                        
+                        <strong>Step 2</strong>
+                        
+                        <p>Save your writen reasoning by clicking the 'create PDF' button below. Only after this is fully complete can you proceed to implementation phase.</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="button-container"><a class="hero-button" href="art-implementation.html"><span>Implement Plan</span></a></div>
+
+		<!-- Scripts -->
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+        
+        <script src="../assets/js/jquery.min.js"></script>
+        <script src="../assets/js/bootstrap.js"></script>
+        
+		<script src="../assets/js/skel.min.js"></script>
+		<script src="../assets/js/util.js"></script>
+		<!--[if lte IE 8]><script src="../assets/js/ie/respond.min.js"></script><![endif]-->
+		<script src="../assets/js/main.js"></script>
+
+       
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+
+        <script>
+            $(".hero-button").hide();
+            
+            $(".save-button").click(function(){
+                $(".hero-button").show();
+            })
+            
+            $(document).ready(function(){
+                $("#instructions").modal('show');
+            });
+            
+            setInterval(removeParent,1000);
+
+            function removeParent(){
+                $('.pull-item').each(function() {
+                    if ($(this).has('.drag-item').length == 0) {
+                        $(this).hide();
+                    }
+                });
+            }
+            
+            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                $('.notification').show();
+                $('.modal').css('padding-top', '5rem');
+                $('.notification').append('<p class="mb0">Use desktop or laptop for optimal performance.</p>');
+                
+                $(".modal-button").click(function(){
+                    $('.notification').hide();
+                })
+            } else {
+                $('.notification').hide();
+            }
+            
+            var observationA = angular.module('pdfAppA', []);
+
+            observationA.controller('pdfControllerA',['$scope', function($scope){
+
+                $scope.saveA = function(){
+
+                    let teacher = document.getElementById("teacher").name + ":" + document.getElementById("teacher").value, 
+                        subject = document.getElementById("subject").name + ":" + document.getElementById("subject").value,
+                        name = document.getElementById("teacher").value,
+                        description = document.getElementById("description").name + ":" + document.getElementById("description").value,
+                        pdf = new jsPDF();
+                    
+                    var splitText = pdf.splitTextToSize(description, 180);
+                    
+                        pdf.setFont("helvetica");
+                        pdf.setFontSize(12);
+
+                        pdf.text(20, 20, "Crafts & Visual Arts Space");
+                        pdf.text(20, 30, teacher);
+                        pdf.text(20, 40, subject);
+                        pdf.text(20, 60, splitText);
+                        pdf.save(name + '-art-environment.pdf');
+                }
+
+            }]);
+
+            //Script can be found at : https://rawgit.com/MrRio/jsPDF/master/docs/index.html
+            
+            angular.module('CombineModule', ['pdfAppA']);
+            
+            // JSON Clones - Images use PNG format - the graphic element must stay same size as provided - Export with an Artboard with dimensions of atleast 192 px by 192 px
+
+            $(function () {
+                json = {
+                    "objects": [
+                        {       
+                                "image": "../images/StudentAvatarA.png",
+                                "objectNumber": "A",
+                                "name": "Student",
+                        },
+                        {
+                                "image": "../images/StudentAvatarB.png",
+                                "objectNumber": "B",
+                                "name": "Student",
+                        },
+                        {
+                                "image": "../images/StudentAvatarC.png",
+                                "objectNumber": "C",
+                                "name": "Student",
+                        },
+                        {
+                                "image": "../images/StudentAvatarD.png",
+                                "objectNumber": "D",
+                                "name": "Student",
+                        },
+                        {
+                                "image": "../images/StudentAvatarE.png",
+                                "objectNumber": "E",
+                                "name": "Student",
+                        },
+                        {       
+                                "image": "../images/artroom/SpotLight.png",
+                                "objectNumber": "1",
+                                "name": "Spot Light",
+                        },
+                        {
+                                "image": "../images/artroom/SubjectModel.png",
+                                "objectNumber": "2",
+                                "name": "Model",
+                        },
+                        {
+                                "image": "../images/artroom/Table&Chairs.png",
+                                "objectNumber": "3",
+                                "name": "Table &amp; Chairs",
+                        },
+                        {
+                                "image": "../images/artroom/Table.png",
+                                "objectNumber": "4",
+                                "name": "Table",
+                        },
+                        {
+                                "image": "../images/artroom/Tape.png",
+                                "objectNumber": "5",
+                                "name": "Tape",
+                        },
+                        {
+                                "image": "../images/artroom/WallHanging.png",
+                                "objectNumber": "6",
+                                "name": "Hanging Artwork",
+                        },
+                        {
+                                "image": "../images/artroom/AdultChair.png",
+                                "objectNumber": "7",
+                                "name": "Adult Chair",
+                        },
+                        {
+                                "image": "../images/artroom/ArtDisplay.png",
+                                "objectNumber": "8",
+                                "name": "Art Display",
+                        },
+                        {
+                                "image": "../images/artroom/BinBack.png",
+                                "objectNumber": "9",
+                                "name": "Bins",
+                        },
+                        {
+                                "image": "../images/artroom/Bins.png",
+                                "objectNumber": "10",
+                                "name": "Bins",
+                        },
+                        {
+                                "image": "../images/artroom/Bookshelf.png",
+                                "objectNumber": "11",
+                                "name": "Bookshelf",
+                        },
+                        {
+                                "image": "../images/artroom/Canvas1.png",
+                                "objectNumber": "13",
+                                "name": "Canvas",
+                        },
+                        {
+                                "image": "../images/artroom/Canvas2.png",
+                                "objectNumber": "14",
+                                "name": "Canvas",
+                        },
+                        {
+                                "image": "../images/artroom/Canvas3.png",
+                                "objectNumber": "15",
+                                "name": "Canvas",
+                        },
+                        {
+                                "image": "../images/artroom/Canvas4.png",
+                                "objectNumber": "16",
+                                "name": "Canvas",
+                        },
+                        {
+                                "image": "../images/artroom/CardboardBuildingSupplies.png",
+                                "objectNumber": "17",
+                                "name": "Building Supplies",
+                        },
+                        {
+                                "image": "../images/artroom/Chair1.png",
+                                "objectNumber": "18",
+                                "name": "Chair",
+                        },
+                        {
+                                "image": "../images/artroom/Chair2.png",
+                                "objectNumber": "19",
+                                "name": "Chair",
+                        },
+                        {
+                                "image": "../images/artroom/Chair3.png",
+                                "objectNumber": "20",
+                                "name": "Chair",
+                        },
+                        {
+                                "image": "../images/artroom/Chair4.png",
+                                "objectNumber": "21",
+                                "name": "Chair",
+                        },
+                        {
+                                "image": "../images/artroom/Clock.png",
+                                "objectNumber": "22",
+                                "name": "Clock",
+                        },
+                        {
+                                "image": "../images/artroom/DropCloth.png",
+                                "objectNumber": "23",
+                                "name": "DropCloth",
+                        },
+                        {
+                                "image": "../images/artroom/Easel.png",
+                                "objectNumber": "24",
+                                "name": "Easel",
+                        },
+                        {
+                                "image": "../images/artroom/FruitBowl.png",
+                                "objectNumber": "25",
+                                "name": "Fruit Bowl",
+                        },
+                        {
+                                "image": "../images/artroom/Glue.png",
+                                "objectNumber": "26",
+                                "name": "Glue",
+                        },
+                        {
+                                "image": "../images/artroom/Markers.png",
+                                "objectNumber": "27",
+                                "name": "Markers",
+                        },
+                        {
+                                "image": "../images/artroom/MilkCarton.png",
+                                "objectNumber": "28",
+                                "name": "Milk Carton",
+                        },
+                        {
+                                "image": "../images/artroom/Paint1.png",
+                                "objectNumber": "29",
+                                "name": "Paint",
+                        },
+                        {
+                                "image": "../images/artroom/Paint2.png",
+                                "objectNumber": "30",
+                                "name": "Paint",
+                        },
+                        {
+                                "image": "../images/artroom/Paint3.png",
+                                "objectNumber": "31",
+                                "name": "Paint",
+                        },
+                        {
+                                "image": "../images/artroom/PaintBrushes.png",
+                                "objectNumber": "32",
+                                "name": "Paint Brushes",
+                        },
+                        {
+                                "image": "../images/artroom/PaintMixing.png",
+                                "objectNumber": "33",
+                                "name": "Paint Mixing",
+                        },
+                        {
+                                "image": "../images/artroom/PaintStation.png",
+                                "objectNumber": "34",
+                                "name": "Paint Station",
+                        },
+                        {
+                                "image": "../images/artroom/Pen&Rule.png",
+                                "objectNumber": "35",
+                                "name": "Pen &amp; Ruler",
+                        },
+                        {
+                                "image": "../images/artroom/Pencil&Eraser.png",
+                                "objectNumber": "36",
+                                "name": "Pencil &amp; Eraser",
+                        },
+                        {
+                                "image": "../images/artroom/Pencil2.png",
+                                "objectNumber": "37",
+                                "name": "Pencil",
+                        },
+                        {
+                                "image": "../images/artroom/Pencils1.png",
+                                "objectNumber": "38",
+                                "name": "Pencil",
+                        },
+                        {
+                                "image": "../images/artroom/Plant1.png",
+                                "objectNumber": "39",
+                                "name": "Plant",
+                        },
+                        {
+                                "image": "../images/artroom/Plant2.png",
+                                "objectNumber": "40",
+                                "name": "Plant",
+                        },
+                        {
+                                "image": "../images/artroom/PlayClay1.png",
+                                "objectNumber": "41",
+                                "name": "Clay",
+                        },
+                        {
+                                "image": "../images/artroom/PlayClay2.png",
+                                "objectNumber": "42",
+                                "name": "Clay",
+                        },
+                        {
+                                "image": "../images/artroom/Rug.png",
+                                "objectNumber": "43",
+                                "name": "Rug",
+                        },
+                        {
+                                "image": "../images/artroom/ShapeModels.png",
+                                "objectNumber": "44",
+                                "name": "Shapes",
+                        },
+                        {
+                                "image": "../images/artroom/Sink.png",
+                                "objectNumber": "45",
+                                "name": "Sink",
+                        },
+                        {
+                                "image": "../images/artroom/SmallBalls.png",
+                                "objectNumber": "46",
+                                "name": "Balls",
+                        },
+                        {
+                                "image": "../images/artroom/Smocks.png",
+                                "objectNumber": "47",
+                                "name": "Smock"
+                        } 
+                   ]
+                };
+
+                $.each(json.objects, function () {
+                    var newObject = $("body").find("#cloneObject > .pull-item").clone();
+
+                    // Content
+                    newObject.find(".drag-item").attr('src', this.image);
+                    newObject.find(".drag-item").attr('id', 'Obj' + this.objectNumber);
+                    newObject.find(".drag-item").attr('alt', this.name);
+                    newObject.find(".label").append(this.name);
+
+                    // Populate Item
+                    $(newObject).appendTo(".pull-content");
+                });
+                
+                var nodes = document.getElementById('objects').getElementsByClassName('drag-item'),
+                    ids = Array.prototype.map.call(nodes, function(a) {
+                        return a.getAttribute('id');
+                    }),
+                    dragObject = ids;
+
+                console.log(dragObject);
+                
+                let currentDroppable = null;
+                
+                $.each(dragObject, function(value, item) {
+                    console.log(item);
+                    
+                    var newObject = document.getElementById(item);
+                    
+                    newObject.onmousedown = function(event) {
+
+                        let shiftX = event.clientX - newObject.getBoundingClientRect().left;
+                        let shiftY = event.clientY - newObject.getBoundingClientRect().top;
+
+                        newObject.style.position = 'absolute';
+                        newObject.style.zIndex = 1000;
+                        document.body.append(newObject);
+
+                        moveAt(event.pageX, event.pageY);
+
+                        function moveAt(pageX, pageY) {
+                            newObject.style.left = pageX - shiftX + 'px';
+                            newObject.style.top = pageY - shiftY + 'px';
+                        }
+
+                        function onMouseMove(event) {
+                            moveAt(event.pageX, event.pageY);
+
+                            newObject.hidden = true;
+                            let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+                            newObject.hidden = false;
+
+                            if (!elemBelow) return;
+
+                            let droppableBelow = elemBelow.closest('.droppable');
+
+                            if (currentDroppable != droppableBelow) {
+                                if (currentDroppable) { // null when we were not over a droppable before this event
+                                    leaveDroppable(currentDroppable);
+                                }
+                                currentDroppable = droppableBelow;
+                                if (currentDroppable) { // null if we're not coming over a droppable now
+                                    // (maybe just left the droppable)
+                                    enterDroppable(currentDroppable);
+                                }
+                            }
+                        }
+
+                        document.addEventListener('mousemove', onMouseMove);
+
+                        newObject.onmouseup = function() {
+                            document.removeEventListener('mousemove', onMouseMove);
+                            newObject.onmouseup = null;
+                        };
+                    };
+
+                    newObject.ondragstart = function() {
+                        return false;
+                    };
+                });
+            });
+        </script>
+	</body>
+</html>

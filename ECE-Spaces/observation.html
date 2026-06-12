@@ -1,0 +1,250 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Arts-Based Curriculum </title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="js/ie/html5shiv.js"></script><![endif]-->
+		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous"> 
+
+		
+		<link rel="stylesheet" href="assets/css/custom.css">
+		<link rel="stylesheet" href="assets/css/common.css" />
+		<link rel="stylesheet" href="assets/css/typography.css" />
+
+		<link rel="stylesheet" media="print" href="assets/css/print.css" />
+
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+	</head>
+	
+	<!------------------ ANGULAR/HTML Form (ng-*) ---> 
+	
+	<body class="fade-in dark" ng-app="CombineModule">
+        <header id="header">
+            <a href="activities.html" class="borderless primary-text back-button"><i class="fas fa-arrow-left"></i> Back to Activities</a>
+        </header>
+        <section class="internal-content">
+            <div class="container">
+                <h3 class="mb30 text-center white-text"> Observation &amp; Documentation</h3>
+                
+                <p class="mb30 text-center white-text">Click on each video scenario to start your observation then document your observation. Be sure to follow the instructions for saving your documentation of the observation.</p>
+
+                <div class="flex-collection">
+                    <a class="grid-item flex-3" style="background: url('images/thumbnails/thumbnail1.jpg');" data-toggle="modal" data-target="#video1">
+                        <div class="grid-content"><i class="fas fa-play"></i></div>
+                        <div class="grid-title">Video A</div>
+                    </a>
+                    <a class="grid-item flex-3" style="background: url('images/thumbnails/thumbnail2.jpg');" data-toggle="modal" data-target="#video2">
+                        <div class="grid-content"><i class="fas fa-play"></i></div>
+                        <div class="grid-title">Video B</div>
+                    </a>
+                    <a class="grid-item flex-3" style="background: url('images/thumbnails/thumbnail3.jpg');" data-toggle="modal" data-target="#video3">
+                        <div class="grid-content"><i class="fas fa-play"></i></div>
+                        <div class="grid-title">Video C</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <footer id="footer">
+        </footer>
+        
+        <div class="modal fade-in" id="video1" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                       
+                            <div ng-controller="pdfControllerA">
+                                <form name="form" novalidate>
+                                   <button type="button" class="modal-button primary-text" data-dismiss="modal"><i class="fas fa-times"></i></button>
+                                   
+                                    <button name="submit" class="save-button" ng-click="saveA()" ng-disabled="disableSubmit">Create PDF</button>
+                                    
+                                   
+                                    <div class="video-container"><iframe src="https://player.vimeo.com/video/430690235?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+                                   
+                                    <div class="observation-document">
+                                        <div class="form-group">
+                                            <label for="subject" name="labelA">Subject</label>
+                                            <input type="text" name="subject" id="subject" ng-model="titleSubject" class="form-control" placeholder="Subject">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="observation" name="labelB">Observation</label>
+                                            <textarea id="observation" name="observation" ng-model="area" ng-disabled="limit" cols="30" rows="10" placeholder="Observation Description..."></textarea>
+                                        </div>
+                                    </div>                                    
+                                </form>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal fade-in" id="video2" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">  
+                <div class="modal-content">
+                    <div class="modal-body"> 
+                       
+                            <div ng-controller="pdfControllerB">
+                                <form name="form" novalidate>
+                                   <button type="button" class="modal-button primary-text" data-dismiss="modal"><i class="fas fa-times"></i></button>
+                                   
+                                    <button name="submitB" class="save-button" ng-click="saveB()" ng-disabled="disableSubmit">Create PDF</button>
+                                    
+                                   
+                                    <div class="video-container"><iframe src="https://player.vimeo.com/video/430690235?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+                                   
+                                    <div class="observation-document">
+                                        <div class="form-group">
+                                            <label for="subject1B" name="label1B">Subject</label>
+                                            <input type="text" name="subject1B" id="subject1B" ng-model="titleSubjectB" class="form-control" placeholder="Subject">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="observation2B" name="label2B">Observation</label>
+                                            <textarea id="observation2B" name="observation2B" ng-model="area" ng-disabled="limit" cols="30" rows="10" placeholder="Observation Description..."></textarea>
+                                        </div>
+                                    </div>                                    
+                                </form>
+                            </div> 
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal fade-in" id="video3" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body"> 
+                       
+                            <div ng-controller="pdfControllerC">
+                                <form name="form" novalidate>
+                                   <button type="button" class="modal-button primary-text" data-dismiss="modal"><i class="fas fa-times"></i></button>
+                                   
+                                    <button name="submitC" class="save-button" ng-click="saveC()" ng-disabled="disableSubmit">Create PDF</button>
+                                    
+                                    <div class="video-container"><iframe src="https://player.vimeo.com/video/430690235?title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+                                   
+                                    <div class="observation-document">
+                                        <div class="form-group">
+                                            <label for="subject1C" name="label1C">Subject</label>
+                                            <input type="text" name="subject1C" id="subject1C" ng-model="titleSubjectC" class="form-control" placeholder="Subject">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="observation2C" name="label2C">Observation</label>
+                                            <textarea id="observation2C" name="observation2C" ng-model="area" ng-disabled="limit" cols="30" rows="10" placeholder="Observation Description..."></textarea>
+                                        </div>
+                                    </div>                                    
+                                </form>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+		<!-- Scripts -->
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+        
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/bootstrap.js"></script>
+        
+		<script src="assets/js/skel.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+		<script src="assets/js/main.js"></script>
+
+        <!---------------------- ANGULAR JS ------------>       
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+
+        <script>
+            //OBSERVATION A
+            var observationA = angular.module('pdfAppA', []);
+
+            observationA.controller('pdfControllerA',['$scope', function($scope){
+
+                $scope.saveA = function(){
+
+                    let subject = document.getElementById("subject").value,
+                        observation = document.getElementById("observation").value,
+                        docA = new jsPDF();
+                    
+                    var splitText = docA.splitTextToSize(observation, 180);
+                    
+                        docA.setFont("helvetica");
+                        docA.setFontSize(12);
+
+                        docA.text(20, 20, subject);
+                        docA.text(20, 30, splitText);
+                        docA.save('ObservationA.pdf');
+                }
+
+            }]);
+
+            //OBSERVATION B
+            var observationB = angular.module('pdfAppB', []);
+
+            observationB.controller('pdfControllerB',['$scope', function($scope){
+
+                $scope.saveB = function(){
+
+                    let subject1B = document.getElementById("subject1B").value,
+                        observation2B = document.getElementById("observation2B").value,
+                        docB = new jsPDF();
+                    
+                    var splitText = docB.splitTextToSize(observation2B, 180);
+                    
+                        docB.setFont("helvetica");
+                        docB.setFontSize(12);
+
+                        docB.text(20, 20, subject1B);
+                        docB.text(20, 30, splitText);
+                        docB.save('ObservationB.pdf');
+                }
+
+            }]);
+
+            //OBSERVATION C
+            var observationC = angular.module('pdfAppC', []);
+
+            observationC.controller('pdfControllerC',['$scope', function($scope){
+
+                $scope.saveC = function(){
+
+                    let subject1C = document.getElementById("subject1C").value,
+                        observation2C = document.getElementById("observation2C").value,
+                        docC = new jsPDF();
+                    
+                    var splitText = docC.splitTextToSize(observation2C, 180);
+                    
+                        docC.setFont("helvetica");
+                        docC.setFontSize(12);
+
+                        docC.text(20, 20, subject1C);
+                        docC.text(20, 30, observation2C);
+                        docC.save('ObservationC.pdf');
+                }
+
+            }]);
+            
+            angular.module('CombineModule', ['pdfAppA', 'pdfAppB', 'pdfAppC']);
+
+            //Script can be found at : https://rawgit.com/MrRio/jsPDF/master/docs/index.html
+        </script>
+	</body>
+</html>

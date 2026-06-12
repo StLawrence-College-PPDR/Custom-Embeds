@@ -1,0 +1,359 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Arts-Based Curriculum </title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="js/ie/html5shiv.js"></script><![endif]-->
+		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous"> 
+
+		
+		<link rel="stylesheet" href="assets/css/custom.css">
+		<link rel="stylesheet" href="assets/css/common.css" />
+		<link rel="stylesheet" href="assets/css/typography.css" />
+
+		<link rel="stylesheet" media="print" href="assets/css/print.css" />
+
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+	</head>
+	<body class="fade-in">
+       <header id="header">
+            <a href="index.html" class="back-button borderless"><i class="fas fa-arrow-left"></i> Back to Instructions</a>
+       </header>
+        <section class="internal-content">
+            <div class="container">
+                <h3 class="mb30 text-center">Meet Your Students</h3>
+                
+                
+                <p class="mb30 text-center">As you work through the scenarios here, these are the students that you're responsible for in this instance at the virtual center. Take some time and read the card for each student profile as this will inform what and how you achieve the objectives of each activity in the simulation. (Use the  left and right to scroll through the student profiles). <i>Note: Each time you start the simulation you will be assigned a random group of students. After reading through the student profile, click the “Choose Activity” button at the bottom.</i></p>
+                
+                <!--- POPULATED SLIDER -->
+
+                <div class="sliders">
+                    <div id="RandomSlide" class="regular sliderTWO">
+                    </div>
+
+                    <div id="RandomSlide" class="regular sliderTHREE">
+                    </div>
+
+                    <div id="RandomSlide" class="regular sliderFOUR">
+                    </div>
+                </div>
+                
+                <!--- SLIDE CLONE -->
+        
+                <div id="cloneSlide" style="display: none;">
+                    <div class="slide">
+                        <div class="slide-image"></div>
+                        <div class="slide-content">
+                            <h6 class="slide-name mb30"></h6>
+                            <p class="slide-description"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+        
+        <footer id="footer">
+            <div class="button-container"><a class="hero-button" href="activities.html"><span>Choose Activity</span></a></div>
+        </footer>
+    
+        
+		<!-- Scripts -->
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+        
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/bootstrap.js"></script>
+        
+		<script src="assets/js/skel.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+		<script src="assets/js/main.js"></script>
+		<script src="assets/js/slick-master/slick/slick.js"></script>
+		
+		<script>
+            
+            $.fn.randomize = function(selector){
+                var $elems = selector ? $(this).find(selector) : $(this).children(),
+                $parents = $elems.parent();
+
+                $parents.each(function(){
+                    $(this).children(selector).sort(function(){
+                        return Math.round(Math.random()) - 0.5;
+                    }).detach().appendTo(this);
+                    
+                    $(this).children(selector).sort(function(){
+                        return Math.round(Math.random() * 5);
+                    }).slice(0,2).addClass('remove-child').appendTo(this);
+                });
+
+                return this;
+            };
+            
+            $('body').randomize('#RandomSlide');
+            
+            $(function () {
+                json = {
+                    "TWO": [
+                        {
+                            "objectNumber": "1",
+                            "name": "Emma",
+                            "image": "images/profiles/profile1.jpg",
+                            "age": "1 <sup>1/2</sup>",
+                            "description": "Emma enjoys arts and crafts. Her favourite thing to do is paint her family and Ralph, her dog."
+                        },
+                        {
+                            "objectNumber": "2",
+                            "name": "Mason",
+                            "image": "images/profiles/profile2.jpg",
+                            "age": "1 <sup>1/2</sup>",
+                            "description": "Mason loves to read. During storytime he likes to have a front-row seat to a good fairy tale."
+                        },
+                        {
+                            "objectNumber": "3",
+                            "name": "Noah",
+                            "image": "images/profiles/profile6.jpg",
+                            "age": "1 <sup>1/2</sup>",
+                            "description": "Noah likes to be active and outside. In his spare time he spends alot of time in his pool."
+                        },
+                        {
+                            "objectNumber": "4",
+                            "name": "Carlos",
+                            "image": "images/profiles/profile11.jpg",
+                            "age": "2",
+                            "description": "Carlos is a quiet boy but shines when playing an instrument. He likes to play the drums like his dad!"
+                        },
+                        {
+                            "objectNumber": "5",
+                            "name": "Danny",
+                            "image": "images/profiles/profile12.jpg",
+                            "age": "2",
+                            "description": "Danny loves to build things with his hands. As soon as he arrive to school he runs straight for the building blocks."
+                        }
+                    ],
+
+                    "THREE": [
+                       {
+                            "objectNumber": "6",
+                            "name": "Olivia",
+                            "image": "images/profiles/profile3.jpg",
+                            "age": "2 <sup>1/2</sup>",
+                            "description": "Olivia is girly girl! She loves pretty clothes and playing with hair. When she grows up she wants to be a hair dresser."
+                        },
+                        {
+                            "objectNumber": "7",
+                            "name": "Benjamin",
+                            "image": "images/profiles/profile7.jpg",
+                            "age": "2 <sup>1/2</sup>",
+                            "description": "Benjamin has recently moved from South Africa. He misses the hot weather but loves to skating."
+                        },
+                        {
+                            "objectNumber": "8",
+                            "name": "Tim",
+                            "image": "images/profiles/profile15.jpg",
+                            "age": "3",
+                            "description": "Tim loves to make others laugh. He is always joking and telling stories. When he grows up he wants to be a fireman."
+                        },
+                        {
+                            "objectNumber": "9",
+                            "name": "Rhett",
+                            "image": "images/profiles/profile9.jpg",
+                            "age": "2 <sup>1/2</sup>",
+                            "description": "Rhett is very smart! On the weekends, Rhett and his brother like to do science experiments in the kitchen."
+                        },
+                        {
+                            "objectNumber": "10",
+                            "name": "Harper",
+                            "image": "images/profiles/profile4.jpg",
+                            "age": "3",
+                            "description": "Harper has quite the imagination. She love storytime. Especially about whimiscal princesses and frogs."
+                        }
+                    ],
+
+                    "FOUR": [
+                       {
+                            "objectNumber": "11",
+                            "name": "Charlotte",
+                            "image": "images/profiles/profile10.jpg",
+                            "age": "3 <sup>1/2</sup>",
+                            "description": "Charolette loves to bake. She spends alot of time at her Grandmothers house on the weekend. They bake cookies together and swim in the pool."
+                        },
+                        {
+                            "objectNumber": "12",
+                            "name": "Amelia",
+                            "image": "images/profiles/profile5.jpg",
+                            "age": "4",
+                            "description": "Amelia enjoys playing sports. After school she watches her older brother play baseball. She plans on joining a litte league team next summer."
+                        },
+                        {
+                            "objectNumber": "13",
+                            "name": "Madison",
+                            "image": "images/profiles/profile13.jpg",
+                            "age": "3 <sup>1/2</sup>",
+                            "description": "Madison likes to hangout with her big sister Jessica. Together they ride their bikes and play on the swings at the park."
+                        },
+                        {
+                            "objectNumber": "14",
+                            "name": "Sara",
+                            "image": "images/profiles/profile14.jpg",
+                            "age": "3 <sup>1/2</sup>",
+                            "description": "Sara is very quiet. Often, Sara's foster parents will find her playing under tables."
+                        },
+                        {
+                            "objectNumber": "15",
+                            "name": "Sophia",
+                            "image": "images/profiles/profile8.jpg",
+                            "age": "4",
+                            "description": "Sophia has travelled to 4 different countries with her parents. She enjoys bringing in photos and souvenirs to share with her classmates."
+                        }
+                    ]
+                };
+                
+             
+            //-------------------------------- Directors Card
+
+            $.each(json.TWO, function () {
+                var newProfile = $("body").find("#cloneSlide > .slide").clone();
+
+                // Content
+                newProfile.find(".slide-name").append('<span class="primary-text">' + this.name + ',</span> ' + this.age);
+                newProfile.find(".slide-description").append(this.description);
+                newProfile.find(".slide-image").css('background-image', 'url(' + this.image + ')');
+                newProfile.find(".slide").attr('id', 'student' + this.objectNumber);
+                
+                // Populate Item
+                $(newProfile).appendTo(".sliderTWO");
+            });
+            
+            $.each(json.THREE, function () {
+                var newProfile = $("body").find("#cloneSlide > .slide").clone();
+
+                // Content
+                newProfile.find(".slide-name").append('<span class="primary-text">' + this.name + ',</span> ' + this.age);
+                newProfile.find(".slide-description").append(this.description);
+                newProfile.find(".slide-image").css('background-image', 'url(' + this.image + ')');
+                newProfile.find(".slide").attr('id', 'student' + this.objectNumber);
+                
+                // Populate Item
+                $(newProfile).appendTo(".sliderTHREE");
+            });
+            
+            $.each(json.FOUR, function () {
+                var newProfile = $("body").find("#cloneSlide > .slide").clone();
+
+                // Content
+                newProfile.find(".slide-name").append('<span class="primary-text">' + this.name + ',</span> ' + this.age);
+                newProfile.find(".slide-description").append(this.description);
+                newProfile.find(".slide-image").css('background-image', 'url(' + this.image + ')');
+                newProfile.find(".slide").attr('id', 'student' + this.objectNumber);
+                
+                // Populate Item
+                $(newProfile).appendTo(".sliderFOUR");
+            });
+            
+            // ---------------------------- SLIDER JQUERY
+            
+            $(".sliderTWO").slick({
+                accessibility: true,
+                dots: false,
+                arrows: true,
+                centerMode: true,
+                infinite: true,
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                adaptiveHeight: true,
+
+                responsive: [{
+                    breakpoint: 1400,
+                    settings: {
+                    slidesToShow: 3,
+                    infinite: true
+                }
+
+                }, {
+                    breakpoint: 1320,
+                    settings: {
+                    slidesToShow: 2,
+                    dots: true
+                }
+
+                }, {
+                    breakpoint: 700,
+                    settings: "unslick" // destroys slick
+                }]
+            });
+            
+            $(".sliderTHREE").slick({
+                accessibility: true,
+                dots: false,
+                arrows: true,
+                centerMode: true,
+                infinite: true,
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                adaptiveHeight: true,
+
+                responsive: [{
+                    breakpoint: 1400,
+                    settings: {
+                    slidesToShow: 3,
+                    infinite: true
+                }
+
+                }, {
+                    breakpoint: 1320,
+                    settings: {
+                    slidesToShow: 2,
+                    dots: true
+                }
+
+                }, {
+                    breakpoint: 700,
+                    settings: "unslick" // destroys slick
+                }]
+            });
+            
+            $(".sliderFOUR").slick({
+                accessibility: true,
+                dots: false,
+                arrows: true,
+                centerMode: true,
+                infinite: true,
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                adaptiveHeight: true,
+
+                responsive: [{
+                    breakpoint: 1400,
+                    settings: {
+                    slidesToShow: 3,
+                    infinite: true
+                }
+
+                }, {
+                    breakpoint: 1320,
+                    settings: {
+                    slidesToShow: 2,
+                    dots: true
+                }
+
+                }, {
+                    breakpoint: 700,
+                    settings: "unslick" // destroys slick
+                }]
+            });
+        });
+            
+        </script>
+	</body>
+</html>

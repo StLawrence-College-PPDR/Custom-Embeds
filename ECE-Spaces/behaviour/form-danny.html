@@ -1,0 +1,542 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Arts-Based Curriculum </title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="js/ie/html5shiv.js"></script><![endif]-->
+		
+         <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous"> 
+		
+		<link rel="stylesheet" href="../assets/css/custom.css">
+		<link rel="stylesheet" href="../assets/css/common.css" />
+		<link rel="stylesheet" href="../assets/css/typography.css" />
+
+		<link rel="stylesheet" media="print" href="../assets/css/print.css" />
+
+		<!--[if lte IE 9]><link rel="stylesheet" href="../assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="../assets/css/ie8.css" /><![endif]-->
+		
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+	</head>
+	<body class="fade-in modal-light behaviour-app" ng-app="app">
+        <header id="header">
+            <a href="../activities.html" class="borderless primary-text back-button"><i class="fas fa-arrow-left"></i> Back to Activities</a>
+        </header>
+		
+		<section class="internal-content behaviour-app">
+			<div class="container">
+			    <div class="progress light">
+                  <div class="progress-bar past-bar" role="progressbar" style="width: 33.3%;" aria-valuenow="33.33" aria-valuemin="0" aria-valuemax="100">Student Profiles</div>
+                  <div class="progress-bar past-bar" role="progressbar" style="width: 33.3%;" aria-valuenow="33.33" aria-valuemin="0" aria-valuemax="100">Individuals Information</div>
+                  <div class="progress-bar" role="progressbar" style="width: 33.3%;" aria-valuenow="33.33" aria-valuemin="0" aria-valuemax="100">Behavioural Plan</div>
+                </div>
+                
+				<h3 class="mb30 text-center">Danny's Behavioural Plan</h3>
+				<p class="mb30 text-center">After reviewing the child's information, develop a behavioural plan by completing all of the text fields below under each tab. To revisit the reports for each student hover on the chevron in the right panel. After completing the final tab, save your plan by selecting the 'Download PDF' at the bottom of your screen.</p>
+
+				<nav class="nav nav-tabs nav-pills nav-justified nav-form">
+					<a class="nav-item nav-link active" id="nav-0-tab" data-toggle="tab" href="#nav-0-content" role="tab" aria-controls="nav-0-content" aria-selected="true">Teacher <br>Information</a>
+					<a class="nav-item nav-link" id="nav-1-tab" data-toggle="tab" href="#nav-1-content" role="tab" aria-controls="nav-1-content" aria-selected="true">Behavior Hypothesis<br>Statements</a>
+					<a class="nav-item nav-link" id="nav-2-tab" data-toggle="tab" href="#nav-2-content" role="tab" aria-controls="nav-2-content" aria-selected="false">Prevention<br>Strategies</a>
+					<a class="nav-item nav-link" id="nav-3-tab" data-toggle="tab" href="#nav-3-content" role="tab" aria-controls="nav-3-content" aria-selected="false">Replacement<br>Skills</a>
+					<a class="nav-item nav-link" id="nav-4-tab" data-toggle="tab" href="#nav-4-content" role="tab" aria-controls="nav-4-content" aria-selected="false">Consequence<br>Strategies</a>
+					<a class="nav-item nav-link" id="nav-5-tab" data-toggle="tab" href="#nav-5-content" role="tab" aria-controls="nav-5-content" aria-selected="false">Long Term<br>Strategies/Evaluation</a>
+				</nav>
+				
+			<div ng-controller="appController">
+				<div class="tab-content" id="nav-tabContent">
+				    <div class="tab-pane fade show active" id="nav-0-content" role="tabpanel" aria-labelledby="nav-0-tab">
+						
+						<form name="form" novalidate>
+							<div class="observation-document">
+								<div class="form-group">
+									<label for="title0" name="label0">Teacher</label>
+									<input type="text" name="title0" id="title0" ng-model="title0" class="form-control" placeholder="Your Name">
+								</div>
+							</div>
+						</form>
+
+					</div><!-- end nav-0-content -->
+					<div class="tab-pane fade " id="nav-1-content" role="tabpanel" aria-labelledby="nav-1-tab">
+						
+						<form name="form" novalidate>
+							<div class="observation-document">
+								<div class="form-group">
+									<label for="title1" name="labelA">Title</label>
+									<input type="text" name="title1" id="title1" ng-model="title1" class="form-control" >
+								</div>
+
+								<div class="form-group">
+									<label for="textArea1" name="labelB">Hypothesis</label>
+									<textarea id="textArea1" name="observation" ng-model="textArea1" ng-disabled="limit" cols="30" rows="10" ></textarea>
+								</div>
+							</div>
+						</form>
+
+					</div><!-- end nav-1-content -->
+					<div class="tab-pane fade" id="nav-2-content" role="tabpanel" aria-labelledby="nav-2-tab">
+
+						<form name="form" novalidate>
+							<div class="observation-document">
+								<div class="form-group">
+									<label for="title2" name="labelA2">Title</label>
+									<input type="text" name="title2" id="title2" ng-model="title2" class="form-control" >
+								</div>
+
+								<div class="form-group">
+									<label for="textArea2" name="labelB2">Strategies</label>
+									<textarea id="textArea2" name="observation" ng-model="textArea2" ng-disabled="limit" cols="30" rows="10" ></textarea>
+								</div>
+							</div>
+						</form>
+
+					</div><!-- end nav-2-content -->
+					<div class="tab-pane fade" id="nav-3-content" role="tabpanel" aria-labelledby="nav-3-tab">
+					
+						<form name="form" novalidate>
+							<div class="observation-document">
+								<div class="form-group">
+									<label for="title3" name="labelA3">Title</label>
+									<input type="text" name="title3" id="title3" ng-model="title3" class="form-control" >
+								</div>
+
+								<div class="form-group">
+									<label for="textArea1" name="labelB3">Skills</label>
+									<textarea id="textArea3" name="observation" ng-model="textArea3" ng-disabled="limit" cols="30" rows="10" ></textarea>
+								</div>
+							</div>
+						</form>
+
+					</div><!-- end nav-3-content -->
+					<div class="tab-pane fade" id="nav-4-content" role="tabpanel" aria-labelledby="nav-4-tab">
+					
+						<form name="form" novalidate>
+							<div class="observation-document">
+								<div class="form-group">
+									<label for="title4" name="labelA4">Title</label>
+									<input type="text" name="title4" id="title4" ng-model="title4" class="form-control" >
+								</div>
+
+								<div class="form-group">
+									<label for="textArea4" name="labelB4">Strategies</label>
+									<textarea id="textArea4" name="observation" ng-model="textArea4" ng-disabled="limit" cols="30" rows="10" ></textarea>
+								</div>
+							</div>
+						</form>
+					
+					</div><!-- end nav-4-content -->
+					<div class="tab-pane fade" id="nav-5-content" role="tabpanel" aria-labelledby="nav-5-tab">
+					
+						<form name="form" novalidate>
+							<div class="observation-document">
+								<div class="form-group">
+									<label for="title" name="labelA5">Title</label>
+									<input type="text" name="title5" id="title5" ng-model="title5" class="form-control" >
+								</div>
+
+								<div class="form-group">
+									<label for="textArea5" name="labelB5">Strategies/Evaluation</label>
+									<textarea id="textArea5" name="observation" ng-model="textArea5" ng-disabled="limit" cols="30" rows="10" ></textarea>
+								</div>
+							</div>
+						</form>
+					
+					</div><!-- end nav-5-content -->
+				</div>
+				
+				
+				<div class="button-container"><a class="hero-button" ng-click="saveAsPDF()" ng-disabled="disableSubmit " name="submit"><span>Download PDF</span></a></div>
+				
+			</div><!-- end $appController -->
+				
+			</div><!-- end .container -->
+		</section><!-- end .internal-content -->
+		        
+        <div class="environment-setup">
+           
+            <div class="instructions">Hover to Open</div>
+            <div class="pull-out">
+                <div class="pull-lever"><i class="fas fa-chevron-left"></i></div>
+                <div class="pull-content">
+                    <div class="pull-item doc-item" data-toggle="modal" data-target="#modalD">
+                        <img src="../images/file-icon.svg">
+                        <span class="label">Biography</span>
+                    </div>
+                    <div class="pull-item doc-item" data-toggle="modal" data-target="#modalA">
+                        <img src="../images/folder-icon.svg">
+                        <span class="label">Observation Cards</span>
+                    </div>
+                    <div class="pull-item doc-item" data-toggle="modal" data-target="#modalC">
+                        <img src="../images/file-icon.svg">
+                        <span class="label">Interview Form</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!------------------ Bootstrap Modal --->
+		
+          <div class="modal fade-in" id="modalD" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body"> 
+                        <button type="button" class="modal-button primary-text mb30" data-dismiss="modal"><i class="fas fa-times"></i></button>
+                        
+                        <div class="observation-document">
+                            <div class="slide-image" style="background: url('../images/profiles/profile12.jpg');"></div>
+                            <h6 class="mb30 text-center">Danny, 1 yrs</h6>
+                            
+                            <p>Danny is a 22-month old boy that lives with his mother, father, and 12-month old sister. He is a new child at a community childcare program where he attends childcare 5 mornings a week. Danny is language delayed and does not use words. He does repeat consonant-vowel combinations and will occasionally repeat simple words, often repeating the initial sound over and over with a whiney frustrated sounding voice. Danny has very limited play skills and is likely to manipulate toys by repetitive actions of spinning moving parts or mouthing them.</p>
+                            
+                            <p>Danny’s parents report that he is very difficult to manage at home and in the community. They describe that Danny as being “very rigid” about what he wants to do and diffi cult to redirect. When pushed to comply, he often becomes aggressive and hits his parents or throws toys and tries running away. During meals he never sits with his parents to eat. He will come to the table periodically, pick up food from his plate and walk off to eat it. His mother also shared that she is very concerned about how he plays because he doesn’t seem to use toys correctly. He likes spinning in circles with toys and twirling spinning toy parts. His parents are reluctant to take him to the store or other places in the community because he has severe tantrums, resists getting in the car, and/or resists leaving places.</p>
+                       
+                            <p>Danny’s childcare teacher visited him at home to welcome him to his new childcare. She was distressed to observe that Danny seems to be “in charge.” His parents are reluctant to place limits on him. He insists on watching videos repetitively, while rewinding favorite sequences over and over, or running up and down their hallway. </p>
+                            
+                            <p>At his childcare, Danny has tantrums that include crying, screaming, dropping to the fl oor, and hitting at adults. Danny refuses to eat and will tantrum if guided to the table. He is most likely to have challenging behavior during small group activities (like story time, puppet play, and music time), clean-up time, and when transitioning from activities.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+        
+        <div class="modal fade-in" id="modalA" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body"> 
+                        <button type="button" class="modal-button primary-text mb30" data-dismiss="modal"><i class="fas fa-times"></i></button>
+                        
+                        <div class="observation-document">
+                            <h5 class="mb30">Observation Card</h5>
+                           
+                            <div class="flex-collection">
+                                <div class="flex-3">
+                                    <p>Name: <span class="underline">Danny</span></p>
+                                </div>
+                                <div class="flex-3">
+                                    <p>Observer: <span class="underline">Teacher</span></p>
+                                </div>
+                                <div class="flex-3">
+                                    <p>Date: <span class="underline">1/15</span></p>
+                                </div>
+                                
+                                <div class="flex-3">
+                                    <p>General Context: <span class="underline">Playground</span></p>
+                                </div>
+                                <div class="flex-3">
+                                    <p>Time: <span class="underline">12:30pm</span></p>
+                                </div>
+                                <div class="flex-3">
+                                    
+                                </div>
+                                
+                                <div class="flex-full">
+                                    <p>Trigger: <span class="underline">Danny’s mom comes to the playground to pick him up. Danny is happy to see her and gives her a hug. She says, “Let’s get in the car.”</span></p>
+                                </div>
+                                <div class="flex-full">
+                                    <p>Challenging Behaviour: <span class="underline">Danny drops to the ground and begins screaming. He kicks his mother when she approaches.</span></p>
+                                </div>
+                                <div class="flex-full">
+                                    <p>Maintaining Consequence: <span class="underline">His mother goes to sit on the bench until he is calmer. Then she asks the teacher to carry him to the car.</span></p>
+                                </div>
+                                <div class="flex-full">
+                                    <p>Possible Function:</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="observation-document">
+                           <h5 class="mb30">Observation Card</h5>
+                           
+                            <div class="flex-collection">
+                                <div class="flex-3">
+                                    <p>Name: <span class="underline">Danny</span></p>
+                                </div>
+                                <div class="flex-3">
+                                    <p>Observer: <span class="underline">Teacher</span></p>
+                                </div>
+                                <div class="flex-3">
+                                    <p>Date: <span class="underline">9/15</span></p>
+                                </div>
+                                
+                                <div class="flex-3">
+                                    <p>General Context: <span class="underline">Story time with puppet</span></p>
+                                </div>
+                                <div class="flex-3">
+                                    <p>Time: <span class="underline">9:00am</span></p>
+                                </div>
+                                <div class="flex-3">
+                                    
+                                </div>
+                                
+                                <div class="flex-full">
+                                    <p>Trigger: <span class="underline">The children come to the rug for story time. An adult cues Danny to join the group by going over to him and pointing to the story area.</span></p>
+                                </div>
+                                <div class="flex-full">
+                                    <p>Challenging Behaviour: <span class="underline">Danny backs away and swings his arms at the adult in an attempt to push the adult away</span></p>
+                                </div>
+                                <div class="flex-full">
+                                    <p>Maintaining Consequence: <span class="underline">The adult gives him squishy balls at a table and then leaves him to play as she joins story time.</span></p>
+                                </div>
+                                <div class="flex-full">
+                                    <p>Possible Function:</p>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="observation-document">
+                           <h5 class="mb30">Observation Card</h5>
+                           
+                            <div class="flex-collection">
+                                <div class="flex-3">
+                                    <p>Name: <span class="underline">Danny</span></p>
+                                </div>
+                                <div class="flex-3">
+                                    <p>Observer: <span class="underline">Teacher</span></p>
+                                </div>
+                                <div class="flex-3">
+                                    <p>Date: <span class="underline">9/15</span></p>
+                                </div>
+                                
+                                <div class="flex-3">
+                                    <p>General Context: <span class="underline">Centers/Snack</span></p>
+                                </div>
+                                <div class="flex-3">
+                                    <p>Time: <span class="underline">9:15am</span></p>
+                                </div>
+                                <div class="flex-3">
+                                    
+                                </div>
+                                
+                                <div class="flex-full">
+                                    <p>Trigger: <span class="underline">The teacher asks Danny to come eat snack while holding a cracker. </span></p>
+                                </div>
+                                <div class="flex-full">
+                                    <p>Challenging Behaviour: <span class="underline">Danny comes to the table takes 2 crackers and walks around the room while eating.</span></p>
+                                </div>
+                                <div class="flex-full">
+                                    <p>Maintaining Consequence: <span class="underline">The teacher leaves him alone and sits with other children at the snack table.</span></p>
+                                </div>
+                                <div class="flex-full">
+                                    <p>Possible Function:</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="observation-document">
+                           <h5 class="mb30">Observation Card</h5>
+                            
+                            <div class="flex-collection">
+                                <div class="flex-3">
+                                    <p>Name: <span class="underline">Danny</span></p>
+                                </div>
+                                <div class="flex-3">
+                                    <p>Observer: <span class="underline">Mother</span></p>
+                                </div>
+                                <div class="flex-3">
+                                    <p>Date: <span class="underline">9/16</span></p>
+                                </div>
+                                
+                                <div class="flex-3">
+                                    <p>General Context: <span class="underline">Playing on Swing</span></p>
+                                </div>
+                                <div class="flex-3">
+                                    <p>Time: <span class="underline">4:15pm</span></p>
+                                </div>
+                                <div class="flex-3">
+                                    
+                                </div>
+                                
+                                <div class="flex-full">
+                                    <p>Trigger: <span class="underline">Grandmother comes to pick him up to visit at her house. Danny giggles when he sees her. She says, “Come on Danny, let’s go get your suitcase,” while reaching for his hand.</span></p>
+                                </div>
+                                <div class="flex-full">
+                                    <p>Challenging Behaviour: <span class="underline">Danny drops to the ground and screams and hits at his grandmother.</span></p>
+                                </div>
+                                <div class="flex-full">
+                                    <p>Maintaining Consequence: <span class="underline">His grandmother turns to talk to his mother until he calms and then his mother carries him inside to get the suitcase.</span></p>
+                                </div>
+                                <div class="flex-full">
+                                    <p>Possible Function:</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="observation-document">
+                           <h5 class="mb30">Observation Card</h5>
+                           
+                            <div class="flex-collection">
+                                <div class="flex-3">
+                                    <p>Name: <span class="underline">Danny</span></p>
+                                </div>
+                                <div class="flex-3">
+                                    <p>Observer: <span class="underline">Mother</span></p>
+                                </div>
+                                <div class="flex-3">
+                                    <p>Date: <span class="underline">9/17</span></p>
+                                </div>
+                                
+                                <div class="flex-3">
+                                    <p>General Context: <span class="underline">Dinner time</span></p>
+                                </div>
+                                <div class="flex-3">
+                                    <p>Time: <span class="underline">6:00pm</span></p>
+                                </div>
+                                <div class="flex-3">
+                                    
+                                </div>
+                                
+                                <div class="flex-full">
+                                    <p>Trigger: <span class="underline">Danny is watching videos. His mother asks him, “Are you ready for dinner?</span></p>
+                                </div>
+                                <div class="flex-full">
+                                    <p>Challenging Behaviour: <span class="underline">Danny whines and kicks at his mother. He pulls away then goes to the food, takes 2 french fries and goes back to watch television.</span></p>
+                                </div>
+                                <div class="flex-full">
+                                    <p>Maintaining Consequence: <span class="underline">Danny’s mother sits and joins him in watching the video.</span></p>
+                                </div>
+                                <div class="flex-full">
+                                    <p>Possible Function:</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="observation-document">
+                           <h5 class="mb30">Observation Card</h5>
+                           
+                            <div class="flex-collection">
+                                <div class="flex-3">
+                                    <p>Name: <span class="underline">Danny</span></p>
+                                </div>
+                                <div class="flex-3">
+                                    <p>Observer: <span class="underline">Mother</span></p>
+                                </div>
+                                <div class="flex-3">
+                                    <p>Date: <span class="underline">9/17</span></p>
+                                </div>
+                                
+                                <div class="flex-3">
+                                    <p>General Context: <span class="underline">Diaper changing</span></p>
+                                </div>
+                                <div class="flex-3">
+                                    <p>Time: <span class="underline">10:30am</span></p>
+                                </div>
+                                <div class="flex-3">
+                                    
+                                </div>
+                                
+                                <div class="flex-full">
+                                    <p>Trigger: <span class="underline">Dad goes to Danny who is spinning toy car wheels and says, “let’s go change your diaper” while taking his hand.</span></p>
+                                </div>
+                                <div class="flex-full">
+                                    <p>Challenging Behaviour: <span class="underline">Danny screams, drops to the fl oor, throws car and hits at his dad.</span></p>
+                                </div>
+                                <div class="flex-full">
+                                    <p>Maintaining Consequence: <span class="underline">His dad tries to pick Danny up and he rolls away and grabs car and runs away screaming.</span></p>
+                                </div>
+                                <div class="flex-full">
+                                    <p>Possible Function:</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal fade-in" id="modalC" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body"> 
+                        <button type="button" class="modal-button primary-text mb30" data-dismiss="modal"><i class="fas fa-times"></i></button>
+                        
+                        <iframe src="../behaviour/interviewForm-Danny.pdf" width="100%" height="1200px"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+		<!-- Scripts -->
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+        
+        <script src="../assets/js/jquery.min.js"></script>
+        <script src="../assets/js/bootstrap.js"></script>
+        
+		<script src="../assets/js/skel.min.js"></script>
+		<script src="../assets/js/util.js"></script>
+		<!--[if lte IE 8]><script src="../assets/js/ie/respond.min.js"></script><![endif]-->
+		<script src="../assets/js/main.js"></script>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+
+        <script>
+            $(document).ready(function(){
+                $("#instructions").modal('show');
+            });
+
+			var app = angular.module("app", []);
+			app.controller("appController", function($scope) {
+				$scope.saveAsPDF = function(){
+
+					let pdf = new jsPDF();
+                    var textArea1 = ($scope.textArea1 ? $scope.textArea1 : ""),
+                        textArea2 = ($scope.textArea2 ? $scope.textArea2 : ""),
+                        textArea3 = ($scope.textArea3 ? $scope.textArea3 : ""),
+                        textArea4 = ($scope.textArea4 ? $scope.textArea4 : ""),
+                        textArea5 = ($scope.textArea5 ? $scope.textArea5 : ""),
+                        splitText1 = pdf.splitTextToSize(textArea1, 180),
+                        splitText2 = pdf.splitTextToSize(textArea2, 180),
+                        splitText3 = pdf.splitTextToSize(textArea3, 180),
+                        splitText4 = pdf.splitTextToSize(textArea4, 180),
+                        splitText5 = pdf.splitTextToSize(textArea5, 180);
+
+					pdf.setFont("helvetica");
+					pdf.setFontSize(12);
+
+					pdf.text(20, 20, "Carlos' Behavioural Plan");
+					pdf.text(20, 30, ($scope.title0 ? $scope.title0 : "") );
+					pdf.text(20, 50, "Behavior Hypothesis Statements");
+					pdf.text(20, 60, ($scope.title1 ? $scope.title1 : "") );
+					pdf.text(20, 80, splitText1 );
+
+					pdf.addPage();
+					
+					pdf.text(20, 20, "Prevention Strategies");
+					pdf.text(20, 30, ($scope.title2 ? $scope.title2 : "") );
+					pdf.text(20, 60, splitText2 );
+
+					pdf.addPage();
+					
+					pdf.text(20, 20, "Replacement Skills");
+					pdf.text(20, 30, ($scope.title3 ? $scope.title3 : "") );
+					pdf.text(20, 60, splitText3 );
+
+					pdf.addPage();
+					
+					pdf.text(20, 20, "Consequence Strategies");
+					pdf.text(20, 30, ($scope.title4 ? $scope.title4 : "") );
+					pdf.text(20, 60, splitText4 );
+
+					pdf.addPage();
+					
+					pdf.text(20, 20, "Long Term Strategies/Evaluation");
+					pdf.text(20, 30, ($scope.title5 ? $scope.title5 : "") );
+					pdf.text(20, 60, splitText5 );
+					
+					pdf.save(($scope.title0 ? $scope.title0 : "") + '-behaviour-plan-danny.pdf');
+					
+				};
+			} );
+            //Script can be found at : https://rawgit.com/MrRio/jsPDF/master/docs/index.html
+        </script>
+		
+	</body>
+</html>
