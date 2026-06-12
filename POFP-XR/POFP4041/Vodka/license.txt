@@ -1,0 +1,11 @@
+Model Information:
+* title:	Vodka (Tuica)
+* source:	https://sketchfab.com/3d-models/vodka-tuica-a3a17b679da64cbf9f30e68336bc7af5
+* author:	emypustiu (https://sketchfab.com/emypustiu)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Vodka (Tuica)" (https://sketchfab.com/3d-models/vodka-tuica-a3a17b679da64cbf9f30e68336bc7af5) by emypustiu (https://sketchfab.com/emypustiu) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
