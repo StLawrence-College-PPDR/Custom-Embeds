@@ -1,0 +1,434 @@
+<!-- 
+Each annotation will need the following...
+    1. Navbar: Number using bootstap icon and click function. 
+    2. Modal/Bubble: Annotation description, picture, zoom picture, numberical identifier, video, title, etc.
+    3. Annotated Marker: Positioned numberical marker on the 3D model.
+    4. Script: Click functions for navbar and 3D model.
+    
+    *Only edit the position and rotation of annotated markers on the parent entity. 
+    
+Position (x,y,z) by Colours in aframe inspector (ctrl + alt + i)...
+    x (Red) = Left to right
+    y (Green) = Up and down
+    z (Blue) = Front to back
+
+Editing the model for the scene will need the following...
+    1. If model is not centered upon uploading, edit in blender to be a the center point of the 3D area.
+    2. Rotate the first view point of the model by editing the y (x,y,x) cooridinates. Example 90 degress (0,90,0);
+-->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>WebXR Markers</title>
+    <meta name="description" content="WebXR Markers">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="courses-style.css">
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://supereggbert.github.io/aframe-htmlembed-component/dist/build.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.5.1/dist/aframe-look-at-component.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v5.0.1/dist/aframe-extras.min.js"></script>
+    <script src="https://cdn.rawgit.com/tizzle/aframe-orbit-controls-component/v0.1.14/dist/aframe-orbit-controls-component.min.js">
+      </script>
+    <script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script>
+    <script>
+        AFRAME.registerComponent('change-color-on-hover',{
+            init:function(){
+                var data = this.data;
+                var el = this.el;
+                var defaultColor = el.getAttribute('material').color;
+                var defaultOpacity = el.getAttribute('material').opacity;
+                
+                this.el.addEventListener('mouseleave',function(){
+                    el.setAttribute('color', defaultColor);
+                    el.setAttribute('opacity', defaultOpacity);
+                });
+                
+                this.el.addEventListener('mouseenter', function() {
+                    el.setAttribute('color', data.color);
+                    el.setAttribute('opacity', data.opacity);
+                });
+            }
+          });
+    
+    </script>
+  </head>
+  <body>
+    <div id="shield" class="embed-wrapper">
+<!--Navbar-->
+        <div class="navigation-scene">
+            <ul class="nav navbar nav-pills">
+              <li class="nav-item">
+                  <a id="showModal" class="nav-link active" onclick="modal()"><i class="bi bi-arrows-move"></i><span class="nav-link-text"> Model</span></a>
+              </li>
+              <li class="nav-item">
+                  <a id="showMarkers" class="nav-link" onclick="markers()"><i class="bi bi-1-circle"></i><span class="nav-link-text"> Markers</span></a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#" target="_blank"><i class="bi bi-zoom-in"></i><span class="nav-link-text"> Fullscreen</span></a>
+              </li>
+              <li class="nav-item">
+                  <a id="showResources" class="nav-link" onclick="resources()"><i class="bi bi-bookmark"></i><span class="nav-link-text"> Resources</span></a>
+              </li>
+              <li class="nav-item">
+                  <a id="showHelp" class="nav-link" onclick="help()"><i class="bi bi-info-circle"></i><span class="nav-link-text"> Help</span></a>
+              </li>
+            </ul>
+        </div>
+        <div id="markers" class="markers-bar">
+            <ul>
+                <li><a id="annotation1" onclick="bubble1()">Decoration</a></li>
+                <li><a id="annotation2" onclick="bubble2()">Creation</a></li>
+                <li><a id="annotation3" onclick="bubble3()">Fabrication</a></li>
+            </ul>
+            <div class="markers-content">
+                <hr>
+                <a class="text-align: center; margin-bottom: 0;" onclick="modal()"><i class="bi bi-x-circle"></i> Close</a>
+            </div>
+        </div>
+<!--Resources-->
+        <div id="resources" class="markers-bar">
+            <div class="resources-content">
+                <p>Gadacz, René R.. "Moccasin". The Canadian Encyclopedia, 19 June 2020, Historica Canada. www.thecanadianencyclopedia.ca/en/article/moccasin. Accessed 19 December 2023.</p>
+                
+                <p>Gadacz, R. (2020). Moccasin. In The Canadian Encyclopedia. Retrieved from https://www.thecanadianencyclopedia.ca/en/article/moccasin</p>
+                
+                <p>Gadacz, René R.. "Moccasin." The Canadian Encyclopedia. Historica Canada. Article published February 07, 2006; Last Edited June 19, 2020.</p>
+                
+                <p>The Canadian Encyclopedia, s.v. "Moccasin," by René R. Gadacz, Accessed December 19, 2023, https://www.thecanadianencyclopedia.ca/en/article/moccasin</p>
+                
+                <p>Ojibwa tribe child's moccasin by Cuming Collection, Southwark Council on Sketchfab, https://sketchfab.com/models/607fb16069344554b250ab38ed19906f/embed</p>
+                
+                <p>Southeastern region moccasin, 1820-1840 - Bata Shoe Museum - DSC00617.JPG. 2013, July 4. In wikipedia. https://commons.wikimedia.org/wiki/File:Southeastern_region_moccasin,_1820-1840_-_Bata_Shoe_Museum_-_DSC00617.JPG</p>
+                
+                <p>Traditional moosehide maker.jpg. 2016, June 10. In wikipedia. https://commons.wikimedia.org/wiki/File:Traditional_moosehide_maker.jpg</p>
+                
+                <p>Charles Deas A Group of Sioux detail Amon Carter Museum.jpg. 1845. In wikipedia. https://commons.wikimedia.org/wiki/File:Charles_Deas_A_Group_of_Sioux_detail_Amon_Carter_Museum.jpg</p>
+            </div>
+            
+            <div class="markers-content">
+                <hr>
+                <a class="text-align: center; margin-bottom: 0;" onclick="modal()"><i class="bi bi-x-circle"></i> Close</a>
+            </div>
+        </div>
+<!--Help Window-->
+        <div id="helpWindow" class="help-window">
+            <div class="help-content flex-collection">
+                <div class="help-item flex-3">
+                    <p><strong><i class="bi bi-arrows-move"></i></strong></p>
+                    <p><strong>Orbit</strong></p>
+                    <p class="op4">Left-click and drag to move the 3D object around.</p>
+                </div>
+                <div class="help-item flex-3">
+                    <p><strong><i class="bi bi-zoom-in"></i></strong></p>
+                    <p><strong>Zoom</strong></p>
+                    <p class="op4">Scroll using your mouse scroll wheel.</p>
+                </div>
+                <div class="help-item flex-3">
+                    <p><strong><i class="bi bi-1-circle"></i></strong></p>
+                    <p><strong>Annotation</strong></p>
+                    <p class="op4">Click on numberical values to reveal information.</p>
+                </div>
+            </div>
+        </div>
+  
+<!--Modal 1-->
+        <div id="modal1" class="bubble">
+            <div class="bubble-body">
+                <div class="bubble-number">1</div>
+                <div class="bubble-title">Decoration</div>
+                <div class="bubble-content">
+                    <p>Indigenous women adorned moccasins through diverse techniques, such as using red ochre paint, fringe, ribbon, quillwork, and copper bells. The patterns on the moccasins frequently conveyed the heritage, community, or personal history of the maker or wearer.</p>
+                </div>
+                <div class="bubble-media" style="background: url('img6.png');"></div>
+                <div class="bubble-zoom" style="background: url('img1.png');"></div>
+                <!-- <button type="button" class="btn btn-primary">Button</button>-->
+                <hr>
+                <a class="text-align: center; margin-bottom: 0;" onclick="modal()"><i class="bi bi-x-circle"></i> Close</a>
+            </div>
+        </div>
+<!--Modal 2-->
+        <div id="modal2" class="bubble">
+            <div class="bubble-body">
+                <div class="bubble-number">2</div>
+                <div class="bubble-title">Fabrication</div>
+                <div class="bubble-content">
+                    <p>Indigenous peoples employed distinct methods for crafting moccasins, yet there were commonalities in their approaches. Traditionally, women engaged in the moccasin-making process by cleaning, stretching, and sun-drying animal skins. Using a bone knife or a similar tool, they would carefully scrape the hides to achieve a consistent appearance and texture. Prior to crafting the moccasins, the skins were often treated through smoking, and the women skillfully stitched them together using sinew.</p>
+                </div>
+                <div class="bubble-media" style="background: url('img5.png');"></div>
+                <div class="bubble-zoom" style="background: url('img3.png');"></div>
+                <hr>
+                <a class="text-align: center; margin-bottom: 0;" onclick="modal()"><i class="bi bi-x-circle"></i> Close</a>
+            </div>
+        </div>
+<!--Modal 3-->
+        <div id="modal3" class="bubble">
+            <div class="bubble-body">
+                <div class="bubble-number">3</div>
+                <div class="bubble-title">Creation</div>
+                <div class="bubble-content">
+                    <p>Typically, moccasins were created from a single piece of leather, featuring a seam running down the center from the back of the shoe. Nevertheless, various styles and types of moccasins existed. Some incorporated gathered cloth sewn at the toe, while others boasted a flatter design. The inclusion of side flaps, fur linings, high-cut designs (extending above the ankle), and low-cut varieties (reaching ankle length) depended on the preferences of the shoemaker and the intended purpose of the moccasin. For instance, fur linings served to provide warmth in colder climates, a feature unnecessary for those in warmer environments.</p>
+                </div>
+                <div class="bubble-media"><iframe width="560" height="315" src="https://www.youtube.com/embed/hIARJSaWb2E?si=HfPpfWxskGaNtSYJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+                <div class="bubble-zoom" style="background: url('img4.png');"></div>
+                <hr>
+                <a class="text-align: center; margin-bottom: 0;" onclick="modal()"><i class="bi bi-x-circle"></i> Close</a>
+            </div>
+        </div>
+    </div>
+    
+<!-- 3D Model Scene: rayOrigin allows a computer-based mouse be the cursor instead of the aframe cursor. -->    
+    <a-scene id="aScene" html-markers vr-mode-ui="enabled: false" cursor="rayOrigin: mouse">
+    
+    <a-sky id="#sky" color="#f3f3f3"></a-sky>
+    
+<!-- Camera: Using orbit controls component to create a single axis area. -->
+        <a-entity
+            id="camera"
+            camera="fov: 80; zoom: 1.5;"
+            position="0 2 5"
+            orbit-controls="
+              autoRotate: false;
+              target: #target;
+              enableDamping: true;
+              dampingFactor: 0.125;
+              rotateSpeed:0.25;
+              minDistance:3;
+              maxDistance:100;
+              "
+            camera look-controls mouse-cursor>
+            <a-entity geometry="primitive:cone; radius-bottom:1; radius-top:0" scale=".33 1 .33" position="0 0 0" rotation="90 0 0" material="color: #0099ff; transparent: true; opacity:0.5"></a-entity>
+        </a-entity>
+        
+<!-- Assets: Path to 3D model here. -->
+        <a-assets>
+            <a-asset-item
+              id="model"
+              response-type="arraybuffer"
+              src="Model/scene.gltf"
+            ></a-asset-item>
+        </a-assets>
+
+<!-- Target: All annotations and gltf model need to be inside the target ID to orbit on the same axis.-->  
+        <a-entity id="target" position="0 0 0">
+           
+<!-- Model: a-asset will place the model here. Control attributes from this tag.--> 
+            <a-entity gltf-model="#model" position="0 0 0" scale="2 2 2" rotation="0 90 0" cube-env-map="path: HDR/; extension: jpg; reflectivity: 0.5;" renderer="colorManagement: true; physicallyCorrectLights: true;"></a-entity>
+            
+<!-- Annotations: Reveal associated modal/bubble to reveal on click. -->
+
+<!-- Annotation 1 -->            
+            <a-entity id="bubble1" onclick="bubble1()" class="moveTarget" position="1.968 0 0.889">
+               <a-entity text="value: 1; align: center;" position="-0.317 0.639 0.495" scale="1.5 1.5 1.5"></a-entity>
+                <a-ring position="-0.310 0.639 0.495" geometry="radius: 1.25; radiusInner: 1.070;" color="#FFFFFF" scale="0.070 0.070 0.070"></a-ring>
+                <a-circle position="-0.310 0.639 0.494" radius="1.25" material="color: #000000; opacity: 0.4;" scale="0.070 0.070 0.070" change-color-on-hover="color: #d84738; opacity: 1;" ></a-circle>
+            </a-entity>
+            
+<!-- Annotation 2 -->              
+            <a-entity id="bubble2" onclick="bubble2()" class="moveTarget" position="-0.816 -0.245 0.871" rotation="0 -20 0">
+               <a-entity text="value: 2; align: center;" position="-0.311 0.269 0.495" scale="1.5 1.5 1.5" material="color: #FFFFFF;"></a-entity>
+                <a-ring position="-0.310 0.269 0.495" geometry="radius: 1.25; radiusInner: 1.070;" material="color: #FFFFFF;" scale="0.070 0.070 0.070"></a-ring>
+                <a-circle position="-0.310 0.269 0.494" radius="1.25" material="color: #000000; opacity: 0.4;" change-color-on-hover="color: #d84738; opacity: 1;" scale="0.070 0.070 0.070"></a-circle>
+            </a-entity>
+            
+<!-- Annotation 3 -->              
+            <a-entity id="bubble3" onclick="bubble3()" class="moveTarget" position="-0.100 -0.245 -0.336" rotation="0 180.0 0">
+               <a-entity text="value: 3; align: center;" position="-0.311 0.269 0.495" scale="1.5 1.5 1.5" material="color: #FFFFFF;"></a-entity>
+                <a-ring position="-0.310 0.269 0.495" geometry="radius: 1.25; radiusInner: 1.070;" material="color: #FFFFFF;" scale="0.070 0.070 0.070"></a-ring>
+                <a-circle position="-0.310 0.269 0.494" radius="1.25" material="color: #000000; opacity: 0.4;" change-color-on-hover="color: #d84738; opacity: 1;" scale="0.070 0.070 0.070"></a-circle>
+            </a-entity>
+        </a-entity>
+    </a-scene>    
+  </body>
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js" integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+    <script type="text/javascript">
+        $('#modal1').hide();
+        $('#modal2').hide();
+        $('#modal3').hide();
+        $('#markers').hide();
+        $('#resources').hide();
+        $('#helpWindow').hide();
+      
+        function bubble1() {
+            document.getElementById('modal1').style.display = 'block';
+            document.getElementById('modal3').style.display = 'none';
+            document.getElementById('modal2').style.display = 'none';
+            
+            document.getElementById('annotation3').classList.remove("active");
+            document.getElementById('annotation2').classList.remove("active");
+            document.getElementById('annotation1').classList.add("active");
+            
+            document.getElementById('shield').classList.add("active");
+            
+            document.getElementById('helpWindow').style.display = 'none';
+            document.getElementById('markers').style.display = 'none';
+            document.getElementById('resources').style.display = 'none';
+            
+            document.getElementById('showHelp').classList.remove("active");
+            document.getElementById('showModal').classList.remove("active");
+            document.getElementById('showMarkers').classList.remove("active");
+            document.getElementById('showResources').classList.remove("active");
+        }
+      
+        function bubble2() {
+            document.getElementById('modal2').style.display = 'block';
+            document.getElementById('modal1').style.display = 'none';
+            document.getElementById('modal3').style.display = 'none';
+            
+            document.getElementById('annotation1').classList.remove("active");
+            document.getElementById('annotation3').classList.remove("active");
+            document.getElementById('annotation2').classList.add("active");
+            
+            document.getElementById('shield').classList.add("active");
+            
+            document.getElementById('helpWindow').style.display = 'none';
+            document.getElementById('markers').style.display = 'none';
+            document.getElementById('resources').style.display = 'none';
+            
+            document.getElementById('showHelp').classList.remove("active");
+            document.getElementById('showModal').classList.remove("active");
+            document.getElementById('showMarkers').classList.remove("active");
+            document.getElementById('showResources').classList.remove("active");
+        }
+        
+        function bubble3() {
+            document.getElementById('modal3').style.display = 'block';
+            document.getElementById('modal1').style.display = 'none';
+            document.getElementById('modal2').style.display = 'none';
+            
+            document.getElementById('annotation1').classList.remove("active");
+            document.getElementById('annotation2').classList.remove("active");
+            document.getElementById('annotation3').classList.add("active");
+            
+            document.getElementById('shield').classList.add("active");
+            
+            document.getElementById('helpWindow').style.display = 'none';
+            document.getElementById('markers').style.display = 'none';
+            document.getElementById('resources').style.display = 'none';
+            
+            document.getElementById('showHelp').classList.remove("active");
+            document.getElementById('showResources').classList.remove("active");
+            document.getElementById('showModal').classList.remove("active");
+            document.getElementById('showMarkers').classList.remove("active");
+        }
+      
+        function help() {
+            document.getElementById('helpWindow').style.display = 'block';
+            
+            document.getElementById('showHelp').classList.add("active");
+            document.getElementById('showModal').classList.remove("active");
+            document.getElementById('showResources').classList.remove("active");
+            document.getElementById('annotation1').classList.remove("active");
+            document.getElementById('annotation2').classList.remove("active");
+            document.getElementById('shield').classList.remove("active");
+            document.getElementById('showMarkers').classList.remove("active");
+            document.getElementById('markers').style.display = 'none';
+            document.getElementById('resources').style.display = 'none';
+        }
+      
+        function modal() {
+            document.getElementById('helpWindow').style.display = 'none';
+            document.getElementById('resources').style.display = 'none';
+            document.getElementById('modal1').style.display = 'none';
+            document.getElementById('modal2').style.display = 'none';
+            document.getElementById('modal3').style.display = 'none';
+            
+            document.getElementById('showHelp').classList.remove("active");
+            document.getElementById('showResources').classList.remove("active");
+            document.getElementById('showModal').classList.add("active");
+            document.getElementById('annotation1').classList.remove("active");
+            document.getElementById('annotation2').classList.remove("active");
+            document.getElementById('shield').classList.remove("active");
+            document.getElementById('showMarkers').classList.remove("active");
+            document.getElementById('markers').style.display = 'none';
+        }
+      
+        function markers() {
+            document.getElementById('helpWindow').style.display = 'none';
+            document.getElementById('markers').style.display = 'block';
+            document.getElementById('resources').style.display = 'none';
+            document.getElementById('modal1').style.display = 'none';
+            document.getElementById('modal2').style.display = 'none';
+            
+            document.getElementById('showHelp').classList.remove("active");
+            document.getElementById('showModal').classList.remove("active");
+            document.getElementById('showResources').classList.remove("active");
+            document.getElementById('showMarkers').classList.add("active");
+            document.getElementById('annotation1').classList.remove("active");
+            document.getElementById('annotation2').classList.remove("active");
+            document.getElementById('shield').classList.add("active");
+        } 
+        
+        function resources() {
+            document.getElementById('helpWindow').style.display = 'none';
+            document.getElementById('markers').style.display = 'none';
+            document.getElementById('resources').style.display = 'block';
+            document.getElementById('modal1').style.display = 'none';
+            document.getElementById('modal2').style.display = 'none';
+            
+            document.getElementById('showHelp').classList.remove("active");
+            document.getElementById('showResources').classList.add("active");
+            document.getElementById('showModal').classList.remove("active");
+            document.getElementById('showMarkers').classList.remove("active");
+            document.getElementById('annotation1').classList.remove("active");
+            document.getElementById('annotation2').classList.remove("active");
+            document.getElementById('shield').classList.add("active");
+        } 
+      
+        function hideBubbles() {
+            document.getElementById('modal1').style.display = 'none';
+            document.getElementById('modal2').style.display = 'none';
+            document.getElementById('modal3').style.display = 'none';
+            
+            document.getElementById('showHelp').classList.remove("active");
+            document.getElementById('showResources').classList.remove("active");
+            document.getElementById('showModal').classList.add("active");
+            document.getElementById('showMarkers').classList.remove("active");
+            document.getElementById('annotation1').classList.remove("active");
+            document.getElementById('annotation2').classList.remove("active");
+            document.getElementById('shield').classList.remove("active");
+            document.getElementById('markers').style.display = 'none';
+            document.getElementById('resources').style.display = 'none';
+        }
+
+		document.addEventListener("DOMContentLoaded", function(event) {
+			var scene = document.querySelector('aScene');
+
+			if (scene.hasLoaded) addEventListeners();
+			else scene.addEventListener('loaded', handleSceneLoaded);
+		});
+
+		function handleSceneLoaded() {
+			console.log('scene loaded');
+
+      // IF YOU NEED TO CHANGE ATTRIBUTES OF THE CAMERA, I RECOMMEND DISABLING BEFORE DOING IT.
+      // THIS WAY THE NEW ATTRIBUTES WILL BE PASSED TO THE ORBIT-CONTROLS VIA UPDATE()
+      // document.querySelector('#camera').setAttribute( 'orbit-controls', 'enabled', false);
+      // document.querySelector('#camera').setAttribute( 'position', '0 2 10');
+      // document.querySelector('#camera').setAttribute( 'orbit-controls', 'enabled', true);
+
+			// ORBIT CAMERA DRAG START / END EVENT LISTENERS
+			document.querySelector('#camera').addEventListener('start-drag-orbit-controls', handleDragStart);
+			document.querySelector('#camera').addEventListener('end-drag-orbit-controls', handleDragEnd);
+
+			// TOGGLE ORBIT AND STATIC CAMERA
+			document.querySelector('#changeCamera').addEventListener('click', handleSwitchCamera);
+		}
+
+		function handleDragStart(event) {
+			console.log("drag start");
+		}
+
+		function handleDragEnd(event) {
+			console.log("drag end");
+
+			// var cam1 = document.querySelector('#camera');
+			// console.log(cam1.getAttribute('position'));
+			// console.log(cam1.getAttribute('rotation'));
+		}
+
+	</script>
+</html>
