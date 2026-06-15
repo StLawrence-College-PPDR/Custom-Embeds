@@ -36,12 +36,20 @@ svg {
       padding: 5% !important;
     }
 
+    .flex-2 .cell-content {
+        padding: 10% !important;
+    }
+
 }
 
  @media (min-width: 1300px) {
 
     .flex-2 {
         width: 48%;
+    }
+
+    .flex-2 .cell-content {
+        padding: 10%  !important;
     }
 }
 
@@ -52,7 +60,12 @@ svg {
     }
 
     .cell-content {
-      padding: 5%;
+      padding: 5% !important;
+    }
+
+
+    .flex-2 .cell-content {
+        padding: 10%  !important;
     }
 
     
@@ -65,7 +78,11 @@ svg {
     }
 
     .cell-content {
-      padding: 5%;
+      padding: 5% !important;
+    }
+
+    .flex-2 .cell-content {
+        padding: 10% !important;
     }
     
 }
