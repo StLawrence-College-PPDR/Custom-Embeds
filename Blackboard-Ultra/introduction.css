@@ -33,7 +33,7 @@ svg {
     }
 
     .cell-content {
-      padding: 60px 5% !important;
+      padding: 5% !important;
     }
 
 }
@@ -52,7 +52,7 @@ svg {
     }
 
     .cell-content {
-      padding: 100px 0px 50px 100px;
+      padding: 5%;
     }
 
     
@@ -65,7 +65,7 @@ svg {
     }
 
     .cell-content {
-      padding: 60px 5%;
+      padding: 5%;
     }
     
 }
