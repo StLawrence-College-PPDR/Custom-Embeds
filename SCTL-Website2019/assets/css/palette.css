@@ -1,0 +1,434 @@
+/* -------------------------------------- Accessibility ------ */
+
+/*
+ Just for accessiblity testing currently... something 
+is off the z-index. Causing issues in the mobile navigation.
+*/
+
+/*
+:focus:before {
+    content: "";
+    position: absolute;
+    box-shadow: inset 0 0 0 3px #478ECC;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    
+    z-index: 20000;
+}
+*/
+
+/* -------------------------------------- Primary Palette ------ */
+
+.oxford-1 {
+    background: #343A40;
+}
+
+.oxford-2 {
+    background: #495057;
+}
+
+.oxford-3 {
+    background: #F1F3F4;
+}
+
+.oxford-4 {
+    background: #F7F9fA;
+}
+
+.oxford-5 {
+    background: #ebedef;
+}
+
+.oxford-3-active,
+.selected { 
+    background: rgba(241,243,244,0.10); 
+}
+
+.alternate-header .oxford-3-active { 
+    background: #F1F3F4;
+}
+
+li.oxford-3-background:hover:before {
+    background: #F1F3F4;  
+}
+
+li.oxford-3-background:hover:before,
+li.oxford-3-background:focus:before,
+li.oxford-3-background:active:before,
+li.oxford-3-background:visited:before {
+    background: #F1F3F4 !important;  
+}
+
+.alternate-header li.oxford-3-background:hover:before {
+    background: rgba(241, 243, 244, 0.07); 
+}
+
+.alternate-header li.oxford-3-background:focus,
+.alternate-header li.oxford-3-background:active {
+    background: rgba(241, 243, 244, 0.07);  
+}
+
+.oxford-1-text {
+    color: #343A40;
+}
+
+.oxford-2-text {
+    color: #495057;
+}
+
+.oxford-3-text {
+    color: #F1F3F4;
+}
+
+.oxford-4-text {
+    color: #F7F9fA;
+}
+
+
+.oxford-1-border {
+    border-color: #343A40;
+}
+
+.oxford-2-border {
+    border-color: #495057;
+}
+
+.oxford-3-border {
+    border-color: #F1F3F4;
+}
+
+.oxford-4-border {
+    border-color: #F7F9fA;
+}
+
+
+.white {
+    background: #FFF;
+}
+
+.white-text {
+    color: #FFF;
+}
+
+.white-border {
+    border-color: #FFF;  
+}
+
+/* -------------------------------------- Secondary Palette ------ */
+
+/*---------------------- YELLOW ---*/
+
+.yellow-light {
+    background: #FDC010;
+}
+
+.yellow-dark {
+    background: #E4AE23;
+}
+
+.yellow-light-text {
+    color: #FDC010;
+}
+
+.yellow-dark-text {
+    color: #E4AE23;
+}
+
+li.yellow-background:hover:before,
+li.yellow-background:focus:before,
+li.yellow-background:active:before,
+li.yellow-background:visited:before {
+    background: #FDC010;  
+    color: #F7F9fA;
+}
+
+a.yellow-light-border:hover,
+a.yellow-light-border:after {
+    border-color: #FDC010;  
+    z-index: 3;
+}
+
+a.yellow-dark-border:hover {
+    border-color: #E4AE23;
+}
+
+/*---------------------- BLUE ---*/
+
+.blue-light {
+    background: #478ECC;
+}
+
+.blue-dark {
+    background: #3485C5;
+}
+
+.blue-light-text {
+    color: #478ECC;
+}
+
+.blue-dark-text {
+    color: #3485C5;
+}
+
+li.blue-background:hover:before {
+    background: #478ECC;  
+}
+
+li.blue-background:hover:before,
+li.blue-background:focus:before,
+li.blue-background:active:before,
+li.blue-background:visited:before {
+    background: #478ECC;  
+    color: #F7F9fA;
+}
+
+a.blue-light-border:hover,
+a.blue-light-border:after {
+    border-color: #478ECC;  
+}
+
+a.blue-dark-border:hover {
+    border-color: #3485C5;
+}
+
+/*---------------------- GREEN ---*/
+
+.green-light {
+    background: #8AC249;
+}
+
+.green-dark {
+    background: #7BAE41;
+}
+
+.green-light-text {
+    color: #8AC249;
+}
+
+.green-dark-text {
+    color: #7BAE41;
+}
+
+li.green-background:hover:before {
+    background: #8AC249;  
+}
+
+li.green-background:hover:before,
+li.green-background:focus:before,
+li.green-background:active:before,
+li.green-background:visited:before {
+    background: #8AC249;  
+}
+
+a.green-light-border:hover,
+a.green-light-border:after {
+    border-color: #8AC249;  
+}
+
+a.green-dark-border:hover {
+    border-color: #7BAE41;
+}
+
+/*---------------------- PURPLE ---*/
+
+.purple-light {
+    background: #65499D;
+}
+
+.purple-dark {
+    background: #5D3E98;
+}
+
+.purple-light-text {
+    color: #65499D;
+}
+
+.purple-dark-text {
+    color: #5D3E98;
+}
+
+li.purple-background:hover:before {
+    background: #65499D;  
+}
+
+li.purple-background:hover:before,
+li.purple-background:focus:before,
+li.purple-background:active:before,
+li.purple-background:visited:before {
+    background: #65499D;  
+    color: #F7F9fA;
+}
+
+a.purple-light-border:hover,
+a.purple-light-border:after {
+    border-color: #65499D;  
+}
+
+a.purple-dark-border:hover {
+    border-color: #5D3E98;
+}
+
+/*---------------------- RED ---*/
+
+.red-light {
+    background: #EF4438;
+}
+
+.red-dark {
+    background: #5D3E98;
+}
+
+.red-light-text {
+    color: #EF4438;
+}
+
+.red-dark-text {
+    color: #5D3E98;
+}
+
+li.red-background:hover:before {
+    background: #EF4438;  
+}
+
+li.red-background:hover:before,
+li.red-background:focus:before,
+li.red-background:active:before,
+li.red-background:visited:before {
+    background: #EF4438; 
+    color: #F7F9fA;
+}
+
+a.red-light-border:hover,
+a.red-light-border:after {
+    border-color: #EF4438;  
+}
+
+a.red-dark-border:hover {
+    border-color: #5D3E98;
+}
+
+/*---------------------- TEAL ---*/
+
+.teal-light {
+    background: #0DAABF;
+}
+
+.teal-dark {
+    background: #1499AC;
+}
+
+.teal-light-text {
+    color: #0DAABF;
+}
+
+.teal-dark-text {
+    color: #1499AC;
+}
+
+li.teal-background:hover:before {
+    background: #0DAABF;  
+}
+
+li.teal-background:hover:before,
+li.teal-background:focus:before,
+li.teal-background:active:before,
+li.teal-background:visited:before {
+    background: #0DAABF;  
+    color: #F7F9fA;
+}
+
+a.teal-light-border:hover,
+a.teal-light-border:after {
+    border-color: #0DAABF;  
+}
+
+a.teal-dark-border:hover {
+    border-color: #1499AC;
+}
+
+/*---------------------- Tangerine ---*/
+
+.tangerine-light {
+    background: #f99e53;
+}
+
+.tangerine-dark {
+    background: #f78b32;
+}
+
+.tangerine-light-text {
+    color: #f99e53;
+}
+
+.tangerine-dark-text {
+    color: #f78b32;
+}
+
+li.tangerine-background:hover:before {
+    background: #f99e53;  
+}
+
+li.tangerine-background:hover:before,
+li.tangerine-background:focus:before,
+li.tangerine-background:active:before,
+li.tangerine-background:visited:before {
+    background: #f99e53;  
+    color: #F7F9fA;
+}
+
+a.tangerine-light-border:hover,
+a.tangerine-light-border:after {
+    border-color: #f99e53;  
+}
+
+a.tangerine-dark-border:hover {
+    border-color: #f78b32;
+}
+
+/*---------------------- Alternate Header Active Section ---*/
+
+.alternate-header .blue-light a,
+.alternate-header .red-light a,
+.alternate-header .green-light a,
+.alternate-header .yellow-light a,
+.alternate-header .purple-light a,
+.alternate-header .tangerine-light a,
+.alternate-header .teal-light a {
+    color: #FFF !important;
+}
+
+
+/*---------------------- Icon Hover Color (SVG FILL) ---*/
+.services-card svg {
+    fill: #c2c7ce;
+}
+
+.services-card:hover svg.blue-fill {
+    fill: #478ECC !important;
+}
+
+.services-card:hover svg.red-fill {
+    fill: #EF4438 !important;
+}
+
+.services-card:hover svg.tangerine-fill {
+    fill: #f99e53 !important;
+}
+
+.services-card:hover svg.green-fill {
+    fill: #8AC249 !important;
+}
+
+.services-card:hover svg.yellow-fill {
+    fill: #FDC010 !important;
+}
+
+.services-card:hover svg.purple-fill {
+    fill: #65499D !important;
+}
+
+.services-card:hover svg.teal-fill {
+    fill: #0DAABF !important;
+}
